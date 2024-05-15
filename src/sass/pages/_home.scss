@@ -1,0 +1,109 @@
+$m-side: 15px;
+
+
+
+.main {
+    max-width: 414px;
+    margin: 0 auto;
+
+    display: grid;
+    justify-content: stretch;
+    justify-items: stretch;
+
+}
+
+.section-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    justify-items: stretch;
+    align-items: center;
+
+    &__rule {
+        align-self: self-end;
+    }
+
+    &__logo--left {
+        top: 0;
+        left: 0;
+    }
+}
+
+.result {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 $m-side;
+
+    &__left {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+
+        white-space: nowrap;
+
+        &--text {
+            font-size: 12px;
+            color: $color-aquamarine-medium;
+            margin-right: 8px;
+        }
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+        justify-content: right;
+
+        &--number {
+            font-size: 12px;
+            background-color: $color-eden;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 1.95;
+            color: $color-aquamarine-medium;
+        }
+    }
+}
+
+
+
+.section-betting {
+    max-width: 100%;
+    background-image: url(../assets/frame_betting_table.svg);
+    background-size: 100% 100%;
+    background-position: 0px 3px;
+    background-repeat: no-repeat;
+
+    align-content: start;
+
+    &--counter {
+        color: $color-white;
+        font-size: 13px;
+        font-weight: 300;
+        text-align: center;
+        line-height: 1;
+
+        background: linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
+        padding: 7px 25px 9px 25px;
+        margin: 1px auto;
+        z-index: 4;
+
+        display: inline-block;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &__content {
+        margin: 5px 40px 33px 40px;
+        z-index: 3;
+
+        display: grid;
+        grid-template-rows: repeat(2, max-content);
+        grid-template-columns: repeat(4, 1fr);
+
+        column-gap: 1px;
+        row-gap: 6px;
+    }
+}

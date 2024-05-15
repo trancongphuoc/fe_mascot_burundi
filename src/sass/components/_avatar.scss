@@ -1,0 +1,14 @@
+.avatar {
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    border: 1px solid $color-eucalyptus;
+
+    &__medium {
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        border: 2px solid $color-eucalyptus;
+        margin-right: 10px;
+    }
+}

@@ -1,0 +1,37 @@
+.card--zodiac {
+
+    &__background-selected {
+        @include basicBackgroundCard('../assets/card-background-selected.svg');
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__background--small {
+        @include basicBackgroundCard('../assets/background-card.svg');
+        width: 22px;
+        height: 29px;
+    }
+
+    &__background--medium {
+        background-image: url('../assets/card-background-selected.svg');
+        background-size: auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+    }
+
+    &__small {
+        width: 100%;
+        object-fit: fill;
+    }
+}
+
+.betting-card__background--medium {
+    background-image: url('../assets/background_card_large.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+}

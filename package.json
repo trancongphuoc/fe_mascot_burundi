@@ -9,7 +9,7 @@
     "postbuild": "rm -r ~/Users/fellam/Documents/INMOBI/SERVER/IkaraGAE/src/main/webapp/zodiac-game && mkdir ~/Users/fellam/Documents/INMOBI/SERVER/IkaraGAE/src/main/webapp/zodiac-game && mv -v build/* ~/Users/fellam/Documents/INMOBI/SERVER/IkaraGAE/src/main/webapp/zodiac-game",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "compile:sass": "sass src/sass/main.scss src/index.css -w"
+    "compile:sass": "sass src/sass/main.scss src/css/index.css -w"
   },
   "dependencies": {
     "react": "^18.2.0",
