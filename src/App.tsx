@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './view/Home';
+import Home from './view/Home.tsx';
 
 
 function App() {
