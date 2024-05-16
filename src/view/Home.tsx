@@ -19,12 +19,9 @@ import avatar from '../assets/avatar.png';
 
 import MyBonusToday from '../components/MyBonusToday';
 import BestPlayers from '../components/BestPlayers';
-import Bet from "./assets/background-betting.svg";
 import { useState } from 'react';
 import Popup from '../components/Popup';
-import Icoin from './assets/icoin.svg';
-import backgroundSelected from './assets/b.svg';
-//  
+
 
 
 interface BettingCard {

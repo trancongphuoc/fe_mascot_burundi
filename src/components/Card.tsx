@@ -1,5 +1,3 @@
-import background from '../assets/card-background-selected.svg';
-
 interface CardProps {
     card: string;
     className: string;

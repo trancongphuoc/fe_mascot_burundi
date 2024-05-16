@@ -655,7 +655,6 @@ h4 {
 }
 
 .popup {
-  background: white;
   position: relative;
   width: 100%;
   display: grid;
@@ -665,11 +664,14 @@ h4 {
   justify-items: center;
   align-items: center;
   margin: 0 auto;
-  background-image: url(../assets/background-betting.svg);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
 }
 
+.betting--BgContent {
+  grid-area: 3/1/6/4;
+  z-index: -1;
+  width: 100%;
+  object-fit: contain;
+}
 .betting--zodiac-background {
   grid-area: 1/1/2/-1;
   z-index: 1;
