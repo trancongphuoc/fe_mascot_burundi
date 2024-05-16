@@ -670,7 +670,8 @@ h4 {
   grid-area: 3/1/6/4;
   z-index: -1;
   width: 100%;
-  object-fit: contain;
+  height: 100%;
+  object-fit: fill;
 }
 .betting--zodiac-background {
   grid-area: 1/1/2/-1;
