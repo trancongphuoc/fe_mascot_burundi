@@ -253,9 +253,20 @@
         transform: translateY(2px);
     } 
 
+    &__secondary {
+        font-size: 16px;
+        font-weight: 300;
+        color: $color-white;
+        text-align: center;
+        line-height: 1.1;
+
+        margin-bottom: 1px;
+    }
+
     &__totalIcoin {
         display: flex;
         justify-content: center;
+        margin-top: 1px;
         &--img {
             width: 16px;
             margin-right: 4px;

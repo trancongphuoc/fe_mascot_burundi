@@ -35,6 +35,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
 
   useEffect(() => {
     setBgHeader(dialogType === 'WIN' ? BgHeaderWin : BgHeaderLost);
+    setBgContent(dialogType === 'WIN' ? BgContentWin : BgContentLost);
   }, [dialogType]);
 
   const topUsers: TopUserModel[] = [
@@ -46,10 +47,6 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
   if (!show) {
     return null;
   }
-  
-  dialogType: dialogType = 'WIN';
-  totalIcoin = 100;
-
 
   const renderDialogContent = () => {
     switch (dialogType) {
@@ -69,7 +66,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
           <>
             <p className="win--primary-text">Chúc mừng</p>
             <div className="lost__secondary">
-             <p className="win__totalIcoin--icoin">Thật xuất sắc, Bạn đã đoán trúng ván này</p>
+             <p className="win__secondary">Thật xuất sắc, Bạn đã đoán trúng ván này</p>
              <div className="win__totalIcoin">
               <img className="win__totalIcoin--img" src={Icoin} alt="" />
               <p className="win__totalIcoin--icoin">{totalIcoin}</p>
@@ -85,7 +82,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
   return (
     <div onClick={onClose} className="lost-popup-overlay">
       <div className="lost-popup">
-        <div className="lost--BgContent" style={{ backgroundImage: `url(${BgContentWin})` }}></div>
+        <div className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div>
         <img src={backgroundSelected} alt="card_background" className="lost--zodiac-background" />
         <img src={dragon} alt="card_zodiac" className="lost--zodiac-card" />
         <img src={BgLighter} alt="betting lighter" className="lost--BgLighter" />

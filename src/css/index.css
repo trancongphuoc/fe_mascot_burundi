@@ -1224,9 +1224,18 @@ h4 {
   background-clip: text;
   transform: translateY(2px);
 }
+.win__secondary {
+  font-size: 16px;
+  font-weight: 300;
+  color: #f2fbff;
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 1px;
+}
 .win__totalIcoin {
   display: flex;
   justify-content: center;
+  margin-top: 1px;
 }
 .win__totalIcoin--img {
   width: 16px;
