@@ -1,0 +1,234 @@
+@mixin topUser($params) {
+    $outer-width: map-get($params, outer-width);
+    $outer-color-top: map-get($params, outer-color-top);
+    $outer-color-bottom: map-get($params, outer-color-bottom);
+    $middle-width: map-get($params, middle-width);
+    $inner-width: map-get($params, inner-width);
+    $crown-left: map-get($params, crown-left);
+    $crown-top: map-get($params, crown-top);
+
+    display: grid;
+    justify-items: center;
+    align-content: end;
+    margin-bottom: 11px;
+
+    &--img {
+        grid-area: 1 / 1 / 2 / 2;
+        width: 28px;
+        align-self:flex-start;
+        justify-self: end;
+        transform: translateX($crown-left) translateY( $crown-top);
+
+    }
+
+    &--url {
+        grid-area: 1 / 1 / 2 / 2;
+        @include avatarTwoLayer((
+            outer-width: $outer-width,
+            outer-color-top: $outer-color-top,
+            outer-color-bottom: $outer-color-bottom,
+            middle-width: $middle-width,
+            inner-width: $inner-width,
+        ));
+        margin-bottom: 8px;
+    }
+
+    &--name {
+        color: $color-white;
+        line-height: 1;
+        font-size: 13px;
+        font-weight: 300;
+        margin-bottom: 3px;
+    }
+}
+
+@mixin line {
+    width: 90px;
+    height: 1px;
+    align-self: start;
+    margin-top: 8px;
+}
+
+
+.lost-popup-overlay {
+    position: fixed;
+    display: grid;
+    justify-content: stretch;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .4);
+    z-index: 1000;
+  }
+  
+  .lost-popup {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, min-content);
+    justify-items: center;
+    align-content: end;
+
+    .lost {
+        &--BgContent {
+            grid-area: 3 / 1 / 6 / 4;
+            z-index: -1;
+            width: 100%;
+            background-image: url(../assets/Bg-lost-content.png);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+    
+        &--BgLighter {
+            grid-area: 1 / 1 / 2 / 4;
+            z-index: -1;
+            object-fit: fill;
+            z-index: -1;
+            align-self: end;
+            transform: translateY(50px);
+        }
+    
+        &--BgHeader {
+            grid-area: 2 / 1 / 3 / -1;
+            z-index: 2;
+            max-width: 245px;
+            object-fit: fill;
+            transform: translateY(23px);
+        }
+    
+        @media (max-width: 320px) {
+            &--BgHeader {
+                max-width: 270px;
+                transform: translateY(22px);
+            }
+        }
+    
+        &--zodiac-background {
+            align-self: center;
+            grid-area: 1 / 1 / 2 / -1;
+            z-index: 1;
+            width: 80px;
+            transform: translateY(20px);
+        }
+    
+        &--zodiac-card {
+            grid-area: 1 / 1 / 2 / -1;
+            z-index: 2;
+            width: 60px;
+            align-self: center;
+            transform: translateY(20px);
+        }
+    
+    
+        &--primary-text {
+            grid-area: 2 / 1 / 3 / -1;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1;
+            text-decoration: none;
+            color: $color-white;
+            text-shadow: 1px 1px 2px rgba($color-text-shadow, .5);
+    
+            z-index: 3;
+            align-self: end;
+        }
+    
+        &__secondary { 
+            grid-area: 3 / 1 / 4 / 4;
+            font-size: 16px;
+            font-weight: 300;
+            color: $color-white;
+            text-align: center;
+            line-height: 1.15;
+
+            margin-bottom: 11px;
+            margin-top: 27px;
+    
+        }
+    
+        &--light1 {
+            grid-area: 4 / 3 / 5 / 4;
+            @include line;
+            background-image: linear-gradient(to left, $color-line-1, $color-line-2);
+            justify-self: start;
+        }
+    
+        &--tertiary {
+            grid-area: 4 / 2 / 5 / 3;   
+            line-height: 1;
+            color: $color-white;
+            font-size: 14px;
+            font-weight: 300;
+            margin-bottom: 19px;
+        }
+    
+        &--light2 {
+            grid-area: 4 / 1 / 5 / 2;
+            @include line;
+            background-image: linear-gradient(to left, $color-line-2, $color-line-1);
+            justify-self: end;
+        }
+    
+        &__no3 {
+            grid-area: 5 / 3 / 6 / 4;
+            @include topUser((
+                outer-width: 67px,
+                outer-color-top: $color-lost-av-no3-t,
+                outer-color-bottom: $color-lost-av-no3-b,
+                middle-width: 63px,
+                inner-width: 59px,
+                crown-left: -8px,
+                crown-top: -16px,
+            ))
+        }
+    
+        &__no2 {
+            grid-area: 5 / 1 / 6 / 2;
+            @include topUser((
+                outer-width: 67px,
+                outer-color-top: $color-lost-av-no2-t,
+                outer-color-bottom: $color-lost-av-no2-b,
+                middle-width: 63px,
+                inner-width: 59px,
+                crown-left: -18.5px,
+                crown-top: -16px,
+            ))
+        }
+    
+        &__no1 {
+            grid-area: 5 / 2 / 6 / 3;
+            @include topUser((
+                outer-width: 77px,
+                outer-color-top: $color-lost-av-no1-t,
+                outer-color-bottom: $color-lost-av-no1-b,
+                middle-width: 74px,
+                inner-width: 70px,
+                crown-left: -10px,
+                crown-top: -16px,
+            ));
+            padding-bottom: 19px;
+        }
+    
+        &__totalIcoin {
+            display: flex;
+            line-height: 1;
+            align-items: center;
+    
+            &--img{
+                margin-right: 3px;
+            }
+    
+            &--icoin {
+                color: $color-white;
+                font-size: 13px; 
+                font-weight: 300;
+                line-height: 1;
+            }
+        }
+    }
+}
+

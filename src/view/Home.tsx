@@ -20,7 +20,8 @@ import avatar from '../assets/avatar.png';
 import MyBonusToday from '../components/MyBonusToday';
 import BestPlayers from '../components/BestPlayers';
 import { useState } from 'react';
-import Popup from '../components/Popup';
+import DialogBetting from '../components/DialogBetting';
+import DialogLost from '../components/DialogLost';
 
 
 
@@ -130,11 +131,8 @@ function App() {
 
       <button onClick={handleOpenPopup} className="open-popup-button">Open Popup</button>
 
-      <Popup show={isPopupVisible} onClose={handleClosePopup}>
+      <DialogLost show={isPopupVisible} onClose={handleClosePopup}/>
   
-     
-
-      </Popup>
     </div>
   )
 }

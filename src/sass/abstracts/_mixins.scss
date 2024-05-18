@@ -16,3 +16,55 @@
     justify-content: center;
     align-items: center;
 }
+
+@mixin avatarTwoLayer($params) {
+    $outer-width: map-get($params, outer-width);
+    $outer-color-top: map-get($params, outer-color-top);
+    $outer-color-bottom: map-get($params, outer-color-bottom);
+    $middle-width: map-get($params, middle-width);
+    $inner-width: map-get($params, inner-width);
+
+    position: relative;
+    width: $outer-width;
+    height: $outer-width;
+    border-radius: 50%;
+    overflow: hidden;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        z-index: 1;
+        box-sizing: border-box;
+    }
+
+    &::before {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to bottom, $outer-color-top, $outer-color-bottom);
+        z-index: 1;
+    }
+
+    &::after {
+        top: calc(($outer-width - $middle-width) / 2);
+        left: calc(($outer-width - $middle-width) / 2);
+        width: $middle-width;
+        height: $middle-width;
+        background-image: linear-gradient(to bottom, $outer-color-bottom, $outer-color-top);
+        z-index: 2;
+        box-sizing: border-box;
+    }
+
+    & > * {
+        position: absolute;
+        top: calc(($outer-width - $inner-width) / 2);
+        left: calc(($outer-width - $inner-width) / 2);
+        width: $inner-width;
+        height: $inner-width;
+        border-radius: 50%;
+        z-index: 3;
+    }
+}

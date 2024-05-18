@@ -6,12 +6,12 @@ import BgContent from '../assets/bg-betting-content.png';
 import BgHeader from '../assets/bg-betting-header.png';
 import BgLighter from '../assets/background-betting-lighter.svg';
 
-interface PopupProps {
+interface DialogBettingProps {
   show: boolean;
   onClose: () => void; // Define onClose prop as a function that takes no arguments and returns void
 }
 
-const Popup: React.FC<PopupProps> = ({ show, onClose }) => {
+const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose }) => {
 
   const [stake, setStake] = useState(0);
 
@@ -47,4 +47,4 @@ const Popup: React.FC<PopupProps> = ({ show, onClose }) => {
   );
 };
 
-export default Popup;
+export default DialogBetting;
