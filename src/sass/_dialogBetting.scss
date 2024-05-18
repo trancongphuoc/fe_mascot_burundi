@@ -218,6 +218,13 @@
             position: relative;
             z-index: 3;
             margin: 0;
+
+            &::before {
+                content: url('https://www.svgrepo.com/show/2460/cherry.svg');
+        width: 20px;
+        height: auto;
+        display: inline-block;
+            }
         }
     }
 }

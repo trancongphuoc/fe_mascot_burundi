@@ -49,6 +49,16 @@
     margin-top: 8px;
 }
 
+@mixin primary-text {
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: none;
+    color: $color-white;
+    text-transform: capitalize;
+    z-index: 3;
+    align-self: end;
+}
+
 
 .lost-popup-overlay {
     position: fixed;
@@ -78,9 +88,10 @@
             grid-area: 3 / 1 / 6 / 4;
             z-index: -1;
             width: 100%;
-            background-image: url(../assets/Bg-lost-content.png);
+            // background-image: url(../assets/Bg-lost-content.png);
             background-size: 100% 100%;
             background-repeat: no-repeat;
+        
         }
     
         &--BgLighter {
@@ -118,7 +129,7 @@
         &--zodiac-card {
             grid-area: 1 / 1 / 2 / -1;
             z-index: 2;
-            width: 60px;
+            width: 55px;
             align-self: center;
             transform: translateY(20px);
         }
@@ -126,15 +137,10 @@
     
         &--primary-text {
             grid-area: 2 / 1 / 3 / -1;
-            font-size: 20px;
-            font-weight: 400;
+            @include primary-text;
+
             line-height: 1;
-            text-decoration: none;
-            color: $color-white;
             text-shadow: 1px 1px 2px rgba($color-text-shadow, .5);
-    
-            z-index: 3;
-            align-self: end;
         }
     
         &__secondary { 
@@ -228,6 +234,39 @@
                 font-weight: 300;
                 line-height: 1;
             }
+        }
+    }
+}
+
+.win {
+    &--primary-text {
+        grid-area: 2 / 1 / 3 / -1;
+        @include primary-text;
+
+        line-height: 1.2;
+        text-shadow: 1px 1px 2px rgba($color-text-shadow, .25);
+        background: linear-gradient(to bottom, $color-win-t, $color-win-b);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        transform: translateY(2px);
+    } 
+
+    &__totalIcoin {
+        display: flex;
+        justify-content: center;
+        &--img {
+            width: 16px;
+            margin-right: 4px;
+        }
+
+        &--icoin {
+            font-size: 16px;
+            font-weight: 400;
+            color: $color-white;
+            text-align: center;
+            line-height: 1.15;
         }
     }
 }

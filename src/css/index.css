@@ -882,6 +882,12 @@ h4 {
   z-index: 3;
   margin: 0;
 }
+.betting__confirm--text::before {
+  content: url("https://www.svgrepo.com/show/2460/cherry.svg");
+  width: 20px;
+  height: auto;
+  display: inline-block;
+}
 
 .lost-popup-overlay {
   position: fixed;
@@ -910,7 +916,6 @@ h4 {
   grid-area: 3/1/6/4;
   z-index: -1;
   width: 100%;
-  background-image: url(../assets/Bg-lost-content.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -945,7 +950,7 @@ h4 {
 .lost-popup .lost--zodiac-card {
   grid-area: 1/1/2/-1;
   z-index: 2;
-  width: 60px;
+  width: 55px;
   align-self: center;
   transform: translateY(20px);
 }
@@ -953,12 +958,13 @@ h4 {
   grid-area: 2/1/3/-1;
   font-size: 20px;
   font-weight: 400;
-  line-height: 1;
   text-decoration: none;
   color: #f2fbff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-transform: capitalize;
   z-index: 3;
   align-self: end;
+  line-height: 1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 .lost-popup .lost__secondary {
   grid-area: 3/1/4/4;
@@ -1199,6 +1205,39 @@ h4 {
   font-size: 13px;
   font-weight: 300;
   line-height: 1;
+}
+
+.win--primary-text {
+  grid-area: 2/1/3/-1;
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  color: #f2fbff;
+  text-transform: capitalize;
+  z-index: 3;
+  align-self: end;
+  line-height: 1.2;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(to bottom, #F3FE5C, #ECB926);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transform: translateY(2px);
+}
+.win__totalIcoin {
+  display: flex;
+  justify-content: center;
+}
+.win__totalIcoin--img {
+  width: 16px;
+  margin-right: 4px;
+}
+.win__totalIcoin--icoin {
+  font-size: 16px;
+  font-weight: 400;
+  color: #f2fbff;
+  text-align: center;
+  line-height: 1.15;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -131,7 +131,7 @@ function App() {
 
       <button onClick={handleOpenPopup} className="open-popup-button">Open Popup</button>
 
-      <DialogLost show={isPopupVisible} onClose={handleClosePopup}/>
+      <DialogLost show={isPopupVisible} onClose={handleClosePopup} dialogType='WIN'/>
   
     </div>
   )
