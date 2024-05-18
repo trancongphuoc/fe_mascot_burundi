@@ -18,31 +18,19 @@ interface DialogBettingProps {
   onClose: () => void;
   dialogType: DialogType;
   totalIcoin: number;
+  topUsers: TopUserModel[];
 }
 
-interface TopUserModel {
-  url: string;
-  name: string;
-  icoin: number;
-}
-
-const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType, totalIcoin }) => {
-  const [stake, setStake] = useState(0);
+const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType, totalIcoin, topUsers }) => {
   const [bgHeader, setBgHeader] = useState(BgHeaderLost);
   const [bgContent, setBgContent] = useState(BgContentLost);
 
-  const crown = [CrownGold, CrownSliver, CrownBronze];
+  const crown = [CrownGold, CrownBronze, CrownSliver];
 
   useEffect(() => {
     setBgHeader(dialogType === 'WIN' ? BgHeaderWin : BgHeaderLost);
     setBgContent(dialogType === 'WIN' ? BgContentWin : BgContentLost);
   }, [dialogType]);
-
-  const topUsers: TopUserModel[] = [
-    {url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Lê Hải Yến', icoin: 3000},
-    {url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Trần Tuấn Hùng', icoin: 1000},
-    {url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Ngọc Hoàng', icoin: 9000},
-  ];
 
   if (!show) {
     return null;

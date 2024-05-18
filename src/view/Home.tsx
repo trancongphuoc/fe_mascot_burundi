@@ -68,6 +68,12 @@ function App() {
                                       {name: "Nguyễn Hoàng Chi", avatarUrl: "https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8", winningIcoin: 9999}
                                     ];
   let counter: number = 30;  
+
+  const topUsers: TopUserModel[] = [
+    {url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Lê Hải Yến', icoin: 3000},
+    {url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Trần Tuấn Hùng', icoin: 1000},
+    {url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Ngọc Hoàng', icoin: 9000},
+  ];
   
   
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -131,7 +137,7 @@ function App() {
 
       <button onClick={handleOpenPopup} className="open-popup-button">Open Popup</button>
 
-      <DialogLost show={isPopupVisible} onClose={handleClosePopup} dialogType='WIN' totalIcoin={100}/>
+      <DialogLost show={isPopupVisible} onClose={handleClosePopup} dialogType='WIN' totalIcoin={100} topUsers={topUsers}/>
   
     </div>
   )
