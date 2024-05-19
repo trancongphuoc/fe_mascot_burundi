@@ -22,6 +22,7 @@ import BestPlayers from '../components/BestPlayers';
 import { useState } from 'react';
 import DialogBetting from '../components/DialogBetting';
 import DialogLost from '../components/DialogLost';
+import PopupRule from '../components/PopupRule';
 
 
 
@@ -96,7 +97,7 @@ function App() {
       <section className='section-header u-margin-top-huge1'>
           <img src={PrimaryText} alt="primary_text" className='u-margin-minus-bottom-big'></img>
           <p className='heading-secondary'>Hôm nay {bets} Ván</p>
-          <img src={Rule} alt="card_background" className='section-header__rule'></img>
+          <img src={Rule} onClick={handleOpenPopup} alt="card_background" className='section-header__rule'></img>
       </section>
 
       <div className="result mt-7-5px">
@@ -137,7 +138,7 @@ function App() {
 
       <button onClick={handleOpenPopup} className="open-popup-button">Open Popup</button>
 
-      <DialogLost show={isPopupVisible} onClose={handleClosePopup} dialogType='WIN' totalIcoin={100} topUsers={topUsers}/>
+      <PopupRule show={isPopupVisible} onClose={handleClosePopup} />
   
     </div>
   )

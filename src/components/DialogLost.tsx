@@ -78,7 +78,10 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
         
         {renderDialogContent()}
         
+        <p className ="lost--light1">&nbsp;</p>
         <p className="lost--tertiary">TOP chiến thắng</p>
+        <p className ="lost--light2">&nbsp;</p>
+
         {topUsers.map((user, index) => (
           <div className={`lost__no${index + 1}`} key={index}>
             <img className={`lost__no${index + 1}--img`} src={crown[index]} alt="crown" />
