@@ -78,6 +78,7 @@ function App() {
   
   
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [ruleShow, setRuleShow] = useState(false);
 
   const handleOpenPopup = () => {
     setIsPopupVisible(true);
@@ -85,6 +86,14 @@ function App() {
 
   const handleClosePopup = () => {
     setIsPopupVisible(false);
+  };
+
+  const handleOpenRulePopup = () => {
+    setRuleShow(true);
+  };
+
+  const handleCloseRulePopup = () => {
+    setRuleShow(false);
   };
                                     
                                     
@@ -97,7 +106,7 @@ function App() {
       <section className='section-header u-margin-top-huge1'>
           <img src={PrimaryText} alt="primary_text" className='u-margin-minus-bottom-big'></img>
           <p className='heading-secondary'>Hôm nay {bets} Ván</p>
-          <img src={Rule} onClick={handleOpenPopup} alt="card_background" className='section-header__rule'></img>
+          <img src={Rule} onClick={handleOpenRulePopup} alt="card_background" className='section-header__rule'></img>
       </section>
 
       <div className="result mt-7-5px">
@@ -138,7 +147,10 @@ function App() {
 
       <button onClick={handleOpenPopup} className="open-popup-button">Open Popup</button>
 
-      <PopupRule show={isPopupVisible} onClose={handleClosePopup} />
+      <DialogLost show={isPopupVisible} onClose={handleClosePopup} dialogType='WIN' totalIcoin={100} topUsers={topUsers}/>
+
+      <PopupRule show={ruleShow} onClose={handleCloseRulePopup} />
+
   
     </div>
   )
