@@ -3,3 +3,5 @@ interface TopUserModel {
     name: string;
     icoin: number;
   }
+
+  type DialogType = 'LOST' | 'WIN';

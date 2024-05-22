@@ -102,9 +102,11 @@ let mineHistory: BetInfo[] = [
 
 ];
 
+let dialogType: DialogType = 'WIN';
+
 function App() {
   const [popupState, setPopupState] = useState({
-    isPopupVisible: false,
+    isWinLostVisible: false,
     ruleShow: false,
     resultShow: false,
     bettingtShow: false,
@@ -113,13 +115,23 @@ function App() {
     selectCard: false,
   });
 
-  const handleOpenPopup = () => setPopupState({ ...popupState, isPopupVisible: true });
-  const handleClosePopup = () => setPopupState({ ...popupState, isPopupVisible: false });
+  const handleOpenPopup = () => {
+    dialogType = 'WIN';
+    setPopupState({ ...popupState, isWinLostVisible: true });
+  };
+
+  const handleOpenLostPopup = () => {
+    dialogType = 'LOST';
+    setPopupState({ ...popupState, isWinLostVisible: true });
+  };
+
+  const handleCloseWinLostPopup = () => setPopupState({ ...popupState, isWinLostVisible: false });
   const handleOpenRulePopup = () => setPopupState({ ...popupState, ruleShow: true });
   const handleCloseRulePopup = () => setPopupState({ ...popupState, ruleShow: false });
   const handleOpenResultPopup = () => setPopupState({ ...popupState, resultShow: true });
   const handleCloseResultPopup = () => setPopupState({ ...popupState, resultShow: false });
-  const handleOpenBettingPopup = () => setPopupState({ ...popupState, bettingtShow: true });
+  const handleOpenBettingPopup = () => { setPopupState({ ...popupState, bettingtShow: true })};
+  const handleCloseBettingPopup = () => setPopupState({ ...popupState, bettingtShow: false });
   const handleOpenMineResultPopup = () => { setPopupState({ ...popupState, mineResultShow: true })};
   const handleCloseMineResultPopup = () => setPopupState({ ...popupState, mineResultShow: false });
 
@@ -152,7 +164,7 @@ function App() {
         <p className="section-betting--counter">Đếm ngược {counter}</p>
         <div className="section-betting__content">
           {bettingTable.map((bettingCard, index) => (
-            <FullCard onOpen={handleOpenPopup} key={index} number={index + 1} card={bettingCard.card} isSelected={bettingCard.isSelected} bonus={bettingCard.bonus} players={bettingCard.players} />
+            <FullCard onOpen={handleOpenBettingPopup} key={index} number={index + 1} card={bettingCard.card} isSelected={bettingCard.isSelected} bonus={bettingCard.bonus} players={bettingCard.players} />
           ))}
         </div>
       </section>
@@ -160,17 +172,20 @@ function App() {
       <MyBonusToday onOpen={handleOpenMineResultPopup} bonusToday={1000} goodBets={4} totalIcoin={15000} myInfoBetReults={myInfoBetResults} />
 
       <BestPlayers bestPlayers={bestPlayers} />
+
       <button onClick={handleOpenPopup} className="open-popup-button">Open Popup</button>
+      <button onClick={handleOpenLostPopup} className="open-popup-button">Open Popup</button>
 
-      <DialogLost show={popupState.isPopupVisible} onClose={handleClosePopup} dialogType='WIN' totalIcoin={100} topUsers={topUsers} />
 
+
+
+
+      {/* Dialog when click */}
+      <DialogLost show={popupState.isWinLostVisible} onClose={handleCloseWinLostPopup} dialogType={dialogType} totalIcoin={100} topUsers={topUsers} />
       <PopupRule show={popupState.ruleShow} onClose={handleCloseRulePopup} />
       <PopupResult show={popupState.resultShow} onClose={handleCloseResultPopup} zodiacs={img} history={history} />
-
-      <DialogBetting show={popupState.isPopupVisible} onClose={handleClosePopup}/>
-
+      <DialogBetting show={popupState.bettingtShow} onClose={handleCloseBettingPopup}/>
       <PopupResult show={popupState.resultShow} onClose={handleCloseResultPopup} zodiacs={img} history={history} />
-
       <PopupMineResult show={popupState.mineResultShow} onClose={handleCloseMineResultPopup} mineHistory={mineHistory}/>
     </div>
   );

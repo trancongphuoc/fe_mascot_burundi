@@ -20,8 +20,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose }) => {
   }
 
   return (
-    <div className="popup-overlay">
-      <div className="popup">
+    <div className="betting-popup-overlay">
+      <div className="betting-popup">
         <img src={BgContent} alt="card_background" className='betting--BgContent'></img>
         <img src={backgroundSelected} alt="card_background" className='betting--zodiac-background'></img>
         <img src={dragon} alt="card_zodiac" className='betting--zodiac-card'></img>

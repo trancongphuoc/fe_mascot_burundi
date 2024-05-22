@@ -11,8 +11,6 @@ import CrownGold from '../assets/crown-gold.png';
 import CrownSliver from '../assets/crown-sliver.svg';
 import CrownBronze from '../assets/crown-bronze.png';
 
-type DialogType = 'LOST' | 'WIN';
-
 interface DialogBettingProps {
   show: boolean;
   onClose: () => void;

@@ -1,5 +1,5 @@
 /* Popup.css */
-.popup-overlay {
+.betting-popup-overlay {
     position: fixed;
     display: grid;
     grid-template-columns: 1fr;
@@ -7,7 +7,7 @@
     width: 100%;
     left: 0;
     max-width: 100%;
-    // margin-right: 0;
+
     height: 100%;
     background: rgba(0, 0, 0, .4);
     display: flex;
@@ -17,7 +17,7 @@
     z-index: 1000;
   }
   
-  .popup {
+  .betting-popup {
     // background: white;
     position: relative;
     width: 100%;
@@ -220,10 +220,10 @@
             margin: 0;
 
             &::before {
-                content: url('https://www.svgrepo.com/show/2460/cherry.svg');
-        width: 20px;
-        height: auto;
-        display: inline-block;
+                content: '';
+                width: 20px;
+                height: auto;
+                display: inline-block;
             }
         }
     }

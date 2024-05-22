@@ -714,7 +714,7 @@ h4 {
 }
 
 /* Popup.css */
-.popup-overlay {
+.betting-popup-overlay {
   position: fixed;
   display: grid;
   grid-template-columns: 1fr;
@@ -731,7 +731,7 @@ h4 {
   z-index: 1000;
 }
 
-.popup {
+.betting-popup {
   position: relative;
   width: 100%;
   display: grid;
@@ -907,7 +907,7 @@ h4 {
   margin: 0;
 }
 .betting__confirm--text::before {
-  content: url("https://www.svgrepo.com/show/2460/cherry.svg");
+  content: "";
   width: 20px;
   height: auto;
   display: inline-block;
