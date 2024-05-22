@@ -52,7 +52,7 @@ const PopupRule: React.FC<PopupRuleProps> = ({ show, onClose }) => {
         <div className='rule__line mt-16px'>
           {
           rules.map((_, index) => (
-            <p key={index} className={currentRuleIndex == index ? 'rule__line--selected' : 'rule__line--'}>&nbsp;</p>
+            <p key={index} className={currentRuleIndex == index ? 'rule__line--selected' : 'rule__line--nomarl'}>&nbsp;</p>
           ))
           }
         </div>
