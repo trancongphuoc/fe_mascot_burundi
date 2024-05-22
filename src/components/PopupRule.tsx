@@ -50,9 +50,11 @@ const PopupRule: React.FC<PopupRuleProps> = ({ show, onClose }) => {
         <img className='rule--img mb-20px mt-18-5px' src={rules[currentRuleIndex].image} alt={`Rule ${currentRuleIndex + 1}`} />
         <p className='rule--secondary'>{rules[currentRuleIndex].text}</p>
         <div className='rule__line mt-16px'>
-          {rules.map((rule, index) => (
-            <p key={index} className={currentRuleIndex == index ? 'rule__line--selected' : 'rule__line--nomarl'}>&nbsp;</p>
-          ))}
+          {
+          rules.map((_, index) => (
+            <p key={index} className={currentRuleIndex == index ? 'rule__line--selected' : 'rule__line--'}>&nbsp;</p>
+          ))
+          }
         </div>
         <div className="rule__button mb-20px mt-13px" onClick={handleNext}>
           <p className="rule__button--next">Tiếp tục</p>

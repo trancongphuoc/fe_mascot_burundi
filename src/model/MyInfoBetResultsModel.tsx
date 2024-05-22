@@ -3,4 +3,5 @@ interface MyInfoBetResultModel {
     goodBets: number,
     totalIcoin: number,
     myInfoBetReults: CardModel[];
+    onOpen: () => void;
 }

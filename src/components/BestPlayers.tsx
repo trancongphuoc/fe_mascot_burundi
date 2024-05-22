@@ -23,6 +23,7 @@ function BestPlayers( {bestPlayers}: BestPlayersProps ) {
                                 <p className="content__icoin--data">{player.winningIcoin}</p>
                                 <img src={Icoin} alt="icoin" className="content__icoin--img"></img>
                             </div>
+                            
                             {index !== bestPlayers.length - 1 && <p className='content__icoin--line'>&nbsp;</p>}
                         </div>
                     ))

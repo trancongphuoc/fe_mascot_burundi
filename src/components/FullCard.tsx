@@ -1,15 +1,25 @@
 
 import '../css/index.css';
-import background from '../assets/background_card_large.svg';
-import backgroundSelected from '../assets/b.svg';
+import bgCardNormal from '../assets/bg_card_nomarl.svg';
+import bgCardSelected from '../assets/bg_card_selected.svg';
+import SVG from 'react-inlinesvg';
 
-function FullCard({ card, isSelected,bonus, players, number }: CardModel) {
+interface FullCardPro {
+    card: string;
+    isSelected: boolean;
+    number: number;
+    bonus: number;
+    players: number;
+    onOpen: () => void;
+}
+
+function FullCard({ card, isSelected,bonus, players, number, onOpen}: FullCardPro) {
 
     return (
-        <div className="betting-card">
+        <div onClick={onOpen} className="betting-card">
             <p className='betting-card--no'>{number}</p>
-            <img src={isSelected ? backgroundSelected : background} alt="card_background" className='betting-card--background'></img>
-            <img src={card} alt="card_zodiac" className='betting-card--zodiac'></img>
+            <SVG src={isSelected ? bgCardSelected : bgCardNormal} className='betting-card--background'/>
+            <SVG src={card}  className='betting-card--zodiac'/>
             <p className='betting-card--bonus'>x{bonus}</p> 
             <p className='betting-card--players'>{players} người</p>
         </div>
