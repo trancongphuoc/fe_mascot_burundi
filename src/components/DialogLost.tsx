@@ -69,10 +69,9 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
 
   return (
     <div onClick={onClose} className="lost-popup-overlay">
-      <div className="lost-popup" onClick={e => {
-        console.log('123123');
-        e.stopPropagation()}}>
-        <div className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div>
+      <div className="lost-popup" onClick={e => {e.stopPropagation()}}>
+        <div 
+          className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div>
         <img src={backgroundSelected} alt="card_background" className="lost--zodiac-background" />
         <img src={dragon} alt="card_zodiac" className="lost--zodiac-card" />
         <img src={BgLighter} alt="betting lighter" className="lost--BgLighter" />

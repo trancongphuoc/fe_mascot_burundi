@@ -104,40 +104,81 @@ let mineHistory: BetInfo[] = [
 
 let dialogType: DialogType = 'WIN';
 
+interface ZodiacGameData {
+  isPause: boolean,
+  noGameToday: number,
+  status: string,
+  transactionId: number,
+  zodiacCard: ZodiacCard,
+  
+}
+
+interface ZodiacCard {
+  id: string,
+  imgUrl: string,
+  multiply: number,
+  name: string,
+}
+
 
 function App() {
 
+  const [game, setGame] = useState<ZodiacGameData | null>(null); 
+
   useEffect(() => {
     const fetchStatus = async () => {
-      console.log(db);
-      const starCountRef = ref(db, 'zodiacGame/state/status');
-      const zodiacCard = ref(db, 'zodiacGame/state/zodiacCard');
-      const noGame = ref(db, 'zodiacGame/state/noGameToday');
+      const stateRef = ref(db, 'zodiacGame/state');
 
-      onValue(starCountRef, (snapshot) => {
+      onValue(stateRef, (snapshot) => {
         const data = snapshot.val();
-        console.log(data);
-        setStatusGame(data);
-        console.log('---',statusGame);
-      });
+        if (data) {
+          const zodiacCardData = data.zodiacCard;
+          const zodiacCard: ZodiacCard = {
+            id: zodiacCardData.id,
+            imgUrl: zodiacCardData.imgUrl,
+            multiply: zodiacCardData.multiply,
+            name: zodiacCardData.name,
+          };
 
-      onValue(zodiacCard, (snapshot) => {
-        const data = snapshot.val();
-        console.log('zodiaCard', data);
+          setGame({
+            isPause: data.isPause,
+            noGameToday: data.noGameToday,
+            status: data.status,
+            transactionId: data.transactionId,
+            zodiacCard: zodiacCard,
+          });
+        }
       });
-
-      onValue(noGame, (snapshot) => {
-        const data = snapshot.val();
-        setNoGame(data);
-        console.log('noGame', data);
-      });
-    }
+    };
 
     fetchStatus();
-  }, [])
 
-  const [statusGame, setStatusGame] = useState('PREPARESTART');
-  const [noGame, setNoGame] = useState(0);
+    console.log("step 0", game);
+
+    if (game?.zodiacCard.id.includes("1") ||
+        game?.zodiacCard.id.includes("2") ||
+        game?.zodiacCard.id.includes("3") ||
+        game?.zodiacCard.id.includes("4")) {
+          console.log("step 1");
+          console.log("check id",game?.zodiacCard.id);
+          handleOpenPopup();
+    } else  {
+      console.log("step 2");
+      console.log("check id", game?.zodiacCard.id);
+      handleOpenLostPopup();
+    }
+  }, []);
+
+  // If game data is null, return loading or handle appropriately
+  // if (!game) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // Now you can access game properties safely
+  // const { status, zodiacCard } = game;
+
+  // const [statusGame, setStatusGame] = useState('PREPARESTART');
+
 
   
   const [popupState, setPopupState] = useState({
@@ -146,9 +187,11 @@ function App() {
     resultShow: false,
     bettingtShow: false,
     mineResultShow: false,
-
     selectCard: false,
   });
+
+  const [myBet, setMyBet] = useState()
+
 
   const handleOpenPopup = () => {
     dialogType = 'WIN';
@@ -176,7 +219,7 @@ function App() {
     <div className='main'>
       <section className='section-header u-margin-top-huge1'>
         <img src={PrimaryText} alt="primary_text" className='u-margin-minus-bottom-big' />
-        <p className='heading-secondary'>Hôm nay {noGame} Ván</p>
+        <p className='heading-secondary'>Hôm nay {game?.noGameToday} Ván</p>
         <img src={Rule} onClick={handleOpenRulePopup} alt="card_background" className='section-header__rule' />
       </section>
 
@@ -197,7 +240,7 @@ function App() {
       </div>
 
       <section className="section-betting mt-5px">
-        <p className="section-betting--counter">Đếm ngược {counter}</p>
+        <p className="section-betting--counter">Đếm ngược {30}</p>
         <div className="section-betting__content">
           {bettingTable.map((bettingCard, index) => (
             <FullCard onOpen={handleOpenBettingPopup} key={index} number={index + 1} card={bettingCard.card} isSelected={bettingCard.isSelected} bonus={bettingCard.bonus} players={bettingCard.players} />
