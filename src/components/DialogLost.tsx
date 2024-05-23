@@ -10,6 +10,7 @@ import BgLighter from '../assets/background-betting-lighter.svg';
 import CrownGold from '../assets/crown-gold.png';
 import CrownSliver from '../assets/crown-sliver.svg';
 import CrownBronze from '../assets/crown-bronze.png';
+import Confetti from "http://cdn.skypack.dev/canvas-confetti";
 
 interface DialogBettingProps {
   show: boolean;
@@ -28,6 +29,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
   useEffect(() => {
     setBgHeader(dialogType === 'WIN' ? BgHeaderWin : BgHeaderLost);
     setBgContent(dialogType === 'WIN' ? BgContentWin : BgContentLost);
+    Confetti();
   }, [dialogType]);
 
   if (!show) {

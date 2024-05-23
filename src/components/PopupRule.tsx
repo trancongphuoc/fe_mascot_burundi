@@ -44,7 +44,7 @@ const PopupRule: React.FC<PopupRuleProps> = ({ show, onClose }) => {
   }
 
   return (
-    <div onClick={onClose} className="popup-overlay">
+    <div onClick={onClose} className="rule-popup-overlay">
       <div className="rule" onClick={e => e.stopPropagation()}>
         <p className='rule--primary mt-18-5px'>Thể lệ Đoán Linh Vật</p>
         <img className='rule--img mb-20px mt-18-5px' src={rules[currentRuleIndex].image} alt={`Rule ${currentRuleIndex + 1}`} />

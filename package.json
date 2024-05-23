@@ -12,6 +12,7 @@
     "compile:sass": "sass src/sass/main.scss src/css/index.css -w"
   },
   "dependencies": {
+    "firebase": "^10.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-inlinesvg": "^4.1.3",

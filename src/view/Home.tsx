@@ -19,13 +19,14 @@ import avatar from '../assets/avatar.png';
 
 import MyBonusToday from '../components/MyBonusToday';
 import BestPlayers from '../components/BestPlayers';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DialogBetting from '../components/DialogBetting';
 import DialogLost from '../components/DialogLost';
 import PopupRule from '../components/PopupRule';
 import PopupResult from '../components/PopupResult';
-import { shouldProcessLinkClick } from 'react-router-dom/dist/dom';
 import PopupMineResult from '../components/PopupMineResult';
+import { db } from '../firebase/config';
+import { ref, onValue } from "firebase/database";
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
 
@@ -104,7 +105,33 @@ let mineHistory: BetInfo[] = [
 
 let dialogType: DialogType = 'WIN';
 
+
 function App() {
+
+  useEffect(() => {
+    const fetchStatus = async () => {
+      console.log(db);
+      const starCountRef = ref(db, 'zodiacGame/state/status');
+      const zodiacCard = ref(db, 'zodiacGame/state/zodiacCard');
+
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        console.log(data);
+        setStatusGame(data);
+        console.log('---',statusGame);
+      });
+
+      onValue(zodiacCard, (snapshot) => {
+        const data = snapshot.val();
+        console.log('zodiaCard', data);
+      });
+    }
+    fetchStatus();
+  }, [])
+
+  const [statusGame, setStatusGame] = useState('PREPARESTART');
+
+  
   const [popupState, setPopupState] = useState({
     isWinLostVisible: false,
     ruleShow: false,
@@ -119,6 +146,7 @@ function App() {
     dialogType = 'WIN';
     setPopupState({ ...popupState, isWinLostVisible: true });
   };
+
 
   const handleOpenLostPopup = () => {
     dialogType = 'LOST';

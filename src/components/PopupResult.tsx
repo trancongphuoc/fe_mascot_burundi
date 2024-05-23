@@ -1,7 +1,6 @@
 import BgCard from '../assets/background_card_small.svg'
 import StickIcon from  '../assets/icon_stick.svg';
 import TextResult from '../assets/text-result.svg';
-import BgResult from '../assets/bg-result-game2.svg';
 import SVG from 'react-inlinesvg';
 
 interface PopupResultProps {
