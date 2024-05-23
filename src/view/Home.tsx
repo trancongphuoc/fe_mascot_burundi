@@ -25,8 +25,10 @@ import DialogLost from '../components/DialogLost';
 import PopupRule from '../components/PopupRule';
 import PopupResult from '../components/PopupResult';
 import PopupMineResult from '../components/PopupMineResult';
+
 import { db } from '../firebase/config';
 import { ref, onValue } from "firebase/database";
+import { AnimatePresence } from 'framer-motion';
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
 
@@ -260,11 +262,16 @@ function App() {
 
 
       {/* Dialog when click */}
-      <DialogLost show={popupState.isWinLostVisible} onClose={handleCloseWinLostPopup} dialogType={dialogType} totalIcoin={100} topUsers={topUsers} />
-      <PopupRule show={popupState.ruleShow} onClose={handleCloseRulePopup} />
-      <PopupResult show={popupState.resultShow} onClose={handleCloseResultPopup} zodiacs={img} history={history} />
-      <DialogBetting show={popupState.bettingtShow} onClose={handleCloseBettingPopup}/>
-      <PopupResult show={popupState.resultShow} onClose={handleCloseResultPopup} zodiacs={img} history={history} />
+      
+      <AnimatePresence>
+        {popupState.ruleShow && <PopupRule onClose={handleCloseRulePopup} />}
+        {popupState.bettingtShow && <DialogBetting onClose={handleCloseBettingPopup}/>}
+        {popupState.isWinLostVisible && <DialogLost onClose={handleCloseWinLostPopup} dialogType={dialogType} totalIcoin={100} topUsers={topUsers} />}
+        {popupState.resultShow && <PopupResult onClose={handleCloseResultPopup} zodiacs={img} history={history} />}
+        
+      </AnimatePresence>
+
+      
       <PopupMineResult show={popupState.mineResultShow} onClose={handleCloseMineResultPopup} mineHistory={mineHistory}/>
     </div>
   );

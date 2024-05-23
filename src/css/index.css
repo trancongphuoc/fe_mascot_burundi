@@ -997,7 +997,6 @@ h4 {
   grid-template-rows: repeat(5, min-content);
   justify-items: center;
   align-content: end;
-  animation: up 0.3s ease-out forwards;
 }
 .lost-popup .lost--BgContent {
   grid-area: 3/1/6/4;
@@ -1348,7 +1347,6 @@ h4 {
   flex-direction: column;
   justify-content: center;
   z-index: 1000;
-  animation: appear 0.2s ease-out forwards;
 }
 
 .rule {
@@ -1361,7 +1359,6 @@ h4 {
   justify-items: center;
   border-radius: 10px;
   margin: 0 auto;
-  animation: up 0.3s ease-in-out forwards;
 }
 .rule--primary {
   font-size: 16px;

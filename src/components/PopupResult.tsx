@@ -2,24 +2,30 @@ import BgCard from '../assets/background_card_small.svg'
 import StickIcon from  '../assets/icon_stick.svg';
 import TextResult from '../assets/text-result.svg';
 import SVG from 'react-inlinesvg';
+import { motion } from 'framer-motion';
 
 interface PopupResultProps {
-  show: boolean;
   onClose: () => void;
   zodiacs: string[];
   history: string[];
 }
 
-const PopupResult: React.FC<PopupResultProps> = ({ show, onClose, zodiacs, history }) => {
-
-  if (!show) {
-    return null;
-  }
+const PopupResult: React.FC<PopupResultProps> = ({ onClose, zodiacs, history }) => {
 
   return (
-    <div onClick={onClose} className="popup-overlay">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      className="popup-overlay">
 
-      <div className="result-popup" onClick={e => e.stopPropagation()}>
+      <motion.div
+        initial={{ opacity: 0, scale: .5}}
+        animate={{ opacity: 1, scale: 1}}
+        exit={{ opacity: 0, scale: .5}}
+        className="result-popup"
+        onClick={e => e.stopPropagation()}>
 
         <SVG src={TextResult} className="result-popup--header"/>
 
@@ -72,13 +78,8 @@ const PopupResult: React.FC<PopupResultProps> = ({ show, onClose, zodiacs, histo
           }
           
         </div>
-      
-          
-            
-
-        
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

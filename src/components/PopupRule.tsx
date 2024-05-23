@@ -3,13 +3,13 @@ import Rule1 from '../assets/rule-1.png';
 import Rule2 from '../assets/rule-2.png';
 import Rule3 from '../assets/rule-3.png';
 import Rule4 from '../assets/rule-4.png';
+import { motion } from 'framer-motion';
 
 interface PopupRuleProps {
-  show: boolean;
   onClose: () => void;
 }
 
-const PopupRule: React.FC<PopupRuleProps> = ({ show, onClose }) => {
+const PopupRule: React.FC<PopupRuleProps> = ({ onClose }) => {
   const [currentRuleIndex, setCurrentRuleIndex] = useState(0);
 
   const rules = [
@@ -35,13 +35,19 @@ const PopupRule: React.FC<PopupRuleProps> = ({ show, onClose }) => {
     setCurrentRuleIndex((prevIndex) => (prevIndex + 1) % rules.length);
   };
 
-  if (!show) {
-    return null;
-  }
-
   return (
-    <div onClick={onClose} className="rule-popup-overlay">
-      <div className="rule" onClick={e => e.stopPropagation()}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      className="rule-popup-overlay">
+      <motion.div 
+        initial={{ opacity: 0, scale: .5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: .5 }}
+        className="rule"
+        onClick={e => e.stopPropagation()}>
         <p className='rule--primary mt-18-5px'>Thể lệ Đoán Linh Vật</p>
         <img 
           className='rule--img mb-20px mt-18-5px'
@@ -58,11 +64,14 @@ const PopupRule: React.FC<PopupRuleProps> = ({ show, onClose }) => {
             ))
           }
         </div>
-        <div className="rule__button mb-20px mt-13px" onClick={handleNext}>
+        <motion.div
+          whileTap={{y: 1}}
+          className="rule__button mb-20px mt-13px"
+          onClick={handleNext}>
           <p className="rule__button--next">Tiếp tục</p>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 

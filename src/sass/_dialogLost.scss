@@ -83,7 +83,6 @@
     grid-template-rows: repeat(5, min-content);
     justify-items: center;
     align-content: end;
-    animation: up .3s ease-out forwards;
 
     .lost {
         &--BgContent {

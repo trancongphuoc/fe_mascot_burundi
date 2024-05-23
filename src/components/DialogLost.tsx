@@ -14,16 +14,16 @@ import CrownBronze from '../assets/crown_bronze.svg';
 import dragon from '../assets/dragon.svg';
 
 import SVG from 'react-inlinesvg';
+import { motion } from 'framer-motion';
 
 interface DialogBettingProps {
-  show: boolean;
   onClose: () => void;
   dialogType: DialogType;
   totalIcoin: number;
   topUsers: TopUserModel[];
 }
 
-const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType, totalIcoin, topUsers }) => {
+const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, totalIcoin, topUsers }) => {
   const [bgHeader, setBgHeader] = useState(BgHeaderLost);
   const [bgContent, setBgContent] = useState(BgContentLost);
 
@@ -32,12 +32,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
   useEffect(() => {
     setBgHeader(dialogType === 'WIN' ? BgHeaderWin : BgHeaderLost);
     setBgContent(dialogType === 'WIN' ? BgContentWin : BgContentLost);
-    // Confetti();
   }, [dialogType]);
-
-  if (!show) {
-    return null;
-  }
 
   const renderDialogContent = () => {
     switch (dialogType) {
@@ -71,8 +66,18 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
   };
 
   return (
-    <div onClick={onClose} className="lost-popup-overlay">
-      <div className="lost-popup" onClick={e => {e.stopPropagation()}}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      className="lost-popup-overlay">
+      <motion.div
+        initial={{ opacity: 0, y: 50}}
+        animate={{ opacity: 1, y: 0}}
+        exit={{ opacity: 0, y: 50}}
+        className="lost-popup"
+        onClick={e => {e.stopPropagation()}}>
         <div 
           className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div>
         <SVG src={bgCardSelected} className="lost--zodiac-background" />
@@ -99,8 +104,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
             </div>
           </div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
