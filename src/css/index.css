@@ -26,6 +26,24 @@ body {
   background-repeat: no-repeat;
 }
 
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes up {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 .heading-secondary {
   color: #5fdabc;
   font-weight: 300;
@@ -1317,8 +1335,8 @@ h4 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 24.5px;
   z-index: 1000;
+  animation: appear 0.2s ease-out forwards;
 }
 
 .rule {
@@ -1331,6 +1349,7 @@ h4 {
   justify-items: center;
   border-radius: 10px;
   margin: 0 auto;
+  animation: up 0.3s ease-in-out forwards;
 }
 .rule--primary {
   font-size: 16px;

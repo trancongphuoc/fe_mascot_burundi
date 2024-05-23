@@ -30,7 +30,6 @@ function MyBonusToday({bonusToday, goodBets, totalIcoin, myInfoBetReults, onOpen
                                 <SVG src={myInfoBetReult.card} className="card__main--zodiac"/>
                                 <p className='card__main--bonus'>x{myInfoBetReult.bonus}</p>
                                 <h4 className='card__main--icoin'>{myInfoBetReult.players} iCoin</h4>
-
                             </div>
                         ))
                     }
