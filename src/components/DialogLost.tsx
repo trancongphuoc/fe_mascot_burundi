@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import backgroundSelected from '../assets/b.svg';
-import dragon from '../assets/dragon.svg';
+import bgCardSelected from '../assets/bg_card_selected.svg';
+import TextCongratution from '../assets/text-congratution.svg';
+import BgContentWin from '../assets/bg_content_win.svg';
+import BgContentLost from '../assets/bg_content_lost.svg';
+import BgHeaderLost from '../assets/bg_header_lost.svg';
+import BgHeaderWin from '../assets/bg_header_win.svg';
 import Icoin from '../assets/icoin.svg';
-import BgContentLost from '../assets/Bg-lost-content.png';
-import BgContentWin from '../assets/bg-win-content.png';
-import BgHeaderLost from '../assets/Bg-lost-header.png';
-import BgHeaderWin from '../assets/bg-win-header.png';
-import BgLighter from '../assets/background-betting-lighter.svg';
-import CrownGold from '../assets/crown-gold.png';
-import CrownSliver from '../assets/crown-sliver.svg';
-import CrownBronze from '../assets/crown-bronze.png';
-// import Confetti from "http://cdn.skypack.dev/canvas-confetti";
+import BgLighter from '../assets/bg_lighter.svg';
+import CrownGold from '../assets/crown_gold.svg';
+import CrownSliver from '../assets/crown_sliver.svg';
+import CrownBronze from '../assets/crown_bronze.svg';
+
+import dragon from '../assets/dragon.svg';
+
+import SVG from 'react-inlinesvg';
 
 interface DialogBettingProps {
   show: boolean;
@@ -24,7 +27,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
   const [bgHeader, setBgHeader] = useState(BgHeaderLost);
   const [bgContent, setBgContent] = useState(BgContentLost);
 
-  const crown = [CrownGold, CrownBronze, CrownSliver];
+  const crown = [CrownGold, CrownSliver, CrownBronze];
 
   useEffect(() => {
     setBgHeader(dialogType === 'WIN' ? BgHeaderWin : BgHeaderLost);
@@ -52,11 +55,11 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
       case 'WIN':
         return (
           <>
-            <p className="win--primary-text">Chúc mừng</p>
+            <SVG src={TextCongratution} className="win--primary-text"/>
             <div className="lost__secondary">
              <p className="win__secondary">Thật xuất sắc, Bạn đã đoán trúng ván này</p>
              <div className="win__totalIcoin">
-              <img className="win__totalIcoin--img" src={Icoin} alt="" />
+              <SVG className="win__totalIcoin--img" src={Icoin}/>
               <p className="win__totalIcoin--icoin">{totalIcoin}</p>
              </div>
             </div>
@@ -72,10 +75,10 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
       <div className="lost-popup" onClick={e => {e.stopPropagation()}}>
         <div 
           className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div>
-        <img src={backgroundSelected} alt="card_background" className="lost--zodiac-background" />
-        <img src={dragon} alt="card_zodiac" className="lost--zodiac-card" />
-        <img src={BgLighter} alt="betting lighter" className="lost--BgLighter" />
-        <img src={bgHeader} alt="betting header" className="lost--BgHeader" />
+        <SVG src={bgCardSelected} className="lost--zodiac-background" />
+        <SVG src={dragon} className="lost--zodiac-card" />
+        <SVG src={BgLighter} className="lost--BgLighter" />
+        <SVG src={bgHeader} className="lost--BgHeader" />
         
         {renderDialogContent()}
         
@@ -85,13 +88,13 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
 
         {topUsers.map((user, index) => (
           <div className={`lost__no${index + 1}`} key={index}>
-            <img className={`lost__no${index + 1}--img`} src={crown[index]} alt="crown" />
+            <SVG className={`lost__no${index + 1}--img`} src={crown[index]}/>
             <div className={`lost__no${index + 1}--url`}>
               <img src={user.url} alt="avatar user" />
             </div>
             <p className={`lost__no${index + 1}--name`}>{user.name}</p>
             <div className="lost__totalIcoin">
-              <img className="lost__totalIcoin--img" src={Icoin} alt="icoin" />
+              <SVG className="lost__totalIcoin--img" src={Icoin}/>
               <p className="lost__totalIcoin--icoin">{user.icoin}</p>
             </div>
           </div>

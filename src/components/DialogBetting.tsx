@@ -4,7 +4,7 @@ import dragon from '../assets/dragon.svg';
 import Icoin from '../assets/icoin.svg';
 import BgContent from '../assets/bg-betting-content.png';
 import BgHeader from '../assets/bg-betting-header.png';
-import BgLighter from '../assets/background-betting-lighter.svg';
+import BgLighter from '../assets/bg_lighter.svg';
 
 interface DialogBettingProps {
   show: boolean;
