@@ -10,7 +10,7 @@ import BgLighter from '../assets/background-betting-lighter.svg';
 import CrownGold from '../assets/crown-gold.png';
 import CrownSliver from '../assets/crown-sliver.svg';
 import CrownBronze from '../assets/crown-bronze.png';
-import Confetti from "http://cdn.skypack.dev/canvas-confetti";
+// import Confetti from "http://cdn.skypack.dev/canvas-confetti";
 
 interface DialogBettingProps {
   show: boolean;
@@ -29,7 +29,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
   useEffect(() => {
     setBgHeader(dialogType === 'WIN' ? BgHeaderWin : BgHeaderLost);
     setBgContent(dialogType === 'WIN' ? BgContentWin : BgContentLost);
-    Confetti();
+    // Confetti();
   }, [dialogType]);
 
   if (!show) {
@@ -69,7 +69,9 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ show, onClose, dialogType
 
   return (
     <div onClick={onClose} className="lost-popup-overlay">
-      <div className="lost-popup">
+      <div className="lost-popup" onClick={e => {
+        console.log('123123');
+        e.stopPropagation()}}>
         <div className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div>
         <img src={backgroundSelected} alt="card_background" className="lost--zodiac-background" />
         <img src={dragon} alt="card_zodiac" className="lost--zodiac-card" />

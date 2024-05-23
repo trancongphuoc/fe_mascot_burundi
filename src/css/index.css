@@ -506,6 +506,7 @@ h4 {
 .best-players .contents .content--name {
   align-self: self-end;
   margin-bottom: 0.5px;
+  font-weight: 500;
 }
 .best-players .contents .content--text {
   grid-area: 2/2/3/3;

@@ -21,7 +21,7 @@ const PopupResult: React.FC<PopupResultProps> = ({ show, onClose, zodiacs, histo
 
       <div className="result-popup" onClick={e => e.stopPropagation()}>
 
-          <SVG src={TextResult} className="result-popup--header"/>
+        <SVG src={TextResult} className="result-popup--header"/>
 
         <div className="result-popup__title">
             <p className="result-popup__title--no">Ván</p>
@@ -37,7 +37,6 @@ const PopupResult: React.FC<PopupResultProps> = ({ show, onClose, zodiacs, histo
         </div>
 
         <div className="result-popup__content">
-
           {
             history.map((_, index) => (
               <div className="result-popup__item">
