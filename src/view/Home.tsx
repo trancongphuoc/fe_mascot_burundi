@@ -30,7 +30,6 @@ import { ref, onValue } from "firebase/database";
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
 
-const bets = 124;
 const myInfoBetResults = [
   { card: tiger, isSelected: true, number: 7, bonus: 15, players: 7 , show: ""},
   { card: tiger, isSelected: true, number: 7, bonus: 15, players: 7 },
@@ -113,6 +112,7 @@ function App() {
       console.log(db);
       const starCountRef = ref(db, 'zodiacGame/state/status');
       const zodiacCard = ref(db, 'zodiacGame/state/zodiacCard');
+      const noGame = ref(db, 'zodiacGame/state/noGameToday');
 
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
@@ -125,11 +125,19 @@ function App() {
         const data = snapshot.val();
         console.log('zodiaCard', data);
       });
+
+      onValue(noGame, (snapshot) => {
+        const data = snapshot.val();
+        setNoGame(data);
+        console.log('noGame', data);
+      });
     }
+
     fetchStatus();
   }, [])
 
   const [statusGame, setStatusGame] = useState('PREPARESTART');
+  const [noGame, setNoGame] = useState(0);
 
   
   const [popupState, setPopupState] = useState({
@@ -168,7 +176,7 @@ function App() {
     <div className='main'>
       <section className='section-header u-margin-top-huge1'>
         <img src={PrimaryText} alt="primary_text" className='u-margin-minus-bottom-big' />
-        <p className='heading-secondary'>Hôm nay {bets} Ván</p>
+        <p className='heading-secondary'>Hôm nay {noGame} Ván</p>
         <img src={Rule} onClick={handleOpenRulePopup} alt="card_background" className='section-header__rule' />
       </section>
 
