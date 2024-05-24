@@ -55,7 +55,7 @@ const bestPlayers = [
   { name: "Doan Dai Hiep", avatarUrl: "https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8", winningIcoin: 9999 },
   { name: "Nguyễn Hoàng Chi", avatarUrl: "https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8", winningIcoin: 9999 },
 ];
-const counter = 30;
+// const counter = 30;
 const topUsers = [
   { url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Lê Hải Yến', icoin: 3000 },
   { url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Trần Tuấn Hùng', icoin: 1000 },
@@ -192,7 +192,7 @@ function App() {
     selectCard: false,
   });
 
-  const [myBet, setMyBet] = useState()
+  // const [myBet, setMyBet] = useState()
 
 
   const handleOpenPopup = () => {
@@ -253,9 +253,9 @@ function App() {
       <MyBonusToday onOpen={handleOpenMineResultPopup} bonusToday={1000} goodBets={4} totalIcoin={15000} myInfoBetReults={myInfoBetResults} />
 
       <BestPlayers bestPlayers={bestPlayers} />
-
+{/* 
       <button onClick={handleOpenPopup} className="open-popup-button">Open Popup</button>
-      <button onClick={handleOpenLostPopup} className="open-popup-button">Open Popup</button>
+      <button onClick={handleOpenLostPopup} className="open-popup-button">Open Popup</button> */}
 
 
 

@@ -4,7 +4,7 @@ import TextCongratution from '../assets/text-congratution.svg';
 import BgContentWin from '../assets/bg_content_win.svg';
 import BgContentLost from '../assets/bg_content_lost.svg';
 import BgHeaderLost from '../assets/bg_header_lost.svg';
-import BgHeaderWin from '../assets/bg_header_win.svg';
+import BgHeaderWin from '../assets/bg_header_short_win.svg';
 import Icoin from '../assets/icoin.svg';
 import BgLighter from '../assets/bg_lighter.svg';
 import CrownGold from '../assets/crown_gold.svg';
@@ -32,12 +32,23 @@ interface DialogBettingProps {
 const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, totalIcoin, topUsers }) => {
   const [bgHeader, setBgHeader] = useState(BgHeaderLost);
   const [bgContent, setBgContent] = useState(BgContentLost);
+  const [lineLeft, setLineLeft] = useState(LineLeftLost);
+  const [lineRight, setLineRight] = useState(LineLeftLost);
 
   const crown = [CrownGold, CrownSliver, CrownBronze];
 
   useEffect(() => {
-    setBgHeader(dialogType === 'WIN' ? BgHeaderWin : BgHeaderLost);
-    setBgContent(dialogType === 'WIN' ? BgContentWin : BgContentLost);
+    if (dialogType === 'WIN') {
+      setBgHeader(BgHeaderWin);
+      setBgContent(BgContentWin);
+      setLineLeft(LineLeftWin);
+      setLineRight(LineRightWin);
+    } else if (dialogType === 'LOST') {
+      setBgHeader(BgHeaderLost);
+      setBgContent(BgContentLost);
+      setLineLeft(LineLeftLost);
+      setLineRight(LineRightLost);
+    }
   }, [dialogType]);
 
   const renderDialogContent = () => {
@@ -92,9 +103,9 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
         
         {renderDialogContent()}
         
-        <p className ="lost--light1">&nbsp;</p>
+        <SVG src={lineLeft} className ="lost--light1"/>
         <p className="lost--tertiary">TOP chiến thắng</p>
-        <SVG src={} className ="lost--light2">&nbsp;</p>
+        <SVG src={lineRight} className ="lost--light2"/>
 
         {topUsers.map((user, index) => (
           <div className={`lost__no${index + 1}`} key={index}>

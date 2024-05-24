@@ -43,8 +43,6 @@
 }
 
 @mixin line {
-    width: 110px;
-    height: 1px;
     align-self: start;
     margin-top: 8.5px;
 }
@@ -75,7 +73,7 @@
   
   .lost-popup {
     position: relative;
-    max-width: 500px;
+    max-width: 430px;
     margin: 0 auto;
     width: 100%;
     display: grid;
@@ -90,8 +88,9 @@
             z-index: -1;
             width: 100%;
             height: auto;
-            background-size: 100% 100%;
             background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-position: center;
         
         }
     
@@ -153,15 +152,15 @@
             line-height: 1.15;
 
             margin-bottom: 11px;
-            margin-top: 27px;
+            margin-top: 28px;
     
         }
     
         &--light1 {
-            grid-area: 4 / 3 / 5 / 4;
+            grid-area: 4 / 1 / 5 / 2;
             @include line;
-            background-image: linear-gradient(to left, $color-line-1, $color-line-2);
-            justify-self: start;
+            margin-right: 0;
+            justify-self: end;
         }
     
         &--tertiary {
@@ -174,10 +173,10 @@
         }
     
         &--light2 {
-            grid-area: 4 / 1 / 5 / 2;
+            grid-area: 4 / 3 / 5 / 4;
             @include line;
-
-            justify-self: end;
+            margin-left: 0px;
+            justify-self: start;
         }
     
         &__no3 {
