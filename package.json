@@ -12,8 +12,10 @@
     "compile:sass": "sass src/sass/main.scss src/css/index.css -w"
   },
   "dependencies": {
+    "axios": "^1.7.2",
     "firebase": "^10.12.1",
     "framer-motion": "^11.2.6",
+    "js-base64": "^3.7.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-inlinesvg": "^4.1.3",

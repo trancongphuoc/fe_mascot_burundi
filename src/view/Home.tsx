@@ -25,10 +25,16 @@ import DialogLost from '../components/DialogLost';
 import PopupRule from '../components/PopupRule';
 import PopupResult from '../components/PopupResult';
 import PopupMineResult from '../components/PopupMineResult';
+import OpenCard from '../components/OpenCard';
 
 import { db } from '../firebase/config';
 import { ref, onValue } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
+import { Base64 } from 'js-base64';
+import axios from 'axios';
+
+import api, { BASE_URL_DEV } from '../api/axios'
+
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
 
@@ -155,7 +161,55 @@ function App() {
 
     fetchStatus();
 
-    console.log("step 0", game);
+
+    // let queryString = window.location.search;
+    // queryString = queryString.substring(1);
+    // let pair = queryString.split("=");
+    // let paramName = decodeURIComponent(pair[0]);
+    // let paramValue = decodeURIComponent(pair[1]);
+    // let param = paramValue.split("-");
+    // let key = decodeURIComponent(param[0]);
+       
+    // try{
+    //   const parameters = Base64.decode(key);
+    //   const pa = JSON.parse(parameters);
+    //       axios.post(`/rest/auth`, {
+    //           userId: pa.userId,
+    //           language: pa.language
+    //         }).then((res) => {
+    //           // setToken(res.data)  
+    //           window.localStorage.setItem("token", res.data)
+
+    //       // axios.get(`/rest/feature-request`,{headers  : {
+    //       //     'Authorization': `Bearer ${res.data} `
+    //       //   }}).then((res)=>{
+    //       //     console.log(res.data.list)
+    //       //     if(res.data.list){
+    //       //     setFeatureRequests(res.data.list)
+    //       // }})
+    //       }).catch((error) => console.log(error));
+    // }
+    //   catch {
+
+        const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJGSVJFQkFTRSs4NDk0NTk3OTA3NyIsInJvbGVzIjpbIlVTRVIiXSwiZmFjZWJvb2tVc2VySWQiOiJGSVJFQkFTRSs4NDk0NTk3OTA3NyIsInBhY2thZ2VOYW1lIjoiY29tLnlva2FyYS5kZXYudjEiLCJsYW5ndWFnZSI6ImVuLnlva2FyYSIsInBsYXRmb3JtIjoiSU9TIiwidXNlcklkIjoibnpkeVQ4azBERi91V25IZU9uaXhwQjJ1WnV0Y0UrbjhGb2VTWmw2eTAzR1ZZcWNiZmJraWEwN2ZmSEhmTnhxZGVSbWREZ1hHdnZwM2NTdkdlT0RCblE9PSIsImp0aSI6ImE2ZGRiNjk2LTQ2NjgtNDMzMi04MmVkLTc3YjJmODMwNzhhOCIsImlhdCI6MTcxNjUzNTE5NSwiaXNzIjoiaHR0cHM6Ly93d3cuaWthcmEuY28iLCJleHAiOjE3MTcxMzk5OTV9.h40nj5NUU7KTMtMUIGM-lDgmr-Y8B3-WrBhebhLnq-s";
+        // setToken(paramValue)
+        window.localStorage.setItem("token", token)
+
+        axios.get(`/rest/zodiac-game/history`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        .then((res) => {
+          console.log('history', res.data.list);
+          // Uncomment the following lines if you want to use the response data
+          // if (res.data.list) {
+          //   setFeatureRequests(res.data.list);
+          // }
+        })
+        .catch((error) => console.log(error));
+      // }
+   
 
     if (game?.zodiacCard.id.includes("1") ||
         game?.zodiacCard.id.includes("2") ||
@@ -253,9 +307,9 @@ function App() {
       <MyBonusToday onOpen={handleOpenMineResultPopup} bonusToday={1000} goodBets={4} totalIcoin={15000} myInfoBetReults={myInfoBetResults} />
 
       <BestPlayers bestPlayers={bestPlayers} />
-{/* 
+
       <button onClick={handleOpenPopup} className="open-popup-button">Open Popup</button>
-      <button onClick={handleOpenLostPopup} className="open-popup-button">Open Popup</button> */}
+      <button onClick={handleOpenLostPopup} className="open-popup-button">Open Popup</button>
 
 
 
@@ -271,6 +325,7 @@ function App() {
         
       </AnimatePresence>
 
+          {/* {popupState.ruleShow  &&<OpenCard onClose={handleCloseRulePopup} zodiacs={[]} history={[]}></OpenCard>} */}
       
       <PopupMineResult show={popupState.mineResultShow} onClose={handleCloseMineResultPopup} mineHistory={mineHistory}/>
     </div>
