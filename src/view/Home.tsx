@@ -23,17 +23,19 @@ import { useEffect, useState } from 'react';
 import DialogBetting from '../components/DialogBetting';
 import DialogLost from '../components/DialogLost';
 import PopupRule from '../components/PopupRule';
-import PopupResult from '../components/PopupResult';
+import PopupHistoryGame from '../components/PopupHistoryGame';
 import PopupMineResult from '../components/PopupMineResult';
 import OpenCard from '../components/OpenCard';
 
 import { db } from '../firebase/config';
 import { ref, onValue } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
-import { Base64 } from 'js-base64';
+// import { Base64 } from 'js-base64';
 import axios from 'axios';
 
 import api, { BASE_URL_DEV } from '../api/axios'
+import { GameHistory } from '../model/GameHistory';
+import { fetchGameHistory } from '../api/getGameHistory';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -131,9 +133,29 @@ interface ZodiacCard {
 
 function App() {
 
-  const [game, setGame] = useState<ZodiacGameData | null>(null); 
+  let token: string | null  = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJGSVJFQkFTRSs4NDk0NTk3OTA3NyIsInJvbGVzIjpbIlVTRVIiXSwiZmFjZWJvb2tVc2VySWQiOiJGSVJFQkFTRSs4NDk0NTk3OTA3NyIsInBhY2thZ2VOYW1lIjoiY29tLnlva2FyYS5kZXYudjEiLCJsYW5ndWFnZSI6ImVuLnlva2FyYSIsInBsYXRmb3JtIjoiSU9TIiwidXNlcklkIjoibnpkeVQ4azBERi91V25IZU9uaXhwQjJ1WnV0Y0UrbjhGb2VTWmw2eTAzR1ZZcWNiZmJraWEwN2ZmSEhmTnhxZGVSbWREZ1hHdnZwM2NTdkdlT0RCblE9PSIsImp0aSI6ImE2ZGRiNjk2LTQ2NjgtNDMzMi04MmVkLTc3YjJmODMwNzhhOCIsImlhdCI6MTcxNjUzNTE5NSwiaXNzIjoiaHR0cHM6Ly93d3cuaWthcmEuY28iLCJleHAiOjE3MTcxMzk5OTV9.h40nj5NUU7KTMtMUIGM-lDgmr-Y8B3-WrBhebhLnq-s";
+  window.localStorage.setItem("token", token);
 
-  useEffect(() => {
+  token = window.localStorage.getItem("token");
+
+  
+
+  const [game, setGame] = useState<ZodiacGameData | null>(null); 
+  
+
+  // const fetchGameHistory = async () => {
+  //   api.get(`/rest/zodiac-game/history`, {
+  //     headers: { 'Authorization': `Bearer ${token}` }
+  //   }).then((res) => {
+  //     console.log('history', res.data);
+  //     if (res.data.status === "OK") {
+        
+  //     }
+  //   })
+  //   .catch((error) => console.log(error));
+  // }
+
+  useEffect(() => { 
     const fetchStatus = async () => {
       const stateRef = ref(db, 'zodiacGame/state');
 
@@ -160,6 +182,7 @@ function App() {
     };
 
     fetchStatus();
+
 
 
     // let queryString = window.location.search;
@@ -191,17 +214,16 @@ function App() {
     // }
     //   catch {
 
-        const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJGSVJFQkFTRSs4NDk0NTk3OTA3NyIsInJvbGVzIjpbIlVTRVIiXSwiZmFjZWJvb2tVc2VySWQiOiJGSVJFQkFTRSs4NDk0NTk3OTA3NyIsInBhY2thZ2VOYW1lIjoiY29tLnlva2FyYS5kZXYudjEiLCJsYW5ndWFnZSI6ImVuLnlva2FyYSIsInBsYXRmb3JtIjoiSU9TIiwidXNlcklkIjoibnpkeVQ4azBERi91V25IZU9uaXhwQjJ1WnV0Y0UrbjhGb2VTWmw2eTAzR1ZZcWNiZmJraWEwN2ZmSEhmTnhxZGVSbWREZ1hHdnZwM2NTdkdlT0RCblE9PSIsImp0aSI6ImE2ZGRiNjk2LTQ2NjgtNDMzMi04MmVkLTc3YjJmODMwNzhhOCIsImlhdCI6MTcxNjUzNTE5NSwiaXNzIjoiaHR0cHM6Ly93d3cuaWthcmEuY28iLCJleHAiOjE3MTcxMzk5OTV9.h40nj5NUU7KTMtMUIGM-lDgmr-Y8B3-WrBhebhLnq-s";
         // setToken(paramValue)
-        window.localStorage.setItem("token", token)
 
-        axios.get(`/rest/zodiac-game/history`, {
+
+        api.get(`/rest/zodiac-game/history`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         })
         .then((res) => {
-          console.log('history', res.data.list);
+          console.log('history', res.data);
           // Uncomment the following lines if you want to use the response data
           // if (res.data.list) {
           //   setFeatureRequests(res.data.list);
@@ -318,14 +340,14 @@ function App() {
       {/* Dialog when click */}
       
       <AnimatePresence>
-        {popupState.ruleShow && <PopupRule onClose={handleCloseRulePopup} />}
+        {/* {popupState.ruleShow && <PopupRule onClose={handleCloseRulePopup} />} */}
         {popupState.bettingtShow && <DialogBetting onClose={handleCloseBettingPopup}/>}
         {popupState.isWinLostVisible && <DialogLost onClose={handleCloseWinLostPopup} dialogType={dialogType} totalIcoin={100} topUsers={topUsers} />}
-        {popupState.resultShow && <PopupResult onClose={handleCloseResultPopup} zodiacs={img} history={history} />}
+        {popupState.resultShow && <PopupHistoryGame onClose={handleCloseResultPopup} zodiacs={img} history={history} />}
         
       </AnimatePresence>
 
-          {/* {popupState.ruleShow  &&<OpenCard onClose={handleCloseRulePopup} zodiacs={[]} history={[]}></OpenCard>} */}
+          {popupState.ruleShow  &&<OpenCard onClose={handleCloseRulePopup} zodiacs={[]} token={token}></OpenCard>}
       
       <PopupMineResult show={popupState.mineResultShow} onClose={handleCloseMineResultPopup} mineHistory={mineHistory}/>
     </div>

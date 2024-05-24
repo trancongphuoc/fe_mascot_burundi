@@ -4,7 +4,7 @@ const BASE_URL_DEV = 'https://ikara-development.appspot.com';
 
 
 const api = axios.create({
-    baseURL: window.location.protocol +'//'+window.location.hostname,
+    baseURL: 'https://ikara-development.appspot.com',
 });
    
 export default api;

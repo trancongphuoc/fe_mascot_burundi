@@ -3,14 +3,24 @@ import StickIcon from  '../assets/icon_stick.svg';
 import TextResult from '../assets/text-result.svg';
 import SVG from 'react-inlinesvg';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { GameHistory } from '../model/GameHistory';
+import { fetchGameHistory } from '../api/getGameHistory';
 
-interface PopupResultProps {
+interface PopupHistoryProps {
   onClose: () => void;
   zodiacs: string[];
-  history: string[];
+  token: string | null;
 }
 
-const PopupResult: React.FC<PopupResultProps> = ({ onClose, zodiacs, history }) => {
+const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs, token }) => {
+
+  const [gameHistory, setGameHistory] = useState<GameHistory[]>([]);
+
+  useEffect(() => {
+    fetchGameHistory(token, setGameHistory);
+    console.log('set data', gameHistory);
+  },[])
 
   return (
     <motion.div
@@ -44,7 +54,7 @@ const PopupResult: React.FC<PopupResultProps> = ({ onClose, zodiacs, history }) 
 
         <div className="result-popup__content">
           {
-            history.map((_, index) => (
+            gameHistory.map((_, index) => (
               <div className="result-popup__item">
                 
                 <p className='result-popup__item--index'>{index + 1}</p>
@@ -83,4 +93,4 @@ const PopupResult: React.FC<PopupResultProps> = ({ onClose, zodiacs, history }) 
   );
 };
 
-export default PopupResult;
+export default PopupHistoryGame;
