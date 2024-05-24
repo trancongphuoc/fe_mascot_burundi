@@ -11,6 +11,12 @@ import CrownGold from '../assets/crown_gold.svg';
 import CrownSliver from '../assets/crown_sliver.svg';
 import CrownBronze from '../assets/crown_bronze.svg';
 
+import LineLeftWin from '../assets/line_left_win.svg';
+import LineRightWin from '../assets/line_right_win.svg';
+import LineLeftLost from '../assets/line_left_lost.svg';
+import LineRightLost from '../assets/line_right_lost.svg';
+
+
 import dragon from '../assets/dragon.svg';
 
 import SVG from 'react-inlinesvg';
@@ -78,8 +84,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
         exit={{ opacity: 0, y: 50}}
         className="lost-popup"
         onClick={e => {e.stopPropagation()}}>
-        <div 
-          className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div>
+        <div className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div>
         <SVG src={bgCardSelected} className="lost--zodiac-background" />
         <SVG src={dragon} className="lost--zodiac-card" />
         <SVG src={BgLighter} className="lost--BgLighter" />
@@ -89,7 +94,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
         
         <p className ="lost--light1">&nbsp;</p>
         <p className="lost--tertiary">TOP chiến thắng</p>
-        <p className ="lost--light2">&nbsp;</p>
+        <SVG src={} className ="lost--light2">&nbsp;</p>
 
         {topUsers.map((user, index) => (
           <div className={`lost__no${index + 1}`} key={index}>

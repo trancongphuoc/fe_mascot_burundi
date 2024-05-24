@@ -1002,6 +1002,7 @@ h4 {
   grid-area: 3/1/6/4;
   z-index: -1;
   width: 100%;
+  height: auto;
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -1064,10 +1065,10 @@ h4 {
 }
 .lost-popup .lost--light1 {
   grid-area: 4/3/5/4;
-  width: 90px;
+  width: 110px;
   height: 1px;
   align-self: start;
-  margin-top: 8px;
+  margin-top: 8.5px;
   background-image: linear-gradient(to left, #B8B8B8, #C8C8C8);
   justify-self: start;
 }
@@ -1081,11 +1082,10 @@ h4 {
 }
 .lost-popup .lost--light2 {
   grid-area: 4/1/5/2;
-  width: 90px;
+  width: 110px;
   height: 1px;
   align-self: start;
-  margin-top: 8px;
-  background-image: linear-gradient(to left, #C8C8C8, #B8B8B8);
+  margin-top: 8.5px;
   justify-self: end;
 }
 .lost-popup .lost__no3 {
@@ -1220,7 +1220,7 @@ h4 {
   justify-items: center;
   align-content: end;
   margin-bottom: 11px;
-  padding-bottom: 19px;
+  padding-bottom: 19.5px;
 }
 .lost-popup .lost__no1--img {
   grid-area: 1/1/2/2;
@@ -1285,6 +1285,8 @@ h4 {
 }
 .lost-popup .lost__totalIcoin--img {
   margin-right: 3px;
+  width: 12px;
+  height: 12px;
 }
 .lost-popup .lost__totalIcoin--icoin {
   color: #f2fbff;
