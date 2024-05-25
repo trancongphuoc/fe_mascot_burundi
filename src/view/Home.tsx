@@ -25,17 +25,15 @@ import DialogLost from '../components/DialogLost';
 import PopupRule from '../components/PopupRule';
 import PopupHistoryGame from '../components/PopupHistoryGame';
 import PopupMineResult from '../components/PopupMineResult';
-import OpenCard from '../components/OpenCard';
+// import OpenCard from '../components/OpenCard';
 
 import { db } from '../firebase/config';
 import { ref, onValue } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
 // import { Base64 } from 'js-base64';
-import axios from 'axios';
+// import axios from 'axios';
 
-import api, { BASE_URL_DEV } from '../api/axios'
-import { GameHistory } from '../model/GameHistory';
-import { fetchGameHistory } from '../api/getGameHistory';
+// import api, { BASE_URL_DEV } from '../api/axios'
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -70,7 +68,7 @@ const topUsers = [
   { url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Ngọc Hoàng', icoin: 9000 },
 ];
 
-let history: string[] = ['tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake', 'tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake', 'tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake', 'tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake']
+// let history: string[] = ['tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake', 'tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake', 'tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake', 'tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake']
 
 
 let mineHistory: BetInfo[] = [
@@ -217,22 +215,6 @@ function App() {
         // setToken(paramValue)
 
 
-        api.get(`/rest/zodiac-game/history`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
-        .then((res) => {
-          console.log('history', res.data);
-          // Uncomment the following lines if you want to use the response data
-          // if (res.data.list) {
-          //   setFeatureRequests(res.data.list);
-          // }
-        })
-        .catch((error) => console.log(error));
-      // }
-   
-
     if (game?.zodiacCard.id.includes("1") ||
         game?.zodiacCard.id.includes("2") ||
         game?.zodiacCard.id.includes("3") ||
@@ -340,14 +322,14 @@ function App() {
       {/* Dialog when click */}
       
       <AnimatePresence>
-        {/* {popupState.ruleShow && <PopupRule onClose={handleCloseRulePopup} />} */}
+        {popupState.ruleShow && <PopupRule onClose={handleCloseRulePopup} />}
         {popupState.bettingtShow && <DialogBetting onClose={handleCloseBettingPopup}/>}
         {popupState.isWinLostVisible && <DialogLost onClose={handleCloseWinLostPopup} dialogType={dialogType} totalIcoin={100} topUsers={topUsers} />}
-        {popupState.resultShow && <PopupHistoryGame onClose={handleCloseResultPopup} zodiacs={img} history={history} />}
+        {popupState.resultShow && <PopupHistoryGame onClose={handleCloseResultPopup} zodiacs={img} token={token}/>}
         
       </AnimatePresence>
 
-          {popupState.ruleShow  &&<OpenCard onClose={handleCloseRulePopup} zodiacs={[]} token={token}></OpenCard>}
+          {/* {popupState.ruleShow  &&<OpenCard onClose={handleCloseRulePopup} zodiacs={[]} token={token}></OpenCard>} */}
       
       <PopupMineResult show={popupState.mineResultShow} onClose={handleCloseMineResultPopup} mineHistory={mineHistory}/>
     </div>

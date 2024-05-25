@@ -93,6 +93,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
         initial={{ opacity: 0, y: 50}}
         animate={{ opacity: 1, y: 0}}
         exit={{ opacity: 0, y: 50}}
+        transition={{ type: 'just'}}
         className="lost-popup"
         onClick={e => {e.stopPropagation()}}>
         <div className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div>

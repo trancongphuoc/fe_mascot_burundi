@@ -1,4 +1,4 @@
-import BgCard from '../assets/background_card_small.svg'
+import BgCard from '../assets/bg_card_nomarl.svg'
 import StickIcon from  '../assets/icon_stick.svg';
 import TextResult from '../assets/text-result.svg';
 import SVG from 'react-inlinesvg';
@@ -16,11 +16,32 @@ interface PopupHistoryProps {
 const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs, token }) => {
 
   const [gameHistory, setGameHistory] = useState<GameHistory[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchGameHistory(token, setGameHistory);
-    console.log('set data', gameHistory);
-  },[])
+    const fetchData = async () => {
+      try {
+        fetchGameHistory(token, setGameHistory);
+        setLoading(false);
+      } catch (error) {
+        setError('Error fetching game history');
+        setLoading(false);
+      }
+    };
+
+    if (token) {
+      fetchData();
+    }
+  }, [token]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <motion.div
@@ -39,14 +60,13 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs, token
 
         <SVG src={TextResult} className="result-popup--header"/>
 
-        <div className="result-popup__title">
+        <div className="result-popup__title mt-7px mb-8px">
             <p className="result-popup__title--no">Ván</p>
-  
             {
               zodiacs.map((zodiac, index) => (
                 <div key={index} className="result-popup__card">
-                  <img src={BgCard} alt="zodiac" className="result-popup__card--Bg"/>
-                  <img src={zodiac} alt="zodiac" className="result-popup__card--zodiac" />
+                  <SVG src={BgCard} className="result-popup__card--Bg"/>
+                  <SVG src={zodiac} className="result-popup__card--zodiac" />
                 </div>
               ))
             }
@@ -54,35 +74,17 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs, token
 
         <div className="result-popup__content">
           {
-            gameHistory.map((_, index) => (
-              <div className="result-popup__item">
+            gameHistory.map((game, index) => (
+              <div key={index} className="result-popup__item">
                 
-                <p className='result-popup__item--index'>{index + 1}</p>
-
-                <div className='result-popup__item--buffalo'>
-                <img className='result-popup__item--stickShow' src={StickIcon} alt=""/>
-                </div>
-                <div className='result-popup__item--tiger' >
-                  <img className='result-popup__item--stickShow' src={StickIcon} alt=""/>
-                </div>
-                <div className='result-popup__item--dragon'>
-                  <img className='result-popup__item--stickShow' src={StickIcon} alt=""/>
-                </div>
-                <div className='result-popup__item--snake'>
-                  <img className='result-popup__item--stickShow' src={StickIcon} alt=""/>
-                </div>
-                <div className='result-popup__item--horse'>
-                  <img className='result-popup__item--stickShow' src={StickIcon} alt=""/>
-                </div>
-                <div className='result-popup__item--goat'>
-                  <img className='result-popup__item--stickShow' src={StickIcon} alt=""/>
-                </div>
-                <div className='result-popup__item--chicken'>
-                  <img className='result-popup__item--stickShow' src={StickIcon} alt=""/>
-                </div>
-                <div className='result-popup__item--pig'>
-                  <img className='result-popup__item--stickShow' src={StickIcon} alt=""/>
-                </div>
+                <p className='result-popup__item--index'>{game.noGame}</p>
+                {[...Array(8)].map((_, i) => (
+                    <div key={i} className="result-popup__item--buffalo">
+                      <SVG className={(game.zodiacCardId.slice(-1) == ( i + 1).toString()) ? 
+                          "result-popup__item--stickShow" :
+                          "result-popup__item--stickHide" } src={StickIcon} />
+                    </div>
+                ))}
               </div>
             ))
           }

@@ -78,7 +78,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(5, min-content);
+    grid-template-rows: repeat(auto-fit, min-content);
     justify-items: center;
     align-content: end;
 

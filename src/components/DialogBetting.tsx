@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import backgroundSelected from '../assets/b.svg';
 import dragon from '../assets/dragon.svg';
 import Icoin from '../assets/icoin.svg';
-import BgContent from '../assets/bg-betting-content.png';
+import BgContent from '../assets/bg-result-game2.svg';
 import BgHeader from '../assets/bg-betting-header.png';
 import BgLighter from '../assets/bg_lighter.svg';
 import { motion } from 'framer-motion';

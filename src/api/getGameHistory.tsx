@@ -1,4 +1,4 @@
-import api from 'axios';
+import api from './axios';
 import { GameHistory } from '../model/GameHistory';
 
 export const fetchGameHistory = async (token: string | null, setGameHistory: React.Dispatch<React.SetStateAction<GameHistory[]>>) => {
