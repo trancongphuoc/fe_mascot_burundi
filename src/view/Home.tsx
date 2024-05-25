@@ -17,7 +17,7 @@ import Rule from '../assets/rule.svg';
 import Arrow from '../assets/arrow.svg';
 import avatar from '../assets/avatar.png';
 
-import MyBonusToday from '../components/MyBonusToday';
+import MyHistory from '../components/MyHistory';
 import BestPlayers from '../components/BestPlayers';
 import { useEffect, useState } from 'react';
 import DialogBetting from '../components/DialogBetting';
@@ -308,7 +308,7 @@ function App() {
         </div>
       </section>
 
-      <MyBonusToday onOpen={handleOpenMineResultPopup} bonusToday={1000} goodBets={4} totalIcoin={15000} myInfoBetReults={myInfoBetResults} />
+      <MyHistory onOpen={handleOpenMineResultPopup} bonusToday={1000} goodBets={4} totalIcoin={15000} myInfoBetReults={myInfoBetResults} />
 
       <BestPlayers bestPlayers={bestPlayers} />
 

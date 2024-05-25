@@ -4,7 +4,6 @@ import Rule2 from '../assets/rule-2.png';
 import Rule3 from '../assets/rule-3.png';
 import Rule4 from '../assets/rule-4.png';
 import { motion } from 'framer-motion';
-import SVG from 'react-inlinesvg';
 
 interface PopupRuleProps {
   onClose: () => void;
@@ -50,11 +49,9 @@ const PopupRule: React.FC<PopupRuleProps> = ({ onClose }) => {
         className="rule"
         onClick={e => e.stopPropagation()}>
         <p className='rule--primary mt-18-5px'>Thể lệ Đoán Linh Vật</p>
-        <SVG 
-          cacheRequests={true}
+        <img 
           className='rule--img mb-20px mt-18-5px'
           src={rules[currentRuleIndex].image}
-     
         />
         <p className='rule--secondary'>{rules[currentRuleIndex].text}</p>
         <div className='rule__line mt-16px'>

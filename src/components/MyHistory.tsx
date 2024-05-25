@@ -5,7 +5,7 @@ import Background from '../assets/background_card_small.svg';
 import SVG from 'react-inlinesvg';
 
 
-function MyBonusToday({bonusToday, goodBets, totalIcoin, myInfoBetReults, onOpen} : MyInfoBetResultModel) {
+function MyHistory({bonusToday, goodBets, totalIcoin, myInfoBetReults, onOpen} : MyInfoBetResultModel) {
     return (
         <>  
             <div className="section-myInfo mt-24px">
@@ -49,4 +49,4 @@ function MyBonusToday({bonusToday, goodBets, totalIcoin, myInfoBetReults, onOpen
     );
 }
 
-export default MyBonusToday;
+export default MyHistory;

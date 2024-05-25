@@ -7,17 +7,12 @@ import IcoinWin from '../assets/icoin.svg'
 import SVG from 'react-inlinesvg';
 
 interface PopupMineResultProps {
-  show: boolean;
   onClose: () => void;
 
   mineHistory: BetInfo[];
 }
 
-const PopupMineResult: React.FC<PopupMineResultProps> = ({ show, onClose, mineHistory }) => {
-
-  if (!show) {
-    return null;
-  }
+const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose, mineHistory }) => {
 
   return (
     <div onClick={onClose} className="popup-overlay">
