@@ -65,7 +65,7 @@ const PopupRule: React.FC<PopupRuleProps> = ({ onClose }) => {
         </div>
         <motion.div
           whileTap={{y: 1}}
-          className="rule__button mb-20px mt-13px"
+          className="rule__button mb-21px mt-13px"
           onClick={handleNext}>
           <p className="rule__button--next">Tiếp tục</p>
         </motion.div>

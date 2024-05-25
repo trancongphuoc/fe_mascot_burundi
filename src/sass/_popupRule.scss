@@ -10,7 +10,6 @@
     flex-direction: column;
     justify-content: center;
     z-index: 1000;
-    // animation: appear .2s ease-out forwards;
 }
   
 .rule {
@@ -23,7 +22,7 @@
     justify-items: center;
     border-radius: 10px;
     margin: 0 auto;
-    // animation: up .3s ease-in-out forwards;
+    margin-top: 50px;
 
     &--primary {
         font-size: 16px;

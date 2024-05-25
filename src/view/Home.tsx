@@ -24,7 +24,7 @@ import DialogBetting from '../components/DialogBetting';
 import DialogLost from '../components/DialogLost';
 import PopupRule from '../components/PopupRule';
 import PopupHistoryGame from '../components/PopupHistoryGame';
-import PopupMineResult from '../components/PopupMineResult';
+import PopupMyHistory from '../components/PopupMyHistory';
 // import OpenCard from '../components/OpenCard';
 
 import { db } from '../firebase/config';
@@ -326,12 +326,14 @@ function App() {
         {popupState.bettingtShow && <DialogBetting onClose={handleCloseBettingPopup}/>}
         {popupState.isWinLostVisible && <DialogLost onClose={handleCloseWinLostPopup} dialogType={dialogType} totalIcoin={100} topUsers={topUsers} />}
         {popupState.resultShow && <PopupHistoryGame onClose={handleCloseResultPopup} zodiacs={img} token={token}/>}
+
+        {popupState.mineResultShow && <PopupMyHistory onClose={handleCloseMineResultPopup} mineHistory={mineHistory}/>}
         
       </AnimatePresence>
 
           {/* {popupState.ruleShow  &&<OpenCard onClose={handleCloseRulePopup} zodiacs={[]} token={token}></OpenCard>} */}
       
-      <PopupMineResult show={popupState.mineResultShow} onClose={handleCloseMineResultPopup} mineHistory={mineHistory}/>
+     
     </div>
   );
 }

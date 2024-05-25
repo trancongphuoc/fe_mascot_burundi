@@ -253,6 +253,10 @@ h4 {
   margin-bottom: 21.5px !important;
 }
 
+.mb-21px {
+  margin-bottom: 21px !important;
+}
+
 .mb-20px {
   margin-bottom: 20px !important;
 }
@@ -1372,6 +1376,7 @@ h4 {
   justify-items: center;
   border-radius: 10px;
   margin: 0 auto;
+  margin-top: 50px;
 }
 .rule--primary {
   font-size: 16px;
