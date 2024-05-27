@@ -483,8 +483,6 @@ h4 {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  width: 100%;
-  height: 100%;
   justify-content: center;
   justify-items: center;
   align-content: center;
@@ -509,12 +507,24 @@ h4 {
 .flip-card__back {
   grid-area: 1/1/2/2;
   backface-visibility: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  align-items: center;
 }
 .flip-card__back--bg {
   grid-area: 1/1/2/2;
   justify-self: center;
-  width: 143px;
-  height: 190px;
+  width: 155px;
+  height: auto;
+  z-index: 1;
+}
+.flip-card__back--zodiac {
+  grid-area: 1/1/2/2;
+  width: 100px;
+  height: auto;
+  z-index: 2;
 }
 .flip-card__front {
   grid-area: 1/1/2/2;
@@ -527,8 +537,8 @@ h4 {
 }
 .flip-card__front--bg {
   grid-area: 1/1/2/2;
-  width: 143px;
-  height: 190px;
+  width: 155px;
+  height: auto;
 }
 .flip-card__front--questionMark {
   grid-area: 1/1/2/2;
@@ -1585,6 +1595,7 @@ h4 {
   padding: 0 7px;
   margin-bottom: 8px;
   padding-top: 8.5px;
+  scrollbar-width: none;
   clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 5% 100%, 0% 95%);
 }
 .history-game-popup__item {

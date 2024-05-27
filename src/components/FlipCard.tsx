@@ -5,8 +5,14 @@ import BgCard from '../assets/bg_card_nomarl.svg';
 import SVG from 'react-inlinesvg';
 import QuestionMark from '../assets/question_mark.svg';
 import BgLight from '../assets/circle_light.svg'
+import tiger from '../assets/tiger.svg';
 
-export default function FlipCard(zodiac: string) {
+interface FlipCardProps {
+    zodiac: string;
+  }
+  
+
+export default function FlipCard({ zodiac }: FlipCardProps) {
   const [flip, setFlip] = useState(true);
 
 
@@ -22,8 +28,8 @@ export default function FlipCard(zodiac: string) {
         <div className="bg">
 
             <motion.div
-                 animate={{ rotate: 360 }}
-                 transition={{ ease: "linear", duration: 2, repeat: Infinity }}
+                animate={{ rotate: 360 }}
+                transition={{ ease: "linear", duration: 2, repeat: Infinity }}
                 className="bg--circle-light">
                 <SVG src={BgLight}/>
             </motion.div>
@@ -31,7 +37,7 @@ export default function FlipCard(zodiac: string) {
             <motion.div
                 transition={{ duration: 0.7 }}
                 animate={{ rotateY: flip ? 0 : 180 }}
-                className="flip-card"
+                className="flip-card mt-6px"
             >   
                 <motion.div
                 transition={{ duration: 0.7 }}
@@ -59,9 +65,9 @@ export default function FlipCard(zodiac: string) {
                         onClick={() => setFlip((prevState) => !prevState)}
                         className="flip-card__back--bg"/>
                     <SVG
-                        src={zodiac}
+                        src={true ? tiger : zodiac}
                         onClick={() => setFlip((prevState) => !prevState)}
-                        className="flip-card__back--bg"/>
+                        className="flip-card__back--zodiac"/>
 
                 </motion.div>
                 

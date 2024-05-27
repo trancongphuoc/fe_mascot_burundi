@@ -21,7 +21,7 @@ const Countdown: React.FC<CountdownProps> = ({ startTimer, className }) => {
 
   useEffect(() => {
     if (startTimer) {
-      setCount(30);
+      setCount(45);
     } else {
       clearInterval(timer);
       setCount(0);

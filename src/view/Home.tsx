@@ -111,7 +111,7 @@ let mineHistory: BetInfo[] = [
 
 ];
 
-let dialogType: DialogType = 'WIN';
+
 
 interface ZodiacGameData {
   isPause: boolean,
@@ -137,13 +137,24 @@ function App() {
 
   token = window.localStorage.getItem("token");
 
-  
-
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
   const [startTime, setStartTime] = useState(true); 
 
   const [statusGame, setStatusGame] = useState('NONE');
+  //open card
   const [openGameResult, setOpenGameResult] = useState(false);
+  //open rule
+  const [openRule, setOpenRule] = useState(false);
+  //open lost win
+  const [openLostWin, setOpenLostWin] = useState(false);
+  //open history game
+  const [openHistoryGame, setOpenHistoryGame] = useState(false);
+  //open betting
+  const [openBetting, setOpenBetting] = useState(false);
+  //open my history
+  const [openMyHistory, setOpenMyHistory] = useState(false);
+
+  const [dialogType, setDialogType] = useState<DialogType>('LOST');
   
 
   // const fetchGameHistory = async () => {
@@ -214,6 +225,7 @@ function App() {
 
     fetchStatus();
     fetchGameInfo();
+    setDialogType('LOST');
 
     if (statusGame == "COUNTDOWN") {
       setStartTime(true)
@@ -222,10 +234,17 @@ function App() {
     }
 
     if (statusGame === "RESULT") {
-      handleOpenLostPopup()
+      //close dilog
+      setOpenRule(false);
+      setOpenLostWin(false);
+      setOpenHistoryGame(false);
+
+
+      setOpenGameResult(true)
     }
 
     console.log('check data', game);
+
 
 
 
@@ -269,67 +288,21 @@ function App() {
 
   }, [statusGame]);
 
-  // If game data is null, return loading or handle appropriately
-  // if (!game) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // Now you can access game properties safely
-  // const { status, zodiacCard } = game;
-
-  // const [statusGame, setStatusGame] = useState('PREPARESTART');
-
-
-  
-  const [popupState, setPopupState] = useState({
-    isWinLostVisible: false,
-    ruleShow: false,
-    resultShow: false,
-    bettingtShow: false,
-    mineResultShow: false,
-    selectCard: false,
-  });
-
-  // const [myBet, setMyBet] = useState()
-
-
-  const handleOpenPopup = () => {
-    dialogType = 'WIN';
-    setPopupState({ ...popupState, isWinLostVisible: true });
-  };
-
-
-  const handleOpenLostPopup = () => {
-    dialogType = 'LOST';
-    setPopupState({ ...popupState, isWinLostVisible: true });
-  };
-
-  const handleCloseWinLostPopup = () => setPopupState({ ...popupState, isWinLostVisible: false });
-  const handleOpenRulePopup = () => setPopupState({ ...popupState, ruleShow: true });
-  const handleCloseRulePopup = () => setPopupState({ ...popupState, ruleShow: false });
-  const handleOpenResultPopup = () => {
-
-    setPopupState({ ...popupState, resultShow: true })
-    console.log('resultShow', popupState.resultShow)};
-  const handleCloseResultPopup = () => setPopupState({ ...popupState, resultShow: false });
-  const handleOpenBettingPopup = () => { setPopupState({ ...popupState, bettingtShow: true })};
-  const handleCloseBettingPopup = () => setPopupState({ ...popupState, bettingtShow: false });
-  const handleOpenMineResultPopup = () => { setPopupState({ ...popupState, mineResultShow: true })};
-  const handleCloseMineResultPopup = () => setPopupState({ ...popupState, mineResultShow: false });
-
-  const handleCloseGameResultPopup = () => setOpenGameResult(true);
-
 
   return (
     <div className='main'>
       <section className='section-header u-margin-top-huge1'>
         <img src={PrimaryText} alt="primary_text" className='u-margin-minus-bottom-big' />
         <p className='heading-secondary'>Hôm nay {game?.noGameToday} Ván</p>
-        <img src={Rule} onClick={handleOpenRulePopup} alt="card_background" className='section-header__rule' />
+        <img
+          src={Rule}
+          onClick={() => setOpenRule(true)}
+          alt="card_background"
+          className='section-header__rule'/>
       </section>
 
       <div className="result mt-7-5px">
-        <div className="result__left" onClick={handleOpenResultPopup}>
+        <div className="result__left" onClick={() => setOpenHistoryGame(true)}>
           <p className='result__left--text'>Kết quả</p>
           {leftResults.map((result, index) => (
             <Card key={index} card={result} className="card--zodiac__small" classNameBackground="card--zodiac__background--small mr-4px" />
@@ -348,37 +321,37 @@ function App() {
         <CountDown className='section-betting--counter' startTimer={startTime} />
         <div className="section-betting__content">
           {bettingTable.map((bettingCard, index) => (
-            <FullCard onOpen={handleOpenBettingPopup} key={index} number={index + 1} card={bettingCard.card} isSelected={bettingCard.isSelected} bonus={bettingCard.bonus} players={bettingCard.players} />
+            <FullCard onOpen={()=> setOpenBetting(true)} key={index} number={index + 1} card={bettingCard.card} isSelected={bettingCard.isSelected} bonus={bettingCard.bonus} players={bettingCard.players} />
           ))}
         </div>
       </section>
 
-      <MyHistory onOpen={handleOpenMineResultPopup} bonusToday={1000} goodBets={4} totalIcoin={15000} myInfoBetReults={myInfoBetResults} />
+      <MyHistory onOpen={()=> setOpenMyHistory(true)} bonusToday={1000} goodBets={4} totalIcoin={15000} myInfoBetReults={myInfoBetResults} />
 
       <BestPlayers bestPlayers={bestPlayers} />
 
-      <button onClick={handleOpenPopup} className="open-popup-button">Open Popup</button>
-      <button onClick={handleOpenLostPopup} className="open-popup-button">Open Popup</button>
+      <button onClick={() => {
+        setDialogType('WIN');
+        setOpenLostWin(true)}} className="open-popup-button">Open Popup</button>
 
+      <button onClick={() => {
+        setDialogType('LOST');
+        setOpenLostWin(true)}} className="open-popup-button">Open Popup</button>
 
-
+      <button onClick={()=> setOpenGameResult(true)} className="open-popup-result game">Open resul Popup</button>
 
 
       {/* Dialog when click */}
       
       <AnimatePresence>
-        {popupState.ruleShow && <PopupRule onClose={handleCloseRulePopup} />}
-        {popupState.bettingtShow && <DialogBetting onClose={handleCloseBettingPopup}/>}
-        {popupState.isWinLostVisible && <DialogLost onClose={handleCloseWinLostPopup} dialogType={dialogType} totalIcoin={100} topUsers={topUsers} />}
-
-        {
-        popupState.resultShow && <PopupHistoryGame onClose={handleCloseResultPopup} zodiacs={img} token={token}/>}
-
-        {popupState.mineResultShow && <PopupMyHistory onClose={handleCloseMineResultPopup} mineHistory={mineHistory}/>}
-        
+        {openRule && <PopupRule onClose={()=> setOpenRule(false)} />}
+        {openBetting && <DialogBetting onClose={()=> setOpenBetting(false)}/>}
+        {openLostWin && <DialogLost onClose={() => setOpenLostWin(false)} dialogType={dialogType} totalIcoin={100} topUsers={topUsers} />}
+        {openHistoryGame && <PopupHistoryGame onClose={() => setOpenHistoryGame(false)} zodiacs={img} token={token}/>}
+        {openMyHistory && <PopupMyHistory onClose={()=> setOpenMyHistory(false)} mineHistory={mineHistory}/>}
       </AnimatePresence>
 
-          {openGameResult && <OpenCard onClose={handleCloseGameResultPopup} zodiacs={[tiger]} history={[]}/>}
+      {openGameResult && <OpenCard onClose={()=> setOpenGameResult(false)} zodiac={game?.zodiacCard.id ?? ''} history={[]}/>}
       
      
     </div>
