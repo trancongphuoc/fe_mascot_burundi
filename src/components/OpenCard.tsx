@@ -1,9 +1,9 @@
 
-import SVG from 'react-inlinesvg';
+// import SVG from 'react-inlinesvg';
 import { motion } from 'framer-motion';
-import CirleTornado from '../assets/circle_tornado.svg';
-import CirleLight from '../assets/circle_light.svg';
-import BgCard from '../assets/bg_card_nomarl.svg';
+// import CirleTornado from '../assets/circle_tornado.svg';
+// import CirleLight from '../assets/circle_light.svg';
+// import BgCard from '../assets/bg_card_nomarl.svg';
 import FlipCard from './FlipCard';
 
 interface OpenCardProps {
@@ -12,7 +12,7 @@ interface OpenCardProps {
   history: string[];
 }
 
-const OpenCard: React.FC<OpenCardProps> = ({ onClose, zodiacs, history }) => {
+const OpenCard: React.FC<OpenCardProps> = ({ onClose, zodiacs}) => {
 
   return (
     <motion.div
@@ -34,8 +34,6 @@ const OpenCard: React.FC<OpenCardProps> = ({ onClose, zodiacs, history }) => {
         {/* <SVG src={CirleTornado} className="open-card--tornado"/>
         <SVG src={CirleLight} className="open-card--light"/> */}
         <FlipCard/>
-
-
 
 
       </motion.div>

@@ -25,14 +25,15 @@ import DialogLost from '../components/DialogLost';
 import PopupRule from '../components/PopupRule';
 import PopupHistoryGame from '../components/PopupHistoryGame';
 import PopupMyHistory from '../components/PopupMyHistory';
-import OpenCard from '../components/OpenCard';
+// import OpenCard from '../components/OpenCard';
 
 import { db } from '../firebase/config';
 import { ref, onValue } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
-import firebase from 'firebase/compat/app';
+// import firebase from 'firebase/compat/app';
 // import { getAuth, signInWithCustomToken } from "firebase/auth";
 import CountDown from '../components/CountDown';
+import OpenCard from '../components/OpenCard';
 
 
 
@@ -140,6 +141,9 @@ function App() {
 
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
   const [startTime, setStartTime] = useState(true); 
+
+  const [statusGame, setStatusGame] = useState('NONE');
+  const [openGameResult, setOpenGameResult] = useState(false);
   
 
   // const fetchGameHistory = async () => {
@@ -154,24 +158,24 @@ function App() {
   //   .catch((error) => console.log(error));
   // }
 
-  const accessToken = () => {
-    if (token != null) {
-      firebase.auth().signInWithCustomToken(token)
-        .then((res) => {
-          console.log('firebase', res)
-        })
-        .catch(error => {
-          console.error("Error signing in with custom token:", error);
-        });
-    }
+  // const accessToken = () => {
+  //   if (token != null) {
+  //     firebase.auth().signInWithCustomToken(token)
+  //       .then((res) => {
+  //         console.log('firebase', res)
+  //       })
+  //       .catch(error => {
+  //         console.error("Error signing in with custom token:", error);
+  //       });
+  //   }
 
     
-  };
+  // };
 
 
 
   useEffect(() => { 
-    const fetchStatus = async () => {
+    const fetchGameInfo = async () => {
       const stateRef = ref(db, 'zodiacGame/state');
 
       onValue(stateRef, (snapshot) => {
@@ -196,16 +200,34 @@ function App() {
       });
     };
 
+ const fetchStatus = async () => {
+      const stateRef = ref(db, 'zodiacGame/state/status');
+
+      onValue(stateRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data && data !== statusGame) {
+          setStatusGame(data);
+          console.log('status', data)
+        }
+      });
+    };
+
     fetchStatus();
+    fetchGameInfo();
+
+    if (statusGame == "COUNTDOWN") {
+      setStartTime(true)
+    } else {
+      setStartTime(false)
+    }
+
+    if (statusGame === "RESULT") {
+      handleOpenLostPopup()
+    }
 
     console.log('check data', game);
 
-    // if (game?.status == "RESULT") {
-    //   console.log('result', game?.status)
-    // }
 
-  
-    
 
 
 
@@ -245,7 +267,7 @@ function App() {
 
 
 
-  }, []);
+  }, [statusGame]);
 
   // If game data is null, return loading or handle appropriately
   // if (!game) {
@@ -294,6 +316,8 @@ function App() {
   const handleCloseBettingPopup = () => setPopupState({ ...popupState, bettingtShow: false });
   const handleOpenMineResultPopup = () => { setPopupState({ ...popupState, mineResultShow: true })};
   const handleCloseMineResultPopup = () => setPopupState({ ...popupState, mineResultShow: false });
+
+  const handleCloseGameResultPopup = () => setOpenGameResult(true);
 
 
   return (
@@ -354,7 +378,7 @@ function App() {
         
       </AnimatePresence>
 
-          {false && <OpenCard onClose={handleCloseRulePopup} zodiacs={[]} history={[]} />}
+          {openGameResult && <OpenCard onClose={handleCloseGameResultPopup} zodiacs={[tiger]} history={[]}/>}
       
      
     </div>

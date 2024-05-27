@@ -6,8 +6,7 @@ import SVG from 'react-inlinesvg';
 import QuestionMark from '../assets/question_mark.svg';
 import BgLight from '../assets/circle_light.svg'
 
-export default function FlipCard() {
-  console.log(motion);
+export default function FlipCard(zodiac: string) {
   const [flip, setFlip] = useState(true);
 
 
@@ -59,6 +58,11 @@ export default function FlipCard() {
                         src={BgCard}
                         onClick={() => setFlip((prevState) => !prevState)}
                         className="flip-card__back--bg"/>
+                    <SVG
+                        src={zodiac}
+                        onClick={() => setFlip((prevState) => !prevState)}
+                        className="flip-card__back--bg"/>
+
                 </motion.div>
                 
             </motion.div>

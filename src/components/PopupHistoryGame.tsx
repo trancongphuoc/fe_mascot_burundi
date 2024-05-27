@@ -51,12 +51,12 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs, token
         initial={{ opacity: 0, scale: .5}}
         animate={{ opacity: 1, scale: 1}}
         exit={{ opacity: 0, scale: .5}}
-        className="history-game-popup mt-55px"
+        className="history-game-popup mt-59px"
         onClick={e => e.stopPropagation()}>
 
         <SVG src={TextResult} className="history-game-popup--header"/>
 
-        <div className="history-game-popup__title mt-7px mb-8px">
+        <div className="history-game-popup__title mt-7px">
             <p className="history-game-popup__title--no">Ván</p>
             {
               zodiacs.map((zodiac, index) => (

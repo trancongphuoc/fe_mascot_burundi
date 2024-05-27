@@ -129,6 +129,14 @@ h4 {
   margin-top: 80px !important;
 }
 
+.mt-60px {
+  margin-top: 60px !important;
+}
+
+.mt-59px {
+  margin-top: 59px !important;
+}
+
 .mt-55px {
   margin-top: 55px !important;
 }
@@ -1526,7 +1534,6 @@ h4 {
   justify-content: center;
   align-content: flex-start;
   margin: 0 auto;
-  margin-top: 5px;
   background-image: url(../assets/bg_history_game.svg);
   background-size: contain;
   background-position: center;
@@ -1578,6 +1585,7 @@ h4 {
   padding: 0 7px;
   margin-bottom: 8px;
   padding-top: 8.5px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 5% 100%, 0% 95%);
 }
 .history-game-popup__item {
   width: 100%;
