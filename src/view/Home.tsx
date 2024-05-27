@@ -25,15 +25,15 @@ import DialogLost from '../components/DialogLost';
 import PopupRule from '../components/PopupRule';
 import PopupHistoryGame from '../components/PopupHistoryGame';
 import PopupMyHistory from '../components/PopupMyHistory';
-// import OpenCard from '../components/OpenCard';
+import OpenCard from '../components/OpenCard';
 
 import { db } from '../firebase/config';
 import { ref, onValue } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
-// import { Base64 } from 'js-base64';
-// import axios from 'axios';
+import firebase from 'firebase/compat/app';
+// import { getAuth, signInWithCustomToken } from "firebase/auth";
+import CountDown from '../components/CountDown';
 
-// import api, { BASE_URL_DEV } from '../api/axios'
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -43,8 +43,8 @@ const myInfoBetResults = [
   { card: tiger, isSelected: true, number: 7, bonus: 15, players: 7 },
   { card: tiger, isSelected: true, number: 7, bonus: 15, players: 7 },
 ];
-const leftResults = [horse, goat, pig];
-const rightResults = [avatar, avatar, avatar, avatar];
+const leftResults = [horse, goat, pig, tiger];
+const rightResults = [avatar, avatar, avatar, avatar, avatar];
 const numberResult = 29;
 const bettingTable = [
   { card: buffalo, isSelected: false, bonus: 5, players: 0 },
@@ -131,7 +131,7 @@ interface ZodiacCard {
 
 function App() {
 
-  let token: string | null  = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJGSVJFQkFTRSs4NDk0NTk3OTA3NyIsInJvbGVzIjpbIlVTRVIiXSwiZmFjZWJvb2tVc2VySWQiOiJGSVJFQkFTRSs4NDk0NTk3OTA3NyIsInBhY2thZ2VOYW1lIjoiY29tLnlva2FyYS5kZXYudjEiLCJsYW5ndWFnZSI6ImVuLnlva2FyYSIsInBsYXRmb3JtIjoiSU9TIiwidXNlcklkIjoibnpkeVQ4azBERi91V25IZU9uaXhwQjJ1WnV0Y0UrbjhGb2VTWmw2eTAzR1ZZcWNiZmJraWEwN2ZmSEhmTnhxZGVSbWREZ1hHdnZwM2NTdkdlT0RCblE9PSIsImp0aSI6ImE2ZGRiNjk2LTQ2NjgtNDMzMi04MmVkLTc3YjJmODMwNzhhOCIsImlhdCI6MTcxNjUzNTE5NSwiaXNzIjoiaHR0cHM6Ly93d3cuaWthcmEuY28iLCJleHAiOjE3MTcxMzk5OTV9.h40nj5NUU7KTMtMUIGM-lDgmr-Y8B3-WrBhebhLnq-s";
+  let token: string | null  = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTA2Nzg1MTczNDA2MDM3MDUxMzciLCJyb2xlcyI6WyJVU0VSIl0sImZhY2Vib29rVXNlcklkIjoiMTEwNjc4NTE3MzQwNjAzNzA1MTM3IiwicGFja2FnZU5hbWUiOiJjb20ueW9rYXJhLmRldi52MSIsImxhbmd1YWdlIjoiZW4ueW9rYXJhIiwicGxhdGZvcm0iOiJJT1MiLCJ1c2VySWQiOiJuemR5VDhrMERGL3VXbkhlT25peHBCMnVadXRjRStuOEZvZVNabDZ5MDNHVllxY2JmYmtpYTA3ZmZISGZOeHFkZVJtZERnWEd2dnAzY1N2R2VPREJuUT09IiwianRpIjoiMTVmM2YzOTMtMmY5MS00MDMzLTgzOTYtMmQxYzY4ZDQ1MjY4IiwiaWF0IjoxNzE2NjQ3NjMzLCJpc3MiOiJodHRwczovL3d3dy5pa2FyYS5jbyIsImV4cCI6MTcxNzI1MjQzM30.mendnBAJLnoyni-K6qFUqGd_xkS4xsoYfuAko-OGynM";
   window.localStorage.setItem("token", token);
 
   token = window.localStorage.getItem("token");
@@ -139,6 +139,7 @@ function App() {
   
 
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
+  const [startTime, setStartTime] = useState(true); 
   
 
   // const fetchGameHistory = async () => {
@@ -152,6 +153,22 @@ function App() {
   //   })
   //   .catch((error) => console.log(error));
   // }
+
+  const accessToken = () => {
+    if (token != null) {
+      firebase.auth().signInWithCustomToken(token)
+        .then((res) => {
+          console.log('firebase', res)
+        })
+        .catch(error => {
+          console.error("Error signing in with custom token:", error);
+        });
+    }
+
+    
+  };
+
+
 
   useEffect(() => { 
     const fetchStatus = async () => {
@@ -180,6 +197,18 @@ function App() {
     };
 
     fetchStatus();
+
+    console.log('check data', game);
+
+    // if (game?.status == "RESULT") {
+    //   console.log('result', game?.status)
+    // }
+
+  
+    
+
+
+
 
 
 
@@ -215,18 +244,7 @@ function App() {
         // setToken(paramValue)
 
 
-    if (game?.zodiacCard.id.includes("1") ||
-        game?.zodiacCard.id.includes("2") ||
-        game?.zodiacCard.id.includes("3") ||
-        game?.zodiacCard.id.includes("4")) {
-          console.log("step 1");
-          console.log("check id",game?.zodiacCard.id);
-          handleOpenPopup();
-    } else  {
-      console.log("step 2");
-      console.log("check id", game?.zodiacCard.id);
-      handleOpenLostPopup();
-    }
+
   }, []);
 
   // If game data is null, return loading or handle appropriately
@@ -267,7 +285,10 @@ function App() {
   const handleCloseWinLostPopup = () => setPopupState({ ...popupState, isWinLostVisible: false });
   const handleOpenRulePopup = () => setPopupState({ ...popupState, ruleShow: true });
   const handleCloseRulePopup = () => setPopupState({ ...popupState, ruleShow: false });
-  const handleOpenResultPopup = () => setPopupState({ ...popupState, resultShow: true });
+  const handleOpenResultPopup = () => {
+
+    setPopupState({ ...popupState, resultShow: true })
+    console.log('resultShow', popupState.resultShow)};
   const handleCloseResultPopup = () => setPopupState({ ...popupState, resultShow: false });
   const handleOpenBettingPopup = () => { setPopupState({ ...popupState, bettingtShow: true })};
   const handleCloseBettingPopup = () => setPopupState({ ...popupState, bettingtShow: false });
@@ -300,7 +321,7 @@ function App() {
       </div>
 
       <section className="section-betting mt-5px">
-        <p className="section-betting--counter">Đếm ngược {30}</p>
+        <CountDown className='section-betting--counter' startTimer={startTime} />
         <div className="section-betting__content">
           {bettingTable.map((bettingCard, index) => (
             <FullCard onOpen={handleOpenBettingPopup} key={index} number={index + 1} card={bettingCard.card} isSelected={bettingCard.isSelected} bonus={bettingCard.bonus} players={bettingCard.players} />
@@ -325,13 +346,15 @@ function App() {
         {popupState.ruleShow && <PopupRule onClose={handleCloseRulePopup} />}
         {popupState.bettingtShow && <DialogBetting onClose={handleCloseBettingPopup}/>}
         {popupState.isWinLostVisible && <DialogLost onClose={handleCloseWinLostPopup} dialogType={dialogType} totalIcoin={100} topUsers={topUsers} />}
-        {popupState.resultShow && <PopupHistoryGame onClose={handleCloseResultPopup} zodiacs={img} token={token}/>}
+
+        {
+        popupState.resultShow && <PopupHistoryGame onClose={handleCloseResultPopup} zodiacs={img} token={token}/>}
 
         {popupState.mineResultShow && <PopupMyHistory onClose={handleCloseMineResultPopup} mineHistory={mineHistory}/>}
         
       </AnimatePresence>
 
-          {/* {popupState.ruleShow  &&<OpenCard onClose={handleCloseRulePopup} zodiacs={[]} token={token}></OpenCard>} */}
+          {false && <OpenCard onClose={handleCloseRulePopup} zodiacs={[]} history={[]} />}
       
      
     </div>

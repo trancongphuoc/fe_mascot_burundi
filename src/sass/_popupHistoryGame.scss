@@ -4,7 +4,7 @@
 // $color-result-3: #colorValue3;
 // $color-white: #ffffff;
 
-.popup-overlay {
+.history-game-overlay {
     position: fixed;
     width: 100%;
     left: 0;
@@ -13,7 +13,7 @@
     background: rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     z-index: 1000;
     overflow: hidden;
 }   
@@ -25,6 +25,7 @@
 //         max-height: 400px;
 //         &__title {
 //             max-width: 200px;
+
 //         }
 
 //         &__content {
@@ -33,7 +34,7 @@
 //     }
 // }
 
-.result-popup {
+.history-game-popup {
     max-width: 382px;
     max-height: 611px;
     height: 100%;
@@ -92,7 +93,7 @@
 
         &--zodiac {
             grid-area: 1 / 1 / -1 / -1;
-            width: 50%;
+            width: 60%;
             height: auto;
         }
     }
@@ -103,6 +104,7 @@
 
         padding: 0 7px;
         margin-bottom: 8px;
+        padding-top: 8.5px;
     }
 
     &__item {
@@ -118,7 +120,7 @@
         &--index {
             color: $color-white;
             font-size: 14px;
-            font-weight: 300;
+            font-weight: 400;
             line-height: 1;
         }
 

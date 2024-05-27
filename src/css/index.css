@@ -121,6 +121,22 @@ h4 {
   margin-right: 5px !important;
 }
 
+.mt-100px {
+  margin-top: 100px !important;
+}
+
+.mt-80px {
+  margin-top: 80px !important;
+}
+
+.mt-55px {
+  margin-top: 55px !important;
+}
+
+.mt-50px {
+  margin-top: 50px !important;
+}
+
 .mt-30px {
   margin-top: 30px !important;
 }
@@ -453,6 +469,61 @@ h4 {
 
 .arrow-white {
   margin: 0 5px;
+}
+
+.bg {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+}
+.bg--circle-light {
+  grid-area: 1/1/2/2;
+  z-index: -1;
+}
+
+.flip-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  width: 100%;
+  height: 100%;
+  grid-area: 1/1/2/2;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+.flip-card__back {
+  grid-area: 1/1/2/2;
+  backface-visibility: hidden;
+}
+.flip-card__back--bg {
+  grid-area: 1/1/2/2;
+  justify-self: center;
+  width: 143px;
+  height: 190px;
+}
+.flip-card__front {
+  grid-area: 1/1/2/2;
+  backface-visibility: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  align-items: center;
+}
+.flip-card__front--bg {
+  grid-area: 1/1/2/2;
+  width: 143px;
+  height: 190px;
+}
+.flip-card__front--questionMark {
+  grid-area: 1/1/2/2;
 }
 
 .main {
@@ -1432,7 +1503,7 @@ h4 {
   margin-top: 11px;
 }
 
-.popup-overlay {
+.history-game-overlay {
   position: fixed;
   width: 100%;
   left: 0;
@@ -1441,12 +1512,12 @@ h4 {
   background: rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   z-index: 1000;
   overflow: hidden;
 }
 
-.result-popup {
+.history-game-popup {
   max-width: 382px;
   max-height: 611px;
   height: 100%;
@@ -1461,12 +1532,12 @@ h4 {
   background-position: center;
   background-repeat: no-repeat;
 }
-.result-popup--header {
+.history-game-popup--header {
   justify-self: center;
   margin-top: 6px;
   margin-bottom: 7px;
 }
-.result-popup__title {
+.history-game-popup__title {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
@@ -1475,14 +1546,14 @@ h4 {
   align-items: center;
   padding: 0 7px;
 }
-.result-popup__title--no {
+.history-game-popup__title--no {
   margin-top: 6px;
   color: #f2fbff;
   font-size: 16px;
   font-weight: 400;
   line-height: 1;
 }
-.result-popup__card {
+.history-game-popup__card {
   width: 100%;
   display: grid;
   align-content: center;
@@ -1490,24 +1561,25 @@ h4 {
   justify-items: center;
   align-items: center;
 }
-.result-popup__card--Bg {
+.history-game-popup__card--Bg {
   grid-area: 1/1/-1/-1;
   width: 100%;
   height: auto;
   padding: 0 4px;
 }
-.result-popup__card--zodiac {
+.history-game-popup__card--zodiac {
   grid-area: 1/1/-1/-1;
-  width: 50%;
+  width: 60%;
   height: auto;
 }
-.result-popup__content {
+.history-game-popup__content {
   overflow-y: auto;
   scrollbar-width: auto;
   padding: 0 7px;
   margin-bottom: 8px;
+  padding-top: 8.5px;
 }
-.result-popup__item {
+.history-game-popup__item {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(9, minmax(min-content, 1fr));
@@ -1516,19 +1588,19 @@ h4 {
   justify-items: center;
   border-top: 0.2px solid #58E2C5;
 }
-.result-popup__item--index {
+.history-game-popup__item--index {
   color: #f2fbff;
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
 }
-.result-popup__item--stickShow {
+.history-game-popup__item--stickShow {
   opacity: 1;
 }
-.result-popup__item--stickHide {
+.history-game-popup__item--stickHide {
   opacity: 0;
 }
-.result-popup__item--buffalo, .result-popup__item--tiger, .result-popup__item--dragon, .result-popup__item--snake, .result-popup__item--horse, .result-popup__item--goat, .result-popup__item--chicken, .result-popup__item--pig {
+.history-game-popup__item--buffalo, .history-game-popup__item--tiger, .history-game-popup__item--dragon, .history-game-popup__item--snake, .history-game-popup__item--horse, .history-game-popup__item--goat, .history-game-popup__item--chicken, .history-game-popup__item--pig {
   width: 100%;
   height: 100%;
   display: grid;
@@ -1720,8 +1792,33 @@ h4 {
 
 .open-card {
   position: relative;
+  max-width: 414px;
+  width: 100%;
   height: auto;
+  display: grid;
   margin: 0 auto;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+.open-card--tornado {
+  grid-area: 1/1/2/2;
+  z-index: 1;
+}
+.open-card--light {
+  grid-area: 1/1/2/2;
+  z-index: 2;
+}
+.open-card .card {
+  grid-area: 1/1/2/2;
+  z-index: 3;
+  display: grid;
+  align-content: center;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(10, 50px);
 }
 
 /*# sourceMappingURL=index.css.map */
