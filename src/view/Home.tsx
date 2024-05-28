@@ -8,14 +8,11 @@ import goat from '../assets/goat.svg';
 import horse from '../assets/horse.svg';
 import pig from '../assets/pig.svg';
 import snake from '../assets/snake.svg';
+import bettingFrame from '../assets/frame_betting_table.svg';
 
-import Card from '../components/Card';
 import FullCard from '../components/FullCard';
-import AvatarCircle from '../components/AvatarCircle';
 import PrimaryText from '../assets/primary-text.svg';
 import Rule from '../assets/rule.svg';
-import Arrow from '../assets/arrow.svg';
-import avatar from '../assets/avatar.png';
 
 import MyHistory from '../components/MyHistory';
 import BestPlayers from '../components/BestPlayers';
@@ -25,15 +22,20 @@ import DialogLost from '../components/DialogLost';
 import PopupRule from '../components/PopupRule';
 import PopupHistoryGame from '../components/PopupHistoryGame';
 import PopupMyHistory from '../components/PopupMyHistory';
-// import OpenCard from '../components/OpenCard';
 
 import { db } from '../firebase/config';
 import { ref, onValue } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
-// import firebase from 'firebase/compat/app';
-// import { getAuth, signInWithCustomToken } from "firebase/auth";
+
 import CountDown from '../components/CountDown';
 import OpenCard from '../components/OpenCard';
+import Players from '../components/Players';
+import { ShortGameHistory } from '../components/ShortGameHistory';
+
+import { joinGameZodiac } from '../api/joinGameZodiac';
+
+import SVG from 'react-inlinesvg';
+
 
 
 
@@ -44,9 +46,7 @@ const myInfoBetResults = [
   { card: tiger, isSelected: true, number: 7, bonus: 15, players: 7 },
   { card: tiger, isSelected: true, number: 7, bonus: 15, players: 7 },
 ];
-const leftResults = [horse, goat, pig, tiger];
-const rightResults = [avatar, avatar, avatar, avatar, avatar];
-const numberResult = 29;
+
 const bettingTable = [
   { card: buffalo, isSelected: false, bonus: 5, players: 0 },
   { card: tiger, isSelected: false, bonus: 5, players: 0 },
@@ -62,14 +62,12 @@ const bestPlayers = [
   { name: "Doan Dai Hiep", avatarUrl: "https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8", winningIcoin: 9999 },
   { name: "Nguyễn Hoàng Chi", avatarUrl: "https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8", winningIcoin: 9999 },
 ];
-// const counter = 30;
+
 const topUsers = [
   { url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Lê Hải Yến', icoin: 3000 },
   { url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Trần Tuấn Hùng', icoin: 1000 },
   { url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Ngọc Hoàng', icoin: 9000 },
 ];
-
-// let history: string[] = ['tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake', 'tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake', 'tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake', 'tiger', 'buffalo', 'chicken', 'dragon', 'goat', 'horse', 'pig', 'snake']
 
 
 let mineHistory: BetInfo[] = [
@@ -138,7 +136,6 @@ function App() {
   token = window.localStorage.getItem("token");
 
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
-  const [startTime, setStartTime] = useState(true); 
 
   const [statusGame, setStatusGame] = useState('NONE');
   //open card
@@ -156,32 +153,23 @@ function App() {
 
   const [dialogType, setDialogType] = useState<DialogType>('LOST');
   
+  //joint game
+  const [joinGame, setJoinGame] = useState(false);
 
-  // const fetchGameHistory = async () => {
-  //   api.get(`/rest/zodiac-game/history`, {
-  //     headers: { 'Authorization': `Bearer ${token}` }
-  //   }).then((res) => {
-  //     console.log('history', res.data);
-  //     if (res.data.status === "OK") {
-        
-  //     }
-  //   })
-  //   .catch((error) => console.log(error));
-  // }
-
-  // const accessToken = () => {
-  //   if (token != null) {
-  //     firebase.auth().signInWithCustomToken(token)
-  //       .then((res) => {
-  //         console.log('firebase', res)
-  //       })
-  //       .catch(error => {
-  //         console.error("Error signing in with custom token:", error);
-  //       });
-  //   }
-
-    
-  // };
+  useEffect(()=> {
+    const fetchData = async () => {
+      try {
+        const data = await joinGameZodiac(token);
+        if (data != null && data === "OK") {
+          setJoinGame(true);
+          console.log('join game success')
+        }
+      } catch (error) {
+        console.log('error', error);
+      }
+    };
+    fetchData();
+  },[joinGame])
 
 
 
@@ -226,12 +214,6 @@ function App() {
     fetchStatus();
     fetchGameInfo();
     setDialogType('LOST');
-
-    if (statusGame == "COUNTDOWN") {
-      setStartTime(true)
-    } else {
-      setStartTime(false)
-    }
 
     if (statusGame === "RESULT") {
       //close dilog
@@ -297,28 +279,20 @@ function App() {
       </section>
 
       <div className="result mt-7-5px">
-        <div className="result__left" onClick={() => setOpenHistoryGame(true)}>
-          <p className='result__left--text'>Kết quả</p>
-          {leftResults.map((result, index) => (
-            <Card key={index} card={result} className="card--zodiac__small" classNameBackground="card--zodiac__background--small mr-4px" />
-          ))}
-          <img src={Arrow} alt="card_background" />
-        </div>
-        <div className="result__right">
-          {rightResults.map((result, index) => (
-            <AvatarCircle key={index} avatarUrl={result} className="avatar mr-5px" />
-          ))}
-          <h2 className='result__right--number'>{numberResult}</h2>
-        </div>
+        <ShortGameHistory openDialog={()=> {setOpenHistoryGame(true)}}/>
+        <Players/>
       </div>
 
       <section className="section-betting mt-5px">
-        <CountDown className='section-betting--counter' startTimer={startTime} />
+        <CountDown className='section-betting--counter'/>
+
         <div className="section-betting__content">
+          {/* <SVG src={bettingFrame} className="section-betting--bg"/> */}
           {bettingTable.map((bettingCard, index) => (
             <FullCard onOpen={()=> setOpenBetting(true)} key={index} number={index + 1} card={bettingCard.card} isSelected={bettingCard.isSelected} bonus={bettingCard.bonus} players={bettingCard.players} />
           ))}
         </div>
+
       </section>
 
       <MyHistory onOpen={()=> setOpenMyHistory(true)} bonusToday={1000} goodBets={4} totalIcoin={15000} myInfoBetReults={myInfoBetResults} />

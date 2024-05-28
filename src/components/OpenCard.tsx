@@ -16,10 +16,11 @@ interface OpenCardProps {
 const OpenCard: React.FC<OpenCardProps> = ({ onClose, zodiac}) => {
 
   useEffect(() => {
-    // Set a timer to call the onClose function after 4 seconds
-    const timer = setTimeout(onClose, 4000);
+    const timer = setTimeout(() => {
+      console.log('Closing...');
+      onClose();
+    }, 3000);
 
-    // Cleanup function to clear the timer if the component is unmounted before 4 seconds
     return () => clearTimeout(timer);
   }, [onClose]);
 

@@ -23,8 +23,9 @@
     }
 
     &__small {
-        width: 100%;
-        object-fit: fill;
+        width: 80%;
+        height: auto;
+        object-fit: fit;
     }
 }
 
