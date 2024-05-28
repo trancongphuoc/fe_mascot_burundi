@@ -238,18 +238,13 @@ function App() {
       setOpenRule(false);
       setOpenLostWin(false);
       setOpenHistoryGame(false);
+      setOpenMyHistory(false);
 
-
+      //open card
       setOpenGameResult(true)
     }
 
     console.log('check data', game);
-
-
-
-
-
-
 
 
 
