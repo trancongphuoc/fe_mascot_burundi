@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import bgCardSelected from '../assets/bg_card_selected.svg';
+import bgCardSelected from '../assets/bg_card_selected_light.svg';
 import TextCongratution from '../assets/text-congratution.svg';
 import BgContentWin from '../assets/bg_content_win.svg';
 import BgContentLost from '../assets/bg_content_lost.svg';
@@ -68,8 +68,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
         return (
           <>
             <SVG src={TextCongratution} className="win--primary-text"/>
-            <div className="lost__secondary">
-             <p className="win__secondary">Thật xuất sắc, Bạn đã đoán trúng ván này</p>
+            <div className="win__secondary">
+             <p className="win__secondary--text">Thật xuất sắc, Bạn đã đoán trúng ván này</p>
              <div className="win__totalIcoin">
               <SVG className="win__totalIcoin--img" src={Icoin}/>
               <p className="win__totalIcoin--icoin">{totalIcoin}</p>
@@ -96,7 +96,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
         transition={{ type: 'just'}}
         className="lost-popup"
         onClick={e => {e.stopPropagation()}}>
-        <div className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div>
+        {/* <div className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div> */}
+        <SVG src={bgContent} className="lost--BgContent mb--1px"/>
         <SVG src={bgCardSelected} className="lost--zodiac-background" />
         <SVG src={dragon} className="lost--zodiac-card" />
         <SVG src={BgLighter} className="lost--BgLighter" />
