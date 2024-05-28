@@ -5,14 +5,33 @@ import TextHistory from '../assets/text-mine-history.svg';
 import IcoinLost from '../assets/icoin-lost.svg';
 import IcoinWin from '../assets/icoin.svg'
 import SVG from 'react-inlinesvg';
+import { useEffect, useState } from 'react';
+import { fetchMyHistory } from '../api/getMyHistory';
 
 interface PopupMineResultProps {
   onClose: () => void;
-
   mineHistory: BetInfo[];
 }
 
 const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose, mineHistory }) => {
+
+  // const [gameHistory, setGameHistory] = useState<GameHistory[]>([]);
+  // const [loading, setLoading] = useState<boolean>(true);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await fetchMyHistory();
+  //       if (data != null) {
+  //         setGameHistory(data);
+  //       }
+  //     } catch (error) {
+  //       console.log('error', error);
+  //     }
+  //     setLoading(false);
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
     <div onClick={onClose} className="popup-overlay">

@@ -1,5 +1,6 @@
 
 // ZODIAC_CARD_1
+//      counter: 0
 //     id : "ZODIAC_CARD_1"
 //     imageUrl : "https://data4.ikara.co/data/minio/ikara-data/tarot_image/trau.svg"
 //     multiply : 5
@@ -16,6 +17,7 @@ type ZodiacCardId = 'ZODIAC_CARD_1' |
                 'ZODIAC_CARD_8';
 
 interface ZodiacCardModel {
+    counter?: number,
     id: string,
     imageUrl: string,
     multiply: number,

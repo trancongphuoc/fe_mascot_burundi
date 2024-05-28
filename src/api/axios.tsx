@@ -9,3 +9,5 @@ const api = axios.create({
    
 export default api;
 export { BASE_URL_DEV };
+
+export const token = window.sessionStorage.getItem('token');

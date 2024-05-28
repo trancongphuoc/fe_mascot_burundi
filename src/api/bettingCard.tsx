@@ -1,19 +1,27 @@
-import axios from 'axios';
+import axios from 'axios'; // Ensure you have axios imported correctly
 import api, { token } from './axios';
 
 interface ApiResponse {
   status: string;
-  [key: string]: any;
+  [key: string]: any; // Allow additional properties if necessary
 }
 
-export const joinGameZodiac = async (): Promise<string> => {
+export const bettingCard = async (
+  zodiacGameId: number,
+  totalIcoin: number,
+  zodiacCardId: string
+): Promise<string> => {
   try {
-    const response = await api.post<ApiResponse>('/rest/zodiac-game/join-game', {}, {
+    const response = await api.post<ApiResponse>('/rest/zodiac-game/betting', {
+      zodiacGameId,
+      totalIcoin,
+      zodiacCardId
+    }, {
       headers: { 'Authorization': `Bearer ${token}` },
     });
 
-    console.log('join Game:', response.data);
-
+    console.log('Response betting:', response.data);
+    
     if (response.data.status === "OK") {
       return "OK";
     } else {
@@ -22,10 +30,8 @@ export const joinGameZodiac = async (): Promise<string> => {
     }
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      // Handle known Axios error structure
       console.error('Axios error fetching game history:', error.response?.data || error.message);
     } else {
-      // Handle unknown error structure
       console.error('Unexpected error fetching game history:', error);
     }
     return "FAILED";

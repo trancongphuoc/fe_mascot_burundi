@@ -8,9 +8,7 @@ import goat from '../assets/goat.svg';
 import horse from '../assets/horse.svg';
 import pig from '../assets/pig.svg';
 import snake from '../assets/snake.svg';
-// import bettingFrame from '../assets/frame_betting_table.svg';
 
-import FullCard from '../components/FullCard';
 import PrimaryText from '../assets/primary-text.svg';
 import Rule from '../assets/rule.svg';
 
@@ -27,16 +25,16 @@ import { db } from '../firebase/config';
 import { ref, onValue } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
 
-import CountDown from '../components/CountDown';
 import OpenCard from '../components/OpenCard';
 import Players from '../components/Players';
 import { ShortGameHistory } from '../components/ShortGameHistory';
 
 import { joinGameZodiac } from '../api/joinGameZodiac';
+import { BettingTable } from '../components/BettingTable';
+import { Base64 } from 'js-base64';
+import { fetchMyHistory } from '../api/getMyHistory';
 
 // import SVG from 'react-inlinesvg';
-
-
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -47,16 +45,6 @@ const myInfoBetResults = [
   { card: tiger, isSelected: true, number: 7, bonus: 15, players: 7 },
 ];
 
-const bettingTable = [
-  { card: buffalo, isSelected: false, bonus: 5, players: 0 },
-  { card: tiger, isSelected: false, bonus: 5, players: 0 },
-  { card: dragon, isSelected: true, bonus: 5, players: 0 },
-  { card: snake, isSelected: false, bonus: 8, players: 10 },
-  { card: horse, isSelected: false, bonus: 8, players: 0 },
-  { card: goat, isSelected: false, bonus: 10, players: 20 },
-  { card: chicken, isSelected: false, bonus: 15, players: 0 },
-  { card: pig, isSelected: false, bonus: 20, players: 0 },
-];
 const bestPlayers = [
   { name: "Dong Hoang Linh", avatarUrl: "https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8", winningIcoin: 9999 },
   { name: "Doan Dai Hiep", avatarUrl: "https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8", winningIcoin: 9999 },
@@ -130,10 +118,7 @@ interface ZodiacCard {
 
 function App() {
 
-  let token: string | null  = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTA2Nzg1MTczNDA2MDM3MDUxMzciLCJyb2xlcyI6WyJVU0VSIl0sImZhY2Vib29rVXNlcklkIjoiMTEwNjc4NTE3MzQwNjAzNzA1MTM3IiwicGFja2FnZU5hbWUiOiJjb20ueW9rYXJhLmRldi52MSIsImxhbmd1YWdlIjoiZW4ueW9rYXJhIiwicGxhdGZvcm0iOiJJT1MiLCJ1c2VySWQiOiJuemR5VDhrMERGL3VXbkhlT25peHBCMnVadXRjRStuOEZvZVNabDZ5MDNHVllxY2JmYmtpYTA3ZmZISGZOeHFkZVJtZERnWEd2dnAzY1N2R2VPREJuUT09IiwianRpIjoiMTVmM2YzOTMtMmY5MS00MDMzLTgzOTYtMmQxYzY4ZDQ1MjY4IiwiaWF0IjoxNzE2NjQ3NjMzLCJpc3MiOiJodHRwczovL3d3dy5pa2FyYS5jbyIsImV4cCI6MTcxNzI1MjQzM30.mendnBAJLnoyni-K6qFUqGd_xkS4xsoYfuAko-OGynM";
-  window.localStorage.setItem("token", token);
 
-  token = window.localStorage.getItem("token");
 
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
 
@@ -155,11 +140,38 @@ function App() {
   
   //joint game
   const [joinGame, setJoinGame] = useState(false);
+  //get select card
+  const [selectCard, setSelectCard] = useState<ZodiacCardModel | null>(null);
+
+  const fetchToken = async () => {
+    let queryString = window.location.search;
+    // queryString = queryString.substring(1);
+    queryString = 'parameters=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJGSVJFQkFTRSs4NDk0NDQ5NTE5MiIsInJvbGVzIjpbIlRFU1RFUiIsIlVTRVIiXSwiZmFjZWJvb2tVc2VySWQiOiJGSVJFQkFTRSs4NDk0NDQ5NTE5MiIsInBhY2thZ2VOYW1lIjoiY29tLmRldi55b2thcmEiLCJsYW5ndWFnZSI6ImVuLnlva2FyYSIsInBsYXRmb3JtIjoiSU9TIiwidXNlcklkIjoiemNzQ0dwMHN0b3FzQkVLNExXejRWb2p0S255RVlldHdsRDJIZUU0VWs0bkdsMjNETklpMEw4MVppeE5QLzlrMlJDajZYU284TURRc0kxMHM4d0ZjRFE9PSIsImp0aSI6IjNmM2ZhYTUwLTgwOTMtNDk5NS05MjAwLTBjOWY3YWU3MjI2NiIsImlhdCI6MTcxNjg4NjE4NywiaXNzIjoiaHR0cHM6Ly93d3cuaWthcmEuY28iLCJleHAiOjE3MTc0OTA5ODd9.zQCV54zV51JMAQIRaBXQYlY8XwDXxcwQ1DX_nGClNBc'
+    
+    let pair = queryString.split("=");
+    let paramName = decodeURIComponent(pair[0]);
+    let paramValue = decodeURIComponent(pair[1]);
+    let param = paramValue.split("-");
+    let key = decodeURIComponent(param[0]);
+       
+    try{
+      const parameters = Base64.decode(key);
+      const pa = JSON.parse(parameters);
+
+    } catch(error) {
+
+        // setToken(paramValue)
+    }
+
+    let token: string | null  = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTA2Nzg1MTczNDA2MDM3MDUxMzciLCJyb2xlcyI6WyJVU0VSIl0sImZhY2Vib29rVXNlcklkIjoiMTEwNjc4NTE3MzQwNjAzNzA1MTM3IiwicGFja2FnZU5hbWUiOiJjb20ueW9rYXJhLmRldi52MSIsImxhbmd1YWdlIjoiZW4ueW9rYXJhIiwicGxhdGZvcm0iOiJJT1MiLCJ1c2VySWQiOiJuemR5VDhrMERGL3VXbkhlT25peHBCMnVadXRjRStuOEZvZVNabDZ5MDNHVllxY2JmYmtpYTA3ZmZISGZOeHFkZVJtZERnWEd2dnAzY1N2R2VPREJuUT09IiwianRpIjoiMTVmM2YzOTMtMmY5MS00MDMzLTgzOTYtMmQxYzY4ZDQ1MjY4IiwiaWF0IjoxNzE2NjQ3NjMzLCJpc3MiOiJodHRwczovL3d3dy5pa2FyYS5jbyIsImV4cCI6MTcxNzI1MjQzM30.mendnBAJLnoyni-K6qFUqGd_xkS4xsoYfuAko-OGynM";
+    window.sessionStorage.setItem('token', token);
+
+  };
 
   useEffect(()=> {
     const fetchData = async () => {
       try {
-        const data = await joinGameZodiac(token);
+        const data = await joinGameZodiac();
         if (data != null && data === "OK") {
           setJoinGame(true);
           console.log('join game success')
@@ -168,7 +180,10 @@ function App() {
         console.log('error', error);
       }
     };
+    fetchToken();
     fetchData();
+    fetchMyHistory()
+
   },[joinGame])
 
 
@@ -228,42 +243,13 @@ function App() {
 
     console.log('check data', game);
 
-
-
-    // let queryString = window.location.search;
-    // queryString = queryString.substring(1);
-    // let pair = queryString.split("=");
-    // let paramName = decodeURIComponent(pair[0]);
-    // let paramValue = decodeURIComponent(pair[1]);
-    // let param = paramValue.split("-");
-    // let key = decodeURIComponent(param[0]);
-       
-    // try{
-    //   const parameters = Base64.decode(key);
-    //   const pa = JSON.parse(parameters);
-    //       axios.post(`/rest/auth`, {
-    //           userId: pa.userId,
-    //           language: pa.language
-    //         }).then((res) => {
-    //           // setToken(res.data)  
-    //           window.localStorage.setItem("token", res.data)
-
-    //       // axios.get(`/rest/feature-request`,{headers  : {
-    //       //     'Authorization': `Bearer ${res.data} `
-    //       //   }}).then((res)=>{
-    //       //     console.log(res.data.list)
-    //       //     if(res.data.list){
-    //       //     setFeatureRequests(res.data.list)
-    //       // }})
-    //       }).catch((error) => console.log(error));
-    // }
-    //   catch {
-
-        // setToken(paramValue)
-
-
-
   }, [statusGame]);
+
+  const handleCardSelection = (card: ZodiacCardModel) => {
+    console.log('Selected Card ID:', card.id);
+    setSelectCard(card)
+    setOpenBetting(true)
+};
 
 
   return (
@@ -283,21 +269,10 @@ function App() {
         <Players/>
       </div>
 
-      <section className="section-betting mt-5px">
-        <CountDown className='section-betting--counter'/>
-
-        <div className="section-betting__content">
-          {/* <SVG src={bettingFrame} className="section-betting--bg"/> */}
-          {bettingTable.map((bettingCard, index) => (
-            <FullCard onOpen={()=> setOpenBetting(true)} key={index} number={index + 1} card={bettingCard.card} isSelected={bettingCard.isSelected} bonus={bettingCard.bonus} players={bettingCard.players} />
-          ))}
-        </div>
-
-      </section>
+      <BettingTable onSelectCard={handleCardSelection} openBetting={true}/>
 
       <MyHistory onOpen={()=> setOpenMyHistory(true)} bonusToday={1000} goodBets={4} totalIcoin={15000} myInfoBetReults={myInfoBetResults} />
-
-      <BestPlayers bestPlayers={bestPlayers} />
+      <BestPlayers bestPlayers={bestPlayers}/>
 
       <button onClick={() => {
         setDialogType('WIN');
@@ -306,23 +281,32 @@ function App() {
       <button onClick={() => {
         setDialogType('LOST');
         setOpenLostWin(true)}} className="open-popup-button">Open Popup</button>
-
       <button onClick={()=> setOpenGameResult(true)} className="open-popup-result game">Open resul Popup</button>
 
 
       {/* Dialog when click */}
-      
       <AnimatePresence>
         {openRule && <PopupRule onClose={()=> setOpenRule(false)} />}
-        {openBetting && <DialogBetting onClose={()=> setOpenBetting(false)}/>}
-        {openLostWin && <DialogLost onClose={() => setOpenLostWin(false)} dialogType={dialogType} totalIcoin={100} topUsers={topUsers} />}
-        {openHistoryGame && <PopupHistoryGame onClose={() => setOpenHistoryGame(false)} zodiacs={img} token={token}/>}
+        {openBetting && selectCard && (
+                                        <DialogBetting
+                                          onClose={() => {
+                                            setOpenBetting(false);
+                                            setSelectCard(null);
+                                          }}
+                                          zodiacGameId={game?.transactionId ?? 0}
+                                          zodiacCardSelect={selectCard}
+                                        />
+                                      )}
+        {openLostWin && <DialogLost
+                          onClose={() => setOpenLostWin(false)}
+                          dialogType={dialogType} totalIcoin={100}
+                          topUsers={topUsers} />}
+        {openHistoryGame && <PopupHistoryGame
+                              onClose={() => setOpenHistoryGame(false)}
+                              zodiacs={img}/>}
         {openMyHistory && <PopupMyHistory onClose={()=> setOpenMyHistory(false)} mineHistory={mineHistory}/>}
       </AnimatePresence>
-
       {openGameResult && <OpenCard onClose={()=> setOpenGameResult(false)} zodiac={game?.zodiacCard.id ?? ''} history={[]}/>}
-      
-     
     </div>
   );
 }

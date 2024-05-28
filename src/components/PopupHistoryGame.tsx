@@ -11,10 +11,9 @@ import { ScaleLoader } from 'react-spinners';
 interface PopupHistoryProps {
   onClose: () => void;
   zodiacs: string[];
-  token: string | null;
 }
 
-const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs, token }) => {
+const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs }) => {
 
   const [gameHistory, setGameHistory] = useState<GameHistory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -22,7 +21,7 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs, token
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchGameHistory(token);
+        const data = await fetchGameHistory();
         if (data != null) {
           setGameHistory(data);
         }
@@ -31,13 +30,8 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs, token
       }
       setLoading(false);
     };
-  
-    if (token) {
-      fetchData();
-    }
-  
-    
-  }, [token]);
+    fetchData();
+  }, []);
 
   return (
     <motion.div

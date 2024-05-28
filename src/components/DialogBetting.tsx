@@ -1,19 +1,40 @@
 import React, { useState } from 'react';
-import backgroundSelected from '../assets/b.svg';
+import bgCardSelect from '../assets/bg_card_selected_light.svg';
 import dragon from '../assets/dragon.svg';
 import Icoin from '../assets/icoin.svg';
-import BgContent from '../assets/bg-result-game2.svg';
-import BgHeader from '../assets/bg-betting-header.png';
+import BgContent from '../assets/bg_content_win.svg';
+import BgHeader from '../assets/bg_header_betting.svg';
 import BgLighter from '../assets/bg_lighter.svg';
 import { motion } from 'framer-motion';
+import { bettingCard } from '../api/bettingCard';
+
+import SVG from 'react-inlinesvg';
 
 interface DialogBettingProps {
-  onClose: () => void; // Define onClose prop as a function that takes no arguments and returns void
+  onClose: () => void;
+  zodiacGameId: number;
+  zodiacCardSelect: ZodiacCardModel;
 }
 
-const DialogBetting: React.FC<DialogBettingProps> = ({ onClose }) => {
-
+const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect } : DialogBettingProps) => {
   const [stake, setStake] = useState(0);
+
+
+  const fetchData = async () => {
+    if (!stake || !zodiacGameId || !zodiacCardSelect) {
+      console.log('lest data');
+      return;
+    }
+    onClose();
+    try {
+      const data = await bettingCard(zodiacGameId, stake, zodiacCardSelect.id);
+      if (data != null && data === "OK") {
+        console.log('betting success')
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
 
   return (
     <motion.div
@@ -28,16 +49,17 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose }) => {
         exit={{ opacity: 0, y: 50 }}
         className="betting-popup"
         onClick={e => {e.stopPropagation()}}>
-        <img src={BgContent} alt="card_background" className='betting--BgContent'></img>
-        <img src={backgroundSelected} alt="card_background" className='betting--zodiac-background'></img>
-        <img src={dragon} alt="card_zodiac" className='betting--zodiac-card'></img>
 
-        <img src={BgLighter} alt="betting lighter" className='betting--BgLighter'></img>
-        <img src={BgHeader} alt="betting header" className='betting--BgHeader'></img>
+        <SVG src={BgContent} className='betting--BgContent'/>
+        <SVG src={bgCardSelect} className='betting--zodiac-background'/>
+        <SVG src={zodiacCardSelect.imageUrl ?? ''} className='betting--zodiac-card'/>
+
+        <SVG src={BgLighter} className='betting--BgLighter'/>
+        <SVG src={BgHeader} className='betting--BgHeader'/>
 
         <p className="betting--text">Chúc bạn nhận thưởng lớn</p>
 
-        <div className ="betting__totalIcoin mb-15-5px mt-28px">
+        <div className ="betting__totalIcoin mb-15px mt-28px">
           <img className='betting__totalIcoin--img' src={Icoin} alt="" />
           <p className='betting__totalIcoin--icoin'>{stake}</p>
         </div>
@@ -45,9 +67,10 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose }) => {
         <div onClick={()=>setStake((stake) => stake + 10)} className ="betting--button">+10</div>
         <div onClick={()=>setStake((stake) => stake + 100)} className ="betting--button-2">+100</div>
         <div onClick={()=>setStake((stake) => stake + 1000)} className ="betting--button-3">+1000</div>
+
         <motion.div
           whileTap={{ y: 1}}
-          onClick={onClose}
+          onClick={fetchData}
           className ="betting__confirm mb-33px mt-14-5px">
           <p className='betting__confirm--text'>Xác nhận</p>
         </motion.div>

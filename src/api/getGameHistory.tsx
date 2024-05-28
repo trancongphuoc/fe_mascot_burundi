@@ -1,7 +1,7 @@
-import api from './axios';
+import api, { token } from './axios';
 import { GameHistory } from '../model/GameHistory';
 
-export const fetchGameHistory = async (token: string | null): Promise<GameHistory[] | null> => {
+export const fetchGameHistory = async (): Promise<GameHistory[] | null> => {
   try {
     const response = await api.get(`/rest/zodiac-game/history`, {
       headers: { 'Authorization': `Bearer ${token}` },

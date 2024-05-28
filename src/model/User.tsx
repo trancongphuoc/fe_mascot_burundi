@@ -11,6 +11,7 @@
 // }
 
 interface User {
+    language?: string,
     facebookUserId?: string,
     profileImageLink: string,
     name: string,
