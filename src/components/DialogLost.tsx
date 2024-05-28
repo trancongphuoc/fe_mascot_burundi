@@ -57,11 +57,10 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
         return (
           <>
             <p className="lost--primary-text">Rất tiếc</p>
-            <p className="lost__secondary">
-              <span>Bạn bỏ lỡ phần thưởng lần đoán này</span>
-              <br />
-              <span>Đừng nản lòng, hãy cố gắng lên, tin tưởng bản thân!</span>
-            </p>
+            <div className="lost__secondary">
+              <p className="lost__secondary--text1">Bạn bỏ lỡ phần thưởng lần đoán này</p>
+              <p className="lost__secondary--text2">Đừng nản lòng, hãy cố gắng lên, tin tưởng bản thân!</p>
+            </div>
           </>
         );
       case 'WIN':
