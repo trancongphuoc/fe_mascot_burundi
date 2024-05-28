@@ -8,7 +8,7 @@ import goat from '../assets/goat.svg';
 import horse from '../assets/horse.svg';
 import pig from '../assets/pig.svg';
 import snake from '../assets/snake.svg';
-import bettingFrame from '../assets/frame_betting_table.svg';
+// import bettingFrame from '../assets/frame_betting_table.svg';
 
 import FullCard from '../components/FullCard';
 import PrimaryText from '../assets/primary-text.svg';
@@ -34,7 +34,7 @@ import { ShortGameHistory } from '../components/ShortGameHistory';
 
 import { joinGameZodiac } from '../api/joinGameZodiac';
 
-import SVG from 'react-inlinesvg';
+// import SVG from 'react-inlinesvg';
 
 
 
