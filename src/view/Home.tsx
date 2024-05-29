@@ -142,32 +142,13 @@ function App() {
   //get select card
   const [selectCard, setSelectCard] = useState<ZodiacCardModel | null>(null);
 
-  const fetchToken = async () => {
-    let queryString = window.location.search;
-    let urlParams = new URLSearchParams(queryString);
-    let parameters = urlParams.get('parameters');
-
-    if (parameters) {
-      try {
-        let decodedParams = atob(parameters);
-        let data = JSON.parse(decodedParams);
-        getToken(data)
-      } catch (error) {
-        window.sessionStorage.setItem('token', parameters);
-      }
-    } else {
-      //remove this when run live
-      let token: string | null  = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTA2Nzg1MTczNDA2MDM3MDUxMzciLCJyb2xlcyI6WyJVU0VSIl0sImZhY2Vib29rVXNlcklkIjoiMTEwNjc4NTE3MzQwNjAzNzA1MTM3IiwicGFja2FnZU5hbWUiOiJjb20ueW9rYXJhLmRldi52MSIsImxhbmd1YWdlIjoiZW4ueW9rYXJhIiwicGxhdGZvcm0iOiJJT1MiLCJ1c2VySWQiOiJuemR5VDhrMERGL3VXbkhlT25peHBCMnVadXRjRStuOEZvZVNabDZ5MDNHVllxY2JmYmtpYTA3ZmZISGZOeHFkZVJtZERnWEd2dnAzY1N2R2VPREJuUT09IiwianRpIjoiMTVmM2YzOTMtMmY5MS00MDMzLTgzOTYtMmQxYzY4ZDQ1MjY4IiwiaWF0IjoxNzE2NjQ3NjMzLCJpc3MiOiJodHRwczovL3d3dy5pa2FyYS5jbyIsImV4cCI6MTcxNzI1MjQzM30.mendnBAJLnoyni-K6qFUqGd_xkS4xsoYfuAko-OGynM";
-      window.sessionStorage.setItem('token', token);
-      console.log('now use default token')
-    }
-  };
 
   useEffect(()=> {
     const fetchData = async () => {
       try {
         const data = await joinGameZodiac();
-        if (data != null && data === "OK") {
+        if (data != null && data !== "FAILED") {
+          window.sessionStorage.setItem('facebookUserId', data);
           setJoinGame(true);
           console.log('join game success')
         }
@@ -175,9 +156,35 @@ function App() {
         console.log('error', error);
       }
     };
-    fetchData();
-    fetchToken()
-  },[joinGame])
+
+    const fetchToken = async () => {
+      let queryString = window.location.search;
+      let urlParams = new URLSearchParams(queryString);
+      let parameters = urlParams.get('parameters');
+
+      if (parameters) {
+        try {
+          let decodedParams = atob(parameters);
+          let data = JSON.parse(decodedParams);
+          await getToken(data);
+        } catch (error) {
+          window.sessionStorage.setItem('token', parameters);
+        }
+      } else {
+        // Remove this when running live
+        let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTA2Nzg1MTczNDA2MDM3MDUxMzciLCJyb2xlcyI6WyJVU0VSIl0sImZhY2Vib29rVXNlcklkIjoiMTEwNjc4NTE3MzQwNjAzNzA1MTM3IiwicGFja2FnZU5hbWUiOiJjb20ueW9rYXJhLmRldi52MSIsImxhbmd1YWdlIjoiZW4ueW9rYXJhIiwicGxhdGZvcm0iOiJJT1MiLCJ1c2VySWQiOiJuemR5VDhrMERGL3VXbkhlT25peHBCMnVadXRjRStuOEZvZVNabDZ5MDNHVllxY2JmYmtpYTA3ZmZISGZOeHFkZVJtZERnWEd2dnAzY1N2R2VPREJuUT09IiwianRpIjoiMTVmM2YzOTMtMmY5MS00MDMzLTgzOTYtMmQxYzY4ZDQ1MjY4IiwiaWF0IjoxNzE2NjQ3NjMzLCJpc3MiOiJodHRwczovL3d3dy5pa2FyYS5jbyIsImV4cCI6MTcxNzI1MjQzM30.mendnBAJLnoyni-K6qFUqGd_xkS4xsoYfuAko-OGynM";
+        window.sessionStorage.setItem('token', token);
+        console.log('now use default token');
+      }
+    };
+
+    const execute = async () => {
+      await fetchToken();
+      await fetchData();
+    };
+
+    execute();
+  }, [joinGame]);
 
 
 
