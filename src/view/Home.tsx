@@ -110,13 +110,13 @@ interface ZodiacCard {
 }
 
 
-function App() {
-
+function Home() {
+  // Use the parameters as needed in your component
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const parameters = queryParams.get('parameters');
 
-  console.log('ta', parameters)
+  console.log(parameters);
 
 
 
@@ -316,4 +316,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

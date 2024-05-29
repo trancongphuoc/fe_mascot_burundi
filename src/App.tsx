@@ -1,12 +1,13 @@
+// App.tsx
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './view/Home.tsx';
 
 function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        {/* Add other routes here */}
+        <Route path="/zodiac-game" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
