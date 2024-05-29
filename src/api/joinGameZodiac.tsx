@@ -14,7 +14,8 @@ export const joinGameZodiac = async (): Promise<string> => {
 
     console.log('join Game:', response.data);
 
-    if (response.data.status === "OK" && response.data.user) {
+    if (response.data.status === "OK" && response.data.data && response.data.data.facebookUserId) {
+      console.log('user', response.data.user);
       return response.data.user.facebookUserId;
     } else {
       console.error('Unexpected response structure:', response.data);

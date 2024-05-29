@@ -7,7 +7,8 @@ function App() {
     <>  
       <BrowserRouter>
         <Routes>
-          <Route path='/zodiac-game' element={<Home/>} />
+        <Route path="/zodiac-game" element={<Home />} />
+        <Route index element={<Home />} />
         </Routes>
       </BrowserRouter>
     </>

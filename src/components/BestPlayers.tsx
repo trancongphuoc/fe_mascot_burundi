@@ -7,11 +7,8 @@ import { off, onValue, ref } from 'firebase/database';
 import { db } from '../firebase/config';
 import bgBestPlayers from '../assets/bg_best_players.svg';
 
-interface BestPlayersProps {
-    bestPlayers: BestPlayersModel[];
-}
 
-function BestPlayers({bestPlayers}: BestPlayersProps) {
+function BestPlayers() {
 
     const [topUsers, setTopUser] = useState<User[]>([])
 
@@ -58,7 +55,7 @@ function BestPlayers({bestPlayers}: BestPlayersProps) {
                 {
                     topUsers.map((user, index) => (
                         <div className="content" key={index}>
-                            <img src={user.profileImageLink} alt="avatar" className='content--img'></img>
+                            <img src={user.facebookUserId} alt="avatar" className='content--img'></img>
                             <p className="content--name">{user.name}</p>
                             <p className="content--text">Thưởng ván trước:</p>
                             <div className="content__icoin">

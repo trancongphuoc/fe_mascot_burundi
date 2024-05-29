@@ -44,12 +44,6 @@ const myInfoBetResults = [
   { card: tiger, isSelected: true, number: 7, bonus: 15, players: 7 },
 ];
 
-const bestPlayers = [
-  { name: "Dong Hoang Linh", avatarUrl: "https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8", winningIcoin: 9999 },
-  { name: "Doan Dai Hiep", avatarUrl: "https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8", winningIcoin: 9999 },
-  { name: "Nguyễn Hoàng Chi", avatarUrl: "https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8", winningIcoin: 9999 },
-];
-
 const topUsers = [
   { url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Lê Hải Yến', icoin: 3000 },
   { url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Trần Tuấn Hùng', icoin: 1000 },
@@ -144,13 +138,14 @@ function App() {
 
 
   useEffect(()=> {
+    console.log('step 1');
     const fetchData = async () => {
       try {
         const data = await joinGameZodiac();
         if (data != null && data !== "FAILED") {
           window.sessionStorage.setItem('facebookUserId', data);
           setJoinGame(true);
-          console.log('join game success')
+          console.log('join game success', window.sessionStorage.getItem('facebookUserId'))
         }
       } catch (error) {
         console.log('error', error);
@@ -272,7 +267,7 @@ function App() {
       <BettingTable onSelectCard={handleCardSelection} openBetting={true}/>
 
       <MyHistory onOpen={()=> setOpenMyHistory(true)} bonusToday={1000} goodBets={4} totalIcoin={15000} myInfoBetReults={myInfoBetResults} />
-      <BestPlayers bestPlayers={bestPlayers}/>
+      <BestPlayers />
 
       <button onClick={() => {
         setDialogType('WIN');

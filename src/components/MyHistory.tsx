@@ -13,7 +13,7 @@ function MyHistory({bonusToday, goodBets, totalIcoin, myInfoBetReults, onOpen} :
 
     useEffect(() => {
         console.log('check fb', facebookUserId);
-        const stateRef = ref(db, `zodiacGame/players/${facebookUserId}`);
+        const stateRef = ref(db, `/zodiacGame/players/${facebookUserId}`);
 
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
