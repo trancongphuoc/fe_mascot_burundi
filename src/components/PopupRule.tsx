@@ -48,13 +48,13 @@ const PopupRule: React.FC<PopupRuleProps> = ({ onClose }) => {
         exit={{ opacity: 0, scale: .5 }}
         className="rule"
         onClick={e => e.stopPropagation()}>
-        <p className='rule--primary mt-18-5px'>Thể lệ Đoán Linh Vật</p>
+        <p className='rule--primary mt-20px'>Thể lệ Đoán Linh Vật</p>
         <img 
           className='rule--img mb-20px mt-18-5px'
           src={rules[currentRuleIndex].image}
         />
         <p className='rule--secondary'>{rules[currentRuleIndex].text}</p>
-        <div className='rule__line mt-16px'>
+        <div className='rule__line mt-18px'>
           {rules.map((_, index) => (
             <p 
               key={index}

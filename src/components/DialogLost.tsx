@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import bgCardSelected from '../assets/bg_card_selected_light.svg';
-import TextCongratution from '../assets/text-congratution.svg';
+import TextCongratution from '../assets/text_congregation.svg';
+import TextApologize from '../assets/text_apologize.svg';
 import BgContentWin from '../assets/bg_content_win.svg';
 import BgContentLost from '../assets/bg_content_lost.svg';
 import BgHeaderLost from '../assets/bg_header_lost.svg';
@@ -56,7 +57,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
       case 'LOST':
         return (
           <>
-            <p className="lost--primary-text">Rất tiếc</p>
+            <SVG src={TextApologize} className="lost--primary-text"/>
             <div className="lost__secondary">
               <p className="lost__secondary--text1">Bạn bỏ lỡ phần thưởng lần đoán này</p>
               <p className="lost__secondary--text2">Đừng nản lòng, hãy cố gắng lên, tin tưởng bản thân!</p>
@@ -68,7 +69,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
           <>
             <SVG src={TextCongratution} className="win--primary-text"/>
             <div className="win__secondary">
-             <p className="win__secondary--text">Thật xuất sắc, Bạn đã đoán trúng ván này</p>
+             <p className="win__secondary--text">Thật xuất sắc, bạn đã đoán trúng ván này</p>
              <div className="win__totalIcoin">
               <SVG className="win__totalIcoin--img" src={Icoin}/>
               <p className="win__totalIcoin--icoin">{totalIcoin}</p>

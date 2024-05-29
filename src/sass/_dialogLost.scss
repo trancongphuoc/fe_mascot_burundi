@@ -37,7 +37,7 @@
         color: $color-white;
         line-height: 1;
         font-size: 13px;
-        font-weight: 300;
+        font-weight: 350;
         margin-bottom: 3px;
     }
 }
@@ -168,7 +168,7 @@
             line-height: 1;
             color: $color-white;
             font-size: 14px;
-            font-weight: 300;
+            font-weight: 350;
             margin-bottom: 20px;
         }
     
@@ -189,7 +189,8 @@
                 inner-width: 59px,
                 crown-left: -8px,
                 crown-top: -15px,
-            ))
+            ));
+            padding-right: 4px;
         }
     
         &__no2 {
@@ -202,15 +203,16 @@
                 inner-width: 59px,
                 crown-left: -18.5px,
                 crown-top: -15px,
-            ))
+            ));
+            padding-left: 4px;
         }
     
         &__no1 {
             grid-area: 5 / 2 / 6 / 3;
             @include topUser((
                 outer-width: 77px,
-                outer-color-top: $color-lost-av-no1-t,
-                outer-color-bottom: $color-lost-av-no1-b,
+                outer-color-top: $color-lost-av-no1-b,
+                outer-color-bottom: $color-lost-av-no1-t,
                 middle-width: 74px,
                 inner-width: 70px,
                 crown-left: -11px,
@@ -262,7 +264,7 @@
 
     &__secondary--text {
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 350;
         color: $color-white;
         text-align: center;
     }
@@ -281,7 +283,7 @@
 
         &--icoin {
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 450;
             color: $color-white;
             text-align: center;
         }

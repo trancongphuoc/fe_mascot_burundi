@@ -16,13 +16,14 @@
     background: white;
     position: relative;
     max-width: 260px;
+    height: auto;
     display: grid;
     grid-template-rows: repeat(2, min-content) 49px repeat(2, min-content);
     justify-content: center;
     justify-items: center;
     border-radius: 10px;
     margin: 0 auto;
-    margin-top: 82px;
+    margin-top: -5px;
 
     &--primary {
         font-size: 16px;
@@ -40,16 +41,16 @@
     &--secondary {
         text-align: justify;
         color: $color-black;
-        font-size: 13px;
+        font-size: 15px;
         line-height: 1.25;
-        font-weight: 400;
-        margin: 0 20px;
+        font-weight: 390;
+        margin: 0 16px;
     }
 
     &__line {
         display: flex;
         line-height: 1;
-        margin-top: 16px;
+        margin-top: 50px;
 
         & > :not(:last-child) {
             margin-right: 5px;
@@ -83,7 +84,7 @@
             font-size: 20px;
             line-height: 1;
             margin-top: 11px;
-            font-weight: 500;
+            font-weight: 420;
         }
     }
 }

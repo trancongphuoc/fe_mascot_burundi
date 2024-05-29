@@ -457,7 +457,7 @@ h4 {
   margin-top: 4px;
   font-size: 10px;
   font-weight: 300;
-  color: #f2fbff;
+  color: #ffffff;
   line-height: 1;
 }
 .betting-card--background {
@@ -623,7 +623,7 @@ h4 {
   align-content: start;
 }
 .section-betting--counter {
-  color: #f2fbff;
+  color: #ffffff;
   font-size: 13px;
   font-weight: 300;
   text-align: center;
@@ -675,7 +675,7 @@ h4 {
   grid-template-columns: minmax(max-content, 45px) 1fr;
   margin: 0 17px;
   padding-top: 8.5px;
-  color: #f2fbff;
+  color: #ffffff;
   line-height: 1;
 }
 .best-players .contents .content--img {
@@ -762,7 +762,7 @@ h4 {
   z-index: 2;
   justify-self: end;
   display: flex;
-  color: #f2fbff;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 300;
   line-height: 1;
@@ -857,7 +857,7 @@ h4 {
 .section-myInfo .end-left {
   grid-area: 3/1/4/2;
   display: flex;
-  color: #f2fbff;
+  color: #ffffff;
   padding-top: 11px;
   padding-bottom: 5px;
   align-items: center;
@@ -881,7 +881,7 @@ h4 {
   display: flex;
   justify-self: end;
   align-items: center;
-  color: #f2fbff;
+  color: #ffffff;
   padding-top: 11px;
   padding-bottom: 5px;
 }
@@ -973,7 +973,7 @@ h4 {
   font-weight: 400;
   line-height: 1;
   text-decoration: none;
-  color: #f2fbff;
+  color: #ffffff;
   z-index: 3;
   align-items: end;
   transform: translateY(3px);
@@ -993,7 +993,7 @@ h4 {
   margin-right: 4px;
 }
 .betting__totalIcoin--icoin {
-  color: #f2fbff;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 400;
   line-height: 1;
@@ -1168,7 +1168,7 @@ h4 {
   font-size: 20px;
   font-weight: 400;
   text-decoration: none;
-  color: #f2fbff;
+  color: #ffffff;
   text-transform: capitalize;
   z-index: 3;
   align-self: end;
@@ -1180,7 +1180,7 @@ h4 {
   grid-area: 3/1/4/4;
   font-size: 16px;
   font-weight: 300;
-  color: #f2fbff;
+  color: #ffffff;
   text-align: center;
   line-height: 1.15;
   margin-bottom: 10px;
@@ -1196,9 +1196,9 @@ h4 {
 .lost-popup .lost--tertiary {
   grid-area: 4/2/5/3;
   line-height: 1;
-  color: #f2fbff;
+  color: #ffffff;
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 350;
   margin-bottom: 20px;
 }
 .lost-popup .lost--light2 {
@@ -1214,6 +1214,7 @@ h4 {
   justify-items: center;
   align-content: end;
   margin-bottom: 11px;
+  padding-right: 4px;
 }
 .lost-popup .lost__no3--img {
   grid-area: 1/1/2/2;
@@ -1265,10 +1266,10 @@ h4 {
   z-index: 3;
 }
 .lost-popup .lost__no3--name {
-  color: #f2fbff;
+  color: #ffffff;
   line-height: 1;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 350;
   margin-bottom: 3px;
 }
 .lost-popup .lost__no2 {
@@ -1277,6 +1278,7 @@ h4 {
   justify-items: center;
   align-content: end;
   margin-bottom: 11px;
+  padding-left: 4px;
 }
 .lost-popup .lost__no2--img {
   grid-area: 1/1/2/2;
@@ -1328,10 +1330,10 @@ h4 {
   z-index: 3;
 }
 .lost-popup .lost__no2--name {
-  color: #f2fbff;
+  color: #ffffff;
   line-height: 1;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 350;
   margin-bottom: 3px;
 }
 .lost-popup .lost__no1 {
@@ -1370,7 +1372,7 @@ h4 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(to bottom, #F0AB39, #FAE5C2);
+  background-image: linear-gradient(to bottom, #FAE5C2, #F0AB39);
   z-index: 1;
 }
 .lost-popup .lost__no1--url::after {
@@ -1378,7 +1380,7 @@ h4 {
   left: 1.5px;
   width: 74px;
   height: 74px;
-  background-image: linear-gradient(to bottom, #FAE5C2, #F0AB39);
+  background-image: linear-gradient(to bottom, #F0AB39, #FAE5C2);
   z-index: 2;
   box-sizing: border-box;
 }
@@ -1392,10 +1394,10 @@ h4 {
   z-index: 3;
 }
 .lost-popup .lost__no1--name {
-  color: #f2fbff;
+  color: #ffffff;
   line-height: 1;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 350;
   margin-bottom: 3px;
 }
 .lost-popup .lost__totalIcoin {
@@ -1409,7 +1411,7 @@ h4 {
   height: 12px;
 }
 .lost-popup .lost__totalIcoin--icoin {
-  color: #f2fbff;
+  color: #ffffff;
   font-size: 13px;
   font-weight: 300;
   line-height: 1;
@@ -1424,7 +1426,7 @@ h4 {
   grid-area: 3/1/4/4;
   font-size: 16px;
   font-weight: 300;
-  color: #f2fbff;
+  color: #ffffff;
   text-align: center;
   line-height: 1.15;
   margin-bottom: 10px;
@@ -1432,8 +1434,8 @@ h4 {
 }
 .win__secondary--text {
   font-size: 16px;
-  font-weight: 500;
-  color: #f2fbff;
+  font-weight: 350;
+  color: #ffffff;
   text-align: center;
 }
 .win__totalIcoin {
@@ -1449,8 +1451,8 @@ h4 {
 }
 .win__totalIcoin--icoin {
   font-size: 16px;
-  font-weight: 500;
-  color: #f2fbff;
+  font-weight: 450;
+  color: #ffffff;
   text-align: center;
 }
 
@@ -1472,13 +1474,14 @@ h4 {
   background: white;
   position: relative;
   max-width: 260px;
+  height: auto;
   display: grid;
   grid-template-rows: repeat(2, min-content) 49px repeat(2, min-content);
   justify-content: center;
   justify-items: center;
   border-radius: 10px;
   margin: 0 auto;
-  margin-top: 82px;
+  margin-top: -5px;
 }
 .rule--primary {
   font-size: 16px;
@@ -1494,15 +1497,15 @@ h4 {
 .rule--secondary {
   text-align: justify;
   color: #000;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.25;
-  font-weight: 400;
-  margin: 0 20px;
+  font-weight: 390;
+  margin: 0 16px;
 }
 .rule__line {
   display: flex;
   line-height: 1;
-  margin-top: 16px;
+  margin-top: 50px;
 }
 .rule__line > :not(:last-child) {
   margin-right: 5px;
@@ -1528,11 +1531,11 @@ h4 {
   margin: 13px 0 20px 0;
 }
 .rule__button--next {
-  color: #f2fbff;
+  color: #ffffff;
   font-size: 20px;
   line-height: 1;
   margin-top: 11px;
-  font-weight: 500;
+  font-weight: 420;
 }
 
 .history-game-overlay {
@@ -1579,7 +1582,7 @@ h4 {
 }
 .history-game-popup__title--no {
   margin-top: 6px;
-  color: #f2fbff;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 400;
   line-height: 1;
@@ -1622,7 +1625,7 @@ h4 {
   border-top: 0.2px solid #58E2C5;
 }
 .history-game-popup__item--index {
-  color: #f2fbff;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 400;
   line-height: 1;
@@ -1684,7 +1687,7 @@ h4 {
   width: 100%;
   height: 100%;
   text-align: center;
-  color: #f2fbff;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 300;
   line-height: 1;
@@ -1694,7 +1697,7 @@ h4 {
   width: 100%;
   height: 100%;
   text-align: center;
-  color: #f2fbff;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 300;
   line-height: 1;
@@ -1717,7 +1720,7 @@ h4 {
   display: flex;
   flex-direction: column;
   text-align: center;
-  color: #f2fbff;
+  color: #ffffff;
   line-height: 1;
   margin-bottom: 6px;
 }
@@ -1786,7 +1789,7 @@ h4 {
   margin-right: 1px;
 }
 .mine-popup .item .bets .bet__icoin--data {
-  color: #f2fbff;
+  color: #ffffff;
   font-size: 10px;
 }
 .mine-popup .item__icoin {
