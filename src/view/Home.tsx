@@ -5,8 +5,9 @@ import buffalo from '../assets/buffalo.svg';
 import chicken from '../assets/chicken.svg';
 import dragon from '../assets/dragon.svg';
 import goat from '../assets/goat.svg';
-{ userId, platform, language, packageName }: TokenRequestParams, platform: any, language: any, packageName: any, platform: any, language: any, packageName: anysets/pig.svg';
 import snake from '../assets/snake.svg';
+import horse from '../assets/horse.svg';
+import pig from '../assets/pig.svg';
 
 import PrimaryText from '../assets/primary-text.svg';
 import Rule from '../assets/rule.svg';
