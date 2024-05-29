@@ -31,8 +31,6 @@ import { ShortGameHistory } from '../components/ShortGameHistory';
 
 import { joinGameZodiac } from '../api/joinGameZodiac';
 import { BettingTable } from '../components/BettingTable';
-import { Base64 } from 'js-base64';
-import { fetchMyHistory } from '../api/getMyHistory';
 import { getToken } from '../api/getToken';
 
 // import SVG from 'react-inlinesvg';
@@ -178,7 +176,7 @@ function App() {
       }
     };
     fetchData();
-    fetchMyHistory()
+    fetchToken()
   },[joinGame])
 
 

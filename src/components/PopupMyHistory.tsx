@@ -38,7 +38,7 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose, mineHistory 
 
       <div className="mine-popup" onClick={e => e.stopPropagation()}>
 
-        <SVG src={TextHistory} className="mine-popup--header mt-7px mb-12-5px"/>
+        <SVG src={ loading ? TextHistory : ''} className="mine-popup--header mt-7px mb-12-5px"/>
         <div className="mine-popup__title mb-7px">
             <p className="mine-popup__title--head1">Ván</p>
             <p className="mine-popup__title--head2">Mức cược</p>
