@@ -17,5 +17,5 @@ interface User {
     name: string,
     uid?: string,
     totalIcoin?: number,
-    noBettingToday: number,
+    noBettingToday?: number,
 }

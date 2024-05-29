@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Rule1 from '../assets/rule_1.png';
 import Rule2 from '../assets/rule_2.png';
 import Rule3 from '../assets/rule_3.png';
@@ -11,6 +11,13 @@ interface PopupRuleProps {
 
 const PopupRule: React.FC<PopupRuleProps> = ({ onClose }) => {
   const [currentRuleIndex, setCurrentRuleIndex] = useState(0);
+
+  useEffect(() => {
+    const preloadImages = [Rule1, Rule2, Rule3, Rule4];
+    preloadImages.forEach((image) => {
+      new Image().src = image;
+    });
+  }, []);
 
   const rules = [
     {
