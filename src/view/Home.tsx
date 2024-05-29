@@ -32,6 +32,7 @@ import { ShortGameHistory } from '../components/ShortGameHistory';
 import { joinGameZodiac } from '../api/joinGameZodiac';
 import { BettingTable } from '../components/BettingTable';
 import { getToken } from '../api/getToken';
+import { useLocation } from 'react-router-dom';
 
 // import SVG from 'react-inlinesvg';
 
@@ -110,6 +111,12 @@ interface ZodiacCard {
 
 
 function App() {
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const parameters = queryParams.get('parameters');
+
+  console.log('ta', parameters)
 
 
 

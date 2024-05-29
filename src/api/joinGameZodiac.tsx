@@ -1,11 +1,6 @@
 import axios from 'axios';
 import api, { token } from './axios';
 
-interface ApiResponse {
-  status: string;
-  [key: string]: any;
-}
-
 interface JoinGameResponse {
   status: string;
   message: string;
