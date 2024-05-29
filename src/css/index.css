@@ -1432,7 +1432,7 @@ h4 {
 }
 .win__secondary--text {
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 500;
   color: #f2fbff;
   text-align: center;
 }
@@ -1449,7 +1449,7 @@ h4 {
 }
 .win__totalIcoin--icoin {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   color: #f2fbff;
   text-align: center;
 }
