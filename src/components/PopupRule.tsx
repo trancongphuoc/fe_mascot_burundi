@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Rule1 from '../assets/rule-1.png';
-import Rule2 from '../assets/rule-2.png';
-import Rule3 from '../assets/rule-3.png';
-import Rule4 from '../assets/rule-4.png';
+import Rule1 from '../assets/rule_1.png';
+import Rule2 from '../assets/rule_2.png';
+import Rule3 from '../assets/rule_3.png';
+import Rule4 from '../assets/rule_4.png';
 import { motion } from 'framer-motion';
 
 interface PopupRuleProps {
