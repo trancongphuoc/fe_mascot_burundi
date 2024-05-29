@@ -1,5 +1,4 @@
 import api, { token } from './axios';
-import { GameHistory } from '../model/GameHistory';
 
 export const fetchMyHistory = async () => {
   try {

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import bgCardSelect from '../assets/bg_card_selected_light.svg';
-import dragon from '../assets/dragon.svg';
 import Icoin from '../assets/icoin.svg';
 import BgContent from '../assets/bg_content_win.svg';
 import BgHeader from '../assets/bg_header_betting.svg';
@@ -18,7 +17,6 @@ interface DialogBettingProps {
 
 const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect } : DialogBettingProps) => {
   const [stake, setStake] = useState(0);
-
 
   const fetchData = async () => {
     if (!stake || !zodiacGameId || !zodiacCardSelect) {

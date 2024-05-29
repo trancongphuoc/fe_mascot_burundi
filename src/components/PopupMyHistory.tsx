@@ -16,22 +16,22 @@ interface PopupMineResultProps {
 const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose, mineHistory }) => {
 
   // const [gameHistory, setGameHistory] = useState<GameHistory[]>([]);
-  // const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await fetchMyHistory();
-  //       if (data != null) {
-  //         setGameHistory(data);
-  //       }
-  //     } catch (error) {
-  //       console.log('error', error);
-  //     }
-  //     setLoading(false);
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchMyHistory();
+        if (data != null) {
+          // setGameHistory(data);
+        }
+      } catch (error) {
+        console.log('error', error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div onClick={onClose} className="popup-overlay">

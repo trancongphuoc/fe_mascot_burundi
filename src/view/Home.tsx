@@ -5,8 +5,7 @@ import buffalo from '../assets/buffalo.svg';
 import chicken from '../assets/chicken.svg';
 import dragon from '../assets/dragon.svg';
 import goat from '../assets/goat.svg';
-import horse from '../assets/horse.svg';
-import pig from '../assets/pig.svg';
+{ userId, platform, language, packageName }: TokenRequestParams, platform: any, language: any, packageName: any, platform: any, language: any, packageName: anysets/pig.svg';
 import snake from '../assets/snake.svg';
 
 import PrimaryText from '../assets/primary-text.svg';
@@ -33,6 +32,7 @@ import { joinGameZodiac } from '../api/joinGameZodiac';
 import { BettingTable } from '../components/BettingTable';
 import { Base64 } from 'js-base64';
 import { fetchMyHistory } from '../api/getMyHistory';
+import { getToken } from '../api/getToken';
 
 // import SVG from 'react-inlinesvg';
 
@@ -145,27 +145,23 @@ function App() {
 
   const fetchToken = async () => {
     let queryString = window.location.search;
-    // queryString = queryString.substring(1);
-    queryString = 'parameters=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJGSVJFQkFTRSs4NDk0NDQ5NTE5MiIsInJvbGVzIjpbIlRFU1RFUiIsIlVTRVIiXSwiZmFjZWJvb2tVc2VySWQiOiJGSVJFQkFTRSs4NDk0NDQ5NTE5MiIsInBhY2thZ2VOYW1lIjoiY29tLmRldi55b2thcmEiLCJsYW5ndWFnZSI6ImVuLnlva2FyYSIsInBsYXRmb3JtIjoiSU9TIiwidXNlcklkIjoiemNzQ0dwMHN0b3FzQkVLNExXejRWb2p0S255RVlldHdsRDJIZUU0VWs0bkdsMjNETklpMEw4MVppeE5QLzlrMlJDajZYU284TURRc0kxMHM4d0ZjRFE9PSIsImp0aSI6IjNmM2ZhYTUwLTgwOTMtNDk5NS05MjAwLTBjOWY3YWU3MjI2NiIsImlhdCI6MTcxNjg4NjE4NywiaXNzIjoiaHR0cHM6Ly93d3cuaWthcmEuY28iLCJleHAiOjE3MTc0OTA5ODd9.zQCV54zV51JMAQIRaBXQYlY8XwDXxcwQ1DX_nGClNBc'
-    
-    let pair = queryString.split("=");
-    let paramName = decodeURIComponent(pair[0]);
-    let paramValue = decodeURIComponent(pair[1]);
-    let param = paramValue.split("-");
-    let key = decodeURIComponent(param[0]);
-       
-    try{
-      const parameters = Base64.decode(key);
-      const pa = JSON.parse(parameters);
+    let urlParams = new URLSearchParams(queryString);
+    let parameters = urlParams.get('parameters');
 
-    } catch(error) {
-
-        // setToken(paramValue)
+    if (parameters) {
+      try {
+        let decodedParams = atob(parameters);
+        let data = JSON.parse(decodedParams);
+        getToken(data)
+      } catch (error) {
+        window.sessionStorage.setItem('token', parameters);
+      }
+    } else {
+      //remove this when run live
+      let token: string | null  = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTA2Nzg1MTczNDA2MDM3MDUxMzciLCJyb2xlcyI6WyJVU0VSIl0sImZhY2Vib29rVXNlcklkIjoiMTEwNjc4NTE3MzQwNjAzNzA1MTM3IiwicGFja2FnZU5hbWUiOiJjb20ueW9rYXJhLmRldi52MSIsImxhbmd1YWdlIjoiZW4ueW9rYXJhIiwicGxhdGZvcm0iOiJJT1MiLCJ1c2VySWQiOiJuemR5VDhrMERGL3VXbkhlT25peHBCMnVadXRjRStuOEZvZVNabDZ5MDNHVllxY2JmYmtpYTA3ZmZISGZOeHFkZVJtZERnWEd2dnAzY1N2R2VPREJuUT09IiwianRpIjoiMTVmM2YzOTMtMmY5MS00MDMzLTgzOTYtMmQxYzY4ZDQ1MjY4IiwiaWF0IjoxNzE2NjQ3NjMzLCJpc3MiOiJodHRwczovL3d3dy5pa2FyYS5jbyIsImV4cCI6MTcxNzI1MjQzM30.mendnBAJLnoyni-K6qFUqGd_xkS4xsoYfuAko-OGynM";
+      window.sessionStorage.setItem('token', token);
+      console.log('now use default token')
     }
-
-    let token: string | null  = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTA2Nzg1MTczNDA2MDM3MDUxMzciLCJyb2xlcyI6WyJVU0VSIl0sImZhY2Vib29rVXNlcklkIjoiMTEwNjc4NTE3MzQwNjAzNzA1MTM3IiwicGFja2FnZU5hbWUiOiJjb20ueW9rYXJhLmRldi52MSIsImxhbmd1YWdlIjoiZW4ueW9rYXJhIiwicGxhdGZvcm0iOiJJT1MiLCJ1c2VySWQiOiJuemR5VDhrMERGL3VXbkhlT25peHBCMnVadXRjRStuOEZvZVNabDZ5MDNHVllxY2JmYmtpYTA3ZmZISGZOeHFkZVJtZERnWEd2dnAzY1N2R2VPREJuUT09IiwianRpIjoiMTVmM2YzOTMtMmY5MS00MDMzLTgzOTYtMmQxYzY4ZDQ1MjY4IiwiaWF0IjoxNzE2NjQ3NjMzLCJpc3MiOiJodHRwczovL3d3dy5pa2FyYS5jbyIsImV4cCI6MTcxNzI1MjQzM30.mendnBAJLnoyni-K6qFUqGd_xkS4xsoYfuAko-OGynM";
-    window.sessionStorage.setItem('token', token);
-
   };
 
   useEffect(()=> {
@@ -180,10 +176,8 @@ function App() {
         console.log('error', error);
       }
     };
-    fetchToken();
     fetchData();
     fetchMyHistory()
-
   },[joinGame])
 
 
@@ -228,17 +222,17 @@ function App() {
 
     fetchStatus();
     fetchGameInfo();
-    // setDialogType('LOST');
+    setDialogType('LOST');
 
     if (statusGame === "RESULT") {
       //close dilog
-      // setOpenRule(false);
-      // setOpenLostWin(false);
-      // setOpenHistoryGame(false);
-      // setOpenMyHistory(false);
+      setOpenRule(false);
+      setOpenLostWin(false);
+      setOpenHistoryGame(false);
+      setOpenMyHistory(false);
 
       // //open card
-      // setOpenGameResult(true)
+      setOpenGameResult(true)
     }
 
     console.log('check data', game);
