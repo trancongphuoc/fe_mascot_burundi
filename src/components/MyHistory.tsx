@@ -9,9 +9,10 @@ import { db } from '../firebase/config';
 
 
 function MyHistory({bonusToday, goodBets, totalIcoin, myInfoBetReults, onOpen} : MyInfoBetResultModel) {
-    const facebookUserId = window.sessionStorage.getItem('facebookUserId');
+    
 
     useEffect(() => {
+        const facebookUserId = window.sessionStorage.getItem('facebookUserId');
         console.log('check fb', facebookUserId);
         const stateRef = ref(db, `/zodiacGame/players/${facebookUserId}`);
 

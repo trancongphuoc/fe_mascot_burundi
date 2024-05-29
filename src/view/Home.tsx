@@ -179,6 +179,9 @@ function App() {
     };
 
     execute();
+
+    const facebookUserId = window.sessionStorage.getItem('facebookUserId');
+    console.log('check fb', facebookUserId);
   }, [joinGame]);
 
 

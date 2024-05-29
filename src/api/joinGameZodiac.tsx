@@ -6,29 +6,41 @@ interface ApiResponse {
   [key: string]: any;
 }
 
+interface JoinGameResponse {
+  status: string;
+  message: string;
+  data: {
+    user: User;
+  };
+}
+
 export const joinGameZodiac = async (): Promise<string> => {
   try {
-    const response = await api.post<ApiResponse>('/rest/zodiac-game/join-game', {}, {
+    const response = await api.post<JoinGameResponse>('/rest/zodiac-game/join-game', {}, {
       headers: { 'Authorization': `Bearer ${token}` },
     });
 
-    console.log('join Game:', response.data);
+    console.log('Join Game Response:', response.data);
 
-    if (response.data.status === "OK" && response.data.data && response.data.data.facebookUserId) {
-      console.log('user', response.data.user);
-      return response.data.user.facebookUserId;
+    const { status, data } = response.data;
+
+    if (status === "OK" && data && data.user && data.user.facebookUserId) {
+      const { facebookUserId } = data.user;
+      return facebookUserId;
     } else {
       console.error('Unexpected response structure:', response.data);
       return "FAILED";
     }
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      // Handle known Axios error structure
-      console.error('Axios error fetching game history:', error.response?.data || error.message);
-    } else {
-      // Handle unknown error structure
-      console.error('Unexpected error fetching game history:', error);
-    }
+    handleAxiosError(error);
     return "FAILED";
+  }
+};
+
+const handleAxiosError = (error: any) => {
+  if (axios.isAxiosError(error)) {
+    console.error('Axios error fetching game history:', error.response?.data || error.message);
+  } else {
+    console.error('Unexpected error fetching game history:', error);
   }
 };
