@@ -232,14 +232,14 @@ function Home() {
     setDialogType('LOST');
 
     if (statusGame === "RESULT") {
-      //close dilog
-      // setOpenRule(false);
-      // setOpenLostWin(false);
-      // setOpenHistoryGame(false);
-      // setOpenMyHistory(false);
+      // close dilog
+      setOpenRule(false);
+      setOpenLostWin(false);
+      setOpenHistoryGame(false);
+      setOpenMyHistory(false);
 
-      // // //open card
-      // setOpenGameResult(true)
+      // //open card
+      setOpenGameResult(true)
     }
 
     console.log('check data', game);
