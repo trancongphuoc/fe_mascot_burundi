@@ -637,6 +637,8 @@ h4 {
   font-weight: 300;
   text-align: center;
   line-height: 1;
+  max-width: 135px;
+  height: 29px;
   background: linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
   padding: 7px 25px 9px 25px;
   margin: 1px auto;
@@ -742,7 +744,7 @@ h4 {
   margin: 0 16px;
   border-radius: 10px;
   display: grid;
-  grid-template-rows: repeat(3, max-content);
+  grid-template-rows: 39px min-content 30px;
   grid-template-columns: repeat(2, 1fr);
   justify-content: center;
   align-items: center;
@@ -763,13 +765,14 @@ h4 {
   font-weight: 300;
   line-height: 1;
   padding-left: 10px;
-  padding-top: 3px;
+  padding-top: 2px;
 }
 .section-myInfo .header-left--text {
   margin-right: 6px;
 }
 .section-myInfo .header-left--img {
   width: 16px;
+  height: auto;
   margin-right: 6px;
 }
 .section-myInfo .header-left--icoin {
@@ -876,8 +879,8 @@ h4 {
   grid-area: 3/1/4/2;
   display: flex;
   color: #ffffff;
-  padding-top: 11px;
-  padding-bottom: 5px;
+  padding-top: 0;
+  padding-bottom: 0;
   align-items: center;
 }
 .section-myInfo .end-left--text {
@@ -888,6 +891,7 @@ h4 {
 }
 .section-myInfo .end-left--img {
   width: 16px;
+  height: auto;
   margin-right: 6px;
 }
 .section-myInfo .end-left--icoin {
@@ -900,8 +904,8 @@ h4 {
   justify-self: end;
   align-items: center;
   color: #ffffff;
-  padding-top: 11px;
-  padding-bottom: 5px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .section-myInfo .end-right--text {
   margin-right: 6px;
