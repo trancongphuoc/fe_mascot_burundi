@@ -5,7 +5,7 @@
   export default defineConfig(({ mode }) => {
     return {
       plugins: [react()],
-      base: '/zodiac-game',
+      base: '/',
       build: {
         outDir: 'dist', // Ensure this is set to your desired output directory
       },
