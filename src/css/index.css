@@ -729,7 +729,6 @@ h4 {
 }
 
 .section-myInfo {
-  background-color: #054254;
   margin: 0 16px;
   border-radius: 10px;
   display: grid;
@@ -738,17 +737,10 @@ h4 {
   justify-content: center;
   align-items: center;
   justify-items: left;
-  border: 0.1px solid #32DAB1;
 }
-.section-myInfo__header--background {
-  grid-area: 1/1/2/-1;
-  z-index: 1;
-  justify-self: stretch;
-  align-self: stretch;
-  height: 38px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  background: repeating-linear-gradient(125deg, #0A5158, #0A5158 15px, #094147 15px, #094147 30px);
+.section-myInfo__bg {
+  grid-area: 1/1/-1/-1;
+  z-index: -1;
 }
 .section-myInfo .header-left {
   grid-area: 1/1/2/2;

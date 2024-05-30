@@ -3,13 +3,23 @@ import Icoin from '../assets/icoin.svg';
 import ArrowWhite from '../assets/arrow-white.svg';
 import Background from '../assets/background_card_small.svg';
 import SVG from 'react-inlinesvg';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { off, onValue, ref } from 'firebase/database';
 import { db } from '../firebase/config';
+import bgMyBonus from '../assets/bg_my_bonus.svg';
+
+interface BetUser extends User {
+    bettingCards?: BetZodiacCard[];
+}
+
+interface BetZodiacCard extends ZodiacCardModel {
+    totalIcoinBetting: number;
+}
 
 
-function MyHistory({bonusToday, goodBets, totalIcoin, myInfoBetReults, onOpen} : MyInfoBetResultModel) {
+function MyHistory({totalIcoin, onOpen} : MyInfoBetResultModel) {
     const facebookUserId = window.sessionStorage.getItem('facebookUserId');
+    const [betUser, setBetUser] = useState<BetUser>()
 
     useEffect(() => {
         const stateRef = ref(db, `/zodiacGame/players/${facebookUserId}`);
@@ -18,25 +28,33 @@ function MyHistory({bonusToday, goodBets, totalIcoin, myInfoBetReults, onOpen} :
             const data = snapshot.val();
             console.log('check face', data)
             if (data) {
-                // const playersList: User[] = [];
-                // for (const playerId in data) {
-                //     if (Object.hasOwnProperty.call(data, playerId)) {
-                //         const playerData = data[playerId];
-                //         const player: User = {
-                //             facebookUserId: playerData.facebookUserId,
-                //             profileImageLink: playerData.profileImageLink,
-                //             name: playerData.name,
-                //             uid: playerData.uid,
-                //             totalIcoin: playerData.totalIcoin,
-                //             noBettingToday: playerData.noBettingToday
-                //         };
-                //         playersList.push(player);
-                //     }
-                // }
-
-                // setPlayers(playersList);
-                // const extraPlayers = playersList.length > 5 ? playersList.length - 5 : 0;
-                // setNumber(extraPlayers);
+                const cards: BetZodiacCard[] = [];
+                if (data.bettingCards) {
+                    for (const cardsId in data.bettingCards) {
+                        if (Object.hasOwnProperty.call(data.bettingCards, cardsId)) {
+                            const cardId = data.bettingCards[cardsId];
+                            const card: BetZodiacCard = {
+                                id: cardId.id ?? '',
+                                imageUrl: cardId.imageUrl ?? '',
+                                name: cardId.name ?? '',
+                                multiply: cardId.multiply ?? 0,
+                                totalIcoinBetting: cardId.totalIcoinBetting ?? 0,
+                            };
+                            cards.push(card);
+                        }
+                    }
+                }
+            
+                const user: BetUser = {
+                    facebookUserId: data.facebookUserId,
+                    profileImageLink: data.profileImageLink,
+                    name: data.name,
+                    uid: data.uid,
+                    totalIcoin: data.totalIcoin,
+                    noBettingToday: data.noBettingToday,
+                    bettingCards: cards,
+                };
+                setBetUser(user);                
             }
         };
 
@@ -52,27 +70,28 @@ function MyHistory({bonusToday, goodBets, totalIcoin, myInfoBetReults, onOpen} :
     return (
         <>  
             <div className="section-myInfo mt-24px">
+                <SVG src={bgMyBonus} className="section-myInfo__bg"/>
                 <div className="section-myInfo__header--background">&nbsp;</div>
                 <div className="header-left">
                     <p className='header-left--text'>Thưởng hôm nay:</p>
                     <SVG className='header-left--img' src={Icoin}/>
-                    <p className='header-left--icoin'>{bonusToday}</p>
+                    <p className='header-left--icoin'>{betUser?.totalIcoin ?? 0}</p>
                 </div>
                 <div onClick={onOpen} className="header-right">
-                    <p className='header-right--text'>Số lần đã đoán hôm nay: {goodBets}</p>
+                    <p className='header-right--text'>Số lần đã đoán hôm nay: {betUser?.noBettingToday ?? 0}</p>
                     <SVG className='header-right--arrow' src={ArrowWhite}/>
                 </div>
                
                 <div className="section-myInfo__cards">
-                    {
-                        myInfoBetReults.map((myInfoBetReult, index) => (
+                    {  betUser?.bettingCards && 
+                        betUser?.bettingCards.map((betCard, index) => (
                             <div key={index} className="card__main">
                                 <p className="card__main--background-color">&nbsp;</p>
-                                <p className="card__main--header">{myInfoBetReult.number}</p>
+                                <p className="card__main--header">{betCard.id.split('_').slice(-1)}</p>
                                 <SVG src={Background} className="card__main--background"/>
-                                <SVG src={myInfoBetReult.card} className="card__main--zodiac"/>
-                                <p className='card__main--bonus'>x{myInfoBetReult.bonus}</p>
-                                <h4 className='card__main--icoin'>{myInfoBetReult.players} iCoin</h4>
+                                <SVG src={betCard.imageUrl} className="card__main--zodiac"/>
+                                <p className='card__main--bonus'>x{betCard.multiply}</p>
+                                <h4 className='card__main--icoin'>{betCard.totalIcoinBetting} iCoin</h4>
                             </div>
                         ))
                     }

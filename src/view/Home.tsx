@@ -160,10 +160,6 @@ function Home() {
     };
 
     const fetchToken = async () => {
-      let queryString = window.location.search;
-      let urlParams = new URLSearchParams(queryString);
-      let parameters = urlParams.get('parameters');
-
       if (parameters) {
         try {
           let decodedParams = atob(parameters);

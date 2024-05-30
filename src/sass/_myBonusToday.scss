@@ -1,5 +1,4 @@
 .section-myInfo {
-    background-color: $color-sherpa-blue;
     margin: 0 16px;
     border-radius: 10px;
 
@@ -11,26 +10,11 @@
     align-items: center;
     justify-items: left;
 
-    border: .1px solid $color-eucalyptus;
+    // border: .1px solid $color-eucalyptus;
 
-
-    &__header {
-        &--background {
-            grid-area: 1 / 1 / 2 / -1;
-            z-index: 1;
-            justify-self: stretch;
-            align-self: stretch;
-            height: 38px;
-
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-
-            background: repeating-linear-gradient(125deg,
-                    $color-Midnight-green,
-                    $color-Midnight-green 15px,
-                    $color-warm-black-2 15px,
-                    $color-warm-black-2 30px);
-        }
+    &__bg {
+        grid-area: 1 / 1 / -1 / -1;
+        z-index: -1;
     }
 
     .header-left {
