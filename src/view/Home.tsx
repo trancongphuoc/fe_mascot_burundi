@@ -36,46 +36,6 @@ import { useLocation } from 'react-router-dom';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
-
-let mineHistory: BetInfo[] = [
-  {
-    time: new Date(),
-    bettings: [{ zodiac: tiger, bonus: 'x3', icoin: 10 }, { zodiac: tiger, bonus: 'x5', icoin: -20 }],
-    totalIcoin: -10
-  },
-  {
-    time: new Date(),
-    bettings: [{ zodiac: buffalo, bonus: 'x3', icoin: -10 }, { zodiac: tiger, bonus: 'x5', icoin: 20 }],
-    totalIcoin: 10
-  },
-  {
-    time: new Date(),
-    bettings: [{ zodiac: snake, bonus: 'x3', icoin: -20 }, { zodiac: tiger, bonus: 'x5', icoin: 10 }],
-    totalIcoin: -10
-  },
-  {
-    time: new Date(),
-    bettings: [{ zodiac: snake, bonus: 'x3', icoin: -20 }, { zodiac: tiger, bonus: 'x5', icoin: 10 }],
-    totalIcoin: -10
-  },
-  {
-    time: new Date(),
-    bettings: [{ zodiac: snake, bonus: 'x3', icoin: -20 }, { zodiac: tiger, bonus: 'x5', icoin: 10 }],
-    totalIcoin: -10
-  },
-  {
-    time: new Date(),
-    bettings: [{ zodiac: snake, bonus: 'x3', icoin: -20 }, { zodiac: tiger, bonus: 'x5', icoin: 10 }],
-    totalIcoin: -10
-  },
-  {
-    time: new Date(),
-    bettings: [{ zodiac: snake, bonus: 'x3', icoin: -20 }, { zodiac: tiger, bonus: 'x5', icoin: 10 }],
-    totalIcoin: -10
-  },
-
-];
-
 interface ZodiacGameData {
   isPause: boolean,
   noGameToday: number,
@@ -245,13 +205,13 @@ function Home() {
 
     if (statusGame === "RESULT") {
       // close dilog
-      setOpenRule(false);
-      setOpenLostWin(false);
-      setOpenHistoryGame(false);
-      setOpenMyHistory(false);
+      // setOpenRule(false);
+      // setOpenLostWin(false);
+      // setOpenHistoryGame(false);
+      // setOpenMyHistory(false);
 
       // //open card
-      setOpenGameResult(true)
+      // setOpenGameResult(true)
     }
   }, [statusGame]);
 
@@ -307,20 +267,19 @@ function Home() {
                                         />
                                       )}
         {openLostWin && <DialogLost
-          onClose={() => setOpenLostWin(false)}
-          dialogType={dialogType} totalIcoin={totalIcoinWin}
-          topUsers={game?.topUser ?? []} zodiac={game?.zodiacCard.imgUrl ?? ''} />}
+                            onClose={() => setOpenLostWin(false)}
+                            dialogType={dialogType} totalIcoin={totalIcoinWin}
+                            topUsers={game?.topUser ?? []} zodiac={game?.zodiacCard.imgUrl ?? ''} />}
         {openHistoryGame && <PopupHistoryGame
                               onClose={() => setOpenHistoryGame(false)}
                               zodiacs={img}/>}
-        {openMyHistory && <PopupMyHistory onClose={()=> setOpenMyHistory(false)} mineHistory={mineHistory}/>}
+        {openMyHistory && <PopupMyHistory onClose={()=> setOpenMyHistory(false)}/>}
       </AnimatePresence>
       {openGameResult && <OpenCard
                               onClose={()=> {
                                               setOpenGameResult(false)
                                                setOpenLostWin(true)}}
-                              zodiac={game?.zodiacCard.imgUrl ?? ''}
-                              />}
+                              zodiac={game?.zodiacCard.imgUrl ?? ''}/>}
     </div>
   );
 }
