@@ -24,6 +24,8 @@ body {
     font-family: $font-primary;
     font-weight: 400;
     line-height: 1.6;
+    max-width: 430px;
+    width: 100%;
 
     background-image: url(../assets/buffalo_logo.svg), url(../assets/goat_logo.svg), linear-gradient(
         to bottom,

@@ -56,7 +56,6 @@ export default function FlipCard({ zodiac }: FlipCardProps) {
                 <motion.div
                     initial={{ rotateY: 180 }}
                     animate={{ rotateY: flip ? 180 : 0 }}
-                    // style={{ display: flip ? "none" : "block" }}
                     transition={{ duration: 0.7 }}
                     className="flip-card__back"
                 >

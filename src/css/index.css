@@ -21,6 +21,8 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   line-height: 1.6;
+  max-width: 430px;
+  width: 100%;
   background-image: url(../assets/buffalo_logo.svg), url(../assets/goat_logo.svg), linear-gradient(to bottom, #094348 0%, #062F33 30%, #062F33 100%);
   background-position: top left, top right, center;
   background-repeat: no-repeat;
@@ -558,7 +560,8 @@ h4 {
 }
 
 .main {
-  max-width: 414px;
+  max-width: 430px;
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
@@ -616,13 +619,19 @@ h4 {
 
 .section-betting {
   max-width: 100%;
-  background-image: url(../assets/frame_betting_table.svg);
-  background-size: 100% 100%;
-  background-position: 0px 3px;
-  background-repeat: no-repeat;
   align-content: start;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content;
+}
+.section-betting__bg {
+  grid-area: 1/1/-1/-1;
+  z-index: -1;
+  width: 100%;
+  height: auto;
 }
 .section-betting--counter {
+  grid-area: 1/1/2/2;
   color: #ffffff;
   font-size: 13px;
   font-weight: 300;
@@ -631,12 +640,14 @@ h4 {
   background: linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
   padding: 7px 25px 9px 25px;
   margin: 1px auto;
-  z-index: 4;
+  z-index: 2;
   display: inline-block;
   margin-left: 50%;
   transform: translateX(-50%);
 }
 .section-betting__content {
+  grid-area: 2/1/3/2;
+  z-index: 2;
   margin: 5px 40px 33px 40px;
   z-index: 3;
   display: grid;
@@ -652,13 +663,12 @@ h4 {
   grid-template-columns: 1fr;
   grid-template-rows: 50px max-content;
   margin: 0 16px;
-  background-image: url(../assets/bg_best_players.svg);
-  background-size: 100% auto;
-  background-repeat: no-repeat;
 }
 .best-players__bg {
   grid-area: 1/1/-1/-1;
   z-index: -1;
+  width: 100%;
+  height: auto;
 }
 .best-players--img {
   grid-area: 1/1/2/2;
@@ -741,6 +751,8 @@ h4 {
 .section-myInfo__bg {
   grid-area: 1/1/-1/-1;
   z-index: -1;
+  width: 100%;
+  height: auto;
 }
 .section-myInfo .header-left {
   grid-area: 1/1/2/2;
@@ -1565,17 +1577,21 @@ h4 {
   width: 100%;
   display: grid;
   justify-content: center;
-  align-content: flex-start;
+  align-content: start;
+  grid-template-rows: 50px min-content min-content;
+  grid-template-columns: 1fr;
   margin: 0 auto;
-  background-image: url(../assets/bg_history_game.svg);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+}
+.history-game-popup__bg {
+  grid-area: 1/1/-1/-1;
+  z-index: -1;
 }
 .history-game-popup--header {
+  grid-area: 1/1/2/2;
   justify-self: center;
   margin-top: 6px;
   margin-bottom: 7px;
+  z-index: 2;
 }
 .history-game-popup__title {
   width: 100%;
@@ -1585,6 +1601,7 @@ h4 {
   justify-items: center;
   align-items: center;
   padding: 0 7px;
+  grid-area: 2/1/3/2;
 }
 .history-game-popup__title--no {
   margin-top: 6px;
@@ -1612,13 +1629,23 @@ h4 {
   width: 60%;
   height: auto;
 }
+.history-game-popup__loading {
+  grid-area: 3/1/4/2;
+  z-index: 2;
+  align-self: flex-start;
+  justify-self: center;
+}
 .history-game-popup__content {
+  grid-area: 3/1/4/2;
   overflow-y: auto;
-  scrollbar-width: auto;
+  scrollbar-width: none;
+  width: 100%;
+  height: 500px;
+  align-content: start;
   padding: 0 7px;
   margin-bottom: 8px;
   padding-top: 8.5px;
-  scrollbar-width: none;
+  z-index: 2;
   clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 5% 100%, 0% 95%);
 }
 .history-game-popup__item {
@@ -1834,7 +1861,7 @@ h4 {
 
 .open-card {
   position: relative;
-  max-width: 414px;
+  max-width: 430px;
   width: 100%;
   height: auto;
   display: grid;

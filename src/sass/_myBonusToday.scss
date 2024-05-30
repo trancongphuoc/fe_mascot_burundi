@@ -10,11 +10,11 @@
     align-items: center;
     justify-items: left;
 
-    // border: .1px solid $color-eucalyptus;
-
     &__bg {
         grid-area: 1 / 1 / -1 / -1;
         z-index: -1;
+        width: 100%;
+        height: auto;
     }
 
     .header-left {

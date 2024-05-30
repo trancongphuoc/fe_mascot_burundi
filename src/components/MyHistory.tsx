@@ -71,6 +71,7 @@ function MyHistory({totalIcoin, onOpen} : MyInfoBetResultModel) {
         <>  
             <div className="section-myInfo mt-24px">
                 <SVG src={bgMyBonus} className="section-myInfo__bg"/>
+                
                 <div className="section-myInfo__header--background">&nbsp;</div>
                 <div className="header-left">
                     <p className='header-left--text'>Thưởng hôm nay:</p>
