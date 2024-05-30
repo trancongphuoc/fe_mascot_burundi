@@ -16,7 +16,8 @@ interface DialogBettingProps {
 
 const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect }) => {
   const [stake, setStake] = useState(0);
-  const clickAudioRef = useRef<HTMLAudioElement>(new Audio('/sounds/stake.wav'));
+  const clickAudioRef = useRef<HTMLAudioElement>(new Audio('zodiac-game/public/sounds/stake_button.wav'));
+  const confirmRef = useRef<HTMLAudioElement>(new Audio('zodiac-game/public/sounds/confirm_button.wav'));
 
 
   const fetchData = useCallback(async () => {
@@ -41,6 +42,15 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
 
   const playClickAudio = () => {
     const audio = clickAudioRef.current;
+    audio.currentTime = 0; // Reset the audio to start from the beginning
+    audio.play().catch((error) => {
+      console.error('Audio play error:', error);
+    });
+  };
+
+
+  const confirmAudio = () => {
+    const audio = confirmRef.current;
     audio.currentTime = 0; // Reset the audio to start from the beginning
     audio.play().catch((error) => {
       console.error('Audio play error:', error);
@@ -104,7 +114,9 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
 
         <motion.div
           whileTap={{ y: 1 }}
-          onClick={fetchData}
+          onClick={() => {
+            fetchData()
+            confirmAudio()}}
           className="betting__confirm mb-33px mt-14-5px">
           <p className="betting__confirm--text">Xác nhận</p>
         </motion.div>
