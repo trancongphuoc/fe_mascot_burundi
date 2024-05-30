@@ -10,7 +10,6 @@ import { useEffect } from 'react';
 interface OpenCardProps {
   onClose: () => void;
   zodiac: string;
-  history: string[];
 }
 
 const OpenCard: React.FC<OpenCardProps> = ({ onClose, zodiac}) => {

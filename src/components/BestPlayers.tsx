@@ -14,7 +14,6 @@ function BestPlayers() {
 
     useEffect(() => {
         const stateRef = ref(db, '/zodiacGame/state/topUsers');
-  
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
             console.log('zodiacCards', data);
@@ -39,23 +38,18 @@ function BestPlayers() {
             }
         };
         onValue(stateRef, handleData);
-        return () => {
-            off(stateRef, 'value', handleData);
-        };
+        return () => off(stateRef, 'value', handleData);
     }, []);
 
     return (    
         <div className="best-players mb-4-5px mt-30px">
-
             <SVG src={bgBestPlayers} className="best-players__bg"/>
-
             <SVG src={SecondaryText} className='best-players--img mt-6px'/>
-
             <div className="contents mt-8px mb-23-5px">
                 {
                     topUsers.map((user, index) => (
                         <div className="content" key={index}>
-                            <img src={user.facebookUserId} alt="avatar" className='content--img'></img>
+                            <img src={user.profileImageLink} alt="avatar" className='content--img'></img>
                             <p className="content--name">{user.name}</p>
                             <p className="content--text">Thưởng ván trước:</p>
                             <div className="content__icoin">

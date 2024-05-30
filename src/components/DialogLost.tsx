@@ -17,26 +17,33 @@ import LineRightWin from '../assets/line_right_win.svg';
 import LineLeftLost from '../assets/line_left_lost.svg';
 import LineRightLost from '../assets/line_right_lost.svg';
 
-
-import dragon from '../assets/dragon.svg';
-
 import SVG from 'react-inlinesvg';
 import { motion } from 'framer-motion';
 
-interface DialogBettingProps {
+interface DialogLostWinProps {
   onClose: () => void;
   dialogType: DialogType;
   totalIcoin: number;
-  topUsers: TopUserModel[];
+  topUsers: User[];
+  zodiac: string;
 }
 
-const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, totalIcoin, topUsers }) => {
+const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, totalIcoin, topUsers, zodiac }) => {
   const [bgHeader, setBgHeader] = useState(BgHeaderLost);
   const [bgContent, setBgContent] = useState(BgContentLost);
   const [lineLeft, setLineLeft] = useState(LineLeftLost);
   const [lineRight, setLineRight] = useState(LineLeftLost);
 
   const crown = [CrownGold, CrownSliver, CrownBronze];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log('Closing...');
+      onClose();
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [onClose]);
 
   useEffect(() => {
     if (dialogType === 'WIN') {
@@ -96,10 +103,9 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
         transition={{ type: 'just'}}
         className="lost-popup"
         onClick={e => {e.stopPropagation()}}>
-        {/* <div className="lost--BgContent" style={{ backgroundImage: `url(${bgContent})` }}></div> */}
         <SVG src={bgContent} className="lost--BgContent mb--1px"/>
         <SVG src={bgCardSelected} className="lost--zodiac-background" />
-        <SVG src={dragon} className="lost--zodiac-card" />
+        <SVG src={zodiac} className="lost--zodiac-card" />
         <SVG src={BgLighter} className="lost--BgLighter" />
         <SVG src={bgHeader} className="lost--BgHeader" />
         
@@ -113,12 +119,12 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
           <div className={`lost__no${index + 1}`} key={index}>
             <SVG className={`lost__no${index + 1}--img`} src={crown[index]}/>
             <div className={`lost__no${index + 1}--url`}>
-              <img src={user.url} alt="avatar user" />
+              <img src={user.profileImageLink} alt="avatar user" />
             </div>
             <p className={`lost__no${index + 1}--name`}>{user.name}</p>
             <div className="lost__totalIcoin">
               <SVG className="lost__totalIcoin--img" src={Icoin}/>
-              <p className="lost__totalIcoin--icoin">{user.icoin}</p>
+              <p className="lost__totalIcoin--icoin">{user.totalIcoin}</p>
             </div>
           </div>
         ))}
@@ -127,4 +133,4 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, dialogType, tota
   );
 };
 
-export default DialogBetting;
+export default DialogLostWin;

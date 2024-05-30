@@ -22,7 +22,7 @@ import PopupHistoryGame from '../components/PopupHistoryGame';
 import PopupMyHistory from '../components/PopupMyHistory';
 
 import { db } from '../firebase/config';
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, off } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
 
 import OpenCard from '../components/OpenCard';
@@ -34,23 +34,8 @@ import { BettingTable } from '../components/BettingTable';
 import { getToken } from '../api/getToken';
 import { useLocation } from 'react-router-dom';
 
-// import SVG from 'react-inlinesvg';
-
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
-
-const myInfoBetResults = [
-  { card: tiger, isSelected: true, number: 7, bonus: 15, players: 7 , show: ""},
-  { card: tiger, isSelected: true, number: 7, bonus: 15, players: 7 },
-  { card: tiger, isSelected: true, number: 7, bonus: 15, players: 7 },
-];
-
-const topUsers = [
-  { url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Lê Hải Yến', icoin: 3000 },
-  { url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Trần Tuấn Hùng', icoin: 1000 },
-  { url: 'https://www.ikara.co/avatar/103929910820839711115?type=LARGE&version=8', name: 'Ngọc Hoàng', icoin: 9000 },
-];
-
 
 let mineHistory: BetInfo[] = [
   {
@@ -91,14 +76,13 @@ let mineHistory: BetInfo[] = [
 
 ];
 
-
-
 interface ZodiacGameData {
   isPause: boolean,
   noGameToday: number,
   status: string,
   transactionId: number,
   zodiacCard: ZodiacCard,
+  topUser?: User[],
   
 }
 
@@ -115,10 +99,6 @@ function Home() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const parameters = queryParams.get('parameters');
-
-  console.log(parameters);
-
-
 
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
 
@@ -142,17 +122,32 @@ function Home() {
   const [joinGame, setJoinGame] = useState(false);
   //get select card
   const [selectCard, setSelectCard] = useState<ZodiacCardModel | null>(null);
+  const [totalIcoinWin, setTotalIcoinWin] = useState(0);
+  //get win or not
+  const handleIsWin = (data: { isWin?: boolean | undefined; icoinWin?: number | undefined }) => {
+    if (data && data.icoinWin) {
+      setTotalIcoinWin(data.icoinWin);
+    }
+    if (typeof data.isWin === 'boolean') {
+      if (data.isWin) {
+        setDialogType('WIN');
+      } else {
+        setDialogType('LOST');
+      }
+  } else {
+      console.log("Win status is undefined or not a boolean.");
+  }
+};
 
 
   useEffect(()=> {
-    console.log('step 1');
     const fetchData = async () => {
       try {
         const data = await joinGameZodiac();
         if (data != null && data !== "FAILED") {
           window.sessionStorage.setItem('facebookUserId', data);
           setJoinGame(true);
-          console.log('join game success', window.sessionStorage.getItem('facebookUserId'))
+          console.log('join game success')
         }
       } catch (error) {
         console.log('error', error);
@@ -180,44 +175,62 @@ function Home() {
       await fetchToken();
       await fetchData();
     };
-
     execute();
-
-    const facebookUserId = window.sessionStorage.getItem('facebookUserId');
-    console.log('check fb', facebookUserId);
   }, [joinGame]);
-
 
 
   useEffect(() => { 
     const fetchGameInfo = async () => {
       const stateRef = ref(db, 'zodiacGame/state');
 
-      onValue(stateRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          const zodiacCardData = data.zodiacCard;
-          const zodiacCard: ZodiacCard = {
-            id: zodiacCardData.id,
-            imgUrl: zodiacCardData.imgUrl,
-            multiply: zodiacCardData.multiply,
-            name: zodiacCardData.name,
-          };
+      const handleData = (snapshot: any) => {
+          const data = snapshot.val();
+          if (data) {
+              const zodiacCardData = data.zodiacCard;
+              const zodiacCard: ZodiacCard = {
+                  id: zodiacCardData.id,
+                  imgUrl: zodiacCardData.imageUrl,
+                  multiply: zodiacCardData.multiply,
+                  name: zodiacCardData.name,
+              };
 
-          setGame({
-            isPause: data.isPause,
-            noGameToday: data.noGameToday,
-            status: data.status,
-            transactionId: data.transactionId,
-            zodiacCard: zodiacCard,
-          });
-        }
-      });
-    };
+              const topUsers: User[] = [];
+              if (data.topUsers) {
+                  for (const topUserId in data.topUsers) {
+                      if (Object.hasOwnProperty.call(data.topUsers, topUserId)) {
+                          const user = data.topUsers[topUserId];
+                          const topUser: User = {
+                              facebookUserId: user.facebookUserId ?? '',
+                              name: user.name ?? '',
+                              profileImageLink: user.profileImageLink ?? '',
+                              totalIcoin: user.totalIcoin ?? 0,
+                              uid: user.uid ?? 0,
+                          };
+                          topUsers.push(topUser);
+                      }
+                  }
+              }
 
- const fetchStatus = async () => {
+              setGame({
+                  isPause: data.isPause,
+                  noGameToday: data.noGameToday,
+                  status: data.status,
+                  transactionId: data.transactionId,
+                  zodiacCard: zodiacCard,
+                  topUser: topUsers,
+              });
+          }
+      };
+
+      onValue(stateRef, handleData);
+
+      return () => {
+          off(stateRef, 'value', handleData);
+      };
+  };
+
+  const fetchStatus = async () => {
       const stateRef = ref(db, 'zodiacGame/state/status');
-
       onValue(stateRef, (snapshot) => {
         const data = snapshot.val();
         if (data && data !== statusGame) {
@@ -229,7 +242,6 @@ function Home() {
 
     fetchStatus();
     fetchGameInfo();
-    setDialogType('LOST');
 
     if (statusGame === "RESULT") {
       // close dilog
@@ -241,9 +253,6 @@ function Home() {
       // //open card
       setOpenGameResult(true)
     }
-
-    console.log('check data', game);
-
   }, [statusGame]);
 
   const handleCardSelection = (card: ZodiacCardModel) => {
@@ -271,11 +280,10 @@ function Home() {
       </div>
 
       <BettingTable onSelectCard={handleCardSelection} openBetting={true}/>
-
-      <MyHistory onOpen={()=> setOpenMyHistory(true)} bonusToday={1000} goodBets={4} totalIcoin={15000} myInfoBetReults={myInfoBetResults} />
+      <MyHistory onOpen={() => setOpenMyHistory(true)} onUserDataChange={handleIsWin}/>
       <BestPlayers />
 
-      {/* <button onClick={() => {
+      <button onClick={() => {
         setDialogType('WIN');
         setOpenLostWin(true)}} className="open-popup-button">Open Popup</button>
 
@@ -283,7 +291,7 @@ function Home() {
         setDialogType('LOST');
         setOpenLostWin(true)}} className="open-popup-button">Open Popup</button>
       <button onClick={()=> setOpenGameResult(true)} className="open-popup-result game">Open resul Popup</button>
- */}
+
 
       {/* Dialog when click */}
       <AnimatePresence>
@@ -299,15 +307,20 @@ function Home() {
                                         />
                                       )}
         {openLostWin && <DialogLost
-                          onClose={() => setOpenLostWin(false)}
-                          dialogType={dialogType} totalIcoin={100}
-                          topUsers={topUsers} />}
+          onClose={() => setOpenLostWin(false)}
+          dialogType={dialogType} totalIcoin={totalIcoinWin}
+          topUsers={game?.topUser ?? []} zodiac={game?.zodiacCard.imgUrl ?? ''} />}
         {openHistoryGame && <PopupHistoryGame
                               onClose={() => setOpenHistoryGame(false)}
                               zodiacs={img}/>}
         {openMyHistory && <PopupMyHistory onClose={()=> setOpenMyHistory(false)} mineHistory={mineHistory}/>}
       </AnimatePresence>
-      {openGameResult && <OpenCard onClose={()=> setOpenGameResult(false)} zodiac={game?.zodiacCard.id ?? ''} history={[]}/>}
+      {openGameResult && <OpenCard
+                              onClose={()=> {
+                                              setOpenGameResult(false)
+                                               setOpenLostWin(true)}}
+                              zodiac={game?.zodiacCard.imgUrl ?? ''}
+                              />}
     </div>
   );
 }

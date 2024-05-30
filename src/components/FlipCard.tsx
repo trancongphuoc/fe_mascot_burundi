@@ -5,7 +5,6 @@ import BgCard from '../assets/bg_card_nomarl.svg';
 import SVG from 'react-inlinesvg';
 import QuestionMark from '../assets/question_mark.svg';
 import BgLight from '../assets/circle_light.svg'
-import tiger from '../assets/tiger.svg';
 
 interface FlipCardProps {
     zodiac: string;
@@ -14,6 +13,8 @@ interface FlipCardProps {
 
 export default function FlipCard({ zodiac }: FlipCardProps) {
   const [flip, setFlip] = useState(true);
+
+  console.log('zodiac', zodiac);
 
 
   useEffect(() => {
@@ -64,7 +65,7 @@ export default function FlipCard({ zodiac }: FlipCardProps) {
                         onClick={() => setFlip((prevState) => !prevState)}
                         className="flip-card__back--bg"/>
                     <SVG
-                        src={true ? tiger : zodiac}
+                        src={zodiac}
                         onClick={() => setFlip((prevState) => !prevState)}
                         className="flip-card__back--zodiac"/>
 

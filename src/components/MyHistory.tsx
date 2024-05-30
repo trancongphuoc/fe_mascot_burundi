@@ -10,23 +10,37 @@ import bgMyBonus from '../assets/bg_my_bonus.svg';
 
 interface BetUser extends User {
     bettingCards?: BetZodiacCard[];
+    isWin?: boolean;
+    totalIcoinWin?: number;
 }
 
 interface BetZodiacCard extends ZodiacCardModel {
     totalIcoinBetting: number;
 }
+interface MyInfoBetResultModel {
+    onOpen: () => void;
+    onUserDataChange: (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => void;
+}
 
-
-function MyHistory({totalIcoin, onOpen} : MyInfoBetResultModel) {
+function MyHistory({onOpen, onUserDataChange} : MyInfoBetResultModel) {
     const facebookUserId = window.sessionStorage.getItem('facebookUserId');
     const [betUser, setBetUser] = useState<BetUser>()
+    const [totalIcoin, setTotalIcoin] = useState<number>(0);
+
+    useEffect(()=> {
+        const stateRef = ref(db, `/ikara/users/${facebookUserId}/totalIcoin`);
+        const handleData = (snapshot: any) => {
+            const data = snapshot.val();
+            if (data) setTotalIcoin(data);                
+        };
+        onValue(stateRef, handleData);
+        return () => off(stateRef, 'value', handleData);
+    },[totalIcoin])
 
     useEffect(() => {
         const stateRef = ref(db, `/zodiacGame/players/${facebookUserId}`);
-
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
-            console.log('check face', data)
             if (data) {
                 const cards: BetZodiacCard[] = [];
                 if (data.bettingCards) {
@@ -53,17 +67,15 @@ function MyHistory({totalIcoin, onOpen} : MyInfoBetResultModel) {
                     totalIcoin: data.totalIcoin,
                     noBettingToday: data.noBettingToday,
                     bettingCards: cards,
+                    isWin: data.isWin,
+                    totalIcoinWin: data.totalIcoinWin ?? 0,
                 };
-                setBetUser(user);                
+                setBetUser(user);  
+                onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin ?? 0});          
             }
         };
-
         onValue(stateRef, handleData);
-
-        return () => {
-            off(stateRef, 'value', handleData);
-        };
-
+        return () => off(stateRef, 'value', handleData);
     }, []);
 
 
@@ -75,9 +87,9 @@ function MyHistory({totalIcoin, onOpen} : MyInfoBetResultModel) {
                 <div className="header-left">
                     <p className='header-left--text'>Thưởng hôm nay:</p>
                     <SVG className='header-left--img' src={Icoin}/>
-                    <p className='header-left--icoin'>{betUser?.totalIcoin ?? 0}</p>
+                    <p className='header-left--icoin'>{betUser?.totalIcoinWin ?? 0}</p>
                 </div>
-                
+
                 <div onClick={onOpen} className="header-right">
                     <p className='header-right--text'>Số lần đã đoán hôm nay: {betUser?.noBettingToday ?? 0}</p>
                     <SVG className='header-right--arrow' src={ArrowWhite}/>
