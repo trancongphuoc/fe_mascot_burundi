@@ -81,7 +81,7 @@ function MyHistory({onOpen, onUserDataChange} : MyInfoBetResultModel) {
 
     return (
         <>  
-            <div className="section-myInfo mt-24px">
+            <div className="section-myInfo mt-22px">
                 <SVG src={bgMyBonus} className="section-myInfo__bg"/>
                 
                 <div className="header-left">
