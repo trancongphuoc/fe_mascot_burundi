@@ -87,7 +87,7 @@ function MyHistory({onOpen, onUserDataChange} : MyInfoBetResultModel) {
                 <div className="header-left">
                     <p className='header-left--text'>Thưởng hôm nay:</p>
                     <SVG className='header-left--img' src={Icoin}/>
-                    <p className='header-left--icoin'>{betUser?.totalIcoinWin ?? 0}</p>
+                    <p className='header-left--icoin'>{(betUser?.totalIcoinWin ?? 0).toLocaleString('en-US').replace(/,/g, '.')}</p>
                 </div>
 
                 <div onClick={onOpen} className="header-right">
