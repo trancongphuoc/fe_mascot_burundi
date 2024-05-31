@@ -81,8 +81,7 @@ function MyHistory({onOpen, onUserDataChange} : MyInfoBetResultModel) {
 
     return (
         <>  
-            {/* <div className="section-myInfo mt-22px"> */}
-            <div className="section-myInfo mt-2px">
+            <div className="section-myInfo mt-22px">
                 <SVG src={bgMyBonus} className="section-myInfo__bg"/>
                 
                 <div className="header-left">
@@ -114,7 +113,7 @@ function MyHistory({onOpen, onUserDataChange} : MyInfoBetResultModel) {
                 <div className="end-left">
                     <p className='end-left--text'>Tổng của tôi:</p>
                     <SVG src={Icoin} className="end-left--img"/>
-                    <p className='end-left--icoin'>{totalIcoin}</p>
+                    <p className='end-left--icoin'>{totalIcoin.toLocaleString('en-US').replace(/,/g, '.')}</p>
                 </div>
                 <h4 className='end-right'>
                     <p className='end-right--text'>Nạp ngay</p>

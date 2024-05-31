@@ -14,11 +14,17 @@ $font-primary: 'Roboto', sans-serif;
     box-sizing: inherit;
 }
 
+@viewport {
+    zoom: 1.0; /* Default zoom level */
+    user-zoom: fixed; /* Prevent users from zooming */
+}
+
 html {
     box-sizing: border-box;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    overflow: hidden;
+
+
 }
 
 body {
