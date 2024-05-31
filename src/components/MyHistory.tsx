@@ -96,8 +96,9 @@ function MyHistory({onOpen, onUserDataChange} : MyInfoBetResultModel) {
                 </div>
                
                 <div className="section-myInfo__cards">
-                    {  betUser?.bettingCards && 
-                        betUser?.bettingCards.map((betCard, index) => (
+                    {  
+                    betUser?.bettingCards && 
+                    betUser.bettingCards.map((betCard, index) => (
                             <div key={index} className="card__main">
                                 <p className="card__main--background-color">&nbsp;</p>
                                 <p className="card__main--header">{betCard.id.split('_').slice(-1)}</p>
