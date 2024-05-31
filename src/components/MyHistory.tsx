@@ -6,7 +6,7 @@ import SVG from 'react-inlinesvg';
 import { useEffect, useState } from 'react';
 import { off, onValue, ref } from 'firebase/database';
 import { db } from '../firebase/config';
-import bgMyBonus from '../assets/bg_my_bonus.svg';
+import bgMyBonus from '../assets/bg_my_bonus_new.svg';
 
 interface BetUser extends User {
     bettingCards?: BetZodiacCard[];
@@ -81,7 +81,8 @@ function MyHistory({onOpen, onUserDataChange} : MyInfoBetResultModel) {
 
     return (
         <>  
-            <div className="section-myInfo mt-22px">
+            {/* <div className="section-myInfo mt-22px"> */}
+            <div className="section-myInfo mt-2px">
                 <SVG src={bgMyBonus} className="section-myInfo__bg"/>
                 
                 <div className="header-left">

@@ -109,7 +109,7 @@
 
             text-align: center;
             font-size: 10px;
-            margin-top: 6px;
+            margin-top: 9px;
             border-radius: 4px;
 
             &--background-color {
@@ -174,7 +174,7 @@
         display: flex;
         color: $color-white;
         padding-bottom: $padding-bottom;
-        align-self: end;
+        align-self: start;
 
         &--text {
             font-size: 13px;
@@ -206,7 +206,7 @@
 
         justify-content: end;
         align-content: end;
-        align-self: end;
+  
 
         color: $color-white;
         padding-bottom: $padding-bottom;

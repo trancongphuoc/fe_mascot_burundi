@@ -6,6 +6,8 @@ import SVG from 'react-inlinesvg';
 import bgCardNormal from '../assets/bg_card_nomarl.svg';
 import bgCardSelect from '../assets/bg_card_selected.svg';
 import bbBettingTable from '../assets/frame_betting_table.svg';
+import bb from '../assets/bg_betting_frame_2.svg';
+
 
 interface BettingTableProps {
     onSelectCard: (card: ZodiacCardModel) => void;

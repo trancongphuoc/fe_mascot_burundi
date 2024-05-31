@@ -39,12 +39,12 @@
     }
 
     &--background {
-        max-width: 100%;
-        width: 100%;
+        // max-width: 100%;
+        // width: 100%;
         height: auto;
         grid-area: 2 / 1/ 3 / 2;
         z-index: 1;
-        // max-height: 98px;
+        max-height: 98px;
     }
 
     &--zodiac {
