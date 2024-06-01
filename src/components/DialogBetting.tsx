@@ -7,6 +7,7 @@ import BgLighter from '../assets/bg_lighter.svg';
 import { motion } from 'framer-motion';
 import { bettingCard } from '../api/bettingCard';
 import SVG from 'react-inlinesvg';
+import useAudio from './UseAudio';
 
 interface DialogBettingProps {
   onClose: () => void;
@@ -16,8 +17,8 @@ interface DialogBettingProps {
 
 const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect }) => {
   const [stake, setStake] = useState(0);
-  const clickAudioRef = useRef<HTMLAudioElement>(new Audio('zodiac-game/public/sounds/stake_button.wav'));
-  const confirmRef = useRef<HTMLAudioElement>(new Audio('zodiac-game/public/sounds/confirm_button.wav'));
+  const clickAudioRef = useAudio('/zodiac-game/public/sounds/confirm_button.wav');
+  const confirmRef = useAudio('/zodiac-game/public/sounds/stake_button.wav');
 
 
   const fetchData = useCallback(async () => {
@@ -39,23 +40,6 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
       console.error('Error:', error);
     }
   }, [stake, zodiacGameId, zodiacCardSelect, onClose]);
-
-  const playClickAudio = () => {
-    const audio = clickAudioRef.current;
-    audio.currentTime = 0; // Reset the audio to start from the beginning
-    audio.play().catch((error) => {
-      console.error('Audio play error:', error);
-    });
-  };
-
-
-  const confirmAudio = () => {
-    const audio = confirmRef.current;
-    audio.currentTime = 0; // Reset the audio to start from the beginning
-    audio.play().catch((error) => {
-      console.error('Audio play error:', error);
-    });
-  };
 
   return (
     <motion.div
@@ -90,7 +74,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <motion.div
           whileTap={{ y: 1 }}
           onClick={() => {
-            playClickAudio();
+            clickAudioRef();
             setStake((prevStake) => prevStake + 10);
           }}
           className="betting--button">+10
@@ -98,7 +82,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <motion.div
           whileTap={{ y: 1 }}
           onClick={() => {
-            playClickAudio();
+            clickAudioRef();
             setStake((prevStake) => prevStake + 100);
           }}
           className="betting--button-2">+100
@@ -106,7 +90,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <motion.div
           whileTap={{ y: 1 }}
           onClick={() => {
-            playClickAudio();
+            clickAudioRef();
             setStake((prevStake) => prevStake + 1000);
           }}
           className="betting--button-3">+1000
@@ -116,7 +100,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           whileTap={{ y: 1 }}
           onClick={() => {
             fetchData()
-            confirmAudio()}}
+            confirmRef()}}
           className="betting__confirm mb-33px mt-14-5px">
           <p className="betting__confirm--text">Xác nhận</p>
         </motion.div>

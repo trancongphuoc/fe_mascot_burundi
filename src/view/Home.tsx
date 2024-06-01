@@ -243,7 +243,7 @@ function Home() {
       <MyHistory onOpen={() => setOpenMyHistory(true)} onUserDataChange={handleIsWin}/>
       <BestPlayers />
 
-      {/* <button onClick={() => {
+      <button onClick={() => {
         setDialogType('WIN');
         setOpenLostWin(true)}} className="open-popup-button">Open Popup</button>
 
@@ -251,7 +251,7 @@ function Home() {
         setDialogType('LOST');
         setOpenLostWin(true)}} className="open-popup-button">Open Popup</button>
       <button onClick={()=> setOpenGameResult(true)} className="open-popup-result game">Open resul Popup</button>
- */}
+
 
       {/* Dialog when click */}
       <AnimatePresence>
