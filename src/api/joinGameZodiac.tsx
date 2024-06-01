@@ -15,8 +15,6 @@ export const joinGameZodiac = async (): Promise<string> => {
       headers: { 'Authorization': `Bearer ${token}` },
     });
 
-    console.log('Join Game Response:', response.data);
-
     const { status, data } = response.data;
 
     if (status === "OK" && data && data.user && data.user.facebookUserId) {

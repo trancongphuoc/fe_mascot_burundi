@@ -12,9 +12,10 @@ import bb from '../assets/bg_betting_frame_2.svg';
 interface BettingTableProps {
     onSelectCard: (card: ZodiacCardModel) => void;
     openBetting: boolean;
+    statusGame: StatusGame;
 }
 
-export function BettingTable({ onSelectCard, openBetting }: BettingTableProps) {
+export function BettingTable({ onSelectCard, openBetting, statusGame }: BettingTableProps) {
     const [betCards, setBetCard] = useState<ZodiacCardModel[]>([]);
     const [selectCardId, setSelectCardId] = useState('');
 
@@ -40,6 +41,7 @@ export function BettingTable({ onSelectCard, openBetting }: BettingTableProps) {
                     }
                 }
                 setBetCard(betCards);
+                window.sessionStorage.setItem('card', JSON.stringify(betCards));
             }
         };
         onValue(stateRef, handleData);
@@ -54,24 +56,24 @@ export function BettingTable({ onSelectCard, openBetting }: BettingTableProps) {
     }, [selectCardId]);
 
     return (
-        <div className="section-betting mt-5px">
-            <CountDown className='section-betting--counter'/>
+        <div className="betting-table mt-5px">
+            <CountDown className='betting-table--counter' statusGame={statusGame}/>
 
-            <SVG src={bbBettingTable} className='section-betting__bg'/>
+            <SVG src={bbBettingTable} className='betting-table__bg' cacheRequests={true}/>
 
-            <div className="section-betting__content">
+            <div className="betting-table__content">
                 {betCards.map((betCard, index) => (
                     <div 
                         key={index}
                         onClick={() => handleSetectCard(betCard)}
-                        className="betting-card">
+                        className="betting-table__card">
 
-                        <p className='betting-card--no'>{index + 1}</p>
+                        <p className='betting-table__card--no'>{index + 1}</p>
                         <SVG src={betCard.id === selectCardId && openBetting ? bgCardSelect : bgCardNormal}
-                            className='betting-card--background'/>
-                        <SVG src={betCard.imageUrl} className='betting-card--zodiac'/>
-                        <p className='betting-card--bonus'>x{betCard.multiply}</p> 
-                        <p className='betting-card--players'>{betCard.counter} người</p>
+                            className='betting-table__card--background' cacheRequests={true}/>
+                        <SVG src={betCard.imageUrl} cacheRequests={true} className='betting-table__card--zodiac'/>
+                        <p className='betting-table__card--bonus'>x{betCard.multiply}</p> 
+                        <p className='betting-table__card--players'>{betCard.counter} người</p>
                     </div>
                 ))}
             </div>

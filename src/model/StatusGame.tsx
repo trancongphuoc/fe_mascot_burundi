@@ -1,0 +1,1 @@
+type StatusGame = 'NONE' | 'PREPARESTART' | 'COUNTDOWN' | 'RESULTWAITING' | 'RESULT' | 'END' | 'NONE';

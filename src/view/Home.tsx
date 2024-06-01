@@ -36,10 +36,11 @@ import { useLocation } from 'react-router-dom';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
+
 interface ZodiacGameData {
   isPause: boolean,
   noGameToday: number,
-  status: string,
+  status: StatusGame,
   transactionId: number,
   zodiacCard: ZodiacCard,
   topUser?: User[],
@@ -101,19 +102,6 @@ function Home() {
 
 
   useEffect(()=> {
-    const fetchData = async () => {
-      try {
-        const data = await joinGameZodiac();
-        if (data != null && data !== "FAILED") {
-          window.sessionStorage.setItem('facebookUserId', data);
-          setJoinGame(true);
-          console.log('join game success')
-        }
-      } catch (error) {
-        console.log('error', error);
-      }
-    };
-
     const fetchToken = async () => {
       if (parameters) {
         try {
@@ -124,10 +112,20 @@ function Home() {
           window.sessionStorage.setItem('token', parameters);
         }
       } else {
-        // Remove this when running live
-        let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMTA2Nzg1MTczNDA2MDM3MDUxMzciLCJyb2xlcyI6WyJVU0VSIl0sImZhY2Vib29rVXNlcklkIjoiMTEwNjc4NTE3MzQwNjAzNzA1MTM3IiwicGFja2FnZU5hbWUiOiJjb20ueW9rYXJhLmRldi52MSIsImxhbmd1YWdlIjoiZW4ueW9rYXJhIiwicGxhdGZvcm0iOiJJT1MiLCJ1c2VySWQiOiJuemR5VDhrMERGL3VXbkhlT25peHBCMnVadXRjRStuOEZvZVNabDZ5MDNHVllxY2JmYmtpYTA3ZmZISGZOeHFkZVJtZERnWEd2dnAzY1N2R2VPREJuUT09IiwianRpIjoiMTVmM2YzOTMtMmY5MS00MDMzLTgzOTYtMmQxYzY4ZDQ1MjY4IiwiaWF0IjoxNzE2NjQ3NjMzLCJpc3MiOiJodHRwczovL3d3dy5pa2FyYS5jbyIsImV4cCI6MTcxNzI1MjQzM30.mendnBAJLnoyni-K6qFUqGd_xkS4xsoYfuAko-OGynM";
-        window.sessionStorage.setItem('token', token);
-        console.log('now use default token');
+        console.log('no have para');
+      }
+    };
+
+    const fetchData = async () => {
+      try {
+        const data = await joinGameZodiac();
+        if (data != null && data !== "FAILED") {
+          window.sessionStorage.setItem('facebookUserId', data);
+          setJoinGame(true);
+          console.log('join game success')
+        }
+      } catch (error) {
+        console.log('error join game', error);
       }
     };
 
@@ -179,16 +177,15 @@ function Home() {
                   zodiacCard: zodiacCard,
                   topUser: topUsers,
               });
+
+              setStatusGame(game?.status ?? "NONE");
           }
       };
 
       onValue(stateRef, handleData);
+      return () => off(stateRef, 'value', handleData);
 
-      return () => {
-          off(stateRef, 'value', handleData);
-      };
   };
-
   const fetchStatus = async () => {
       const stateRef = ref(db, 'zodiacGame/state/status');
       onValue(stateRef, (snapshot) => {
@@ -199,19 +196,18 @@ function Home() {
         }
       });
     };
-
-    fetchStatus();
     fetchGameInfo();
 
     if (statusGame === "RESULT") {
       // close dilog
-      // setOpenRule(false);
-      // setOpenLostWin(false);
-      // setOpenHistoryGame(false);
-      // setOpenMyHistory(false);
+      setOpenRule(false);
+      setOpenLostWin(false);
+      setOpenHistoryGame(false);
+      setOpenMyHistory(false);
+      setOpenBetting(false);
 
-      // //open card
-      // setOpenGameResult(true)
+      //open card
+      setOpenGameResult(true)
     }
   }, [statusGame]);
 
@@ -239,7 +235,7 @@ function Home() {
         <Players/>
       </div>
 
-      <BettingTable onSelectCard={handleCardSelection} openBetting={true}/>
+      <BettingTable onSelectCard={handleCardSelection} openBetting={true} statusGame={game?.status ?? "NONE"}/>
       <MyHistory onOpen={() => setOpenMyHistory(true)} onUserDataChange={handleIsWin}/>
       <BestPlayers />
 
