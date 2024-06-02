@@ -12,7 +12,7 @@ import pig from '../assets/pig.svg';
 import PrimaryText from '../assets/primary-text.svg';
 import Rule from '../assets/rule.svg';
 
-import MyHistory from '../components/MyHistory';
+import MyHistory from '../components/MyBonusToday';
 import BestPlayers from '../components/BestPlayers';
 import { useEffect, useState } from 'react';
 import DialogBetting from '../components/DialogBetting';
@@ -33,6 +33,7 @@ import { joinGameZodiac } from '../api/joinGameZodiac';
 import { BettingTable } from '../components/BettingTable';
 import { getToken } from '../api/getToken';
 import { useLocation } from 'react-router-dom';
+import { bettingCard } from '../api/bettingCard';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -82,7 +83,8 @@ function Home() {
   //joint game
   const [joinGame, setJoinGame] = useState(false);
   //get select card
-  const [selectCard, setSelectCard] = useState<ZodiacCardModel | null>(null);
+  const [selectCard, setSelectCard] = useState<BetZodiacCard | null>(null);
+
   const [totalIcoinWin, setTotalIcoinWin] = useState(0);
   //get win or not
   const handleIsWin = (data: { isWin?: boolean | undefined; icoinWin?: number | undefined }) => {
@@ -186,16 +188,17 @@ function Home() {
       return () => off(stateRef, 'value', handleData);
 
   };
-  const fetchStatus = async () => {
-      const stateRef = ref(db, 'zodiacGame/state/status');
-      onValue(stateRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data && data !== statusGame) {
-          setStatusGame(data);
-          console.log('status', data)
-        }
-      });
-    };
+  // const fetchStatus = async () => {
+  //     const stateRef = ref(db, 'zodiacGame/state/status');
+  //     onValue(stateRef, (snapshot) => {
+  //       const data = snapshot.val();
+  //       if (data && data !== statusGame) {
+  //         setStatusGame(data);
+  //         console.log('status', data)
+  //       }
+  //     });
+  //   };
+
     fetchGameInfo();
 
     if (statusGame === "RESULT") {
@@ -212,9 +215,28 @@ function Home() {
   }, [statusGame]);
 
   const handleCardSelection = (card: ZodiacCardModel) => {
-    console.log('Selected Card ID:', card.id);
-    setSelectCard(card)
-    setOpenBetting(true)
+    const betCard: BetZodiacCard = {
+      ...card,
+      transactionId: game?.transactionId ?? 0,
+    };
+  
+    setSelectCard(betCard);
+    setOpenBetting(true);
+  };
+
+
+// send icoin betting
+const betIcoin = async (zodiacCard: ZodiacCardModel, stake: number) => {
+    try {
+      const data = await bettingCard(game?.transactionId ?? 0, stake, zodiacCard.id);
+      if (data === "OK") {
+        console.log('Betting successful');
+      } else {
+        console.log('Betting failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
 };
 
 
@@ -236,7 +258,11 @@ function Home() {
       </div>
 
       <BettingTable onSelectCard={handleCardSelection} openBetting={true} statusGame={game?.status ?? "NONE"}/>
-      <MyHistory onOpen={() => setOpenMyHistory(true)} onUserDataChange={handleIsWin}/>
+      <MyHistory
+        onOpen={() => setOpenMyHistory(true)}
+        onUserDataChange={handleIsWin}
+        bettingCards={[]}
+        statusGame={game?.status ?? 'NONE'}/>
       <BestPlayers />
 
       <button onClick={() => {
@@ -254,13 +280,13 @@ function Home() {
         {openRule && <PopupRule onClose={()=> setOpenRule(false)} />}
         {openBetting && selectCard && (
                                         <DialogBetting
-                                          onClose={() => {
-                                            setOpenBetting(false);
-                                            setSelectCard(null);
-                                          }}
-                                          zodiacGameId={game?.transactionId ?? 0}
-                                          zodiacCardSelect={selectCard}
-                                        />
+            onClose={() => {
+              setOpenBetting(false);
+              setSelectCard(null);
+            } }
+            zodiacCardSelect={selectCard}
+            betIcoin={betIcoin}
+            zodiacGameId={game?.transactionId ?? 0}                                        />
                                       )}
         {openLostWin && <DialogLost
                             onClose={() => setOpenLostWin(false)}

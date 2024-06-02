@@ -5,7 +5,6 @@ import BgContent from '../assets/bg_content_win.svg';
 import BgHeader from '../assets/bg_header_betting.svg';
 import BgLighter from '../assets/bg_lighter.svg';
 import { motion } from 'framer-motion';
-import { bettingCard } from '../api/bettingCard';
 import SVG from 'react-inlinesvg';
 import useAudio from './UseAudio';
 
@@ -13,33 +12,24 @@ interface DialogBettingProps {
   onClose: () => void;
   zodiacGameId: number;
   zodiacCardSelect: ZodiacCardModel;
+  betIcoin: (zodiacCard: ZodiacCardModel, stake: number) => void;
 }
 
-const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect }) => {
-  const [stake, setStake] = useState(0);
+const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect, betIcoin }) => {
+  const [stakes, setStakes] = useState(0);
   const clickAudioRef = useAudio('/zodiac-game/public/sounds/confirm_button.wav');
   const confirmRef = useAudio('/zodiac-game/public/sounds/stake_button.wav');
 
 
-  const fetchData = useCallback(async () => {
-    if (!stake || !zodiacGameId || !zodiacCardSelect) {
+  const sendDataOut = useCallback(async () => {
+    if (!stakes || !zodiacGameId || !zodiacCardSelect) {
       console.log('Incomplete data');
       return;
     }
-
+    betIcoin(zodiacCardSelect, stakes);
     onClose();
-
-    try {
-      const data = await bettingCard(zodiacGameId, stake, zodiacCardSelect.id);
-      if (data === "OK") {
-        console.log('Betting successful');
-      } else {
-        console.log('Betting failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }, [stake, zodiacGameId, zodiacCardSelect, onClose]);
+    
+  }, [stakes, zodiacGameId, zodiacCardSelect, onClose]);
 
   return (
     <motion.div
@@ -68,14 +58,14 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
 
         <div className="betting__totalIcoin mb-15px mt-28px">
           <img className="betting__totalIcoin--img" src={Icoin} alt="Icoin" />
-          <p className="betting__totalIcoin--icoin">{stake}</p>
+          <p className="betting__totalIcoin--icoin">{stakes}</p>
         </div>
 
         <motion.div
           whileTap={{ y: 1 }}
           onClick={() => {
             clickAudioRef();
-            setStake((prevStake) => prevStake + 10);
+            setStakes((prevStake) => prevStake + 10);
           }}
           className="betting--button">+10
         </motion.div>
@@ -83,7 +73,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           whileTap={{ y: 1 }}
           onClick={() => {
             clickAudioRef();
-            setStake((prevStake) => prevStake + 100);
+            setStakes((prevStake) => prevStake + 100);
           }}
           className="betting--button-2">+100
         </motion.div>
@@ -91,7 +81,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           whileTap={{ y: 1 }}
           onClick={() => {
             clickAudioRef();
-            setStake((prevStake) => prevStake + 1000);
+            setStakes((prevStake) => prevStake + 1000);
           }}
           className="betting--button-3">+1000
         </motion.div>
@@ -99,7 +89,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <motion.div
           whileTap={{ y: 1 }}
           onClick={() => {
-            fetchData()
+            sendDataOut()
             confirmRef()}}
           className="betting__confirm mb-33px mt-14-5px">
           <p className="betting__confirm--text">Xác nhận</p>

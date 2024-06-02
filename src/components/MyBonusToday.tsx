@@ -4,7 +4,7 @@ import ArrowWhite from '../assets/arrow-white.svg';
 import Background from '../assets/background_card_small.svg';
 import SVG from 'react-inlinesvg';
 import { useEffect, useState } from 'react';
-import { off, onValue, ref } from 'firebase/database';
+import { DataSnapshot, off, onValue, ref } from 'firebase/database';
 import { db } from '../firebase/config';
 import bgMyBonus from '../assets/bg_my_bonus_new.svg';
 
@@ -14,15 +14,16 @@ interface BetUser extends User {
     totalIcoinWin?: number;
 }
 
-interface BetZodiacCard extends ZodiacCardModel {
-    totalIcoinBetting: number;
-}
+
+
 interface MyInfoBetResultModel {
     onOpen: () => void;
     onUserDataChange: (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => void;
+    statusGame: StatusGame,
+    bettingCards?: BetZodiacCard[];
 }
 
-function MyHistory({onOpen, onUserDataChange} : MyInfoBetResultModel) {
+function MyHistory({onOpen, onUserDataChange, statusGame, bettingCards} : MyInfoBetResultModel) {
     const facebookUserId = window.sessionStorage.getItem('facebookUserId');
     const [betUser, setBetUser] = useState<BetUser>()
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
@@ -39,8 +40,9 @@ function MyHistory({onOpen, onUserDataChange} : MyInfoBetResultModel) {
 
     useEffect(() => {
         const stateRef = ref(db, `/zodiacGame/players/${facebookUserId}`);
-        const handleData = (snapshot: any) => {
+        const handleData = (snapshot: DataSnapshot) => {
             const data = snapshot.val();
+            console.log('check data', data)
             if (data) {
                 const cards: BetZodiacCard[] = [];
                 if (data.bettingCards) {
@@ -74,9 +76,14 @@ function MyHistory({onOpen, onUserDataChange} : MyInfoBetResultModel) {
                 onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin ?? 0});          
             }
         };
-        onValue(stateRef, handleData);
+
+        if (statusGame === "COUNTDOWN") {
+            onValue(stateRef, handleData);
+        } else {
+            off(stateRef, 'value', handleData);
+        }        
         return () => off(stateRef, 'value', handleData);
-    }, []);
+    }, [statusGame]);
 
 
     return (

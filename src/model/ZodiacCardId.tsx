@@ -23,3 +23,8 @@ interface ZodiacCardModel {
     multiply: number,
     name: string,
 }
+
+interface BetZodiacCard extends ZodiacCardModel {
+    totalIcoinBetting?: number;
+    transactionId?: number;
+}
