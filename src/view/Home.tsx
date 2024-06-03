@@ -126,10 +126,13 @@ function Home() {
     const fetchData = async () => {
       try {
         const data = await joinGameZodiac();
+        console.log('join game data return ', data)
         if (data != null && data !== "FAILED") {
           window.sessionStorage.setItem('facebookUserId', data);
           setJoinGame(true);
           console.log('join game success')
+        } else {
+          console.log('call join game')
         }
       } catch (error) {
         console.log('error join game', error);
