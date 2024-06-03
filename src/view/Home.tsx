@@ -262,7 +262,7 @@ const betIcoin = async (zodiacCard: ZodiacCardModel, stake: number) => {
       </section>
 
       <div className="result mt-7-5px">
-        <ShortGameHistory openDialog={()=> {setOpenHistoryGame(true)}}/>
+        <ShortGameHistory openDialog={()=> {setOpenHistoryGame(true)}}  statusGame={game?.status ?? 'NONE'}/>
         <Players/>
       </div>
 

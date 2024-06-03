@@ -16,15 +16,11 @@ const Countdown: React.FC<CountdownProps> = ({ className, statusGame }) => {
     const handleData = (snapshot: DataSnapshot) => {
         const data: number | null = snapshot.val();
         if (typeof data === 'number') {
-          setCount(data - 1);
+          const amountExpect = Math.max(data - 1, 0);
+          setCount(amountExpect);
         }
     };
-    if (statusGame === 'COUNTDOWN') {
-      onValue(stateRef, handleData);
-    } else {
-      off(stateRef, 'value', handleData);
-    }
-
+    onValue(stateRef, handleData);
     return () => off(stateRef, 'value', handleData);
 
 }, [statusGame]);

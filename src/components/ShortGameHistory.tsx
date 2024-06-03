@@ -6,9 +6,10 @@ import { off, onValue, ref } from "firebase/database";
 
 interface ShortGameHistoryProps {
   openDialog: () => void;
+  statusGame: StatusGame;
 }
 
-export function ShortGameHistory ({openDialog}: ShortGameHistoryProps) {
+export function ShortGameHistory ({openDialog, statusGame}: ShortGameHistoryProps) {
     const [gameHistories, setGameHistories] = useState<ZodiacCardModel[]>([])
 
     useEffect(()=> {
@@ -34,14 +35,15 @@ export function ShortGameHistory ({openDialog}: ShortGameHistoryProps) {
               setGameHistories(gameHistoriesList);
           }
       };
-
-      onValue(stateRef, handleData);
-
-      return () => {
-          off(stateRef, 'value', handleData);
-      };
+      if (statusGame === "COUNTDOWN") {
+        onValue(stateRef, handleData);
+      } else {
+        off(stateRef, 'value', handleData);
+      }
+      
+      return () => off(stateRef, 'value', handleData);
         
-  }, []);
+  }, [statusGame]);
 
 
     return (
