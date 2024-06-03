@@ -202,17 +202,17 @@ function Home() {
 
 
     if (statusGame === "RESULT") {
-      // console.log('step 1', openGameResult)
-      // // close dilog
-      // setOpenRule(false);
-      // setOpenLostWin(false);
-      // setOpenHistoryGame(false);
-      // setOpenMyHistory(false);
-      // setOpenBetting(false);
+      console.log('step 1', openGameResult)
+      // close dilog
+      setOpenRule(false);
+      setOpenLostWin(false);
+      setOpenHistoryGame(false);
+      setOpenMyHistory(false);
+      setOpenBetting(false);
 
-      // //open card
-      // setOpenGameResult(true)
-      // console.log('step 1', openGameResult)
+      //open card
+      setOpenGameResult(true)
+      console.log('step 1', openGameResult)
     }
   }, [statusGame]);
 

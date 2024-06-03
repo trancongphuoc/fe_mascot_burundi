@@ -29,6 +29,7 @@ function MyHistory({onOpen, onUserDataChange, statusGame} : MyInfoBetResultModel
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
 
     useEffect(()=> {
+        console.log('check fb', facebookUserId)
         const stateRef = ref(db, `/ikara/users/${facebookUserId}/totalIcoin`);
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
