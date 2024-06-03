@@ -138,6 +138,7 @@ useEffect(() => {
     } catch (error) {
       console.log('error join game', error);
     }
+    console.log('check join game', joinGame)
   };
 
   fetchTokenAndJoinGame();

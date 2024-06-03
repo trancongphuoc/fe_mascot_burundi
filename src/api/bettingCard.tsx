@@ -1,5 +1,5 @@
 import axios from 'axios'; // Ensure you have axios imported correctly
-import api, { token } from './axios';
+import api from './axios';
 
 interface ApiResponse {
   status: string;

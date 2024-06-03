@@ -1,5 +1,5 @@
 import axios from 'axios';
-import api, { token } from './axios';
+import api from './axios';
 
 interface JoinGameResponse {
   status: string;
