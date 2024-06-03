@@ -81,6 +81,8 @@ function Home() {
   const [openMyHistory, setOpenMyHistory] = useState(false);
 
   const [dialogType, setDialogType] = useState<DialogType>('LOST');
+
+  const [fbId, setFbId] = useState('');
   
   //joint game
   const [joinGame, setJoinGame] = useState(false);
@@ -105,47 +107,41 @@ function Home() {
 };
 
 
-  useEffect(()=> {
-
-
-    const fetchToken = async () => {
-      if (parameters) {
-        try {
-          let decodedParams = atob(parameters);
-          let data = JSON.parse(decodedParams);
-          await getToken(data);
-        } catch (error) {
-          window.sessionStorage.setItem('token', parameters);
-        }
-      } else {
-        console.log('no have para');
-      }
-      console.log('check token', window.sessionStorage.getItem('token'))
-    };
-
-    const fetchData = async () => {
+useEffect(() => {
+  const fetchTokenAndJoinGame = async () => {
+    if (parameters) {
       try {
-        const data = await joinGameZodiac();
-        console.log('join game data return ', data)
-        if (data != null && data !== "FAILED") {
-          window.sessionStorage.setItem('facebookUserId', data);
-          setJoinGame(true);
-          console.log('join game success')
-        } else {
-          console.log('call join game')
-        }
+        let decodedParams = atob(parameters);
+        let data = JSON.parse(decodedParams);
+        await getToken(data);
       } catch (error) {
-        console.log('error join game', error);
+        window.sessionStorage.setItem('token', parameters);
       }
-    };
+    } else {
+      console.log('no parameters');
+    }
+    console.log('check token', window.sessionStorage.getItem('token'));
 
-    const execute = async () => {
-      await fetchToken();
-      await fetchData();
-    };
-    execute();
-    console.log('after load',joinGame)
-  }, []);
+    try {
+      const data = await joinGameZodiac();
+      console.log('join game data return', data);
+      if (data !== null && data !== "FAILED") {
+        window.sessionStorage.setItem('facebookUserId', data);
+        setJoinGame(true);
+        setFbId(data);
+        console.log('join game success', window.sessionStorage.getItem('facebookUserId'));
+
+
+      } else {
+        console.log('call join game failed');
+      }
+    } catch (error) {
+      console.log('error join game', error);
+    }
+  };
+
+  fetchTokenAndJoinGame();
+}, [parameters]);
 
 
   useEffect(() => { 
@@ -274,7 +270,7 @@ const betIcoin = async (zodiacCard: ZodiacCardModel, stake: number) => {
       <MyHistory
         onOpen={() => setOpenMyHistory(true)}
         onUserDataChange={handleIsWin}
-        // bettingCards={[]}
+        fbId={fbId}
         statusGame={game?.status ?? 'NONE'}/>
       <BestPlayers />
 

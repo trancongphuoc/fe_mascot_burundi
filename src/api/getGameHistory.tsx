@@ -1,8 +1,10 @@
-import api, { token } from './axios';
+import api from './axios';
 import { GameHistory } from '../model/GameHistory';
 
 export const fetchGameHistory = async (): Promise<GameHistory[] | null> => {
   try {
+    const token = window.sessionStorage.getItem('token');
+
     const response = await api.get(`/rest/zodiac-game/history`, {
       headers: { 'Authorization': `Bearer ${token}` },
     });

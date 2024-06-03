@@ -16,8 +16,7 @@ const Countdown: React.FC<CountdownProps> = ({ className, statusGame }) => {
     const handleData = (snapshot: DataSnapshot) => {
         const data: number | null = snapshot.val();
         if (typeof data === 'number') {
-          const amountExpect = Math.max(data - 1, 0);
-          setCount(amountExpect);
+          setCount(data - 1);
         }
     };
     if (statusGame === 'COUNTDOWN') {

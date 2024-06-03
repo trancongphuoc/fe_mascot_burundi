@@ -1,6 +1,12 @@
-import api, { token } from './axios';
+import api from './axios';
 
 export const fetchMyHistory = async () => {
+  const token = window.sessionStorage.getItem('token');
+  if (!token) {
+    console.error('Token is not available');
+    return "FAILED";
+  } 
+  
   try {
     const response = await api.get(`/rest/zodiac-game/user-history`, {
       headers: { 'Authorization': `Bearer ${token}` },

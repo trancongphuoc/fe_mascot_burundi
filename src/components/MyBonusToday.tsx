@@ -20,27 +20,27 @@ interface MyInfoBetResultModel {
     onOpen: () => void;
     onUserDataChange: (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => void;
     statusGame: StatusGame,
+    fbId: string,
     // bettingCards?: BetZodiacCard[];
 }
 
-function MyHistory({onOpen, onUserDataChange, statusGame} : MyInfoBetResultModel) {
-    const facebookUserId = window.sessionStorage.getItem('facebookUserId');
+function MyHistory({onOpen, onUserDataChange, statusGame, fbId} : MyInfoBetResultModel) {
     const [betUser, setBetUser] = useState<BetUser>()
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
 
     useEffect(()=> {
-        console.log('check fb', facebookUserId)
-        const stateRef = ref(db, `/ikara/users/${facebookUserId}/totalIcoin`);
+        console.log('check fb', fbId)
+        const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
             if (data) setTotalIcoin(data);                
         };
         onValue(stateRef, handleData);
         return () => off(stateRef, 'value', handleData);
-    },[totalIcoin])
+    },[totalIcoin, fbId])
 
     useEffect(() => {
-        const stateRef = ref(db, `/zodiacGame/players/${facebookUserId}`);
+        const stateRef = ref(db, `/zodiacGame/players/${fbId}`);
         const handleData = (snapshot: DataSnapshot) => {
             const data = snapshot.val();
             console.log('check data', data)
@@ -84,7 +84,7 @@ function MyHistory({onOpen, onUserDataChange, statusGame} : MyInfoBetResultModel
             off(stateRef, 'value', handleData);
         }        
         return () => off(stateRef, 'value', handleData);
-    }, [statusGame]);
+    }, [statusGame, fbId]);
 
 
     return (

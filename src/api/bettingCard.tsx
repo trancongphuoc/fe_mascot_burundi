@@ -12,6 +12,12 @@ export const bettingCard = async (
   zodiacCardId: string
 ): Promise<string> => {
   try {
+    const token = window.sessionStorage.getItem('token');
+    if (!token) {
+      console.error('Token is not available');
+      return "FAILED";
+    } 
+    
     const response = await api.post<ApiResponse>('/rest/zodiac-game/betting', {
       zodiacGameId,
       totalIcoin,
