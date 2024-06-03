@@ -20,10 +20,10 @@ interface MyInfoBetResultModel {
     onOpen: () => void;
     onUserDataChange: (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => void;
     statusGame: StatusGame,
-    bettingCards?: BetZodiacCard[];
+    // bettingCards?: BetZodiacCard[];
 }
 
-function MyHistory({onOpen, onUserDataChange, statusGame, bettingCards} : MyInfoBetResultModel) {
+function MyHistory({onOpen, onUserDataChange, statusGame} : MyInfoBetResultModel) {
     const facebookUserId = window.sessionStorage.getItem('facebookUserId');
     const [betUser, setBetUser] = useState<BetUser>()
     const [totalIcoin, setTotalIcoin] = useState<number>(0);

@@ -74,8 +74,8 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, tota
       case 'LOST':
         return (
           <>
-            <SVG src={TextApologize} className="lost--primary-text"/>
-            <div className="lost__secondary">
+            <SVG src={TextApologize} className="lost--primary-text" onClick={e => {e.stopPropagation()}}/>
+            <div className="lost__secondary" onClick={e => {e.stopPropagation()}}>
               <p className="lost__secondary--text1">Bạn bỏ lỡ phần thưởng lần đoán này</p>
               <p className="lost__secondary--text2">Đừng nản lòng, hãy cố gắng lên, tin tưởng bản thân!</p>
             </div>
@@ -84,8 +84,8 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, tota
       case 'WIN':
         return (
           <>
-            <SVG src={TextCongratution} className="win--primary-text"/>
-            <div className="win__secondary">
+            <SVG src={TextCongratution} className="win--primary-text" onClick={e => {e.stopPropagation()}}/>
+            <div className="win__secondary" onClick={e => {e.stopPropagation()}}>
              <p className="win__secondary--text">Thật xuất sắc, bạn đã đoán trúng ván này</p>
              <div className="win__totalIcoin">
               <SVG className="win__totalIcoin--img" src={Icoin}/>
@@ -112,12 +112,12 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, tota
         exit={{ opacity: 0, y: 50}}
         transition={{ type: 'just'}}
         className="lost-popup"
-        onClick={e => {e.stopPropagation()}}>
-        <SVG src={bgContent} className="lost--BgContent mb--1px"/>
-        <SVG src={bgCardSelected} className="lost--zodiac-background" />
-        <SVG src={zodiac} className="lost--zodiac-card" />
-        <SVG src={BgLighter} className="lost--BgLighter" />
-        <SVG src={bgHeader} className="lost--BgHeader" />
+        >
+        <SVG src={bgContent} className="lost--BgContent mb--1px" onClick={e => {e.stopPropagation()}}/>
+        <SVG src={bgCardSelected} className="lost--zodiac-background" onClick={e => {e.stopPropagation()}}/>
+        <SVG src={zodiac} className="lost--zodiac-card" onClick={e => {e.stopPropagation()}}/>
+        <SVG src={BgLighter} className="lost--BgLighter" onClick={e => {e.stopPropagation()}}/>
+        <SVG src={bgHeader} className="lost--BgHeader" onClick={e => {e.stopPropagation()}}/>
         
         {renderDialogContent()}
         
@@ -126,7 +126,7 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, tota
         <SVG src={lineRight} className ="lost--light2"/>
 
         {topUsers.map((user, index) => (
-          <div className={`lost__no${index + 1}`} key={index}>
+          <div className={`lost__no${index + 1}`} key={index} onClick={e => {e.stopPropagation()}}>
             <SVG className={`lost__no${index + 1}--img`} src={crown[index]}/>
             <div className={`lost__no${index + 1}--url`}>
               <img src={user.profileImageLink} alt="avatar user" />

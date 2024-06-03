@@ -179,8 +179,6 @@ function Home() {
                   zodiacCard: zodiacCard,
                   topUser: topUsers,
               });
-
-              setStatusGame(game?.status ?? "NONE");
           }
       };
 
@@ -188,31 +186,37 @@ function Home() {
       return () => off(stateRef, 'value', handleData);
 
   };
-  // const fetchStatus = async () => {
-  //     const stateRef = ref(db, 'zodiacGame/state/status');
-  //     onValue(stateRef, (snapshot) => {
-  //       const data = snapshot.val();
-  //       if (data && data !== statusGame) {
-  //         setStatusGame(data);
-  //         console.log('status', data)
-  //       }
-  //     });
-  //   };
 
+  //get status
+  const fetchStatus = async () => {
+      const stateRef = ref(db, 'zodiacGame/state/status');
+      onValue(stateRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data && data !== statusGame) {
+          setStatusGame(data);
+        }
+      });
+    };
+    fetchStatus();
     fetchGameInfo();
 
-    if (statusGame === "RESULT") {
-      // close dilog
-      setOpenRule(false);
-      setOpenLostWin(false);
-      setOpenHistoryGame(false);
-      setOpenMyHistory(false);
-      setOpenBetting(false);
 
-      //open card
-      setOpenGameResult(true)
+    if (statusGame === "RESULT") {
+      // console.log('step 1', openGameResult)
+      // // close dilog
+      // setOpenRule(false);
+      // setOpenLostWin(false);
+      // setOpenHistoryGame(false);
+      // setOpenMyHistory(false);
+      // setOpenBetting(false);
+
+      // //open card
+      // setOpenGameResult(true)
+      // console.log('step 1', openGameResult)
     }
   }, [statusGame]);
+
+
 
   const handleCardSelection = (card: ZodiacCardModel) => {
     const betCard: BetZodiacCard = {
@@ -261,7 +265,7 @@ const betIcoin = async (zodiacCard: ZodiacCardModel, stake: number) => {
       <MyHistory
         onOpen={() => setOpenMyHistory(true)}
         onUserDataChange={handleIsWin}
-        bettingCards={[]}
+        // bettingCards={[]}
         statusGame={game?.status ?? 'NONE'}/>
       <BestPlayers />
 

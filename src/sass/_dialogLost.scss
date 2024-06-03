@@ -68,7 +68,7 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, .4);
-    z-index: 1000;
+    z-index: 1;
   }
   
   .lost-popup {
@@ -85,7 +85,7 @@
     .lost {
         &--BgContent {
             grid-area: 3 / 1 / 6 / 4;
-            z-index: -1;
+            z-index: 2;
             width: 100%;
             height: auto;
             background-repeat: no-repeat;
@@ -96,16 +96,15 @@
     
         &--BgLighter {
             grid-area: 1 / 1 / 2 / 4;
-            z-index: -1;
+            z-index: 2;
             object-fit: fill;
-            z-index: -1;
             align-self: end;
             transform: translateY(50px);
         }
     
         &--BgHeader {
             grid-area: 2 / 1 / 3 / -1;
-            z-index: 2;
+            z-index: 3;
             max-width: 245px;
             object-fit: fill;
             transform: translateY(24px);
@@ -121,14 +120,14 @@
         &--zodiac-background {
             align-self: center;
             grid-area: 1 / 1 / 2 / -1;
-            z-index: 1;
+            z-index: 3;
             width: 80px;
             transform: translateY(20px);
         }
     
         &--zodiac-card {
             grid-area: 1 / 1 / 2 / -1;
-            z-index: 2;
+            z-index: 4;
             width: 55px;
             align-self: center;
             transform: translateY(20px);
@@ -154,6 +153,7 @@
 
             margin-bottom: 10px;
             margin-top: 27px;
+            z-index: 4;
         }
     
         &--light1 {
@@ -161,6 +161,7 @@
             @include line;
             margin-right: 0;
             justify-self: end;
+            z-index: 4;
         }
     
         &--tertiary {
@@ -170,6 +171,7 @@
             font-size: 14px;
             font-weight: 350;
             margin-bottom: 20px;
+            z-index: 4;
         }
     
         &--light2 {
@@ -177,6 +179,7 @@
             @include line;
             margin-left: 0px;
             justify-self: start;
+            z-index: 4;
         }
     
         &__no3 {
@@ -191,6 +194,7 @@
                 crown-top: -15px,
             ));
             padding-right: 4px;
+            z-index: 4;
         }
     
         &__no2 {
@@ -205,6 +209,7 @@
                 crown-top: -15px,
             ));
             padding-left: 4px;
+            z-index: 4;
         }
     
         &__no1 {
@@ -219,17 +224,20 @@
                 crown-top: -15px,
             ));
             padding-bottom: 19.5px;
+            z-index: 4;
         }
     
         &__totalIcoin {
             display: flex;
             line-height: 1;
             align-items: center;
+            z-index: 4;
     
             &--img{
                 margin-right: 3px;
                 width: 12px;
                 height: 12px;
+                z-index: 4;
             }
     
             &--icoin {
@@ -237,6 +245,7 @@
                 font-size: 13px; 
                 font-weight: 300;
                 line-height: 1;
+                z-index: 4;
             }
         }
     }
@@ -260,6 +269,7 @@
 
         margin-bottom: 10px;
         margin-top: 26.5px;
+        z-index: 4;
     }
 
     &__secondary--text {
@@ -267,6 +277,7 @@
         font-weight: 350;
         color: $color-white;
         text-align: center;
+        z-index: 4;
     }
 
     &__totalIcoin {

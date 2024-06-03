@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 import bgCardSelect from '../assets/bg_card_selected_light.svg';
 import Icoin from '../assets/icoin.svg';
 import BgContent from '../assets/bg_content_win.svg';

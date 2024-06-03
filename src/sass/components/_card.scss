@@ -9,7 +9,7 @@
     }
 
     &__background--small {
-        @include basicBackgroundCard('../assets/background-card.svg');
+        @include basicBackgroundCard('../assets/bg_card_normal_light.svg');
         width: 22px;
         height: 29px;
     }
