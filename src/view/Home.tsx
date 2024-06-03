@@ -58,9 +58,7 @@ interface ZodiacCard {
 
 function Home() {
   // Use the parameters as needed in your component
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const parameters = queryParams.get('parameters');
+
 
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
 
@@ -104,6 +102,11 @@ function Home() {
 
 
   useEffect(()=> {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const parameters = queryParams.get('parameters');
+    console.log('check parameters', parameters)
+
     const fetchToken = async () => {
       if (parameters) {
         try {
@@ -116,6 +119,7 @@ function Home() {
       } else {
         console.log('no have para');
       }
+      console.log('check token', window.sessionStorage.getItem('token'))
     };
 
     const fetchData = async () => {
@@ -136,7 +140,7 @@ function Home() {
       await fetchData();
     };
     execute();
-  }, [joinGame]);
+  }, []);
 
 
   useEffect(() => { 
