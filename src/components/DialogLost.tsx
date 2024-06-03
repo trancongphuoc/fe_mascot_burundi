@@ -122,7 +122,7 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, tota
         {renderDialogContent()}
         
         <SVG src={lineLeft} className ="lost--light1"/>
-        <p className="lost--tertiary">TOP chiến thắng</p>
+        <p className="lost--tertiary" onClick={e => {e.stopPropagation()}}>TOP chiến thắng</p>
         <SVG src={lineRight} className ="lost--light2"/>
 
         {topUsers.map((user, index) => (
