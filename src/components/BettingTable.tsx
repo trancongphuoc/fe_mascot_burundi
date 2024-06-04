@@ -68,8 +68,20 @@ export function BettingTable({ onSelectCard, openBetting, statusGame }: BettingT
                         className="betting-table__card">
 
                         <p className='betting-table__card--no'>{index + 1}</p>
-                        <SVG src={betCard.id === selectCardId && openBetting ? bgCardSelect : bgCardNormal}
-                            className='betting-table__card--background' cacheRequests={true}/>
+
+                            <SVG
+                                src={bgCardSelect}
+                                className='betting-table__card--bgNormal'
+                                style={{zIndex: betCard.id === selectCardId ? 2 : 1,
+                                    opacity: betCard.id === selectCardId ? 1 : 0
+                                }}/> 
+                            <SVG
+                                src={bgCardNormal}
+                                className='betting-table__card--bgSelected'
+                                style={{zIndex: betCard.id === selectCardId ? 1 : 2,
+                                    opacity: betCard.id === selectCardId ? 0 : 1
+                                }}/>
+                        
                         <SVG src={betCard.imageUrl} cacheRequests={true} className='betting-table__card--zodiac'/>
                         <p className='betting-table__card--bonus'>x{betCard.multiply}</p> 
                         <p className='betting-table__card--players'>{betCard.counter} người</p>

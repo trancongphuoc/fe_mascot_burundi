@@ -1979,19 +1979,24 @@ h4 {
   color: #ffffff;
   line-height: 1.1;
 }
-.betting-table__card--background {
+.betting-table__card--bgNormal {
   max-width: 68px;
   height: auto;
   grid-area: 2/1/3/2;
   z-index: 1;
-  transition: all 0.5s;
+}
+.betting-table__card--bgSelected {
+  max-width: 68px;
+  height: auto;
+  grid-area: 2/1/3/2;
+  z-index: 2;
 }
 .betting-table__card--zodiac {
   align-self: center;
   max-width: 65%;
   height: auto;
   grid-area: 2/1/3/2;
-  z-index: 2;
+  z-index: 3;
 }
 @media (max-width: 320px) {
   .betting-table__card--bonus {

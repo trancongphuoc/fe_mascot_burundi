@@ -206,7 +206,6 @@ useEffect(() => {
     fetchStatus();
     fetchGameInfo();
 
-
     if (statusGame === "RESULT") {
       console.log('step 1', openGameResult)
       // close dilog

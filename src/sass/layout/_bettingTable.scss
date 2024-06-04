@@ -89,12 +89,18 @@
             line-height: 1.1;
         }
     
-        &--background {
+        &--bgNormal {
             max-width: 68px;
             height: auto;
             grid-area: 2 / 1/ 3 / 2;
             z-index: 1;
-            transition: all .5s;
+        }
+
+        &--bgSelected {
+            max-width: 68px;
+            height: auto;
+            grid-area: 2 / 1/ 3 / 2;
+            z-index: 2;
         }
     
         &--zodiac {
@@ -102,7 +108,7 @@
             max-width: 65%;
             height: auto;
             grid-area: 2 / 1/ 3 / 2;
-            z-index: 2;
+            z-index: 3;
         }
     
         @media (max-width: 320px) {
