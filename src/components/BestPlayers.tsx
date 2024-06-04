@@ -7,8 +7,12 @@ import { off, onValue, ref } from 'firebase/database';
 import { db } from '../firebase/config';
 import bgBestPlayers from '../assets/bg_best_players.svg';
 
+interface BestPlayersPro {
+    statusGame: StatusGame
+}
 
-function BestPlayers() {
+
+function BestPlayers({statusGame} : BestPlayersPro) {
 
     const [topUsers, setTopUser] = useState<User[]>([])
 
@@ -37,7 +41,11 @@ function BestPlayers() {
                 setTopUser([]);
             }
         };
-        onValue(stateRef, handleData);
+        if (statusGame === "COUNTDOWN") {
+            onValue(stateRef, handleData);
+        } else {
+            off(stateRef, 'value', handleData);
+        }
         return () => off(stateRef, 'value', handleData);
     }, []);
 

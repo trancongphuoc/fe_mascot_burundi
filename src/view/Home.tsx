@@ -272,7 +272,7 @@ const betIcoin = async (zodiacCard: ZodiacCardModel, stake: number) => {
         onUserDataChange={handleIsWin}
         fbId={fbId}
         statusGame={game?.status ?? 'NONE'}/>
-      <BestPlayers />
+      <BestPlayers statusGame={game?.status ?? "NONE"}/>
 
       <button onClick={() => {
         setDialogType('WIN');

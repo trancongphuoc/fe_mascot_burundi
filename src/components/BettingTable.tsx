@@ -14,7 +14,7 @@ interface BettingTableProps {
     statusGame: StatusGame;
 }
 
-export function BettingTable({ onSelectCard, openBetting, statusGame }: BettingTableProps) {
+export function BettingTable({ onSelectCard, statusGame }: BettingTableProps) {
     const [betCards, setBetCard] = useState<ZodiacCardModel[]>([]);
     const [selectCardId, setSelectCardId] = useState('');
 
@@ -68,7 +68,6 @@ export function BettingTable({ onSelectCard, openBetting, statusGame }: BettingT
                         className="betting-table__card">
 
                         <p className='betting-table__card--no'>{index + 1}</p>
-
                             <SVG
                                 src={bgCardSelect}
                                 className='betting-table__card--bgNormal'
