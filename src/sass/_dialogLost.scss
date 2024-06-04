@@ -15,8 +15,9 @@
     &--img {
         grid-area: 1 / 1 / 2 / 2;
         width: 28px;
-        align-self:flex-start;
+        align-self: start;
         justify-self: end;
+
         transform: translateX($crown-left) translateY( $crown-top);
 
     }
@@ -189,7 +190,7 @@
                 outer-color-bottom: $color-lost-av-no3-b,
                 middle-width: 63px,
                 inner-width: 59px,
-                crown-left: -8px,
+                crown-left: -22px,
                 crown-top: -15px,
             ));
             padding-right: 4px;
@@ -204,7 +205,7 @@
                 outer-color-bottom: $color-lost-av-no2-b,
                 middle-width: 63px,
                 inner-width: 59px,
-                crown-left: -18.5px,
+                crown-left: -22px,
                 crown-top: -15px,
             ));
             padding-left: 4px;
@@ -219,7 +220,7 @@
                 outer-color-bottom: $color-lost-av-no1-t,
                 middle-width: 74px,
                 inner-width: 70px,
-                crown-left: -11px,
+                crown-left: -20px,
                 crown-top: -15px,
             ));
             padding-bottom: 19.5px;
