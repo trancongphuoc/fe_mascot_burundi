@@ -1142,7 +1142,6 @@ h4 {
 .lost-popup .lost--BgLighter {
   grid-area: 1/1/2/4;
   z-index: 5;
-  object-fit: fill;
   align-self: end;
   transform: translateY(50px);
 }
@@ -1152,12 +1151,6 @@ h4 {
   max-width: 245px;
   object-fit: fill;
   transform: translateY(24px);
-}
-@media (max-width: 375px) {
-  .lost-popup .lost--BgHeader {
-    max-width: 270px;
-    transform: translateY(22px);
-  }
 }
 .lost-popup .lost--zodiac-background {
   align-self: center;
@@ -1282,7 +1275,7 @@ h4 {
 }
 @media (max-width: 375px) {
   .lost-popup .lost__no3 {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
   .lost-popup .lost__no3--url {
     margin-bottom: 3px;
@@ -1355,7 +1348,7 @@ h4 {
 }
 @media (max-width: 375px) {
   .lost-popup .lost__no2 {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
   .lost-popup .lost__no2--url {
     margin-bottom: 3px;
@@ -1428,7 +1421,7 @@ h4 {
 }
 @media (max-width: 375px) {
   .lost-popup .lost__no1 {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
   .lost-popup .lost__no1--url {
     margin-bottom: 3px;
@@ -1443,6 +1436,29 @@ h4 {
 }
 @media (max-width: 375px) {
   .lost-popup .lost--tertiary {
+    margin-bottom: 13px;
+  }
+  .lost-popup .lost--BgHeader {
+    max-width: 270px;
+    transform: translateY(22px);
+  }
+  .lost-popup .lost__secondary {
+    margin-bottom: 5px;
+    margin-top: 18px;
+  }
+  .lost-popup .lost__secondary--text1 {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .lost-popup .lost__secondary--text2 {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1;
+  }
+  .lost-popup .lost--tertiary {
+    font-size: 12px;
     margin-bottom: 13px;
   }
   .lost-popup .lost__no3 {
@@ -1504,7 +1520,7 @@ h4 {
 }
 @media (max-width: 375px) and (max-width: 375px) {
   .lost-popup .lost__no3 {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
   .lost-popup .lost__no3--url {
     margin-bottom: 3px;
@@ -1577,7 +1593,7 @@ h4 {
 }
 @media (max-width: 375px) and (max-width: 375px) {
   .lost-popup .lost__no2 {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
   .lost-popup .lost__no2--url {
     margin-bottom: 3px;
@@ -1608,8 +1624,8 @@ h4 {
   .lost-popup .lost__no1--url {
     grid-area: 1/1/2/2;
     position: relative;
-    width: 67px;
-    height: 67px;
+    width: 62px;
+    height: 62px;
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 7px;
@@ -1632,8 +1648,8 @@ h4 {
   .lost-popup .lost__no1--url::after {
     top: 1.5px;
     left: 1.5px;
-    width: 64px;
-    height: 64px;
+    width: 59px;
+    height: 59px;
     background-image: linear-gradient(to bottom, , );
     z-index: 2;
     box-sizing: border-box;
@@ -1642,15 +1658,15 @@ h4 {
     position: absolute;
     top: 3.5px;
     left: 3.5px;
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     z-index: 3;
   }
 }
 @media (max-width: 375px) and (max-width: 375px) {
   .lost-popup .lost__no1 {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
   .lost-popup .lost__no1--url {
     margin-bottom: 3px;

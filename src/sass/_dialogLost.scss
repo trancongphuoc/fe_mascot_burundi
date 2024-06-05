@@ -35,7 +35,7 @@
     }
 
     @media (max-width: 375px) {
-        margin-bottom: 5px;
+        margin-bottom: 4px;
         &--url {
             margin-bottom: 3px;
         }
@@ -98,13 +98,11 @@
             background-repeat: no-repeat;
             background-size: 100% 100%;
             background-position: center;
-        
         }
     
         &--BgLighter {
             grid-area: 1 / 1 / 2 / 4;
             z-index: 5;
-            object-fit: fill;
             align-self: end;
             transform: translateY(50px);
         }
@@ -115,13 +113,6 @@
             max-width: 245px;
             object-fit: fill;
             transform: translateY(24px);
-        }
-    
-        @media (max-width: 375px) {
-            &--BgHeader {
-                max-width: 270px;
-                transform: translateY(22px);
-            }
         }
     
         &--zodiac-background {
@@ -239,6 +230,34 @@
                 margin-bottom: 13px;
             }
 
+            &--BgHeader {
+                max-width: 270px;
+                transform: translateY(22px);
+            }
+
+            &__secondary { 
+                &--text1{
+                    font-size: 14px;
+                    font-weight: 300;
+                    line-height: 1;
+                    margin-bottom: 2px
+                };
+
+                &--text2{
+                    font-size: 14px;
+                    font-weight: 300;
+                    line-height: 1;
+                };
+    
+                margin-bottom: 5px;
+                margin-top: 18px;
+            }
+
+            &--tertiary {
+                font-size: 12px;
+                margin-bottom: 13px;
+            }
+
             &__no3 {
                 @include topUser((
                     outer-width: 57px,
@@ -263,9 +282,9 @@
         
             &__no1 {
                 @include topUser((
-                    outer-width: 67px,
-                    middle-width: 64px,
-                    inner-width: 60px,
+                    outer-width: 62px,
+                    middle-width: 59px,
+                    inner-width: 55px,
                     crown-left: -22px,
                     crown-top: -15px,
                 ));
