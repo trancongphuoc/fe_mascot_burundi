@@ -79,6 +79,14 @@
         }
     }
 
+    &__loading {
+        grid-area: 3 / 1 / 4 / 2;
+        z-index: 2;
+        align-self: start;
+        justify-self: center;
+        margin-top: 100px;
+    }
+
     &__content {
         grid-area: 3 / 1 / 4 / 2;
         overflow-y: auto;

@@ -8,6 +8,7 @@ import SVG from 'react-inlinesvg';
 import { useEffect, useState } from 'react';
 import { fetchMyHistory } from '../api/getMyHistory';
 import bgMyHistory from '../assets/bg_my_history.svg';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 interface PopupMineResultProps {
   onClose: () => void;
@@ -69,44 +70,52 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
             <p className="mine-popup__title--head2">Mức cược</p>
         </div>
 
-        <div className="mine-popup__content">
-           {
-              myHistory.map((mine, index) => (
-                <div key={index} className="item">
-                  <div className="item__time">
-                    <p className="item__time--index">{mine.noGame}</p>
-                    <p className="item__time--hour">{mine.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
-                    <p className="item__time--date">{mine.time.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit' })}</p>
-                  </div>
-                  <div className="bets">
-                    {
-                      mine.zodiacCards.map((card, index) => (
-                        <div key={index} className="bet">
-                          <p className="bet--index">{index + 1}</p>
-                          <SVG src={card.id === mine.zodiacCardId ? BgCardWin : BgCardLost} className="bet__card--bg"/>
-                          <SVG src={card.imageUrl} className="bet__card--zodiac"/>
-                          <p className="bet--bonus">x{card.multiply}</p>
-                          <div className="bet__icoin">
-                            <SVG className="bet__icoin--img" src={card.id === mine.zodiacCardId ? IcoinWin : IcoinLost}/>
-                            <p className="bet__icoin--data">{card.totalIcoinBetting}</p>
+        {
+          loading ? (
+            <div className="mine-popup__loading">
+              <ScaleLoader color='#F15350' />
+            </div>
+          ) : (
+            <div className="mine-popup__content">
+            {
+                myHistory.map((mine, index) => (
+                  <div key={index} className="item">
+                    <div className="item__time">
+                      <p className="item__time--index">{mine.noGame}</p>
+                      <p className="item__time--hour">{mine.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
+                      <p className="item__time--date">{mine.time.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit' })}</p>
+                    </div>
+                    <div className="bets">
+                      {
+                        mine.zodiacCards.map((card, index) => (
+                          <div key={index} className="bet">
+                            <p className="bet--index">{index + 1}</p>
+                            <SVG src={card.id === mine.zodiacCardId ? BgCardWin : BgCardLost} className="bet__card--bg"/>
+                            <SVG src={card.imageUrl} className="bet__card--zodiac"/>
+                            <p className="bet--bonus">x{card.multiply}</p>
+                            <div className="bet__icoin">
+                              <SVG className="bet__icoin--img" src={card.id === mine.zodiacCardId ? IcoinWin : IcoinLost}/>
+                              <p className="bet__icoin--data">{card.totalIcoinBetting}</p>
+                            </div>
                           </div>
-                        </div>
-                      ))
-                    }
+                        ))
+                      }
+                    </div>
+             
+  
+                    <div className="item__icoin">
+                      <p className={mine.netIcoin > 0 ? "item__icoin--data-win" : "item__icoin--data-lost"}>
+                            {mine.netIcoin > 0 ?
+                            `+${mine.netIcoin}` :
+                            mine.netIcoin}</p>
+                      <SVG className="item__icoin--img" src={mine.netIcoin > 0 ? IcoinWin : IcoinLost}/>
+                    </div>
                   </div>
-           
-
-                  <div className="item__icoin">
-                    <p className={mine.netIcoin > 0 ? "item__icoin--data-win" : "item__icoin--data-lost"}>
-                          {mine.netIcoin > 0 ?
-                          `+${mine.netIcoin}` :
-                          mine.netIcoin}</p>
-                    <SVG className="item__icoin--img" src={mine.netIcoin > 0 ? IcoinWin : IcoinLost}/>
-                  </div>
-                </div>
-              ))
-           }
-        </div>
+                ))
+             }
+          </div>
+          )
+        }
       </div>
     </div>
   );
