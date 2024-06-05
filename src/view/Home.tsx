@@ -228,8 +228,9 @@ useEffect(() => {
     if (game?.status === "COUNTDOWN") {
       setSelectCard(betCard);
       setOpenBetting(true);
+    } else {
+      setOpenBetting(false);
     }
-
   };
 
 
