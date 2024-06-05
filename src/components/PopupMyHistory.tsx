@@ -41,11 +41,11 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
           const myHistories: MyHistory[] = data.map((history: any) => ({
             time: new Date(history.addTime),
             noGame: history.noGame,
-            totalIcoinWin: history.zodiacGame.totalIcoinWin,
-            totalIcoinBetting: history.totalIcoinBetting,
+            totalIcoinWin: history.totalIcoinWin ?? 0,
+            totalIcoinBetting: history.totalIcoinBetting ?? 0,
             zodiacCardId: history.zodiacCardId,
             zodiacCards: history.zodiacCards,
-            netIcoin: (history.zodiacGame.totalIcoinWin ?? 0) - (history.totalIcoinBetting ?? 0),
+            netIcoin: (history.totalIcoinWin ?? 0) - (history.totalIcoinBetting ?? 0),
           }));
           setMyHistory(myHistories);
         }
