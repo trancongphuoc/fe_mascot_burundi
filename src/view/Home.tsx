@@ -34,6 +34,7 @@ import { BettingTable } from '../components/BettingTable';
 import { getToken } from '../api/getToken';
 import { useLocation } from 'react-router-dom';
 import { bettingCard } from '../api/bettingCard';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -61,8 +62,6 @@ function Home() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const parameters = queryParams.get('parameters');
-  console.log('check parameters', parameters)
-
 
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
 
@@ -120,7 +119,6 @@ useEffect(() => {
     } else {
       console.log('no parameters');
     }
-    console.log('check token', window.sessionStorage.getItem('token'));
 
     try {
       const data = await joinGameZodiac();
@@ -129,16 +127,13 @@ useEffect(() => {
         window.sessionStorage.setItem('facebookUserId', data);
         setJoinGame(true);
         setFbId(data);
-        console.log('join game success', window.sessionStorage.getItem('facebookUserId'));
-
-
+        console.log('join game success');
       } else {
         console.log('call join game failed');
       }
     } catch (error) {
       console.log('error join game', error);
     }
-    console.log('check join game', joinGame)
   };
 
   fetchTokenAndJoinGame();
@@ -211,7 +206,6 @@ useEffect(() => {
     }
 
     if (statusGame === "RESULT") {
-      console.log('step 1', openGameResult)
       // close dilog
       setOpenRule(false);
       setOpenLostWin(false);
@@ -221,7 +215,6 @@ useEffect(() => {
 
       //open card
       setOpenGameResult(true)
-      console.log('step 1', openGameResult)
     }
   }, [statusGame]);
 
@@ -241,22 +234,16 @@ useEffect(() => {
 
 
 // send icoin betting
-const betIcoin = async (zodiacCard: ZodiacCardModel, stake: number) => {
-    try {
-      const data = await bettingCard(game?.transactionId ?? 0, stake, zodiacCard.id);
-      if (data === "OK") {
-        console.log('Betting successful');
-      } else {
-        console.log('Betting failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+const betGame = async (zodiacCard: ZodiacCardModel, stake: number) => {
+    await bettingCard(game?.transactionId ?? 0, stake, zodiacCard.id);
 };
+
 
 
   return (
     <div className='main'>
+      <Toaster position='top-right'/>
+      
       <section className='section-header u-margin-top-huge1'>
         <img src={PrimaryText} alt="primary_text" className='u-margin-minus-bottom-big' />
         <p className='heading-secondary'>Hôm nay {game?.noGameToday} Ván</p>
@@ -281,8 +268,9 @@ const betIcoin = async (zodiacCard: ZodiacCardModel, stake: number) => {
       <BestPlayers statusGame={game?.status ?? "NONE"}/>
 
       <button onClick={() => {
-        setDialogType('WIN');
-        setOpenLostWin(true)}} className="open-popup-button">Open Popup</button>
+        console.log('show toast')
+        // toast.error("qweqwe")
+      }} className="open-popup-button">Open Popup</button>
 
       <button onClick={() => {
         setDialogType('LOST');
@@ -300,7 +288,7 @@ const betIcoin = async (zodiacCard: ZodiacCardModel, stake: number) => {
               setSelectCard(null);
             } }
             zodiacCardSelect={selectCard}
-            betIcoin={betIcoin}
+            betIcoin={betGame}
             zodiacGameId={game?.transactionId ?? 0}                                        />
                                       )}
         {openLostWin && <DialogLost

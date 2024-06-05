@@ -43,7 +43,6 @@ function MyHistory({onOpen, onUserDataChange, statusGame, fbId} : MyInfoBetResul
         const stateRef = ref(db, `/zodiacGame/players/${fbId}`);
         const handleData = (snapshot: DataSnapshot) => {
             const data = snapshot.val();
-            console.log('check data', data)
             if (data) {
                 const cards: BetZodiacCard[] = [];
                 if (data.bettingCards) {

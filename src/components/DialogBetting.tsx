@@ -7,6 +7,7 @@ import BgLighter from '../assets/bg_lighter.svg';
 import { motion } from 'framer-motion';
 import SVG from 'react-inlinesvg';
 import useAudio from './UseAudio';
+import toast from 'react-hot-toast';
 
 interface DialogBettingProps {
   onClose: () => void;
@@ -23,7 +24,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
 
   const sendDataOut = useCallback(async () => {
     if (!stakes || !zodiacGameId || !zodiacCardSelect) {
-      console.log('Incomplete data');
+      toast('Thiếu thông tin', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+      onClose();
       return;
     }
     betIcoin(zodiacCardSelect, stakes);

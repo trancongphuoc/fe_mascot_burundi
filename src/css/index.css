@@ -581,6 +581,12 @@ h4 {
   grid-area: 1/1/2/2;
 }
 
+.custom-toast {
+  background-color: #333;
+  color: #fff;
+  opacity: 0.4;
+}
+
 .main {
   max-width: 430px;
   width: 100%;

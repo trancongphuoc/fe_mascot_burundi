@@ -1,5 +1,6 @@
 import axios from 'axios'; // Ensure you have axios imported correctly
 import api from './axios';
+import toast from 'react-hot-toast';
 
 interface ApiResponse {
   status: string;
@@ -14,7 +15,7 @@ export const bettingCard = async (
   try {
     const token = window.sessionStorage.getItem('token');
     if (!token) {
-      console.error('Token is not available');
+      toast('Thiếu thông tin', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
       return "FAILED";
     } 
     
@@ -31,10 +32,11 @@ export const bettingCard = async (
     if (response.data.status === "OK") {
       return "OK";
     } else {
-      console.error('Unexpected response structure:', response.data);
+      toast('Đặt cược thất bại', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
       return "FAILED";
     }
   } catch (error) {
+    toast('Lỗi đặt cược', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
     if (axios.isAxiosError(error)) {
       console.error('Axios error fetching game history:', error.response?.data || error.message);
     } else {
