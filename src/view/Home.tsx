@@ -206,6 +206,10 @@ useEffect(() => {
     fetchStatus();
     fetchGameInfo();
 
+    if (statusGame != "COUNTDOWN") {
+      setOpenBetting(false);
+    }
+
     if (statusGame === "RESULT") {
       console.log('step 1', openGameResult)
       // close dilog
@@ -228,9 +232,11 @@ useEffect(() => {
       ...card,
       transactionId: game?.transactionId ?? 0,
     };
-  
-    setSelectCard(betCard);
-    setOpenBetting(true);
+    if (game?.status === "COUNTDOWN") {
+      setSelectCard(betCard);
+      setOpenBetting(true);
+    }
+
   };
 
 

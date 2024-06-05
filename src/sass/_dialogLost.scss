@@ -34,6 +34,13 @@
         margin-bottom: 7px;
     }
 
+    @media (max-width: 375px) {
+        margin-bottom: 5px;
+        &--url {
+            margin-bottom: 3px;
+        }
+    }
+
     &--name {
         color: $color-white;
         line-height: 1;
@@ -110,7 +117,7 @@
             transform: translateY(24px);
         }
     
-        @media (max-width: 320px) {
+        @media (max-width: 375px) {
             &--BgHeader {
                 max-width: 270px;
                 transform: translateY(22px);
@@ -226,6 +233,45 @@
             padding-bottom: 19.5px;
             z-index: 7;
         }
+
+        @media (max-width: 375px) {
+            &--tertiary {
+                margin-bottom: 13px;
+            }
+
+            &__no3 {
+                @include topUser((
+                    outer-width: 57px,
+                    middle-width: 53px,
+                    inner-width: 49px,
+                    crown-left: -24px,
+                    crown-top: -15px,
+                ));
+                padding-right: 4px;
+            }
+        
+            &__no2 {
+                @include topUser((
+                    outer-width: 57px,
+                    middle-width: 53px,
+                    inner-width: 49px,
+                    crown-left: -24px,
+                    crown-top: -15px,
+                ));
+                padding-left: 4px;
+            }
+        
+            &__no1 {
+                @include topUser((
+                    outer-width: 67px,
+                    middle-width: 64px,
+                    inner-width: 60px,
+                    crown-left: -22px,
+                    crown-top: -15px,
+                ));
+                padding-bottom: 14px;
+            }
+        }
     
         &__totalIcoin {
             display: flex;
@@ -270,6 +316,16 @@
         margin-bottom: 10px;
         margin-top: 26.5px;
         z-index: 7;
+    }
+
+    @media (max-width: 375px) {
+        &__secondary {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 5px;
+            margin-top: 20px;
+        }
     }
 
     &__secondary--text {

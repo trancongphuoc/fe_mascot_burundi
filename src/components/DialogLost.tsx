@@ -69,6 +69,23 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, tota
     }
   }, [dialogType]);
 
+//   const top123: User[] = [{
+//     name: "Dong Hoang Linh",
+//     profileImageLink: "123",
+//     totalIcoin: 123
+//   },
+//   {
+//     name: "Dong Hoang Linh",
+//     profileImageLink: "123",
+//     totalIcoin: 12312
+//   },
+//   {
+//     name: "Dong Hoang Linh",
+//     profileImageLink: "123",
+//     totalIcoin: 12
+//   },
+// ]
+
   const renderDialogContent = () => {
     switch (dialogType) {
       case 'LOST':
@@ -125,7 +142,7 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, tota
         <p className="lost--tertiary" onClick={e => {e.stopPropagation()}}>TOP chiến thắng</p>
         <SVG src={lineRight} className ="lost--light2"/>
 
-        {topUsers.map((user, index) => (
+        {topUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)).map((user, index) => (
           <div className={`lost__no${index + 1}`} key={index} onClick={e => {e.stopPropagation()}}>
             <SVG className={`lost__no${index + 1}--img`} src={crown[index]}/>
             <div className={`lost__no${index + 1}--url`}>
