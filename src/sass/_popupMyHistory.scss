@@ -140,7 +140,7 @@
             .bet {
                 display: grid;
                 grid-template-columns: 33px;
-                grid-template-rows: repeat(4, min-content);
+                grid-template-rows: repeat(4, max-content);
 
                 align-items: center;
                 justify-items: center;
@@ -195,8 +195,6 @@
                         color: $color-white;
                         font-size: 10px;
                     }
-
-
                 }
             }
         }
