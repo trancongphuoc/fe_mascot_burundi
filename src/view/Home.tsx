@@ -90,9 +90,6 @@ function Home() {
   //get select card
   const [selectCard, setSelectCard] = useState<BetZodiacCard | null>(null);
 
-  //failed betting
-  const [betSuccess, setBetSuccess] = useState(false);
-
   const [totalIcoinWin, setTotalIcoinWin] = useState(0);
   //get win or not
   const handleIsWin = (data: { isWin?: boolean | undefined; icoinWin?: number | undefined }) => {
@@ -213,6 +210,8 @@ useEffect(() => {
 
     if (statusGame == "COUNTDOWN") {
       setOpenLostWin(false);
+      setBetCards([]);
+      setBetSuccess(true);
     }
 
     if (statusGame === "RESULT") {
@@ -245,9 +244,18 @@ useEffect(() => {
   };
 
 
+//list card betting
+const [betCards, setBetCards] = useState<BetZodiacCard[]>([]); 
+  //failed betting
+const [betSuccess, setBetSuccess] = useState(true);
+
 // send icoin betting
-const betGame = async (zodiacCard: ZodiacCardModel, stake: number) => {
-    await bettingCard(game?.transactionId ?? 0, stake, zodiacCard.id);
+const betGame = async (zodiacCard: BetZodiacCard) => {
+  setBetCards(prevBetCards => [...prevBetCards, zodiacCard]);
+  const data = await bettingCard(game?.transactionId ?? 0, zodiacCard.totalIcoinBetting ?? 0, zodiacCard.id);
+  if (data != "OK") {
+    setBetSuccess(false);
+  }
 };
 
 
@@ -275,7 +283,10 @@ const betGame = async (zodiacCard: ZodiacCardModel, stake: number) => {
         onOpen={() => setOpenMyHistory(true)}
         onUserDataChange={handleIsWin}
         fbId={fbId}
+        betCards={betCards}
+        betSuccess={betSuccess}
         statusGame={game?.status ?? 'NONE'}/>
+
       <BestPlayers statusGame={game?.status ?? "NONE"}/>
 
       <button onClick={() => {
@@ -291,16 +302,16 @@ const betGame = async (zodiacCard: ZodiacCardModel, stake: number) => {
       {/* Dialog when click */}
       <AnimatePresence>
         {openRule && <PopupRule onClose={()=> setOpenRule(false)} />}
+
         {openBetting && selectCard && (
                                         <DialogBetting
-            onClose={() => {
-              setOpenBetting(false);
-              setSelectCard(null);
-            } }
-            zodiacCardSelect={selectCard}
-            betIcoin={betGame}
-            zodiacGameId={game?.transactionId ?? 0}                                        />
-                                      )}
+                                            onClose={() => {
+                                              setOpenBetting(false);
+                                              setSelectCard(null);
+                                            }}
+                                            zodiacCardSelect={selectCard}
+                                            betIcoin={betGame}
+                                            zodiacGameId={game?.transactionId ?? 0}/>)}
         {openLostWin && <DialogLost
                             onClose={() => setOpenLostWin(false)}
                             dialogType={dialogType} totalIcoin={totalIcoinWin}

@@ -13,7 +13,7 @@ interface DialogBettingProps {
   onClose: () => void;
   zodiacGameId: number;
   zodiacCardSelect: ZodiacCardModel;
-  betIcoin: (zodiacCard: ZodiacCardModel, stake: number) => void;
+  betIcoin: (zodiacCard: BetZodiacCard) => void;
 }
 
 const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect, betIcoin }) => {
@@ -28,7 +28,11 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
       onClose();
       return;
     }
-    betIcoin(zodiacCardSelect, stakes);
+    const betCard: BetZodiacCard = {
+      ...zodiacCardSelect,
+      totalIcoinBetting: stakes ?? 0,
+    }
+    betIcoin(betCard);
     onClose();
     
   }, [stakes, zodiacGameId, zodiacCardSelect, onClose]);

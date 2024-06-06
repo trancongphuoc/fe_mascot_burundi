@@ -21,12 +21,15 @@ interface MyInfoBetResultModel {
     onUserDataChange: (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => void;
     statusGame: StatusGame,
     fbId: string,
-    // bettingCards?: BetZodiacCard[];
+    betCards: BetZodiacCard[],
+    betSuccess: boolean,
 }
 
-function MyHistory({onOpen, onUserDataChange, statusGame, fbId} : MyInfoBetResultModel) {
+function MyHistory({onOpen, onUserDataChange, statusGame, fbId, betCards, betSuccess} : MyInfoBetResultModel) {
     const [betUser, setBetUser] = useState<BetUser>()
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
+
+    const [bettingCards, setBettingCards] = useState< BetZodiacCard[]>([]);
 
     useEffect(()=> {
         console.log('check fb', fbId)
@@ -85,6 +88,20 @@ function MyHistory({onOpen, onUserDataChange, statusGame, fbId} : MyInfoBetResul
         return () => off(stateRef, 'value', handleData);
     }, [statusGame, fbId]);
 
+    useEffect(() => {
+        if (betSuccess) {
+            setBettingCards(betCards);
+            console.log('step 11');
+        }
+    }, [betSuccess, betCards]);
+    
+    useEffect(() => {
+        if (!betSuccess) {
+            setBettingCards(betUser?.bettingCards ?? []);
+            console.log('step 12');
+        }
+    }, [betSuccess, betUser]); 
+
 
     return (
         <>  
@@ -104,8 +121,11 @@ function MyHistory({onOpen, onUserDataChange, statusGame, fbId} : MyInfoBetResul
                
                 <div className="section-myInfo__cards">
                     {  
-                    betUser?.bettingCards && 
-                    betUser.bettingCards.map((betCard, index) => (
+                    
+                    // betUser?.bettingCards && 
+                    // betUser.bettingCards.map((betCard, index) => (
+      
+                    bettingCards.map((betCard, index) => (
                             <div key={index} className="card__main">
                                 <p className="card__main--background-color">&nbsp;</p>
                                 <p className="card__main--header">{betCard.id.split('_').slice(-1)}</p>
