@@ -14,7 +14,7 @@
     flex-direction: column;
     justify-content: end;
     align-items: end;
-    z-index: 1000;
+    z-index: 4;
   }
   
   .betting-popup {
@@ -35,7 +35,7 @@
 .betting {
     &--BgContent {
         grid-area: 3 / 1 / 6 / 4;
-        z-index: -1;
+        z-index: 5;
         width: 100%;
         height: auto;
         transform: translateY(1px);
@@ -43,7 +43,7 @@
 
     &--BgLighter {
         grid-area: 1 / 1 / 2 / 4;
-        z-index: -1;
+        z-index: 5;
         width: 168px;
         height: auto;
         transform: translateY(50px);
@@ -51,7 +51,7 @@
 
     &--BgHeader {
         grid-area: 2 / 1 / 3 / -1;
-        z-index: 2;
+        z-index: 6;
         max-width: 327px;
         width: 100%;
         height: auto;
@@ -68,14 +68,14 @@
     &--zodiac-background {
         align-self: center;
         grid-area: 1 / 1 / 2 / -1;
-        z-index: 1;
+        z-index: 7;
         width: 80px;
         transform: translateY(30px);
     }
 
     &--zodiac-card {
         grid-area: 1 / 1 / 2 / -1;
-        z-index: 2;
+        z-index: 8;
         width: 60px;
         align-self: center;
         transform: translateY(31px);
@@ -89,7 +89,7 @@
         text-decoration: none;
         color: $color-white;
 
-        z-index: 3;
+        z-index: 7;
 
         align-items: end;
         transform: translateY(3px);
@@ -104,6 +104,7 @@
         height: 40px;
         background-color: $color-2;
         border-radius: 10px;
+        z-index: 5;
 
         &--img {
             width: 16px;
@@ -127,6 +128,8 @@
         font-size: 16px;    
         -webkit-text-stroke: .5px #ffffff;
         align-self: end;
+        z-index: 5;
+        user-select: none;
 
         width: 86px;
         height: 32px;
@@ -147,6 +150,9 @@
         -webkit-text-stroke: .5px #ffffff;
         align-self: end;
 
+        z-index: 5;
+        user-select: none;
+
         width: 86px;
         height: 32px;
         background-image: url(../assets/background-button.svg);
@@ -163,6 +169,9 @@
         justify-self: start;
         -webkit-text-stroke: .5px #ffffff;
         align-self: end;
+
+        z-index: 5;
+        user-select: none;
 
         width: 86px;
         height: 32px;
@@ -186,6 +195,7 @@
         line-height: 46px;
         border-radius: 23px;
         overflow: hidden;
+        z-index: 5;
     
         &::before {
             content: '';
@@ -217,7 +227,7 @@
 
         &--text {
             position: relative;
-            z-index: 3;
+            z-index: 5;
             margin: 0;
 
             &::before {

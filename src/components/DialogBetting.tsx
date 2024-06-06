@@ -47,25 +47,28 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 50 }}
         className="betting-popup"
-        onClick={(e) => e.stopPropagation()}
         aria-modal="true">
         
-        <SVG src={BgContent} className="betting--BgContent" />
-        <SVG src={bgCardSelect} className="betting--zodiac-background" />
-        {zodiacCardSelect.imageUrl && <SVG src={zodiacCardSelect.imageUrl} className="betting--zodiac-card" />}
-        <SVG src={BgLighter} className="betting--BgLighter" />
-        <SVG src={BgHeader} className="betting--BgHeader" />
+        <SVG src={BgContent} className="betting--BgContent" onClick={(e) => e.stopPropagation()}/>
+        <SVG src={bgCardSelect} className="betting--zodiac-background" onClick={(e) => e.stopPropagation()}/>
+        {zodiacCardSelect.imageUrl && <SVG
+                                        src={zodiacCardSelect.imageUrl}
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="betting--zodiac-card" />}
+        <SVG src={BgLighter} className="betting--BgLighter" onClick={(e) => e.stopPropagation()}/>
+        <SVG src={BgHeader} className="betting--BgHeader" onClick={(e) => e.stopPropagation()}/>
 
-        <p className="betting--text">Chúc bạn nhận thưởng lớn</p>
+        <p className="betting--text" onClick={(e) => e.stopPropagation()}>Chúc bạn nhận thưởng lớn</p>
 
-        <div className="betting__totalIcoin mb-15px mt-28px">
+        <div className="betting__totalIcoin mb-15px mt-28px" onClick={(e) => e.stopPropagation()}>
           <img className="betting__totalIcoin--img" src={Icoin} alt="Icoin" />
           <p className="betting__totalIcoin--icoin">{stakes}</p>
         </div>
 
         <motion.div
           whileTap={{ y: 1 }}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation()
             clickAudioRef();
             setStakes((prevStake) => prevStake + 10);
           }}
@@ -73,7 +76,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         </motion.div>
         <motion.div
           whileTap={{ y: 1 }}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation()
             clickAudioRef();
             setStakes((prevStake) => prevStake + 100);
           }}
@@ -81,7 +85,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         </motion.div>
         <motion.div
           whileTap={{ y: 1 }}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation()
             clickAudioRef();
             setStakes((prevStake) => prevStake + 1000);
           }}
@@ -90,7 +95,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
 
         <motion.div
           whileTap={{ y: 1 }}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation()
             sendDataOut()
             confirmRef()}}
           className="betting__confirm mb-33px mt-14-5px">
