@@ -34,7 +34,8 @@ import { BettingTable } from '../components/BettingTable';
 import { getToken } from '../api/getToken';
 import { useLocation } from 'react-router-dom';
 import { bettingCard } from '../api/bettingCard';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import SVG from 'react-inlinesvg';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -141,6 +142,7 @@ useEffect(() => {
 
 
   useEffect(() => { 
+    console.log('joinGame', joinGame)
     const fetchGameInfo = async () => {
       const stateRef = ref(db, 'zodiacGame/state');
 
@@ -246,7 +248,7 @@ const betGame = async (zodiacCard: ZodiacCardModel, stake: number) => {
       <Toaster position='top-right'/>
       
       <section className='section-header u-margin-top-huge1'>
-        <img src={PrimaryText} alt="primary_text" className='u-margin-minus-bottom-big' />
+        <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />
         <p className='heading-secondary'>Hôm nay {game?.noGameToday} Ván</p>
         <img
           src={Rule}
