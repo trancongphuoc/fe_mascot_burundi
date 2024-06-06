@@ -43,14 +43,14 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, tota
   const playLostAudio = useAudio(lostAudioPath);
   const playWinAudio = useAudio(winAudioPath);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      console.log('Closing...');
-      onClose();
-    }, 3000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     console.log('Closing...');
+  //     onClose();
+  //   }, 3000);
 
-    return () => clearTimeout(timer);
-  }, [onClose]);
+  //   return () => clearTimeout(timer);
+  // }, [onClose]);
 
   useEffect(() => {
     if (dialogType === 'WIN') {

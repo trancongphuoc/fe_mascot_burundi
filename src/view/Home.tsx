@@ -207,6 +207,10 @@ useEffect(() => {
       setOpenBetting(false);
     }
 
+    if (statusGame == "COUNTDOWN") {
+      setOpenLostWin(false);
+    }
+
     if (statusGame === "RESULT") {
       // close dilog
       setOpenRule(false);
