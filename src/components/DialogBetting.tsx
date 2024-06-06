@@ -24,7 +24,14 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
 
   const sendDataOut = useCallback(async () => {
     if (!stakes || !zodiacGameId || !zodiacCardSelect) {
-      toast('Thiếu thông tin', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+      if (!stakes) {
+        toast(`Thiếu stake`, { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+      } else if (!zodiacGameId) {
+        toast(`Thiếu thông tin game id`, { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+      } else if (!zodiacCardSelect) {
+        toast(`Thiếu card select`, { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+      }
+      // toast(`Thiếu thông tin ${stakes}-${zodiacGameId}-${zodiacCardSelect}`, { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
       onClose();
       return;
     }
@@ -81,7 +88,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <motion.div
           whileTap={{ y: 1 }}
           onClick={(e) => {
-            e.stopPropagation()
+            e.stopPropagation();
+            e.preventDefault(); //set for disable black bg
             clickAudioRef();
             setStakes((prevStake) => prevStake + 100);
           }}

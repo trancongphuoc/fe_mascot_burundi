@@ -52,7 +52,7 @@ export function BettingTable({ onSelectCard, statusGame }: BettingTableProps) {
     const handleSetectCard = useCallback((cardId: ZodiacCardModel): void => {
         setSelectCardId(cardId.id);
         onSelectCard(cardId);
-    }, [selectCardId]);
+    }, [selectCardId, statusGame]);
 
     return (
         <div className="betting-table mt-5px">

@@ -1389,7 +1389,7 @@ h4 {
   width: 28px;
   align-self: start;
   justify-self: end;
-  transform: translateX(-20px) translateY(-15px);
+  transform: translateX(-33px) translateY(-15px);
 }
 .lost-popup .lost__no1--url {
   grid-area: 1/1/2/2;

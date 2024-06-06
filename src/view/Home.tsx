@@ -36,7 +36,6 @@ import { useLocation } from 'react-router-dom';
 import { bettingCard } from '../api/bettingCard';
 import toast, { Toaster } from 'react-hot-toast';
 import SVG from 'react-inlinesvg';
-import { limit } from 'firebase/firestore';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -67,7 +66,7 @@ function Home() {
 
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
 
-  const [statusGame, setStatusGame] = useState('NONE');
+  const [statusGame, setStatusGame] = useState<StatusGame>('NONE');
   //open card
   const [openGameResult, setOpenGameResult] = useState(false);
   //open rule
@@ -197,10 +196,11 @@ useEffect(() => {
       onValue(stateRef, (snapshot) => {
         const data = snapshot.val();
         if (data && data !== statusGame) {
-          setStatusGame(data);
+          setStatusGame(data);  
         }
       });
     };
+    
     fetchStatus();
     fetchGameInfo();
 
@@ -225,20 +225,23 @@ useEffect(() => {
       //open card
       setOpenGameResult(true)
     }
+
+    toast(`giai doan ${statusGame}`, { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+
   }, [statusGame]);
 
 
 
   const handleCardSelection = (card: ZodiacCardModel) => {
-    const betCard: BetZodiacCard = {
-      ...card,
-      transactionId: game?.transactionId ?? 0,
-    };
-    if (game?.status === "COUNTDOWN") {
+    if (statusGame === "COUNTDOWN") {
+      const betCard: BetZodiacCard = {
+        ...card,
+        transactionId: game?.transactionId ?? 0,
+      };
       setSelectCard(betCard);
       setOpenBetting(true);
     } else {
-      toast('Chưa đến giai đoạn đặt cược', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+      toast(`Chưa đến giai đoạn đặt cược ${statusGame}`, { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
       setOpenBetting(false);
     }
   };
@@ -278,7 +281,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         <Players/>
       </div>
 
-      <BettingTable onSelectCard={handleCardSelection} openBetting={true} statusGame={game?.status ?? "NONE"}/>
+      <BettingTable onSelectCard={handleCardSelection} openBetting={true} statusGame={statusGame ?? "NONE"}/>
       <MyHistory
         onOpen={() => setOpenMyHistory(true)}
         onUserDataChange={handleIsWin}
