@@ -34,8 +34,9 @@ import { BettingTable } from '../components/BettingTable';
 import { getToken } from '../api/getToken';
 import { useLocation } from 'react-router-dom';
 import { bettingCard } from '../api/bettingCard';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import SVG from 'react-inlinesvg';
+import { limit } from 'firebase/firestore';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -88,6 +89,9 @@ function Home() {
   const [joinGame, setJoinGame] = useState(false);
   //get select card
   const [selectCard, setSelectCard] = useState<BetZodiacCard | null>(null);
+
+  //failed betting
+  const [betSuccess, setBetSuccess] = useState(false);
 
   const [totalIcoinWin, setTotalIcoinWin] = useState(0);
   //get win or not
@@ -235,6 +239,7 @@ useEffect(() => {
       setSelectCard(betCard);
       setOpenBetting(true);
     } else {
+      toast('Chưa đến giai đoạn đặt cược', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
       setOpenBetting(false);
     }
   };
@@ -254,10 +259,9 @@ const betGame = async (zodiacCard: ZodiacCardModel, stake: number) => {
       <section className='section-header u-margin-top-huge1'>
         <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />
         <p className='heading-secondary'>Hôm nay {game?.noGameToday} Ván</p>
-        <img
+        <SVG
           src={Rule}
           onClick={() => setOpenRule(true)}
-          alt="card_background"
           className='section-header__rule'/>
       </section>
 
@@ -276,7 +280,6 @@ const betGame = async (zodiacCard: ZodiacCardModel, stake: number) => {
 
       <button onClick={() => {
         console.log('show toast')
-        // toast.error("qweqwe")
       }} className="open-popup-button">Open Popup</button>
 
       <button onClick={() => {
