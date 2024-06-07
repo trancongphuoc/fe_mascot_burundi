@@ -254,13 +254,41 @@ const [betSuccess, setBetSuccess] = useState(true);
 
 // send icoin betting
 const betGame = async (zodiacCard: BetZodiacCard) => {
-  setBetCards(prevBetCards => [...prevBetCards, zodiacCard]);
-  const data = await bettingCard(game?.transactionId ?? 0, zodiacCard.totalIcoinBetting ?? 0, zodiacCard.id);
-  if (data != "OK") {
+  let cardFound = false;
+  const updatedBetCards = betCards.map((card) => {
+    if (card.id === zodiacCard.id) {
+      cardFound = true;
+      return {
+        ...card,
+        totalIcoinBetting: (card.totalIcoinBetting || 0) + (zodiacCard.totalIcoinBetting || 0),
+      };
+    }
+    return card;
+  });
+
+  if (!cardFound) {
+    updatedBetCards.push(zodiacCard);
+  }
+
+  if (updatedBetCards.length > 4) {
+    toast('Đặt cược tối đa 4 lá linh vật', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+  } else {
+    setBetCards(updatedBetCards);
+  }
+
+
+  try {
+    const data = await bettingCard(game?.transactionId ?? 0, zodiacCard.totalIcoinBetting ?? 0, zodiacCard.id);
+    if (data !== "OK") {
+      setBetSuccess(false);
+    }
+    console.log('check betting', data);
+  } catch (error) {
+    console.error('Error betting:', error);
     setBetSuccess(false);
   }
-  console.log('check betting' ,data)
 };
+
 
 
 
