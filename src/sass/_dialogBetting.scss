@@ -138,7 +138,13 @@
         justify-self: end;
     }
 
-    
+    &--button:active {
+        outline: none;
+    }
+
+    &--button:focus {
+        outline: none;
+    }
 
     &--button-2 {
         grid-area: 4 / 2 / 4 / 3;

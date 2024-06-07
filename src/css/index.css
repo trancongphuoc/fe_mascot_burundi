@@ -1032,6 +1032,12 @@ h4 {
   background-image: url(../assets/background-button.svg);
   justify-self: end;
 }
+.betting--button:active {
+  outline: none;
+}
+.betting--button:focus {
+  outline: none;
+}
 .betting--button-2 {
   grid-area: 4/2/4/3;
   text-align: center;
@@ -1125,6 +1131,7 @@ h4 {
   display: flex;
   flex-direction: column;
   justify-content: end;
+  align-content: end;
   top: 0;
   left: 0;
   width: 100%;
