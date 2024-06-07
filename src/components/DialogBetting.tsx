@@ -89,7 +89,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           whileTap={{ y: 1 }}
           onClick={(e) => {
             e.stopPropagation();
-            e.preventDefault(); //set for disable black bg
+            e.preventDefault();
             clickAudioRef();
             setStakes((prevStake) => prevStake + 100);
           }}

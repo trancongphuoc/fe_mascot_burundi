@@ -259,6 +259,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
   if (data != "OK") {
     setBetSuccess(false);
   }
+  console.log('check betting' ,data)
 };
 
 
