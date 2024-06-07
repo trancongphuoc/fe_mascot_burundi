@@ -241,7 +241,7 @@ useEffect(() => {
       setSelectCard(betCard);
       setOpenBetting(true);
     } else {
-      toast(`Chưa đến giai đoạn đặt cược ${statusGame}`, { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+      toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
       setOpenBetting(false);
     }
   };

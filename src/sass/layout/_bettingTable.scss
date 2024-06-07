@@ -57,6 +57,9 @@
         justify-items: center;
         align-items: start;
         width: 1fr;
+
+        outline: none;
+        -webkit-tap-highlight-color: transparent; 
     
         &--no {
             margin-top: 3px;
