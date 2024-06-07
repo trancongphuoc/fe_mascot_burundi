@@ -1027,6 +1027,7 @@ h4 {
   align-self: end;
   z-index: 5;
   user-select: none;
+  pointer-events: none;
   width: 86px;
   height: 32px;
   background-image: url(../assets/background-button.svg);
@@ -1050,6 +1051,7 @@ h4 {
   text-decoration: none;
   z-index: 5;
   user-select: none;
+  pointer-events: none;
   width: 86px;
   height: 32px;
   background-image: url(../assets/background-button.svg);
@@ -1066,6 +1068,7 @@ h4 {
   align-self: end;
   z-index: 5;
   user-select: none;
+  pointer-events: none;
   width: 86px;
   height: 32px;
   background-image: url(../assets/background-button.svg);
@@ -1811,6 +1814,7 @@ h4 {
   max-height: 100px;
   margin: 18.5px 0 20px 0;
   user-select: none;
+  pointer-events: none;
 }
 .rule--secondary {
   text-align: justify;

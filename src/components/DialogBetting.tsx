@@ -95,15 +95,15 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           }}
           className="betting--button-2">+100
         </motion.div>
-        <motion.div
-          whileTap={{ y: 1 }}
+        <div
+          // whileTap={{ y: 1 }}
           onClick={(e) => {
             e.stopPropagation()
             clickAudioRef();
             setStakes((prevStake) => prevStake + 1000);
           }}
           className="betting--button-3">+1000
-        </motion.div>
+        </div>
 
         <motion.div
           whileTap={{ y: 1 }}
