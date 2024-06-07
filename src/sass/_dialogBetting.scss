@@ -129,9 +129,12 @@
         -webkit-text-stroke: .5px #ffffff;
         align-self: end;
         z-index: 5;
-        user-select: none;
 
-        pointer-events: none;
+        -webkit-user-select: text;
+        -khtml-user-select: text;
+        -moz-user-select: text;
+        -o-user-select: text;
+        user-select: text;
 
         width: 86px;
         height: 32px;
@@ -160,9 +163,11 @@
         text-decoration: none;
 
         z-index: 5;
-        user-select: none;
-
-        pointer-events: none;
+        -webkit-user-select: text;
+        -khtml-user-select: text;
+        -moz-user-select: text;
+        -o-user-select: text;
+        user-select: text;
 
         width: 86px;
         height: 32px;
@@ -182,9 +187,11 @@
         align-self: end;
 
         z-index: 5;
-        user-select: none;
-
-        pointer-events: none;
+        -webkit-user-select: text;
+        -khtml-user-select: text;
+        -moz-user-select: text;
+        -o-user-select: text;
+        user-select: text;
 
         width: 86px;
         height: 32px;
