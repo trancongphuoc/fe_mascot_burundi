@@ -36,6 +36,7 @@
         max-width: 226px;
         max-height: 100px;
         margin: 18.5px 0 20px 0;
+        user-select: none;
     }
 
     &--secondary {
@@ -78,6 +79,7 @@
         height: 40px;
         border-radius: 29px;
         margin: 13px 0 20px 0;
+        user-select: none;
 
         &--next {
             color: $color-white;
