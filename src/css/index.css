@@ -1035,6 +1035,8 @@ h4 {
   height: 32px;
   background-image: url(../assets/background-button.svg);
   justify-self: end;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .betting--button:active {
   outline: none;
@@ -1061,6 +1063,8 @@ h4 {
   width: 86px;
   height: 32px;
   background-image: url(../assets/background-button.svg);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .betting--button-3 {
   grid-area: 4/3/4/4;
@@ -1081,6 +1085,8 @@ h4 {
   width: 86px;
   height: 32px;
   background-image: url(../assets/background-button.svg);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .betting__confirm {
   justify-self: center;

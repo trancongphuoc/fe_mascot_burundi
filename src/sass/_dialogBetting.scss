@@ -141,6 +141,9 @@
         background-image: url(../assets/background-button.svg);
 
         justify-self: end;
+
+        outline: none;
+        -webkit-tap-highlight-color: transparent; 
     }
 
     &--button:active {
@@ -172,6 +175,9 @@
         width: 86px;
         height: 32px;
         background-image: url(../assets/background-button.svg);
+
+        outline: none;
+        -webkit-tap-highlight-color: transparent; 
     }
 
     &--button-3 {
@@ -196,6 +202,9 @@
         width: 86px;
         height: 32px;
         background-image: url(../assets/background-button.svg);
+
+        outline: none;
+        -webkit-tap-highlight-color: transparent; 
     }
 
     &__confirm {
