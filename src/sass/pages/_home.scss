@@ -18,6 +18,9 @@
     justify-items: stretch;
     align-items: center;
 
+    outline: none;
+    -webkit-tap-highlight-color: transparent; 
+
     &__rule {
         align-self: self-end;
     }

@@ -603,6 +603,8 @@ h4 {
   justify-content: stretch;
   justify-items: stretch;
   align-items: center;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .section-header__rule {
   align-self: self-end;
