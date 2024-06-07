@@ -34,7 +34,7 @@ import { BettingTable } from '../components/BettingTable';
 import { getToken } from '../api/getToken';
 import { useLocation } from 'react-router-dom';
 import { bettingCard } from '../api/bettingCard';
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster, resolveValue } from 'react-hot-toast';
 import SVG from 'react-inlinesvg';
 
 
@@ -225,14 +225,18 @@ useEffect(() => {
       //open card
       setOpenGameResult(true)
     }
-
-    toast(`giai doan ${statusGame}`, { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+    toast.dismiss();
+    toast(`giai doan ${statusGame}`, { duration: 2000, position: 'bottom-center'});
 
   }, [statusGame]);
 
 
 
   const handleCardSelection = (card: ZodiacCardModel) => {
+
+    toast.dismiss();
+    toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
+
     if (statusGame === "COUNTDOWN") {
       const betCard: BetZodiacCard = {
         ...card,
@@ -241,7 +245,8 @@ useEffect(() => {
       setSelectCard(betCard);
       setOpenBetting(true);
     } else {
-      toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+      toast.dismiss();
+      toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
       setOpenBetting(false);
     }
   };
@@ -271,7 +276,8 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
   }
 
   if (updatedBetCards.length > 4) {
-    toast('Đặt cược tối đa 4 lá linh vật', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+    toast.dismiss();
+    toast('Đặt cược tối đa 4 lá linh vật', { duration: 2000, position: 'bottom-center'});
   } else {
     setBetCards(updatedBetCards);
   }
@@ -294,7 +300,33 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
   return (
     <div className='main'>
-      <Toaster position='top-right'/>
+      {/* <Toaster position='top-right' toastOptions={{
+        style: {
+          background: 'rgba(0, 0 , 0, 0.3)',
+          color: '#fff',
+        },
+
+      }}/> */}
+
+      <Toaster>
+        {(t) => (
+          <div
+            style={{
+              opacity: t.visible ? 1 : 0,
+              transition: 'opacity 0.3s linear',
+              background: 'rgba(0, 0 , 0, 0.5)',
+              fontSize: 12,
+              paddingTop: 6,
+              paddingBottom: 5,
+              paddingLeft: 20,
+              paddingRight: 20,
+              borderRadius: '20px',
+              color: '#fff'}}
+          >
+            {resolveValue(t.message, t)}
+          </div>
+        )}
+      </Toaster>;
       
       <section className='section-header u-margin-top-huge1'>
         <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />

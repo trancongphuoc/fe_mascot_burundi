@@ -15,7 +15,8 @@ export const bettingCard = async (
   try {
     const token = window.sessionStorage.getItem('token');
     if (!token) {
-      toast('Thiếu thông tin', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+      toast.dismiss();
+      toast('Thiếu thông tin', { duration: 2000, position: 'bottom-center'});
       return "FAILED";
     } 
     
@@ -32,11 +33,13 @@ export const bettingCard = async (
     if (response.data.status === "OK") {
       return "OK";
     } else {
-      toast('Đặt cược thất bại', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+      toast.dismiss();
+      toast('Đặt cược thất bại', { duration: 2000, position: 'bottom-center'});
       return "FAILED";
     }
   } catch (error) {
-    toast('Lỗi đặt cược', { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
+    toast.dismiss();
+    toast('Lỗi đặt cược', { duration: 2000, position: 'bottom-center'});
     if (axios.isAxiosError(error)) {
       console.error('Axios error fetching game history:', error.response?.data || error.message);
     } else {
