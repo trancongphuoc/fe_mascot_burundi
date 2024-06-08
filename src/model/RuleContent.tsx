@@ -4,7 +4,7 @@ import Rule3 from '../assets/rule_3.png';
 import Rule4 from '../assets/rule_4.png';
 
 
-export const rules = [
+export const RULE_CONTENTS = [
     {
       image: Rule1,
       text: 'Trong lúc thời gian đếm ngược bạn nhấn chọn lá bài muốn đoán'
