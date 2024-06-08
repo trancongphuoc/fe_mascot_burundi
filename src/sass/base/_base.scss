@@ -29,6 +29,9 @@ body {
     max-width: 430px;
     width: 100%;
 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
     margin: 0 auto;
 
     background-image: url(../assets/buffalo_logo.svg), url(../assets/goat_logo.svg), linear-gradient(

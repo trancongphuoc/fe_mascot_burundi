@@ -166,18 +166,13 @@
         text-decoration: none;
 
         z-index: 5;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -o-user-select: none;
-        user-select: none;
 
         width: 86px;
         height: 32px;
         background-image: url(../assets/background-button.svg);
 
-        outline: none;
-        -webkit-tap-highlight-color: transparent; 
+        @include non_select;
+
     }
 
     &--button-3 {
@@ -193,18 +188,12 @@
         align-self: end;
 
         z-index: 5;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -o-user-select: none;
-        user-select: none;
 
         width: 86px;
         height: 32px;
         background-image: url(../assets/background-button.svg);
 
-        outline: none;
-        -webkit-tap-highlight-color: transparent; 
+        @include non_select;
     }
 
     &__confirm {
@@ -225,6 +214,8 @@
         border-radius: 23px;
         overflow: hidden;
         z-index: 5;
+
+        @include non_select;
     
         &::before {
             content: '';

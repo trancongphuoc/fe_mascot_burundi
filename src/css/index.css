@@ -23,6 +23,8 @@ body {
   line-height: 1.6;
   max-width: 430px;
   width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   margin: 0 auto;
   background-image: url(../assets/buffalo_logo.svg), url(../assets/goat_logo.svg), linear-gradient(to bottom, #094348 0%, #062F33 30%, #062F33 100%);
   background-position: top left, top right, center;
@@ -1057,16 +1059,16 @@ h4 {
   align-self: end;
   text-decoration: none;
   z-index: 5;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  user-select: none;
   width: 86px;
   height: 32px;
   background-image: url(../assets/background-button.svg);
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .betting--button-3 {
   grid-area: 4/3/4/4;
@@ -1079,16 +1081,16 @@ h4 {
   -webkit-text-stroke: 0.5px #ffffff;
   align-self: end;
   z-index: 5;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  user-select: none;
   width: 86px;
   height: 32px;
   background-image: url(../assets/background-button.svg);
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .betting__confirm {
   justify-self: center;
@@ -1108,6 +1110,13 @@ h4 {
   border-radius: 23px;
   overflow: hidden;
   z-index: 5;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .betting__confirm::before {
   content: "";

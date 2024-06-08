@@ -68,3 +68,13 @@
         z-index: 3;
     }
 }
+
+@mixin non_select {
+    outline: none;
+    -webkit-tap-highlight-color: transparent; 
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
