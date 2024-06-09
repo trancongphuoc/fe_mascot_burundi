@@ -20,6 +20,8 @@ import LineRightLost from '../assets/line_right_lost.svg';
 import SVG from 'react-inlinesvg';
 import { motion } from 'framer-motion';
 import useAudio from './UseAudio';
+import winAudio from '../../public/sounds/crowd_victory.wav';
+import lostAudio from '../../public/sounds/crowd_disappointed.wav';
 
 interface DialogLostWinProps {
   onClose: () => void;
@@ -37,11 +39,8 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, tota
 
   const crown = [CrownGold, CrownSliver, CrownBronze];
 
-  let lostAudioPath = '/zodiac-game/public/sounds/crowd_disappointed.wav';
-  let winAudioPath = '/zodiac-game/public/sounds/crowd_victory.wav';
-
-  const playLostAudio = useAudio(lostAudioPath);
-  const playWinAudio = useAudio(winAudioPath);
+  const playLostAudio = useAudio(lostAudio);
+  const playWinAudio = useAudio(winAudio);
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {

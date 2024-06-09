@@ -233,10 +233,6 @@ useEffect(() => {
 
 
   const handleCardSelection = (card: ZodiacCardModel) => {
-
-    toast.dismiss();
-    toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
-
     if (statusGame === "COUNTDOWN") {
       const betCard: BetZodiacCard = {
         ...card,

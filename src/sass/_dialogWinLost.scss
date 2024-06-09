@@ -204,7 +204,7 @@
                 outer-color-bottom: $color-lost-av-no2-b,
                 middle-width: 63px,
                 inner-width: 59px,
-                crown-left: -22px,
+                crown-left: -20%,
                 crown-top: -15px,
             ));
             padding-left: 4px;
@@ -219,9 +219,8 @@
                 outer-color-bottom: $color-lost-av-no1-t,
                 middle-width: 74px,
                 inner-width: 70px,
-                // crown-left: -20px,
-                crown-left: -33px,          
-                crown-top: -15px,
+                crown-left: -35%,          
+                crown-top: -60%,
             ));
             padding-bottom: 19.5px;
             z-index: 7;
