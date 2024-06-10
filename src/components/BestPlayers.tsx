@@ -47,7 +47,7 @@ function BestPlayers({statusGame} : BestPlayersPro) {
             off(stateRef, 'value', handleData);
         }
         return () => off(stateRef, 'value', handleData);
-    }, []);
+    }, [statusGame]);
 
     return (    
         <div className="best-players mb-4-5px mt-30px">
