@@ -80,26 +80,23 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           <p className="betting__totalIcoin--icoin">{stakes}</p>
         </div>
 
-        <motion.div
-          whileTap={{ y: 1 }}
+        <div
           onClick={(e) => {
             e.stopPropagation()
             clickAudioRef();
             setStakes((prevStake) => prevStake + 10);
           }}
           className="betting--button">+10
-        </motion.div>
-        <motion.div
-          whileTap={{ y: 1 }}
+        </div>
+        <div
           onClick={(e) => {
             e.stopPropagation();
             clickAudioRef();
             setStakes((prevStake) => prevStake + 100);
           }}
           className="betting--button-2">+100
-        </motion.div>
+        </div>
         <div
-          // whileTap={{ y: 1 }}
           onClick={(e) => {
             e.stopPropagation()
             clickAudioRef();
@@ -108,15 +105,14 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           className="betting--button-3">+1000
         </div>
 
-        <motion.div
-          whileTap={{ y: 1 }}
+        <div
           onClick={(e) => {
             e.stopPropagation()
             sendDataOut()
             confirmRef()}}
           className="betting__confirm mb-34px mt-14-5px">
           <p className="betting__confirm--text">Xác nhận</p>
-        </motion.div>
+        </div>
       </motion.div>
     </motion.div>
   );
