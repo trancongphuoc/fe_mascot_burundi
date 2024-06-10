@@ -43,8 +43,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
       ...zodiacCardSelect,
       totalIcoinBetting: stakes ?? 0,
     }
-    betIcoin(betCard);
     onClose();
+    betIcoin(betCard);
   };
 
   return (

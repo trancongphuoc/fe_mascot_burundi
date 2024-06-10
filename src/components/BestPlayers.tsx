@@ -4,7 +4,7 @@ import SecondaryText from '../assets/best-players-logo.svg';
 import Icoin from '../assets/icoin.svg';
 import SVG from 'react-inlinesvg';
 import bgBestPlayers from '../assets/bg_best_players.svg';
-import { listenTopUsers } from '../firebase/bestPlayers';
+import { getTopUsers } from '../firebase/bestPlayers';
 
 interface BestPlayersPro {
     statusGame: StatusGame
@@ -24,13 +24,23 @@ function BestPlayers({statusGame} : BestPlayersPro) {
     const [topUsers, setTopUser] = useState<User[]>([])
 
     useEffect(() => {
-        let unsubscribe = () => {}; 
+        let isMounted = true;
+
         if (statusGame === "COUNTDOWN") {
-            unsubscribe = listenTopUsers(setTopUser);
+            getTopUsers()
+                .then(users => {
+                    if (isMounted) {
+                        setTopUser(users);
+                    }
+                })
+                .catch(error => console.error('Error fetching top users:', error));
         } else {
-            unsubscribe && unsubscribe();
+            setTopUser([]);
         }
-        return () => unsubscribe && unsubscribe();
+
+        return () => {
+            isMounted = false;
+        };
     }, [statusGame]);
 
     return (    
