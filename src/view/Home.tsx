@@ -91,11 +91,11 @@ function Home() {
 
   const [totalIcoinWin, setTotalIcoinWin] = useState(0);
   // get win or not
-  const handleIsWin = (data: { isWin?: boolean | undefined; icoinWin?: number | undefined }) => {
-    if (data && data.icoinWin) {
-      setTotalIcoinWin(data.icoinWin);
+  const handleIsWin = (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => {
+    if (data.totalIcoinWin) {
+      setTotalIcoinWin(data.totalIcoinWin);
     }
-   console.log('check icoin win: ', data.icoinWin)
+   console.log('check icoin win: ', data.totalIcoinWin)
 
     if (typeof data.isWin === 'boolean') {
       if (data.isWin) {
