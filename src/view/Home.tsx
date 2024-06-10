@@ -95,6 +95,8 @@ function Home() {
     if (data && data.icoinWin) {
       setTotalIcoinWin(data.icoinWin);
     }
+   console.log('check win: ', data.isWin)
+
     if (typeof data.isWin === 'boolean') {
       if (data.isWin) {
         setDialogType('WIN');
@@ -374,7 +376,9 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                                             zodiacGameId={game?.transactionId ?? 0}/>)}
         {openLostWin && <DialogLost
                             onClose={() => setOpenLostWin(false)}
-                            dialogType={dialogType} totalIcoin={totalIcoinWin}
+                            statusGame={game?.status ?? 'NONE'}
+                            fbId={fbId}
+                            // dialogType={dialogType} totalIcoin={totalIcoinWin}
                             topUsers={game?.topUser ?? []} zodiac={game?.zodiacCard.imgUrl ?? ''} />}
         {openHistoryGame && <PopupHistoryGame
                               onClose={() => setOpenHistoryGame(false)}

@@ -22,20 +22,35 @@ import { motion } from 'framer-motion';
 import useAudio from './UseAudio';
 import winAudio from '../../public/sounds/crowd_victory.wav';
 import lostAudio from '../../public/sounds/crowd_disappointed.wav';
+import { DataSnapshot, off, onValue, ref } from 'firebase/database';
+import { db } from '../firebase/config';
 
 interface DialogLostWinProps {
   onClose: () => void;
-  dialogType: DialogType;
-  totalIcoin: number;
+  // dialogType: DialogType;
+  // totalIcoin: number;
   topUsers: User[];
   zodiac: string;
+  fbId: string;
+  statusGame: StatusGame;
+
+  
 }
 
-const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, totalIcoin, topUsers, zodiac }) => {
+interface BetUser extends User {
+  bettingCards?: BetZodiacCard[];
+  isWin?: boolean;
+  totalIcoinWin?: number;
+}
+
+const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac, fbId, statusGame}) => {
   const [bgHeader, setBgHeader] = useState(BgHeaderLost);
   const [bgContent, setBgContent] = useState(BgContentLost);
   const [lineLeft, setLineLeft] = useState(LineLeftLost);
   const [lineRight, setLineRight] = useState(LineLeftLost);
+
+  const [dialogType, setDialogType] = useState('LOST');
+  const [totalIcoin, setTotalIcoin] = useState(0);
 
   const crown = [CrownGold, CrownSliver, CrownBronze];
 
@@ -50,6 +65,46 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, dialogType, tota
 
   //   return () => clearTimeout(timer);
   // }, [onClose]);
+
+      useEffect(() => {
+        const stateRef = ref(db, `/zodiacGame/players/${fbId}`);
+        const handleData = (snapshot: DataSnapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                const cards: BetZodiacCard[] = [];
+                if (data.bettingCards) {
+                    for (const cardsId in data.bettingCards) {
+                        if (Object.hasOwnProperty.call(data.bettingCards, cardsId)) {
+                            const cardId = data.bettingCards[cardsId];
+                            const card: BetZodiacCard = {
+                                id: cardId.id ?? '',
+                                imageUrl: cardId.imageUrl ?? '',
+                                name: cardId.name ?? '',
+                                multiply: cardId.multiply ?? 0,
+                                totalIcoinBetting: cardId.totalIcoinBetting ?? 0,
+                            };
+                            cards.push(card);
+                        }
+                    }
+                }    
+            }
+
+            if (data && data.isWin) {
+              setDialogType('WIN')
+              setTotalIcoin(data.totalIcoinWin ?? 0);
+            } else {
+              setDialogType('LOST')
+            }
+        };
+
+
+        if (statusGame === "COUNTDOWN") {
+            onValue(stateRef, handleData);
+        } else {
+            off(stateRef, 'value', handleData);
+        }        
+        return () => off(stateRef, 'value', handleData);
+    }, [statusGame, fbId]);
 
   useEffect(() => {
     if (dialogType === 'WIN') {
