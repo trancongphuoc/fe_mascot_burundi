@@ -102,7 +102,6 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
                       }
                     </div>
              
-  
                     <div className="item__icoin">
                       <p className={mine.netIcoin > 0 ? "item__icoin--data-win" : "item__icoin--data-lost"}>
                             {mine.netIcoin > 0 ?

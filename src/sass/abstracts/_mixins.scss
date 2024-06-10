@@ -78,3 +78,8 @@
     -o-user-select: none;
     user-select: none;
 }
+
+@mixin non_decor_button {
+    border: none;
+    background-color: transparent;
+}

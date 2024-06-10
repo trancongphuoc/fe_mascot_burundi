@@ -23,9 +23,10 @@ interface MyInfoBetResultModel {
     fbId: string,
     betCards: BetZodiacCard[],
     betSuccess: boolean,
+    deposit: () => void;
 }
 
-function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataChange} : MyInfoBetResultModel) {
+function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataChange, deposit} : MyInfoBetResultModel) {
     const [betUser, setBetUser] = useState<BetUser>()
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
 
@@ -141,7 +142,7 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                     <SVG src={Icoin} className="end-left--img"/>
                     <p className='end-left--icoin'>{totalIcoin.toLocaleString('en-US').replace(/,/g, '.')}</p>
                 </div>
-                <h4 className='end-right'>
+                <h4 className='end-right' onClick={deposit}>
                     <p className='end-right--text'>Nạp ngay</p>
                     <SVG src={ArrowWhite} className="end-right--img"/>
                 </h4>

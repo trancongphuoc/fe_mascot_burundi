@@ -14,12 +14,13 @@ import Rule from '../assets/rule.svg';
 
 import MyHistory from '../components/MyBonusToday';
 import BestPlayers from '../components/BestPlayers';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DialogBetting from '../components/DialogBetting';
 import DialogLost from '../components/DialogLost';
 import PopupRule from '../components/PopupRule';
 import PopupHistoryGame from '../components/PopupHistoryGame';
 import PopupMyHistory from '../components/PopupMyHistory';
+import PopupNotification from '../components/PopupNotification';
 
 import { db } from '../firebase/config';
 import { ref, onValue, off } from "firebase/database";
@@ -36,6 +37,7 @@ import { useLocation } from 'react-router-dom';
 import { bettingCard } from '../api/bettingCard';
 import toast, { Toaster, resolveValue } from 'react-hot-toast';
 import SVG from 'react-inlinesvg';
+import { useOnlineStatus } from '../api/checkDisconnect';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -79,6 +81,12 @@ function Home() {
   const [openBetting, setOpenBetting] = useState(false);
   //open my history
   const [openMyHistory, setOpenMyHistory] = useState(false);
+
+  //dialog deposit iCoin
+  const [openDepositIcoin, setOpenDepositIcoin] = useState(false);
+
+  //dialog disconnnect
+  const [openDisconnect, setOpenDisconnect] = useState(false);
 
   const [dialogType, setDialogType] = useState<DialogType>('LOST');
 
@@ -291,6 +299,19 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
   }
 };
 
+  // const updateOnlineStatus = () => {
+  //   const onlineStatus = navigator.onLine;
+  //   setOpenDisconnect(!onlineStatus)
+
+  // };
+
+  const updateOnlineStatus = useCallback(() => {
+    const onlineStatus = navigator.onLine;
+    setOpenDisconnect(!onlineStatus)
+  }, []);
+
+  useOnlineStatus(updateOnlineStatus);
+
 
 
 
@@ -337,12 +358,14 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         fbId={fbId}
         betCards={betCards}
         betSuccess={betSuccess}
-        statusGame={game?.status ?? 'NONE'}/>
-
+        statusGame={game?.status ?? 'NONE'}
+        deposit={() => setOpenDepositIcoin(true)}
+        />
+   
       <BestPlayers statusGame={game?.status ?? "NONE"}/>
 
       <button onClick={() => {
-        console.log('show toast')
+        setOpenDisconnect(true);
       }} className="open-popup-button">Open Popup</button>
 
       <button onClick={() => {
@@ -382,7 +405,23 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                               onClose={() => setOpenHistoryGame(false)}
                               zodiacs={img}/>}
         {openMyHistory && <PopupMyHistory onClose={()=> setOpenMyHistory(false)}/>}
+
+        {openDepositIcoin && <PopupNotification 
+                                onClose={() => setOpenDepositIcoin(false)} 
+                                title = 'Không đủ iCoin để chơi, bạn có muốn nạp thêm?'
+                                leftContentButton = 'Huỷ'
+                                rightContentButton = 'Nạp thêm'
+                                />}
+
+        {openDisconnect && <PopupNotification 
+                                onClose={() => setOpenDisconnect(false)} 
+                                title = 'Đường truyền không ổn định, vui lòng kiểm tra kết nối mạng'
+                                leftContentButton = 'Thoát'
+                                rightContentButton = 'Kết nối lại'
+                                />}
+
       </AnimatePresence>
+
       {openGameResult && <OpenCard
                               onClose={()=> {
                                               setOpenGameResult(false)

@@ -594,6 +594,34 @@ h4 {
   opacity: 0.4;
 }
 
+.popup-overlay-center {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.deposit {
+  background: white;
+  position: relative;
+  max-width: 327px;
+  height: auto;
+  display: grid;
+  grid-template-rows: min-content min-content;
+  grid-template-rows: min-content min-content;
+  justify-content: center;
+  justify-items: center;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 26px 39px 24px 39px;
+}
+
 .main {
   max-width: 430px;
   width: 100%;
@@ -2238,6 +2266,38 @@ h4 {
   align-content: center;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(10, 50px);
+}
+
+.content {
+  grid-area: 1/1/2/3;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.button_left {
+  text-align: justify;
+  color: #8D8D8D;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+  margin: 0 16px;
+  border: none;
+  background-color: transparent;
+}
+
+.button_right {
+  text-align: justify;
+  color: #F15351;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+  margin: 0 16px;
+  border: none;
+  background-color: transparent;
 }
 
 .betting-table {
