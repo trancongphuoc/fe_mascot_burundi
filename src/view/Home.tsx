@@ -95,7 +95,7 @@ function Home() {
     if (data && data.icoinWin) {
       setTotalIcoinWin(data.icoinWin);
     }
-   console.log('check win: ', data.isWin)
+   console.log('check icoin win: ', data.icoinWin)
 
     if (typeof data.isWin === 'boolean') {
       if (data.isWin) {
@@ -232,8 +232,6 @@ useEffect(() => {
 
   }, [statusGame]);
 
-
-
   const handleCardSelection = (card: ZodiacCardModel) => {
     if (statusGame === "COUNTDOWN") {
       const betCard: BetZodiacCard = {
@@ -298,14 +296,6 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
   return (
     <div className='main'>
-      {/* <Toaster position='top-right' toastOptions={{
-        style: {
-          background: 'rgba(0, 0 , 0, 0.3)',
-          color: '#fff',
-        },
-
-      }}/> */}
-
       <Toaster>
         {(t) => (
           <div

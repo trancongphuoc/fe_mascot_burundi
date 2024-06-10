@@ -3,12 +3,19 @@ import { useEffect, useState } from 'react';
 import SecondaryText from '../assets/best-players-logo.svg';
 import Icoin from '../assets/icoin.svg';
 import SVG from 'react-inlinesvg';
-import { off, onValue, ref } from 'firebase/database';
-import { db } from '../firebase/config';
 import bgBestPlayers from '../assets/bg_best_players.svg';
+import { listenTopUsers } from '../firebase/bestPlayers';
 
 interface BestPlayersPro {
     statusGame: StatusGame
+}
+
+interface User {
+    facebookUserId: string;
+    name: string;
+    profileImageLink: string;
+    totalIcoin: number;
+    uid: string;
 }
 
 
@@ -17,36 +24,13 @@ function BestPlayers({statusGame} : BestPlayersPro) {
     const [topUsers, setTopUser] = useState<User[]>([])
 
     useEffect(() => {
-        const stateRef = ref(db, '/zodiacGame/state/topUsers');
-        const handleData = (snapshot: any) => {
-            const data = snapshot.val();
-            console.log('zodiacCards', data);
-            if (data) {
-                const topUsers: User[] = [];
-                for (const userId in data) {
-                    if (Object.hasOwnProperty.call(data, userId)) {
-                        const userData = data[userId];
-                        const user: User = {
-                            facebookUserId: userData.facebookUserId ?? '',
-                            name: userData.name ?? '',
-                            profileImageLink: userData.profileImageLink ?? '',
-                            totalIcoin: userData.totalIcoin,
-                            uid: userData.uid,
-                        };
-                        topUsers.push(user);
-                    }
-                }
-                setTopUser(topUsers);
-            } else {
-                setTopUser([]);
-            }
-        };
+        let unsubscribe = () => {}; 
         if (statusGame === "COUNTDOWN") {
-            onValue(stateRef, handleData);
+            unsubscribe = listenTopUsers(setTopUser);
         } else {
-            off(stateRef, 'value', handleData);
+            unsubscribe && unsubscribe();
         }
-        return () => off(stateRef, 'value', handleData);
+        return () => unsubscribe && unsubscribe();
     }, [statusGame]);
 
     return (    
