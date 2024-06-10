@@ -25,7 +25,7 @@ interface MyInfoBetResultModel {
     betSuccess: boolean,
 }
 
-function MyHistory({onOpen, onUserDataChange, statusGame, fbId, betCards, betSuccess} : MyInfoBetResultModel) {
+function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataChange} : MyInfoBetResultModel) {
     const [betUser, setBetUser] = useState<BetUser>()
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
 
@@ -80,25 +80,23 @@ function MyHistory({onOpen, onUserDataChange, statusGame, fbId, betCards, betSuc
             }
         };
 
-        if (statusGame === "COUNTDOWN") {
+        // if (statusGame === "RESULT") {
             onValue(stateRef, handleData);
-        } else {
-            off(stateRef, 'value', handleData);
-        }        
+        // } else {
+        //     off(stateRef, 'value', handleData);
+        // }        
         return () => off(stateRef, 'value', handleData);
     }, [statusGame, fbId]);
 
     useEffect(() => {
         if (betSuccess) {
             setBettingCards(betCards);
-            console.log('step 11');
         }
     }, [betSuccess, betCards]);
     
     useEffect(() => {
         if (!betSuccess) {
             setBettingCards(betUser?.bettingCards ?? []);
-            console.log('step 12');
         }
     }, [betSuccess, betUser]); 
 

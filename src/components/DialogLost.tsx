@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import bgCardSelected from '../assets/bg_card_selected_light.svg';
 import TextCongratution from '../assets/text_congregation.svg';
 import TextApologize from '../assets/text_apologize.svg';
@@ -22,149 +21,65 @@ import { motion } from 'framer-motion';
 import useAudio from './UseAudio';
 import winAudio from '../../public/sounds/crowd_victory.wav';
 import lostAudio from '../../public/sounds/crowd_disappointed.wav';
-import { DataSnapshot, off, onValue, ref } from 'firebase/database';
-import { db } from '../firebase/config';
 
 interface DialogLostWinProps {
   onClose: () => void;
-  // dialogType: DialogType;
-  // totalIcoin: number;
+  dialogType: DialogType;
+  totalIcoin: number;
   topUsers: User[];
   zodiac: string;
-  fbId: string;
-  statusGame: StatusGame;
-
-  
 }
 
-interface BetUser extends User {
-  bettingCards?: BetZodiacCard[];
-  isWin?: boolean;
-  totalIcoinWin?: number;
+const lost = {
+  bgHeader: BgHeaderLost,
+  bgContent: BgContentLost,
+  lineLeft: LineLeftLost,
+  lineRight: LineRightLost
 }
 
-const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac, fbId, statusGame}) => {
-  const [bgHeader, setBgHeader] = useState(BgHeaderLost);
-  const [bgContent, setBgContent] = useState(BgContentLost);
-  const [lineLeft, setLineLeft] = useState(LineLeftLost);
-  const [lineRight, setLineRight] = useState(LineLeftLost);
+const win = {
+  bgHeader: BgHeaderWin,
+  bgContent: BgContentWin,
+  lineLeft: LineLeftWin,
+  lineRight: LineRightWin
+}
 
-  const [dialogType, setDialogType] = useState('LOST');
-  const [totalIcoin, setTotalIcoin] = useState(0);
+const crown = [CrownGold, CrownSliver, CrownBronze];
 
-  const crown = [CrownGold, CrownSliver, CrownBronze];
+
+const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac, totalIcoin, dialogType}) => {
+
+  console.log('check dialogType', dialogType);
+
+  const contentLost = <>
+                      <SVG src={TextApologize} className="lost--primary-text" onClick={e => {e.stopPropagation()}}/>
+                      <div className="lost__secondary" onClick={e => {e.stopPropagation()}}>
+                        <p className="lost__secondary--text1">Bạn bỏ lỡ phần thưởng lần đoán này</p>
+                        <p className="lost__secondary--text2">Đừng nản lòng, hãy cố gắng lên, tin tưởng bản thân!</p>
+                      </div>
+                    </>;
+  const contentWin = <>
+                      <SVG src={TextCongratution} className="win--primary-text" onClick={e => {e.stopPropagation()}}/>
+                      <div className="win__secondary" onClick={e => {e.stopPropagation()}}>
+                      <p className="win__secondary--text">Thật xuất sắc, bạn đã đoán trúng ván này</p>
+                      <div className="win__totalIcoin">
+                        <SVG className="win__totalIcoin--img" src={Icoin}/>
+                        <p className="win__totalIcoin--icoin">{totalIcoin}</p>
+                      </div>
+                      </div>
+                    </>;
 
   const playLostAudio = useAudio(lostAudio);
   const playWinAudio = useAudio(winAudio);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     console.log('Closing...');
-  //     onClose();
-  //   }, 3000);
-
-  //   return () => clearTimeout(timer);
-  // }, [onClose]);
-
-      useEffect(() => {
-        const stateRef = ref(db, `/zodiacGame/players/${fbId}`);
-        const handleData = (snapshot: DataSnapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                const cards: BetZodiacCard[] = [];
-                if (data.bettingCards) {
-                    for (const cardsId in data.bettingCards) {
-                        if (Object.hasOwnProperty.call(data.bettingCards, cardsId)) {
-                            const cardId = data.bettingCards[cardsId];
-                            const card: BetZodiacCard = {
-                                id: cardId.id ?? '',
-                                imageUrl: cardId.imageUrl ?? '',
-                                name: cardId.name ?? '',
-                                multiply: cardId.multiply ?? 0,
-                                totalIcoinBetting: cardId.totalIcoinBetting ?? 0,
-                            };
-                            cards.push(card);
-                        }
-                    }
-                }    
-            }
-
-            if (data && data.isWin) {
-              setDialogType('WIN')
-              setTotalIcoin(data.totalIcoinWin ?? 0);
-            } else {
-              setDialogType('LOST')
-            }
-        };
-
-
-        if (statusGame === "COUNTDOWN") {
-            onValue(stateRef, handleData);
-        } else {
-            off(stateRef, 'value', handleData);
-        }        
-        return () => off(stateRef, 'value', handleData);
-    }, [statusGame, fbId]);
-
-  useEffect(() => {
-    if (dialogType === 'WIN') {
-      setBgHeader(BgHeaderWin);
-      setBgContent(BgContentWin);
-      setLineLeft(LineLeftWin);
-      setLineRight(LineRightWin);
-
-      playWinAudio()
-    } else if (dialogType === 'LOST') {
-      setBgHeader(BgHeaderLost);
-      setBgContent(BgContentLost);
-      setLineLeft(LineLeftLost);
-      setLineRight(LineRightLost);
-      playLostAudio()
-    }
-  }, [dialogType]);
-
-//   const top123: User[] = [{
-//     name: "Dong Hoang Linh",
-//     profileImageLink: "123",
-//     totalIcoin: 123
-//   },
-//   {
-//     name: "Dong Hoang Linh",
-//     profileImageLink: "123",
-//     totalIcoin: 12312
-//   },
-//   {
-//     name: "Dong Hoang Linh",
-//     profileImageLink: "123",
-//     totalIcoin: 12
-//   },
-// ]
-
   const renderDialogContent = () => {
     switch (dialogType) {
       case 'LOST':
-        return (
-          <>
-            <SVG src={TextApologize} className="lost--primary-text" onClick={e => {e.stopPropagation()}}/>
-            <div className="lost__secondary" onClick={e => {e.stopPropagation()}}>
-              <p className="lost__secondary--text1">Bạn bỏ lỡ phần thưởng lần đoán này</p>
-              <p className="lost__secondary--text2">Đừng nản lòng, hãy cố gắng lên, tin tưởng bản thân!</p>
-            </div>
-          </>
-        );
+        playLostAudio()
+        return contentLost;
       case 'WIN':
-        return (
-          <>
-            <SVG src={TextCongratution} className="win--primary-text" onClick={e => {e.stopPropagation()}}/>
-            <div className="win__secondary" onClick={e => {e.stopPropagation()}}>
-             <p className="win__secondary--text">Thật xuất sắc, bạn đã đoán trúng ván này</p>
-             <div className="win__totalIcoin">
-              <SVG className="win__totalIcoin--img" src={Icoin}/>
-              <p className="win__totalIcoin--icoin">{totalIcoin}</p>
-             </div>
-            </div>
-          </>
-        );
+        playWinAudio()
+        return contentWin;
       default:
         return null;
     }
@@ -184,17 +99,17 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
         transition={{ type: 'just'}}
         className="lost-popup"
         >
-        <SVG src={bgContent} className="lost--BgContent mb--1px" onClick={e => {e.stopPropagation()}}/>
+        <SVG src={dialogType == "WIN" ? win.bgContent : lost.bgContent} className="lost--BgContent mb--1px" onClick={e => {e.stopPropagation()}}/>
         <SVG src={bgCardSelected} className="lost--zodiac-background" onClick={e => {e.stopPropagation()}}/>
         <SVG src={zodiac} className="lost--zodiac-card" onClick={e => {e.stopPropagation()}}/>
         <SVG src={BgLighter} className="lost--BgLighter" onClick={e => {e.stopPropagation()}}/>
-        <SVG src={bgHeader} className="lost--BgHeader" onClick={e => {e.stopPropagation()}}/>
+        <SVG src={dialogType == "WIN" ? win.bgHeader : lost.bgHeader} className="lost--BgHeader" onClick={e => {e.stopPropagation()}}/>
         
         {renderDialogContent()}
         
-        <SVG src={lineLeft} className ="lost--light1"/>
+        <SVG src={dialogType == "WIN" ? win.lineLeft : lost.lineLeft} className ="lost--light1"/>
         <p className="lost--tertiary" onClick={e => {e.stopPropagation()}}>TOP chiến thắng</p>
-        <SVG src={lineRight} className ="lost--light2"/>
+        <SVG src={dialogType == "WIN" ? win.lineRight : lost.lineRight} className ="lost--light2"/>
 
         {topUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)).map((user, index) => (
           <div className={`lost__no${index + 1}`} key={index} onClick={e => {e.stopPropagation()}}>

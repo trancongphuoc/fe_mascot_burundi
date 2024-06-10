@@ -90,7 +90,7 @@ function Home() {
   const [selectCard, setSelectCard] = useState<BetZodiacCard | null>(null);
 
   const [totalIcoinWin, setTotalIcoinWin] = useState(0);
-  //get win or not
+  // get win or not
   const handleIsWin = (data: { isWin?: boolean | undefined; icoinWin?: number | undefined }) => {
     if (data && data.icoinWin) {
       setTotalIcoinWin(data.icoinWin);
@@ -243,7 +243,7 @@ useEffect(() => {
       setSelectCard(betCard);
       setOpenBetting(true);
     } else {
-      toast.dismiss();
+      toast.remove();
       toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
       setOpenBetting(false);
     }
@@ -356,7 +356,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
       }} className="open-popup-button">Open Popup</button>
 
       <button onClick={() => {
-        setDialogType('LOST');
+        // setDialogType('LOST');
         setOpenLostWin(true)}} className="open-popup-button">Open Popup</button>
       <button onClick={()=> setOpenGameResult(true)} className="open-popup-result game">Open resul Popup</button>
 
@@ -374,12 +374,20 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                                             zodiacCardSelect={selectCard}
                                             betIcoin={betGame}
                                             zodiacGameId={game?.transactionId ?? 0}/>)}
+
+
+
         {openLostWin && <DialogLost
                             onClose={() => setOpenLostWin(false)}
-                            statusGame={game?.status ?? 'NONE'}
-                            fbId={fbId}
-                            // dialogType={dialogType} totalIcoin={totalIcoinWin}
-                            topUsers={game?.topUser ?? []} zodiac={game?.zodiacCard.imgUrl ?? ''} />}
+                      
+                            dialogType={dialogType}
+                            totalIcoin={totalIcoinWin}
+                            topUsers={game?.topUser ?? []}
+                            zodiac={game?.zodiacCard.imgUrl ?? ''} />}
+
+
+
+
         {openHistoryGame && <PopupHistoryGame
                               onClose={() => setOpenHistoryGame(false)}
                               zodiacs={img}/>}
