@@ -9,14 +9,10 @@ interface PopupRuleProps {
 }
 
 const PopupRule: React.FC<PopupRuleProps> = ({ onClose, title, leftContentButton, rightContentButton}) => {
-
-  // const title = 'Không đủ iCoin để chơi, bạn có muốn nạp thêm?';
-  // const leftContentButton = 'Huỷ';
-  // const rightContentButton = 'Nạp thêm';
-
   return (
     <PopupCenter
       onClick={onClose}
+      className='noti'
     >
       <p className="content">{title}</p>
       <button className="button_left" onClick={onClose}>{leftContentButton}</button>

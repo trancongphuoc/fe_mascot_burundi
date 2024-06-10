@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { RULE_CONTENTS } from '../model/RuleContent';
+import PopupCenter from './PopupCenter';
 
 interface PopupRuleProps {
   onClose: () => void;
@@ -21,18 +22,10 @@ const PopupRule: React.FC<PopupRuleProps> = ({ onClose }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+    <PopupCenter
       onClick={onClose}
-      className="rule-popup-overlay">
-      <motion.div 
-        initial={{ opacity: 0, scale: .5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: .5 }}
-        className="rule"
-        onClick={e => e.stopPropagation()}>
+      className='rule'
+    >
         <p className='rule--primary mt-20px'>Thể lệ Đoán Linh Vật</p>
         <img 
           className='rule--img mb-20px mt-18-5px'
@@ -54,8 +47,7 @@ const PopupRule: React.FC<PopupRuleProps> = ({ onClose }) => {
           onClick={handleNext}>
           <p className="rule__button--next">Tiếp tục</p>
         </motion.div>
-      </motion.div>
-    </motion.div>
+     </PopupCenter>
   );
 };
 
