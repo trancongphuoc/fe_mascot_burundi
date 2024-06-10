@@ -55,7 +55,7 @@ function BestPlayers({statusGame} : BestPlayersPro) {
             <SVG src={SecondaryText} className='best-players--img mt-6px'/>
             <div className="contents mt-8px mb-23-5px">
                 {
-                    topUsers.map((user, index) => (
+                    topUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)).map((user, index) => (
                         <div className="content" key={index}>
                             <img src={user.profileImageLink} alt="avatar" className='content--img'></img>
                             <p className="content--name">{user.name}</p>
