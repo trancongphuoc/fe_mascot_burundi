@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import bgCardSelect from '../assets/bg_card_selected_light.svg';
+import bgCardSelect from '../assets/bg_card_selected.svg';
 import Icoin from '../assets/icoin.svg';
 import BgContent from '../assets/bg_content_win.svg';
 import BgHeader from '../assets/bg_header_betting.svg';
@@ -113,7 +113,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
             e.stopPropagation()
             sendDataOut()
             confirmRef()}}
-          className="betting__confirm mb-33px mt-14-5px">
+          className="betting__confirm mb-34px mt-14-5px">
           <p className="betting__confirm--text">Xác nhận</p>
         </motion.div>
       </motion.div>
