@@ -18,11 +18,12 @@ interface DialogBettingProps {
 
 const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect, betIcoin }) => {
   const [stakes, setStakes] = useState(0);
+
   const clickAudioRef = useAudio('/zodiac-game/public/sounds/confirm_button.wav');
   const confirmRef = useAudio('/zodiac-game/public/sounds/stake_button.wav');
 
 
-  const sendDataOut = useCallback(async () => {
+  const sendDataOut = () => {
     if (!stakes || !zodiacGameId || !zodiacCardSelect) {
       if (!stakes) {
         toast.dismiss();
@@ -44,8 +45,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
     }
     betIcoin(betCard);
     onClose();
-    
-  }, [stakes, zodiacGameId, zodiacCardSelect, onClose]);
+  };
 
   return (
     <motion.div
