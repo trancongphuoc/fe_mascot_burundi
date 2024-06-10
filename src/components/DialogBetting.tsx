@@ -6,7 +6,7 @@ import BgHeader from '../assets/bg_header_betting.svg';
 import BgLighter from '../assets/bg_lighter.svg';
 import { motion } from 'framer-motion';
 import SVG from 'react-inlinesvg';
-import useAudio from './UseAudio';
+// import useAudio from './UseAudio';
 import toast from 'react-hot-toast';
 
 interface DialogBettingProps {
@@ -19,8 +19,8 @@ interface DialogBettingProps {
 const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect, betIcoin }) => {
   const [stakes, setStakes] = useState(0);
 
-  const clickAudioRef = useAudio('/zodiac-game/public/sounds/confirm_button.wav');
-  const confirmRef = useAudio('/zodiac-game/public/sounds/stake_button.wav');
+  // const clickAudioRef = useAudio('/zodiac-game/public/sounds/confirm_button.wav');
+  // const confirmRef = useAudio('/zodiac-game/public/sounds/stake_button.wav');
 
 
   const sendDataOut = () => {
@@ -83,7 +83,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <div
           onClick={(e) => {
             e.stopPropagation()
-            clickAudioRef();
+            // clickAudioRef();
             setStakes((prevStake) => prevStake + 10);
           }}
           className="betting--button">+10
@@ -91,7 +91,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <div
           onClick={(e) => {
             e.stopPropagation();
-            clickAudioRef();
+            // clickAudioRef();
             setStakes((prevStake) => prevStake + 100);
           }}
           className="betting--button-2">+100
@@ -99,7 +99,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <div
           onClick={(e) => {
             e.stopPropagation()
-            clickAudioRef();
+            // clickAudioRef();
             setStakes((prevStake) => prevStake + 1000);
           }}
           className="betting--button-3">+1000
@@ -109,7 +109,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           onClick={(e) => {
             e.stopPropagation()
             sendDataOut()
-            confirmRef()}}
+            // confirmRef()
+          }}
           className="betting__confirm mb-34px mt-14-5px">
           <p className="betting__confirm--text">Xác nhận</p>
         </div>
