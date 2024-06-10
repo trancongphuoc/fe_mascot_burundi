@@ -54,6 +54,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
       exit={{ opacity: 0 }}
       className="betting-popup-overlay"
       onClick={onClose}
+      transition={{ type: 'just'}}
       aria-labelledby="betting-dialog-title"
       role="dialog">
       <motion.div
