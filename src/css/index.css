@@ -987,7 +987,7 @@ h4 {
 .betting-popup-overlay {
   position: fixed;
   display: grid;
-  justify-content: end;
+  justify-content: stretch;
   align-content: end;
   width: 100%;
   height: 100%;
@@ -1224,7 +1224,7 @@ h4 {
 .lost-popup-overlay {
   position: fixed;
   display: grid;
-  justify-content: end;
+  justify-content: stretch;
   align-content: end;
   top: 0;
   left: 0;
