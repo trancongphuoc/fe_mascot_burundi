@@ -1,0 +1,33 @@
+.open-card {
+    display: grid;
+    grid-template-columns: max-content;
+    grid-template-rows: max-content;
+
+    align-content: center;
+    justify-content: center;
+
+    align-items: center;
+    justify-items: center;
+
+    max-width: 430px;
+    width: 100%;
+    height: auto;
+
+    &--img {
+        grid-area: 1 / 1 / 2 / 2;
+        z-index: 3;
+        max-width: 80px;
+        padding-left: 5px;
+        width: 100%;
+        height: auto;
+    }
+    
+    &--lottie-animation {
+        max-width: 430px;
+        width: 100%;
+        height: auto;
+        grid-area: 1 / 1 / 2 / 2;
+        z-index: 2;
+    }
+}
+

@@ -26,9 +26,9 @@ import { db } from '../firebase/config';
 import { ref, onValue, off } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
 
-import OpenCard from '../components/OpenCard';
 import Players from '../components/Players';
 import { ShortGameHistory } from '../components/ShortGameHistory';
+import PopupOpenCard from '../components/openCard/PopupOpenCard';
 
 import { joinGameZodiac } from '../api/joinGameZodiac';
 import { BettingTable } from '../components/BettingTable';
@@ -422,11 +422,11 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
       </AnimatePresence>
 
-      {openGameResult && <OpenCard
+      {openGameResult && <PopupOpenCard
                               onClose={()=> {
                                               setOpenGameResult(false)
                                                setOpenLostWin(true)}}
-                              zodiac={game?.zodiacCard.imgUrl ?? ''}/>}
+                                               zodiacUrl={game?.zodiacCard.imgUrl ?? ''}/>}
     </div>
   );
 }
