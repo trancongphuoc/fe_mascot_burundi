@@ -8,7 +8,6 @@ import SVG from 'react-inlinesvg';
 import { useEffect, useState } from 'react';
 import { fetchMyHistory } from '../api/getMyHistory';
 import bgMyHistory from '../assets/bg_my_history.svg';
-import ScaleLoader from 'react-spinners/ScaleLoader';
 import Loading from './Loading';
 
 interface PopupMineResultProps {
