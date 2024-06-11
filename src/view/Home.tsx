@@ -408,7 +408,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
         {openDepositIcoin && <PopupNotification 
                                 onClose={() => setOpenDepositIcoin(false)} 
-                                title = 'Không đủ iCoin để chơi, bạn có muốn nạp thêm?'
+                                title = 'Bạn không đủ iCoin để chơi vui lòng nạp thêm?'
                                 leftContentButton = 'Huỷ'
                                 rightContentButton = 'Nạp thêm'
                                 />}

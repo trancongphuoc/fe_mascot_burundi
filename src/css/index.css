@@ -15,9 +15,13 @@ html {
   box-sizing: border-box;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  border: none;
+  background-color: transparent;
 }
 
 body {
+  border: inherit;
+  background-color: inherit;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   line-height: 1.6;
@@ -601,10 +605,10 @@ h4 {
   left: 0;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
+  display: grid;
   justify-content: center;
-  z-index: 1000;
+  align-content: center;
+  z-index: 7;
 }
 
 .noti {
@@ -614,12 +618,14 @@ h4 {
   height: auto;
   display: grid;
   grid-template-rows: min-content min-content;
-  grid-template-rows: min-content min-content;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
   justify-items: center;
   border-radius: 10px;
   margin: 0 auto;
-  padding: 26px 39px 24px 39px;
+  padding: 20px 39px 25px 39px;
+  margin-bottom: 5px;
+  z-index: 9;
 }
 
 .open-card {
@@ -2285,33 +2291,58 @@ h4 {
 .content {
   grid-area: 1/1/2/3;
   font-size: 18px;
-  line-height: 1;
+  line-height: 1.45;
   font-weight: 600;
   text-decoration: none;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 26px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 .button_left {
+  grid-area: 2/1/3/2;
+  justify-self: left;
   text-align: justify;
   color: #8D8D8D;
   font-size: 16px;
   line-height: 1;
-  font-weight: 500;
-  margin: 0 16px;
+  font-weight: 600;
+  margin-left: 28px;
   border: none;
   background-color: transparent;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 .button_right {
+  grid-area: 2/2/3/3;
+  justify-self: right;
   text-align: justify;
   color: #F15351;
   font-size: 16px;
   line-height: 1;
-  font-weight: 500;
-  margin: 0 16px;
+  font-weight: 600;
+  margin-right: 28px;
   border: none;
   background-color: transparent;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 .betting-table {
