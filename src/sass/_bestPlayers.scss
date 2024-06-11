@@ -63,6 +63,7 @@
             &--name {
                 grid-area: 1 / 2 / 2 / 3;
                 align-self: end;
+                justify-self: start;
                 font-size: 13px;
                 font-weight: 500;
                 margin-bottom: 1.5px;
@@ -71,6 +72,7 @@
             &--text {
                 grid-area: 2 / 2 / 3 / 3;
                 align-self: start;
+                justify-self: start;
                 font-size: 12px;
                 margin-top: 4.5px;
             }

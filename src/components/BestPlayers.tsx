@@ -23,6 +23,23 @@ function BestPlayers({statusGame} : BestPlayersPro) {
 
     const [topUsers, setTopUser] = useState<User[]>([])
 
+    // const top123: User[] = [{
+    //     name: "Dong Hoang Linh",
+    //     profileImageLink: "123",
+    //     totalIcoin: 123
+    //   },
+    //   {
+    //     name: "Dong Hoang Linh",
+    //     profileImageLink: "123",
+    //     totalIcoin: 12312
+    //   },
+    //   {
+    //     name: "Dong Hoang Linh",
+    //     profileImageLink: "123",
+    //     totalIcoin: 12
+    //   },
+    // ]
+
     useEffect(() => {
         let isMounted = true;
 
