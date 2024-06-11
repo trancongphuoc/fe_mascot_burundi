@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { fetchMyHistory } from '../api/getMyHistory';
 import bgMyHistory from '../assets/bg_my_history.svg';
 import ScaleLoader from 'react-spinners/ScaleLoader';
+import Loading from './Loading';
 
 interface PopupMineResultProps {
   onClose: () => void;
@@ -71,11 +72,7 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
         </div>
 
         {
-          loading ? (
-            <div className="mine-popup__loading">
-              <ScaleLoader color='#F15350' />
-            </div>
-          ) : (
+          loading ? ( <Loading />) : (
             <div className="mine-popup__content">
             {
                 myHistory.map((mine, index) => (

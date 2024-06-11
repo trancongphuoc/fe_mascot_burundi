@@ -6,9 +6,10 @@ interface PopupRuleProps {
   title: string;
   leftContentButton: string,
   rightContentButton: string,
+  rightHandlerButton: () => void;
 }
 
-const PopupRule: React.FC<PopupRuleProps> = ({ onClose, title, leftContentButton, rightContentButton}) => {
+const PopupRule: React.FC<PopupRuleProps> = ({ onClose, title, leftContentButton, rightContentButton, rightHandlerButton}) => {
   return (
     <PopupCenter
       onClick={onClose}
@@ -16,7 +17,7 @@ const PopupRule: React.FC<PopupRuleProps> = ({ onClose, title, leftContentButton
     >
       <p className="content">{title}</p>
       <button className="button_left" onClick={onClose}>{leftContentButton}</button>
-      <button className="button_right">{rightContentButton}</button>
+      <button className="button_right" onClick={rightHandlerButton}>{rightContentButton}</button>
     </PopupCenter>
   );
 };

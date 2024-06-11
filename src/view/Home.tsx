@@ -411,6 +411,9 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                                 title = 'Bạn không đủ iCoin để chơi vui lòng nạp thêm?'
                                 leftContentButton = 'Huỷ'
                                 rightContentButton = 'Nạp thêm'
+                                rightHandlerButton = {() => {
+                                  console.log('click right button')
+                                }}
                                 />}
 
         {openDisconnect && <PopupNotification 
@@ -418,6 +421,9 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                                 title = 'Đường truyền không ổn định, vui lòng kiểm tra kết nối mạng'
                                 leftContentButton = 'Thoát'
                                 rightContentButton = 'Kết nối lại'
+                                rightHandlerButton = {() => {
+                                  window.location.reload();
+                                }}
                                 />}
 
       </AnimatePresence>

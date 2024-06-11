@@ -1,7 +1,5 @@
-
 import { ref, onValue } from 'firebase/database';
 import { db } from './config';
-
 
 interface User {
     facebookUserId: string;
@@ -16,29 +14,27 @@ export const getTopUsers = (): Promise<User[]> => {
         const stateRef = ref(db, '/zodiacGame/state/topUsers');
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
-            const topUsers: User[] = [];
             if (data) {
-                for (const userId in data) {
-                    if (Object.hasOwnProperty.call(data, userId)) {
-                        const userData = data[userId];
-                        const user: User = {
-                            facebookUserId: userData.facebookUserId ?? '',
-                            name: userData.name ?? '',
-                            profileImageLink: userData.profileImageLink ?? '',
-                            totalIcoin: userData.totalIcoin,
-                            uid: userData.uid,
-                        };
-                        topUsers.push(user);
-                    }
-                }
+                const topUsers: User[] = Object.keys(data).map(userId => {
+                    const userData = data[userId];
+                    return {
+                        facebookUserId: userData.facebookUserId ?? '',
+                        name: userData.name ?? '',
+                        profileImageLink: userData.profileImageLink ?? '',
+                        totalIcoin: userData.totalIcoin,
+                        uid: userData.uid,
+                    };
+                });
                 resolve(topUsers);
             } else {
                 resolve([]);
             }
         };
 
-        onValue(stateRef, handleData, (error) => {
+        const handleError = (error: any) => {
             reject(error);
-        });
+        };
+
+        onValue(stateRef, handleData, handleError);
     });
 };

@@ -8,6 +8,7 @@ import bgHistoryGame from '../assets/bg_history_game.svg';
 import BgCard from '../assets/bg_card_normal_light.svg';
 import StickIcon from  '../assets/icon_stick.svg';
 import TextResult from '../assets/text-result.svg';
+import Loading from './Loading';
 
 interface PopupHistoryProps {
   onClose: () => void;
@@ -71,9 +72,7 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs }) => 
         </div>
 
         {loading ? (
-          <div className="history-game-popup__loading">
-            <ScaleLoader color='#F15350' />
-          </div>
+          <Loading className="history-game-popup__loading"/>
         ) : (
           <div className="history-game-popup__content">
             {gameHistory.map((game, index) => (
