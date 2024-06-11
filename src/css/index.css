@@ -985,17 +985,13 @@ h4 {
 .betting-popup-overlay {
   position: fixed;
   display: grid;
-  grid-template-columns: 1fr;
-  justify-content: stretch;
-  width: 100%;
-  left: 0;
-  max-width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
   justify-content: end;
-  align-items: end;
+  align-content: end;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.4);
   z-index: 4;
 }
 
@@ -1225,8 +1221,7 @@ h4 {
 
 .lost-popup-overlay {
   position: fixed;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   justify-content: end;
   align-content: end;
   top: 0;

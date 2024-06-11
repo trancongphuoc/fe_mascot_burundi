@@ -67,8 +67,7 @@
 
 .lost-popup-overlay {
     position: fixed;
-    display: flex;
-    flex-direction: column;
+    display: grid;
     justify-content: end;
     align-content: end;
     top: 0;
