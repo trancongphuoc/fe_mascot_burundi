@@ -106,11 +106,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         </div>
 
         <div
-          onClick={(e) => {
-            e.stopPropagation()
-            sendDataOut()
-            // confirmRef()
-          }}
+          onClick={sendDataOut}
           className="betting__confirm mb-34px mt-14-5px">
           <p className="betting__confirm--text">Xác nhận</p>
         </div>

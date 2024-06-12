@@ -312,7 +312,17 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
   useOnlineStatus(updateOnlineStatus);
 
-
+  // call flutter
+  const callbackMyWallet = () => {
+    // Check if flutter_inappwebview object and callHandler method are available
+    if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
+      // Call the callHandler method with the handler name and shareLink variable
+      window.flutter_inappwebview.callHandler('MyWallet');
+    } else {
+      // Log an error message if flutter_inappwebview or callHandler is not available
+      console.log('window.flutter_inappwebview or callHandler is not available');
+    }
+  }
 
 
   return (
@@ -412,9 +422,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                                 title = 'Bạn không đủ iCoin để chơi vui lòng nạp thêm?'
                                 leftContentButton = 'Huỷ'
                                 rightContentButton = 'Nạp thêm'
-                                rightHandlerButton = {() => {
-                                  console.log('click right button')
-                                }}
+                                rightHandlerButton = {callbackMyWallet}
                                 />}
 
         {openDisconnect && <PopupNotification 
