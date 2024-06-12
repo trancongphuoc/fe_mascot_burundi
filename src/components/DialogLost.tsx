@@ -18,9 +18,9 @@ import LineRightLost from '../assets/line_right_lost.svg';
 
 import SVG from 'react-inlinesvg';
 import { motion } from 'framer-motion';
-import useAudio from './UseAudio';
-import winAudio from '../../public/sounds/crowd_victory.wav';
-import lostAudio from '../../public/sounds/crowd_disappointed.wav';
+// import useAudio from './UseAudio';
+// import winAudio from '../../public/sounds/crowd_victory.wav';
+// import lostAudio from '../../public/sounds/crowd_disappointed.wav';
 
 interface DialogLostWinProps {
   onClose: () => void;
@@ -69,8 +69,8 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
                       </div>
                     </>;
 
-  const playLostAudio = useAudio(lostAudio);
-  const playWinAudio = useAudio(winAudio);
+  // const playLostAudio = useAudio(lostAudio);
+  // const playWinAudio = useAudio(winAudio);
 
   const renderDialogContent = () => {
     switch (dialogType) {
