@@ -1,5 +1,6 @@
 .popup-overlay-center {
     position: fixed;
+    max-width: 430px;
     width: 100%;
     top: 0;
     left: 0;
@@ -11,24 +12,5 @@
     align-content: center;
 
     z-index: 7;
-}
 
-.noti {
-    background: white;
-    position: relative;
-    max-width: 327px;
-    height: auto;
-    display: grid;
-    grid-template-rows: min-content min-content;
-    grid-template-columns: 1fr 1fr;
-
-    justify-content: center;
-    justify-items: center;
-    border-radius: 10px;
-    margin: 0 auto;
-    padding: 20px 39px 25px 39px;
-
-    margin-bottom: 5px;
-
-    z-index: 9;
 }

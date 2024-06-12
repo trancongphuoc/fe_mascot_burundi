@@ -9,7 +9,9 @@ interface LottieAnimationProps {
   speed?: number;
   direction?: AnimationDirection;
   className?: string;
-  onComplete?: () => void; // Callback for completion event
+  width?: string,
+  height?: string,
+  onComplete?: () => void;
 }
 
 const LottieAnimation: React.FC<LottieAnimationProps> = ({
@@ -19,6 +21,8 @@ const LottieAnimation: React.FC<LottieAnimationProps> = ({
   style,
   speed = 1,
   direction = 1,
+  width = '100%',
+  height = '100%',
   className,
   onComplete
 }) => {
@@ -55,7 +59,10 @@ const LottieAnimation: React.FC<LottieAnimationProps> = ({
     };
   }, [autoplay]);
 
-  return <div ref={containerRef} style={style} className={className}></div>;
+  return <div 
+            ref={containerRef}
+            style={{...style, width, height}}
+            className={className}></div>;
 };
 
 export default LottieAnimation;

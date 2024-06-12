@@ -317,6 +317,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
   return (
     <div className='main'>
+    
       <Toaster>
         {(t) => (
           <div
