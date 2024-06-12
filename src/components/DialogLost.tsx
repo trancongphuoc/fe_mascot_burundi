@@ -75,10 +75,10 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
   const renderDialogContent = () => {
     switch (dialogType) {
       case 'LOST':
-        playLostAudio()
+        // playLostAudio()
         return contentLost;
       case 'WIN':
-        playWinAudio()
+        // playWinAudio()
         return contentWin;
       default:
         return null;

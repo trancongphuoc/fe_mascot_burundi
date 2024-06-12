@@ -237,6 +237,7 @@ useEffect(() => {
 
     if (statusGame === "RESULTWAITING") {
       setOpenGameResult(true)
+      setOpenGameResult(false)
     } 
 
 
@@ -322,7 +323,8 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
     // Check if flutter_inappwebview object and callHandler method are available
     if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
       // Call the callHandler method with the handler name and shareLink variable
-      window.flutter_inappwebview.callHandler('MyWallet');
+      window.flutter_inappwebview.callHandler('callbackMyWallet');
+      setOpenDepositIcoin(false);
     } else {
       // Log an error message if flutter_inappwebview or callHandler is not available
       console.log('window.flutter_inappwebview or callHandler is not available');
