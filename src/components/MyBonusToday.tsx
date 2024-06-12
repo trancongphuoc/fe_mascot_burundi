@@ -118,7 +118,7 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                 </div>
 
                 <div onClick={onOpen} className="header-right">
-                    <p className='header-right--text'>Số lần đã đoán hôm nay: {betUser?.noBettingToday ?? 0}</p>
+                    <p className='header-right--text'>Số lần đoán hôm nay: {betUser?.noBettingToday ?? 0}</p>
                     <SVG className='header-right--arrow' src={ArrowWhite}/>
                 </div>
                

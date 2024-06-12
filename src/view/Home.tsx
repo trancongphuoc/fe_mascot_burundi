@@ -236,8 +236,14 @@ useEffect(() => {
     }
 
     if (statusGame === "RESULTWAITING") {
+      setOpenRule((prevRule) => {
+        if (prevRule) {
+          return !prevRule
+        } else {
+          return prevRule
+        }
+    });
       setOpenGameResult(true)
-      setOpenGameResult(false)
     } 
 
 
