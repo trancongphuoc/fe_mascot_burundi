@@ -219,6 +219,7 @@ useEffect(() => {
     }
 
     if (statusGame == "COUNTDOWN") {
+      setOpenGameResult(false)
       setOpenLostWin(false);
       setBetCards([]);
       setBetSuccess(true);
@@ -232,9 +233,13 @@ useEffect(() => {
       setOpenMyHistory(false);
       setOpenBetting(false);
 
-      //open card
-      setOpenGameResult(true)
     }
+
+    if (statusGame === "RESULTWAITING") {
+      setOpenGameResult(true)
+    } 
+
+
     toast.dismiss();
     toast(`giai doan ${statusGame}`, { duration: 2000, position: 'bottom-center'});
 

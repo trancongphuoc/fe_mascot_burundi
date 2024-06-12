@@ -11,11 +11,11 @@ interface BestPlayersPro {
 }
 
 interface User {
-    facebookUserId: string;
-    name: string;
-    profileImageLink: string;
-    totalIcoin: number;
-    uid: string;
+    facebookUserId?: string;
+    name?: string;
+    profileImageLink?: string;
+    totalIcoin?: number;
+    uid?: string;
 }
 
 
@@ -46,8 +46,9 @@ function BestPlayers({statusGame} : BestPlayersPro) {
         if (statusGame === "COUNTDOWN") {
             getTopUsers()
                 .then(users => {
+                    const updateUsers = [...users];
                     if (isMounted) {
-                        setTopUser(users);
+                        setTopUser(updateUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)));
                     }
                 })
                 .catch(error => console.error('Error fetching top users:', error));
@@ -64,21 +65,21 @@ function BestPlayers({statusGame} : BestPlayersPro) {
         <div className="best-players mb-4-5px mt-30px">
             <SVG src={bgBestPlayers} className="best-players__bg"/>
             <SVG src={SecondaryText} className='best-players--img mt-6px'/>
-            <div className="contents mt-8px mb-23-5px">
+            <ol className="contents mt-8px mb-23-5px">
                 {
-                    topUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)).map((user, index) => (
-                        <div className="content" key={index}>
-                            <img src={user.profileImageLink} alt="avatar" className='content--img'></img>
-                            <p className="content--name">{user.name}</p>
-                            <p className="content--text">Thưởng ván trước:</p>
-                            <div className="content__icoin">
-                                <p className="content__icoin--data">{user.totalIcoin}</p>
-                                <img src={Icoin} alt="icoin" className="content__icoin--img"></img>
+                    topUsers.map((user, index) => (
+                        <li className={`content${index}`} key={index}>
+                            <img src={user.profileImageLink} alt="avatar" className={`content${index}--img`}></img>
+                            <p className={`content${index}--name`}>{user.name}</p>
+                            <p className={`content${index}--text`}>Thưởng ván trước:</p>
+                            <div className={`content${index}__icoin`}>
+                                <p className={`content${index}__icoin--data`}>{user.totalIcoin}</p>
+                                <img src={Icoin} alt="icoin" className="content1__icoin--img"></img>
                             </div>
-                        </div>
+                        </li>
                     ))
                 }
-            </div>
+            </ol>
         </div>
     );
 }
