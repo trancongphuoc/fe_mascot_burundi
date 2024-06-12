@@ -37,7 +37,11 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
         const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
-            if (data) setTotalIcoin(data);                
+            if (data) {
+                setTotalIcoin(data);  
+                window.sessionStorage.setItem('totalIcoin', data);   
+            }
+                 
         };
         onValue(stateRef, handleData);
         return () => off(stateRef, 'value', handleData);

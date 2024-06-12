@@ -404,6 +404,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                                             }}
                                             zodiacCardSelect={selectCard}
                                             betIcoin={betGame}
+                                            openDepositPupup={() => setOpenDepositIcoin(true)}
                                             zodiacGameId={game?.transactionId ?? 0}/>)}
 
 
@@ -425,6 +426,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         {openMyHistory && <PopupMyHistory onClose={()=> setOpenMyHistory(false)}/>}
 
         {openDepositIcoin && <PopupNotification 
+                                key={'deposit'}
                                 onClose={() => setOpenDepositIcoin(false)} 
                                 title = 'Bạn không đủ iCoin để chơi vui lòng nạp thêm?'
                                 leftContentButton = 'Huỷ'
@@ -433,6 +435,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                                 />}
 
         {openDisconnect && <PopupNotification 
+                                key={'disconnect'}
                                 onClose={() => setOpenDisconnect(false)} 
                                 title = 'Đường truyền không ổn định, vui lòng kiểm tra kết nối mạng'
                                 leftContentButton = 'Thoát'

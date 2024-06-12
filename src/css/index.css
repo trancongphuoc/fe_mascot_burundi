@@ -600,7 +600,6 @@ h4 {
 
 .popup-overlay-center {
   position: fixed;
-  max-width: 430px;
   width: 100%;
   top: 0;
   left: 0;

@@ -14,9 +14,10 @@ interface DialogBettingProps {
   zodiacGameId: number;
   zodiacCardSelect: ZodiacCardModel;
   betIcoin: (zodiacCard: BetZodiacCard) => void;
+  openDepositPupup: () => void;
 }
 
-const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect, betIcoin }) => {
+const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect, betIcoin, openDepositPupup }) => {
   const [stakes, setStakes] = useState(0);
 
   // const clickAudioRef = useAudio('/zodiac-game/public/sounds/confirm_button.wav');
@@ -46,6 +47,20 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
     onClose();
     betIcoin(betCard);
   };
+
+
+  const handleStake = (stake: number) => {
+    if (stake) {
+      const totalIcoinString = window.sessionStorage.getItem('totalIcoin');
+      const totalIcoin = totalIcoinString !== null ? parseInt(totalIcoinString, 10) : 0;
+      console.log('xxxx', totalIcoin)
+      if (stake <= totalIcoin) {
+        setStakes(prevStake => prevStake + stake)
+      } else {
+        openDepositPupup();
+      }
+    }
+  }
 
   return (
     <motion.div
@@ -80,27 +95,29 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           <p className="betting__totalIcoin--icoin">{stakes}</p>
         </div>
 
-        <div
+        <div key={'stake-10'}
           onClick={(e) => {
             e.stopPropagation()
-            // clickAudioRef();
-            setStakes((prevStake) => prevStake + 10);
+            console.log(window.sessionStorage.getItem('totalIcoin')); 
+            handleStake(10);
           }}
           className="betting--button">+10
         </div>
         <div
+          key={'stake-100'}
           onClick={(e) => {
             e.stopPropagation();
             // clickAudioRef();
-            setStakes((prevStake) => prevStake + 100);
+            handleStake(100)
           }}
           className="betting--button-2">+100
         </div>
         <div
+          key={'stake-1000'}
           onClick={(e) => {
             e.stopPropagation()
             // clickAudioRef();
-            setStakes((prevStake) => prevStake + 1000);
+            handleStake(1000)
           }}
           className="betting--button-3">+1000
         </div>
