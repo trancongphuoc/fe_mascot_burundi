@@ -32,6 +32,8 @@
 
         &--text {
             margin-right: 6px;
+            font-family: 'Roboto';
+            font-weight: 400;
         }
 
         &--img {
@@ -63,11 +65,14 @@
 
         &--text {
             margin-right: 6px;
+            font-family: 'Roboto';
+            font-weight: 400;
         }
 
         &--arrow {
             margin-right: 11px;
-            max-width: 4px;
+            max-width: 7px;
+            height: auto;
         }
     }
 
@@ -127,7 +132,6 @@
                 padding-top: 2px;
                 color: $color-green-jungle;
                 font-family: 'Yeseva One';
-                font-weight: 800;
                 line-height: 1;
                 margin-bottom: -1px;
             }
@@ -181,7 +185,8 @@
 
         &--text {
             font-size: 13px;
-            font-weight: 300;
+            font-weight: 400;
+            font-family: 'Roboto';
             padding-left: 11px;
             margin-right: 6px;
         }
@@ -214,7 +219,8 @@
 
         &--text {
             margin-right: 6px;
-            font-weight: 300;
+            font-weight: 400;
+            font-family: 'Roboto';
         }
 
         &--img {

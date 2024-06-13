@@ -908,6 +908,8 @@ h4 {
 }
 .section-myInfo .header-left--text {
   margin-right: 6px;
+  font-family: "Roboto";
+  font-weight: 400;
 }
 .section-myInfo .header-left--img {
   width: 16px;
@@ -932,10 +934,13 @@ h4 {
 }
 .section-myInfo .header-right--text {
   margin-right: 6px;
+  font-family: "Roboto";
+  font-weight: 400;
 }
 .section-myInfo .header-right--arrow {
   margin-right: 11px;
-  max-width: 4px;
+  max-width: 7px;
+  height: auto;
 }
 @media (max-width: 320px) {
   .section-myInfo .header-right {
@@ -986,7 +991,6 @@ h4 {
   padding-top: 2px;
   color: #29B89A;
   font-family: "Yeseva One";
-  font-weight: 800;
   line-height: 1;
   margin-bottom: -1px;
 }
@@ -1030,7 +1034,8 @@ h4 {
 }
 .section-myInfo .end-left--text {
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
+  font-family: "Roboto";
   padding-left: 11px;
   margin-right: 6px;
 }
@@ -1055,7 +1060,8 @@ h4 {
 }
 .section-myInfo .end-right--text {
   margin-right: 6px;
-  font-weight: 300;
+  font-weight: 400;
+  font-family: "Roboto";
 }
 .section-myInfo .end-right--img {
   max-width: 6px;
