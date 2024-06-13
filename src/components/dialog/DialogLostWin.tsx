@@ -1,20 +1,20 @@
-import bgCardSelected from '../assets/bg_card_selected_light.svg';
-import TextCongratution from '../assets/text_congregation.svg';
-import TextApologize from '../assets/text_apologize.svg';
-import BgContentWin from '../assets/bg_content_win.svg';
-import BgContentLost from '../assets/bg_content_lost.svg';
-import BgHeaderLost from '../assets/bg_header_lost.svg';
-import BgHeaderWin from '../assets/bg_header_short_win.svg';
-import Icoin from '../assets/icoin.svg';
-import BgLighter from '../assets/bg_lighter.svg';
-import CrownGold from '../assets/crown_gold.svg';
-import CrownSliver from '../assets/crown_sliver.svg';
-import CrownBronze from '../assets/crown_bronze.svg';
+import bgCardSelected from '../../assets/bg_card_selected_light.svg';
+import TextCongratution from '../../assets/text_congregation.svg';
+import TextApologize from '../../assets/text_apologize.svg';
+import BgContentWin from '../../assets/bg_content_win.svg';
+import BgContentLost from '../../assets/bg_content_lost.svg';
+import BgHeaderLost from '../../assets/bg_header_lost.svg';
+import BgHeaderWin from '../../assets/bg_header_short_win.svg';
+import Icoin from '../../assets/icoin.svg';
+import BgLighter from '../../assets/bg_lighter.svg';
+import CrownGold from '../../assets/crown_gold.svg';
+import CrownSliver from '../../assets/crown_sliver.svg';
+import CrownBronze from '../../assets/crown_bronze.svg';
 
-import LineLeftWin from '../assets/line_left_win.svg';
-import LineRightWin from '../assets/line_right_win.svg';
-import LineLeftLost from '../assets/line_left_lost.svg';
-import LineRightLost from '../assets/line_right_lost.svg';
+import LineLeftWin from '../../assets/line_left_win.svg';
+import LineRightWin from '../../assets/line_right_win.svg';
+import LineLeftLost from '../../assets/line_left_lost.svg';
+import LineRightLost from '../../assets/line_right_lost.svg';
 
 import SVG from 'react-inlinesvg';
 import { motion } from 'framer-motion';
@@ -45,6 +45,24 @@ const win = {
 }
 
 const crown = [CrownGold, CrownSliver, CrownBronze];
+
+
+const top123: User[] = [{
+  name: "Dong Hoang Linh",
+  profileImageLink: "123",
+  totalIcoin: 123
+},
+{
+  name: "Dong Hoang Linh",
+  profileImageLink: "123",
+  totalIcoin: 12312
+},
+{
+  name: "Dong Hoang Linh",
+  profileImageLink: "123",
+  totalIcoin: 12
+},
+]
 
 
 const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac, totalIcoin, dialogType}) => {
@@ -111,7 +129,9 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
         <p className="lost--tertiary" onClick={e => {e.stopPropagation()}}>TOP chiến thắng</p>
         <SVG src={dialogType == "WIN" ? win.lineRight : lost.lineRight} className ="lost--light2"/>
 
-        {topUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)).map((user, index) => (
+        {top123.map((user, index) => {
+          console.log('check usedata: ',top123)
+          return (
           <div className={`lost__no${index + 1}`} key={index} onClick={e => {e.stopPropagation()}}>
             <SVG className={`lost__no${index + 1}--img`} src={crown[index]}/>
             <div className={`lost__no${index + 1}--url`}>
@@ -123,7 +143,7 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
               <p className="lost__totalIcoin--icoin">{user.totalIcoin}</p>
             </div>
           </div>
-        ))}
+        )})}
       </motion.div>
     </motion.div>
   );

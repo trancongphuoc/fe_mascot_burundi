@@ -3,10 +3,10 @@ import SVG from 'react-inlinesvg';
 import { motion } from 'framer-motion';
 import { GameHistory } from '../../model/GameHistory';
 import { fetchGameHistory } from '../../api/getGameHistory';
-import bgHistoryGame from '../assets/bg_history_game.svg';
-import BgCard from '../assets/bg_card_normal_light.svg';
-import StickIcon from  '../assets/icon_stick.svg';
-import TextResult from '../assets/text-result.svg';
+import bgHistoryGame from '../../assets/bg_history_game.svg';
+import BgCard from '../../assets/bg_card_normal_light.svg';
+import StickIcon from  '../../assets/icon_stick.svg';
+import TextResult from '../../assets/text-result.svg';
 import Loading from '../Loading';
 
 interface PopupHistoryProps {

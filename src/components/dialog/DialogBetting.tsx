@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import bgCardSelect from '../assets/bg_card_selected.svg';
-import Icoin from '../assets/icoin.svg';
-import BgContent from '../assets/bg_content_win.svg';
-import BgHeader from '../assets/bg_header_betting.svg';
-import BgLighter from '../assets/bg_lighter.svg';
+import bgCardSelect from '../../assets/bg_card_selected.svg';
+import Icoin from '../../assets/icoin.svg';
+import BgContent from '../../assets/bg_content_win.svg';
+import BgHeader from '../../assets/bg_header_betting.svg';
+import BgLighter from '../../assets/bg_lighter.svg';
 import { motion } from 'framer-motion';
 import SVG from 'react-inlinesvg';
 // import useAudio from './UseAudio';
