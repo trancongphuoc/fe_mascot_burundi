@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { RULE_CONTENTS } from '../model/RuleContent';
+import { RULE_CONTENTS } from '../../model/RuleContent';
 import PopupCenter from './PopupCenter';
 
 interface PopupRuleProps {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import PopupCenter from '../PopupCenter';
+import PopupCenter from '../popup/PopupCenter';
 import LottieAnimation from './AnimationOpenCard';
 import animationData from '../../assets/json/animation_open_card.json';
 import SVG from 'react-inlinesvg';

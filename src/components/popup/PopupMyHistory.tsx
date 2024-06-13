@@ -6,9 +6,9 @@ import IcoinLost from '../assets/icoin-lost.svg';
 import IcoinWin from '../assets/icoin.svg'
 import SVG from 'react-inlinesvg';
 import { useEffect, useState } from 'react';
-import { fetchMyHistory } from '../api/getMyHistory';
+import { fetchMyHistory } from '../../api/getMyHistory';
 import bgMyHistory from '../assets/bg_my_history.svg';
-import Loading from './Loading';
+import Loading from '../Loading';
 
 interface PopupMineResultProps {
   onClose: () => void;

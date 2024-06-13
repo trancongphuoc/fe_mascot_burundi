@@ -17,10 +17,10 @@ import BestPlayers from '../components/BestPlayers';
 import { useCallback, useEffect, useState } from 'react';
 import DialogBetting from '../components/DialogBetting';
 import DialogLost from '../components/DialogLost';
-import PopupRule from '../components/PopupRule';
-import PopupHistoryGame from '../components/PopupHistoryGame';
-import PopupMyHistory from '../components/PopupMyHistory';
-import PopupNotification from '../components/PopupNotification';
+import PopupRule from '../components/popup/PopupRule';
+import PopupHistoryGame from '../components/popup/PopupHistoryGame';
+import PopupMyHistory from '../components/popup/PopupMyHistory';
+import PopupNotification from '../components/popup/PopupNotification';
 
 import { db } from '../firebase/config';
 import { ref, onValue, off } from "firebase/database";
@@ -215,13 +215,13 @@ useEffect(() => {
     fetchGameInfo();
 
     if (statusGame != "COUNTDOWN") {
-      if (openBetting) setOpenBetting((prevRule) => !prevRule);
+      // if (openBetting) setOpenBetting((prevRule) => !prevRule);
     }
 
     if (statusGame == "COUNTDOWN") {
 
-      if (openGameResult) setOpenGameResult((prevRule) => !prevRule);
-      if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
+      // if (openGameResult) setOpenGameResult((prevRule) => !prevRule);
+      // if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
  
       setBetCards([]);
       setBetSuccess(true);
@@ -229,18 +229,18 @@ useEffect(() => {
 
     if (statusGame === "RESULT") {
       // close dilog
-      if (openRule) setOpenRule((prevRule) => !prevRule);
-      if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
-      if (openHistoryGame) setOpenHistoryGame((prevRule) => !prevRule);
-      if (openMyHistory) setOpenMyHistory((prevRule) => !prevRule);
-      if (openBetting) setOpenBetting((prevRule) => !prevRule);
+      // if (openRule) setOpenRule((prevRule) => !prevRule);
+      // if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
+      // if (openHistoryGame) setOpenHistoryGame((prevRule) => !prevRule);
+      // if (openMyHistory) setOpenMyHistory((prevRule) => !prevRule);
+      // if (openBetting) setOpenBetting((prevRule) => !prevRule);
     }
 
     if (statusGame === "RESULTWAITING") {
-      if (openRule) setOpenRule((prevRule) => !prevRule);
-      if (openDepositIcoin) setOpenDepositIcoin((prevValue) => !prevValue);
+      // if (openRule) setOpenRule((prevRule) => !prevRule);
+      // if (openDepositIcoin) setOpenDepositIcoin((prevValue) => !prevValue);
       
-      if (!openGameResult) setOpenGameResult((prevRule) => !prevRule);
+      // if (!openGameResult) setOpenGameResult((prevRule) => !prevRule);
     } 
 
     toast.dismiss();
