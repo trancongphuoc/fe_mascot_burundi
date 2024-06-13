@@ -1,13 +1,13 @@
-import BgCardLost from '../assets/bg_card_nomarl.svg';
-import BgCardWin from '../assets/bg_card_selected.svg';
+import BgCardLost from '../../assets/bg_card_nomarl.svg';
+import BgCardWin from '../../assets/bg_card_selected.svg';
 
-import TextHistory from '../assets/text-mine-history.svg';
-import IcoinLost from '../assets/icoin-lost.svg';
-import IcoinWin from '../assets/icoin.svg'
+import TextHistory from '../../assets/text-mine-history.svg';
+import IcoinLost from '../../assets/icoin-lost.svg';
+import IcoinWin from '../../assets/icoin.svg'
 import SVG from 'react-inlinesvg';
 import { useEffect, useState } from 'react';
 import { fetchMyHistory } from '../../api/getMyHistory';
-import bgMyHistory from '../assets/bg_my_history.svg';
+import bgMyHistory from '../../assets/bg_my_history.svg';
 import Loading from '../Loading';
 
 interface PopupMineResultProps {
