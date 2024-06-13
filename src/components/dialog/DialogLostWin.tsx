@@ -47,22 +47,22 @@ const win = {
 const crown = [CrownGold, CrownSliver, CrownBronze];
 
 
-const top123: User[] = [{
-  name: "Dong Hoang Linh",
-  profileImageLink: "123",
-  totalIcoin: 123
-},
-{
-  name: "Dong Hoang Linh",
-  profileImageLink: "123",
-  totalIcoin: 12312
-},
-{
-  name: "Dong Hoang Linh",
-  profileImageLink: "123",
-  totalIcoin: 12
-},
-]
+// const top123: User[] = [{
+//   name: "Dong Hoang Linh",
+//   profileImageLink: "123",
+//   totalIcoin: 123
+// },
+// {
+//   name: "Dong Hoang Linh",
+//   profileImageLink: "123",
+//   totalIcoin: 12312
+// },
+// {
+//   name: "Dong Hoang Linh",
+//   profileImageLink: "123",
+//   totalIcoin: 12
+// },
+// ]
 
 
 const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac, totalIcoin, dialogType}) => {
@@ -129,9 +129,7 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
         <p className="lost--tertiary" onClick={e => {e.stopPropagation()}}>TOP chiến thắng</p>
         <SVG src={dialogType == "WIN" ? win.lineRight : lost.lineRight} className ="lost--light2"/>
 
-        {top123.map((user, index) => {
-          console.log('check usedata: ',top123)
-          return (
+        {topUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)).map((user, index) => (
           <div className={`lost__no${index + 1}`} key={index} onClick={e => {e.stopPropagation()}}>
             <SVG className={`lost__no${index + 1}--img`} src={crown[index]}/>
             <div className={`lost__no${index + 1}--url`}>
@@ -143,7 +141,7 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
               <p className="lost__totalIcoin--icoin">{user.totalIcoin}</p>
             </div>
           </div>
-        )})}
+        ))}
       </motion.div>
     </motion.div>
   );

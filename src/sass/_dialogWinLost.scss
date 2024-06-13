@@ -18,7 +18,10 @@
         align-self: start;
         justify-self: end;
 
-        transform: translateX($crown-left) translateY( $crown-top);
+        position: relative;
+
+        right: 22%;
+        top: -18%;
 
     }
 

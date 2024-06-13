@@ -1509,7 +1509,9 @@ h4 {
   width: 28px;
   align-self: start;
   justify-self: end;
-  transform: translateX(-20%) translateY(-15px);
+  position: relative;
+  right: 22%;
+  top: -18%;
 }
 .lost-popup .lost__no3--url {
   grid-area: 1/1/2/2;
@@ -1589,7 +1591,9 @@ h4 {
   width: 28px;
   align-self: start;
   justify-self: end;
-  transform: translateX(-20%) translateY(-15px);
+  position: relative;
+  right: 22%;
+  top: -18%;
 }
 .lost-popup .lost__no2--url {
   grid-area: 1/1/2/2;
@@ -1669,7 +1673,9 @@ h4 {
   width: 28px;
   align-self: start;
   justify-self: end;
-  transform: translateX(-35%) translateY(-60%);
+  position: relative;
+  right: 22%;
+  top: -18%;
 }
 .lost-popup .lost__no1--url {
   grid-area: 1/1/2/2;
@@ -1767,7 +1773,9 @@ h4 {
     width: 28px;
     align-self: start;
     justify-self: end;
-    transform: translateX(-24px) translateY(-15px);
+    position: relative;
+    right: 22%;
+    top: -18%;
   }
   .lost-popup .lost__no3--url {
     grid-area: 1/1/2/2;
@@ -1840,7 +1848,9 @@ h4 {
     width: 28px;
     align-self: start;
     justify-self: end;
-    transform: translateX(-24px) translateY(-15px);
+    position: relative;
+    right: 22%;
+    top: -18%;
   }
   .lost-popup .lost__no2--url {
     grid-area: 1/1/2/2;
@@ -1913,7 +1923,9 @@ h4 {
     width: 28px;
     align-self: start;
     justify-self: end;
-    transform: translateX(-22px) translateY(-15px);
+    position: relative;
+    right: 22%;
+    top: -18%;
   }
   .lost-popup .lost__no1--url {
     grid-area: 1/1/2/2;
