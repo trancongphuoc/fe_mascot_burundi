@@ -69,13 +69,13 @@
 
         &--head1 {
             grid-area: 1 / 1 / 2 / 2;
-            @include head();
+            @include head;
             
         }
 
         &--head2 {
             grid-area: 1 / 2 / 2 / 3;
-            @include head();
+            @include head;
         }
     }
 

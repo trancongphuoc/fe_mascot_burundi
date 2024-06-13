@@ -101,7 +101,7 @@
             background-repeat: no-repeat;
             background-size: 100% 100%;
             background-position: center;
-            @include non_select();
+            @include non_select;
         }
     
         &--BgLighter {
@@ -109,7 +109,7 @@
             z-index: 5;
             align-self: end;
             transform: translateY(50px);
-            @include non_select();
+            @include non_select;
         }
     
         &--BgHeader {
@@ -118,7 +118,7 @@
             max-width: 245px;
             object-fit: fill;
             transform: translateY(24px);
-            @include non_select();
+            @include non_select;
         }
     
         &--zodiac-background {
@@ -127,7 +127,7 @@
             z-index: 6;
             width: 80px;
             transform: translateY(20px);
-            @include non_select();
+            @include non_select;
 
         }
     
@@ -138,15 +138,15 @@
             align-self: center;
             transform: translateY(20px);
 
-            @include non_select();
-            @include non_decor_button();
+            @include non_select;
+            @include non_decor_button;
         }
     
     
         &--primary-text {
             grid-area: 2 / 1 / 3 / -1;
             @include primary-text;
-            @include non_select();
+            @include non_select;
             z-index: 7;
             transform: translateY(1px);
             line-height: 1;
@@ -165,7 +165,7 @@
             margin-top: 27px;
             z-index: 7;
 
-            @include non_select();
+            @include non_select;
         }
     
         &--light1 {
@@ -174,7 +174,7 @@
             margin-right: 0;
             justify-self: end;
             z-index: 7;
-            @include non_select();
+            @include non_select;
         }
     
         &--tertiary {
@@ -185,7 +185,7 @@
             font-weight: 350;
             margin-bottom: 20px;
             z-index: 7;
-            @include non_select();
+            @include non_select;
         }
     
         &--light2 {
@@ -194,7 +194,7 @@
             margin-left: 0px;
             justify-self: start;
             z-index: 7;
-            @include non_select();
+            @include non_select;
         }
     
         &__no3 {
@@ -210,7 +210,7 @@
             ));
             padding-right: 4px;
             z-index: 7;
-            @include non_select();
+            @include non_select;
         }
     
         &__no2 {
@@ -226,7 +226,7 @@
             ));
             padding-left: 4px;
             z-index: 7;
-            @include non_select();
+            @include non_select;
         }
     
         &__no1 {
@@ -242,7 +242,7 @@
             ));
             padding-bottom: 19.5px;
             z-index: 7;
-            @include non_select();
+            @include non_select;
         }
 
         @media (max-width: 375px) {
@@ -323,7 +323,7 @@
                 width: 12px;
                 height: 12px;
                 z-index: 7;
-                @include non_select();
+                @include non_select;
             }
     
             &--icoin {
@@ -332,7 +332,7 @@
                 font-weight: 300;
                 line-height: 1;
                 z-index: 7;
-                @include non_select();
+                @include non_select;
             }
         }
     }
@@ -344,7 +344,7 @@
         z-index: 6;
 
         transform: translateY(33px);
-        @include non_select();
+        @include non_select;
     } 
 
     &__secondary {
@@ -358,7 +358,7 @@
         margin-bottom: 10px;
         margin-top: 26.5px;
         z-index: 7;
-        @include non_select();
+        @include non_select;
     }
 
     @media (max-width: 375px) {
@@ -368,7 +368,7 @@
             line-height: 1;
             margin-bottom: 5px;
             margin-top: 20px;
-            @include non_select();
+            @include non_select;
         }
     }
 
@@ -378,7 +378,7 @@
         color: $color-white;
         text-align: center;
         z-index: 7;
-        @include non_select();
+        @include non_select;
     }
 
     &__totalIcoin {
@@ -386,13 +386,13 @@
         justify-content: center;
         align-items: center;
         margin-top: 1px;
-        @include non_select();
+        @include non_select;
 
         &--img {
             width: 16px;
             height: auto;
             margin-right: 5px;
-            @include non_select();
+            @include non_select;
         }
 
         &--icoin {
@@ -400,7 +400,7 @@
             font-weight: 450;
             color: $color-white;
             text-align: center;
-            @include non_select();
+            @include non_select;
         }
     }
 }
