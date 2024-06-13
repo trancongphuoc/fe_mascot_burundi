@@ -430,7 +430,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         {openDepositIcoin && <PopupNotification 
                                 key={'deposit'}
                                 onClose={() => setOpenDepositIcoin(false)} 
-                                title = 'Bạn không đủ iCoin để chơi vui lòng nạp thêm?'
+                                title = 'Bạn không đủ iCoin để chơi vui lòng nạp thêm!'
                                 leftContentButton = 'Huỷ'
                                 rightContentButton = 'Nạp thêm'
                                 rightHandlerButton = {callbackMyWallet}
