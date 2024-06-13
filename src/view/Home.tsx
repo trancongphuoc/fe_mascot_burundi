@@ -236,13 +236,9 @@ useEffect(() => {
     }
 
     if (statusGame === "RESULTWAITING") {
-      setOpenRule((prevRule) => {
-        if (prevRule) {
-          return !prevRule
-        } else {
-          return prevRule
-        }
-    });
+      if (openRule) setOpenRule((prevRule) => !prevRule);
+      if (openDepositIcoin) setOpenDepositIcoin((prevValue) => !prevValue);
+      
       setOpenGameResult(true)
     } 
 
@@ -359,7 +355,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
             {resolveValue(t.message, t)}
           </div>
         )}
-      </Toaster>;
+      </Toaster>
       
       <header className='section-header u-margin-top-huge1'>
         <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />
