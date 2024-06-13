@@ -361,14 +361,14 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         )}
       </Toaster>;
       
-      <section className='section-header u-margin-top-huge1'>
+      <header className='section-header u-margin-top-huge1'>
         <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />
         <p className='heading-secondary'>Hôm nay {game?.noGameToday} Ván</p>
         <SVG
           src={Rule}
           onClick={() => setOpenRule(true)}
           className='section-header__rule'/>
-      </section>
+      </header>
 
       <div className="result mt-7-5px">
         <ShortGameHistory openDialog={()=> {setOpenHistoryGame(true)}}  statusGame={game?.status ?? 'NONE'}/>

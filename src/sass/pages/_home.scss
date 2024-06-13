@@ -12,17 +12,18 @@
 }
 
 .section-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    justify-items: stretch;
-    align-items: center;
+    display: grid;
+    grid-template-rows: repeat(3, min-content);
+    grid-template-columns: 1fr;
+
+    justify-content: center;
+    justify-items: center;
 
     outline: none;
     -webkit-tap-highlight-color: transparent; 
 
     &__rule {
-        align-self: self-end;
+        justify-self: end;
     }
 
     &__logo--left {
