@@ -215,31 +215,32 @@ useEffect(() => {
     fetchGameInfo();
 
     if (statusGame != "COUNTDOWN") {
-      setOpenBetting(false);
+      if (openBetting) setOpenBetting((prevRule) => !prevRule);
     }
 
     if (statusGame == "COUNTDOWN") {
-      setOpenGameResult(false)
-      setOpenLostWin(false);
+
+      if (openGameResult) setOpenGameResult((prevRule) => !prevRule);
+      if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
+ 
       setBetCards([]);
       setBetSuccess(true);
     }
 
     if (statusGame === "RESULT") {
       // close dilog
-      setOpenRule(false);
-      setOpenLostWin(false);
-      setOpenHistoryGame(false);
-      setOpenMyHistory(false);
-      setOpenBetting(false);
-
+      if (openRule) setOpenRule((prevRule) => !prevRule);
+      if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
+      if (openHistoryGame) setOpenHistoryGame((prevRule) => !prevRule);
+      if (openMyHistory) setOpenMyHistory((prevRule) => !prevRule);
+      if (openBetting) setOpenBetting((prevRule) => !prevRule);
     }
 
     if (statusGame === "RESULTWAITING") {
       if (openRule) setOpenRule((prevRule) => !prevRule);
       if (openDepositIcoin) setOpenDepositIcoin((prevValue) => !prevValue);
       
-      setOpenGameResult(true)
+      if (!openGameResult) setOpenGameResult((prevRule) => !prevRule);
     } 
 
     toast.dismiss();
@@ -254,11 +255,11 @@ useEffect(() => {
         transactionId: game?.transactionId ?? 0,
       };
       setSelectCard(betCard);
-      setOpenBetting(true);
+      if (!openBetting) setOpenBetting((prevRule) => !prevRule);
     } else {
       toast.remove();
       toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
-      setOpenBetting(false);
+      if (openBetting) setOpenBetting((prevRule) => !prevRule);
     }
   };
 
