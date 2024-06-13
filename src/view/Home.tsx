@@ -215,13 +215,13 @@ useEffect(() => {
     fetchGameInfo();
 
     if (statusGame != "COUNTDOWN") {
-      // if (openBetting) setOpenBetting((prevRule) => !prevRule);
+      if (openBetting) setOpenBetting((prevRule) => !prevRule);
     }
 
     if (statusGame == "COUNTDOWN") {
 
-      // if (openGameResult) setOpenGameResult((prevRule) => !prevRule);
-      // if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
+      if (openGameResult) setOpenGameResult((prevRule) => !prevRule);
+      if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
  
       setBetCards([]);
       setBetSuccess(true);
@@ -229,18 +229,18 @@ useEffect(() => {
 
     if (statusGame === "RESULT") {
       // close dilog
-      // if (openRule) setOpenRule((prevRule) => !prevRule);
-      // if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
-      // if (openHistoryGame) setOpenHistoryGame((prevRule) => !prevRule);
-      // if (openMyHistory) setOpenMyHistory((prevRule) => !prevRule);
-      // if (openBetting) setOpenBetting((prevRule) => !prevRule);
+      if (openRule) setOpenRule((prevRule) => !prevRule);
+      if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
+      if (openHistoryGame) setOpenHistoryGame((prevRule) => !prevRule);
+      if (openMyHistory) setOpenMyHistory((prevRule) => !prevRule);
+      if (openBetting) setOpenBetting((prevRule) => !prevRule);
     }
 
     if (statusGame === "RESULTWAITING") {
-      // if (openRule) setOpenRule((prevRule) => !prevRule);
-      // if (openDepositIcoin) setOpenDepositIcoin((prevValue) => !prevValue);
+      if (openRule) setOpenRule((prevRule) => !prevRule);
+      if (openDepositIcoin) setOpenDepositIcoin((prevValue) => !prevValue);
       
-      // if (!openGameResult) setOpenGameResult((prevRule) => !prevRule);
+      if (!openGameResult) setOpenGameResult((prevRule) => !prevRule);
     } 
 
     toast.dismiss();
