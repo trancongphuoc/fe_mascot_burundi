@@ -242,7 +242,6 @@ useEffect(() => {
       setOpenGameResult(true)
     } 
 
-
     toast.dismiss();
     toast(`giai doan ${statusGame}`, { duration: 2000, position: 'bottom-center'});
 
