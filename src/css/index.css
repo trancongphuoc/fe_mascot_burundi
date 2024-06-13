@@ -17,6 +17,7 @@ html {
   scrollbar-width: none; /* Firefox */
   border: none;
   background-color: transparent;
+  overscroll-behavior: none;
 }
 
 body {
