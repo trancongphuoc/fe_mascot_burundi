@@ -645,6 +645,7 @@ h4 {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, min-content);
   justify-content: stretch;
   justify-items: stretch;
 }
@@ -703,7 +704,7 @@ h4 {
   max-width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: min-content max-content 1fr;
+  grid-template-rows: min-content min-content 1fr;
   margin: 0 16px;
 }
 .best-players__bg {
@@ -1170,7 +1171,7 @@ h4 {
 .betting__totalIcoin--icoin {
   color: #ffffff;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1;
 }
 .betting--button {

@@ -2,7 +2,7 @@
     max-width: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: min-content max-content 1fr;
+    grid-template-rows: min-content min-content 1fr;
     margin: 0 16px;
 
     &__bg {
