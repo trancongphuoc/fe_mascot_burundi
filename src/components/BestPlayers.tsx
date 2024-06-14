@@ -43,8 +43,7 @@ function BestPlayers({statusGame} : BestPlayersPro) {
     useEffect(() => {
         let isMounted = true;
 
-        if (statusGame === "RESULT" || statusGame === "RESULTWAITING") {
-            console.log('listen top user')
+        if (statusGame === "END") {
             getTopUsers()
                 .then(users => {
                     const updateUsers = [...users];
