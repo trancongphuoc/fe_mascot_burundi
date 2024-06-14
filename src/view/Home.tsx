@@ -270,13 +270,14 @@ useEffect(() => {
   }, [statusGame]);
 
   const handleCardSelection = (card: ZodiacCardModel) => {
+    console.log('step 1')
     if (statusGame === "COUNTDOWN") {
       const betCard: BetZodiacCard = {
         ...card,
         transactionId: game?.transactionId ?? 0,
       };
       setSelectCard(betCard);
-      if (!openBetting) setOpenBetting((prevRule) => !prevRule);
+      setOpenBetting(true);
     } else {
       toast.remove();
       toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
