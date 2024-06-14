@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import SecondaryText from '../assets/best-players-logo.svg';
 import Icoin from '../assets/icoin.svg';
 import SVG from 'react-inlinesvg';
-import bgBestPlayers from '../assets/bg_best_players.svg';
+import bgBestPlayers from '../assets/bg_best_players.png';
 import { getTopUsers } from '../firebase/bestPlayers';
 
 interface BestPlayersPro {
@@ -43,7 +43,8 @@ function BestPlayers({statusGame} : BestPlayersPro) {
     useEffect(() => {
         let isMounted = true;
 
-        if (statusGame === "COUNTDOWN") {
+        if (statusGame === "RESULT" || statusGame === "RESULTWAITING") {
+            console.log('listen top user')
             getTopUsers()
                 .then(users => {
                     const updateUsers = [...users];
@@ -51,9 +52,10 @@ function BestPlayers({statusGame} : BestPlayersPro) {
                         setTopUser(updateUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)));
                     }
                 })
-                .catch(error => console.error('Error fetching top users:', error));
-        } else {
-            setTopUser([]);
+                .catch(error => {
+                    setTopUser([])
+                    console.error('Error fetching top users:', error)
+                });
         }
 
         return () => {
@@ -63,9 +65,10 @@ function BestPlayers({statusGame} : BestPlayersPro) {
 
     return (    
         <div className="best-players mb-4-5px mt-30px">
-            <SVG src={bgBestPlayers} className="best-players__bg"/>
+            {/* <SVG src={bgBestPlayers} className="best-players__bg"/> */}
+            <img src={bgBestPlayers}  alt={''} className="best-players__bg"/>
             <SVG src={SecondaryText} className='best-players--img mt-6px'/>
-            <ol className="contents mt-8px mb-23-5px">
+            <ol className="contents">
                 {
                     topUsers.map((user, index) => (
                         <li className={`content${index}`} key={index}>

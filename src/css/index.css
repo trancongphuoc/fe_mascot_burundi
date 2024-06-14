@@ -703,14 +703,14 @@ h4 {
   max-width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 50px max-content;
+  grid-template-rows: min-content max-content 1fr;
   margin: 0 16px;
 }
 .best-players__bg {
   grid-area: 1/1/-1/-1;
   z-index: -1;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 .best-players--img {
   grid-area: 1/1/2/2;
@@ -727,12 +727,14 @@ h4 {
   z-index: 2;
   display: grid;
   align-content: start;
+  margin-bottom: 24px;
+  margin-top: 6px;
 }
 .best-players .contents > :not(:first-child) {
   border-top: 0.3px solid #28B598;
 }
 .best-players .contents > :not(:last-child) {
-  padding-bottom: 8px;
+  padding-bottom: 9px;
 }
 .best-players .contents .content0 {
   max-width: 100%;
@@ -1574,6 +1576,7 @@ h4 {
   font-size: 13px;
   font-weight: 350;
   margin-bottom: 3px;
+  text-align: center;
 }
 .lost-popup .lost__no2 {
   grid-area: 5/1/6/2;
@@ -1656,6 +1659,7 @@ h4 {
   font-size: 13px;
   font-weight: 350;
   margin-bottom: 3px;
+  text-align: center;
 }
 .lost-popup .lost__no1 {
   grid-area: 5/2/6/3;
@@ -1738,6 +1742,7 @@ h4 {
   font-size: 13px;
   font-weight: 350;
   margin-bottom: 3px;
+  text-align: center;
 }
 @media (max-width: 375px) {
   .lost-popup .lost--tertiary {
@@ -1840,6 +1845,7 @@ h4 {
     font-size: 13px;
     font-weight: 350;
     margin-bottom: 3px;
+    text-align: center;
   }
   .lost-popup .lost__no2 {
     display: grid;
@@ -1915,6 +1921,7 @@ h4 {
     font-size: 13px;
     font-weight: 350;
     margin-bottom: 3px;
+    text-align: center;
   }
   .lost-popup .lost__no1 {
     display: grid;
@@ -1990,6 +1997,7 @@ h4 {
     font-size: 13px;
     font-weight: 350;
     margin-bottom: 3px;
+    text-align: center;
   }
 }
 .lost-popup .lost__totalIcoin {
@@ -2557,7 +2565,7 @@ h4 {
   border-radius: 10px;
   margin: 0 auto;
   padding: 20px 39px 25px 39px;
-  margin-bottom: 5px;
+  margin-bottom: 9.5px;
   z-index: 9;
 }
 

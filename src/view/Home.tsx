@@ -38,6 +38,7 @@ import { bettingCard } from '../api/bettingCard';
 import toast, { Toaster, resolveValue } from 'react-hot-toast';
 import SVG from 'react-inlinesvg';
 import { useOnlineStatus } from '../api/checkDisconnect';
+// import { doNothing } from '../api/doNothing';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -219,6 +220,7 @@ useEffect(() => {
     }
 
     if (statusGame == "COUNTDOWN") {
+      // doNothing();
 
       if (openGameResult) setOpenGameResult((prevRule) => !prevRule);
       if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
@@ -228,17 +230,18 @@ useEffect(() => {
     }
 
     if (statusGame === "RESULT") {
-      // close dilog
       if (openRule) setOpenRule((prevRule) => !prevRule);
       if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
       if (openHistoryGame) setOpenHistoryGame((prevRule) => !prevRule);
+
+      if (openDepositIcoin) setOpenDepositIcoin((prevValue) => !prevValue);
       if (openMyHistory) setOpenMyHistory((prevRule) => !prevRule);
       if (openBetting) setOpenBetting((prevRule) => !prevRule);
+
     }
 
     if (statusGame === "RESULTWAITING") {
-      if (openRule) setOpenRule((prevRule) => !prevRule);
-      if (openDepositIcoin) setOpenDepositIcoin((prevValue) => !prevValue);
+
       
       if (!openGameResult) setOpenGameResult((prevRule) => !prevRule);
     } 
@@ -383,16 +386,6 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         />
    
       <BestPlayers statusGame={game?.status ?? "NONE"}/>
-
-      <button onClick={() => {
-        setOpenDisconnect(true);
-      }} className="open-popup-button">Open Popup</button>
-
-      <button onClick={() => {
-        // setDialogType('LOST');
-        setOpenLostWin(true)}} className="open-popup-button">Open Popup</button>
-      <button onClick={()=> setOpenGameResult(true)} className="open-popup-result game">Open resul Popup</button>
-
 
       {/* Dialog when click */}
       <AnimatePresence>
