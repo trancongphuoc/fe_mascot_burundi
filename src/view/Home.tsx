@@ -222,29 +222,47 @@ useEffect(() => {
     if (statusGame == "COUNTDOWN") {
       // doNothing();
 
-      if (openGameResult) setOpenGameResult((prevRule) => !prevRule);
-      if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
- 
-      setBetCards([]);
-      setBetSuccess(true);
-    }
-
-    if (statusGame === "RESULT") {
-      if (openRule) setOpenRule((prevRule) => !prevRule);
-      if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
-      if (openHistoryGame) setOpenHistoryGame((prevRule) => !prevRule);
-
-      if (openDepositIcoin) setOpenDepositIcoin((prevValue) => !prevValue);
-      if (openMyHistory) setOpenMyHistory((prevRule) => !prevRule);
-      if (openBetting) setOpenBetting((prevRule) => !prevRule);
-
-    }
-
-    if (statusGame === "RESULTWAITING") {
-
       
-      if (!openGameResult) setOpenGameResult((prevRule) => !prevRule);
-    } 
+      
+ 
+
+    }
+
+    switch (statusGame) {
+      case 'NONE':
+
+      case 'PREPARESTART':
+        
+      case 'COUNTDOWN':
+
+        if (openLostWin) setOpenLostWin((prevRule) => !prevRule);
+        if (openRule) setOpenRule((prevRule) => !prevRule);
+        if (openDepositIcoin) setOpenDepositIcoin((prevValue) => !prevValue);
+        if (openHistoryGame) setOpenHistoryGame((prevRule) => !prevRule);
+        if (openMyHistory) setOpenMyHistory((prevRule) => !prevRule);
+
+        setBetCards([]);
+        setBetSuccess(true);
+        break;
+      case 'RESULTWAITING':
+
+        break;
+      case 'RESULT':
+        if (openRule) setOpenRule((prevRule) => !prevRule);
+        if (openHistoryGame) setOpenHistoryGame((prevRule) => !prevRule);
+        if (openDepositIcoin) setOpenDepositIcoin((prevValue) => !prevValue);
+        if (openMyHistory) setOpenMyHistory((prevRule) => !prevRule);
+
+        if (!openGameResult) setOpenGameResult((prevRule) => !prevRule);
+        break
+      case 'END':
+
+
+    }
+
+
+
+
 
     toast.dismiss();
     toast(`giai doan ${statusGame}`, { duration: 2000, position: 'bottom-center'});
@@ -382,7 +400,6 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         betCards={betCards}
         betSuccess={betSuccess}
         statusGame={game?.status ?? 'NONE'}
-        deposit={() => setOpenDepositIcoin(true)}
         />
    
       <BestPlayers statusGame={game?.status ?? "NONE"}/>

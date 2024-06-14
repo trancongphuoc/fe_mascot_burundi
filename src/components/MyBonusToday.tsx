@@ -23,10 +23,10 @@ interface MyInfoBetResultModel {
     fbId: string,
     betCards: BetZodiacCard[],
     betSuccess: boolean,
-    deposit: () => void;
+    // deposit: () => void;
 }
 
-function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataChange, deposit} : MyInfoBetResultModel) {
+function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataChange} : MyInfoBetResultModel) {
     const [betUser, setBetUser] = useState<BetUser>()
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
 
@@ -105,6 +105,18 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
         }
     }, [betSuccess, betUser]); 
 
+      // call flutter
+  const callbackMyWallet = () => {
+    // Check if flutter_inappwebview object and callHandler method are available
+    if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
+      // Call the callHandler method with the handler name and shareLink variable
+      window.flutter_inappwebview.callHandler('callbackMyWallet');
+    } else {
+      // Log an error message if flutter_inappwebview or callHandler is not available
+      console.log('window.flutter_inappwebview or callHandler is not available');
+    }
+  }
+
 
     return (
         <>  
@@ -146,7 +158,7 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                     <SVG src={Icoin} className="end-left--img"/>
                     <p className='end-left--icoin'>{totalIcoin.toLocaleString('en-US').replace(/,/g, '.')}</p>
                 </div>
-                <h4 className='end-right' onClick={deposit}>
+                <h4 className='end-right' onClick={callbackMyWallet}>
                     <p className='end-right--text'>Nạp ngay</p>
                     <SVG src={ArrowWhite} className="end-right--img"/>
                 </h4>
