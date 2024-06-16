@@ -7,8 +7,10 @@ import IcoinWin from '../../assets/icoin.svg'
 import SVG from 'react-inlinesvg';
 import { useEffect, useState } from 'react';
 import { fetchMyHistory } from '../../api/getMyHistory';
-import bgMyHistory from '../../assets/bg_my_history.svg';
+// import bgMyHistory from '../../assets/bg_my_history.svg';
+import bgMyHistory from '../../assets/bg_my_history.png';
 import Loading from '../Loading';
+import PopupCenter from './PopupCenter';
 
 interface PopupMineResultProps {
   onClose: () => void;
@@ -58,11 +60,12 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
   }, []);
 
   return (
-    <div onClick={onClose} className="popup-overlay">
+    <PopupCenter
+      onClick={onClose}
+      className='mine-popup'>
 
-      <div className="mine-popup" onClick={e => e.stopPropagation()}>
-
-        <SVG src={bgMyHistory} className="mine-popup__bg"/>
+        {/* <SVG src={bgMyHistory} className="mine-popup__bg"/> */}
+        <img src={bgMyHistory} className="mine-popup__bg"/>
 
         <SVG src={ loading ? TextHistory : ''} className="mine-popup--header mt-7px mb-12-5px"/>
         <div className="mine-popup__title mb-7px">
@@ -111,8 +114,7 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
           </div>
           )
         }
-      </div>
-    </div>
+      </PopupCenter>
   );
 };
 

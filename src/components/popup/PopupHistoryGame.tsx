@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SVG from 'react-inlinesvg';
-import { motion } from 'framer-motion';
+
 import { GameHistory } from '../../model/GameHistory';
 import { fetchGameHistory } from '../../api/getGameHistory';
 // import bgHistoryGame from '../../assets/bg_history_game.svg';

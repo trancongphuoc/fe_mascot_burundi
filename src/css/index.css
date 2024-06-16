@@ -2321,34 +2321,21 @@ h4 {
   justify-content: center;
 }
 
-.popup-overlay {
-  position: fixed;
-  width: 100%;
-  left: 0;
-  max-width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  z-index: 1000;
-  overflow: hidden;
-}
-
 .mine-popup {
-  max-width: 430px;
+  max-width: 382px;
   width: 100%;
+  height: auto;
   display: grid;
+  justify-content: center;
+  align-content: center;
   grid-template-columns: 1;
   grid-template-rows: 59px 23px min-content;
-  margin: auto auto;
-  justify-content: center;
-  align-content: start;
+  margin: 0 auto;
 }
 .mine-popup__bg {
   grid-area: 1/1/-1/-1;
   width: 100%;
-  height: auto;
+  height: 80vh;
   z-index: -1;
 }
 .mine-popup--header {
@@ -2395,7 +2382,7 @@ h4 {
   grid-area: 3/1/4/2;
   overflow-y: auto;
   scrollbar-width: auto;
-  height: 520px;
+  height: 69.3vh;
   margin: 0 7px;
   margin-bottom: 10px;
 }
