@@ -3,11 +3,13 @@ import SVG from 'react-inlinesvg';
 import { motion } from 'framer-motion';
 import { GameHistory } from '../../model/GameHistory';
 import { fetchGameHistory } from '../../api/getGameHistory';
-import bgHistoryGame from '../../assets/bg_history_game.svg';
+// import bgHistoryGame from '../../assets/bg_history_game.svg';
+import bgHistoryGame from '../../assets/bg_game_history.png';
 import BgCard from '../../assets/bg_card_normal_light.svg';
 import StickIcon from  '../../assets/icon_stick.svg';
 import TextResult from '../../assets/text-result.svg';
 import Loading from '../Loading';
+import PopupCenter from './PopupCenter';
 
 interface PopupHistoryProps {
   onClose: () => void;
@@ -43,21 +45,11 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs }) => 
   }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={onClose}
-      className="history-game-overlay"
-    >
-      <motion.div
-        initial={{ opacity: 0, scale: .5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: .5 }}
-        className="history-game-popup mt-47px"
-        onClick={e => e.stopPropagation()}
-      >
-        <SVG src={bgHistoryGame} className="history-game-popup__bg" />
+    <PopupCenter
+    onClick={onClose}
+    className='history-game-popup'>
+        {/* <SVG src={bgHistoryGame} className="history-game-popup__bg" /> */}
+        <img src={bgHistoryGame} className="history-game-popup__bg" />
         <SVG src={TextResult} className="history-game-popup--header" />
 
         <div className="history-game-popup__title mt-7px">
@@ -91,8 +83,7 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs }) => 
             ))}
           </div>
         )}
-      </motion.div>
-    </motion.div>
+      </PopupCenter>
   );
 };
 
