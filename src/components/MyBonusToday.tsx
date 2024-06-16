@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { DataSnapshot, off, onValue, ref } from 'firebase/database';
 import { db } from '../firebase/config';
 import bgMyBonus from '../assets/bg_my_bonus_new.svg';
+import bgHeader from '../assets/bg_my_bonus_today.png';
 
 interface BetUser extends User {
     bettingCards?: BetZodiacCard[];
@@ -121,7 +122,9 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
     return (
         <>  
             <div className="section-myInfo mt-22px">
-                <SVG src={bgMyBonus} className="section-myInfo__bg"/>
+                {/* <SVG src={bgMyBonus} className="section-myInfo__bg"/> */}
+
+                <img src={bgHeader} className="section-myInfo__bg"/>
                 
                 <div className="header-left">
                     <p className='header-left--text'>Thưởng hôm nay:</p>
@@ -135,11 +138,7 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                 </div>
                
                 <div className="section-myInfo__cards">
-                    {  
-                    
-                    // betUser?.bettingCards && 
-                    // betUser.bettingCards.map((betCard, index) => (
-      
+                    {   
                     bettingCards.map((betCard, index) => (
                             <div key={index} className="card__main">
                                 <p className="card__main--background-color">&nbsp;</p>
@@ -153,15 +152,17 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                     }
                 </div>
 
-                <div className="end-left">
-                    <p className='end-left--text'>Tổng của tôi:</p>
-                    <SVG src={Icoin} className="end-left--img"/>
-                    <p className='end-left--icoin'>{totalIcoin.toLocaleString('en-US').replace(/,/g, '.')}</p>
+                <div className="end">
+                    <div className="end-left">
+                        <p className='end-left--text'>Tổng của tôi:</p>
+                        <SVG src={Icoin} className="end-left--img"/>
+                        <p className='end-left--icoin'>{totalIcoin.toLocaleString('en-US').replace(/,/g, '.')}</p>
+                    </div>
+                    <h4 className='end-right' onClick={callbackMyWallet}>
+                        <p className='end-right--text'>Nạp ngay</p>
+                        <SVG src={ArrowWhite} className="end-right--img"/>
+                    </h4>
                 </div>
-                <h4 className='end-right' onClick={callbackMyWallet}>
-                    <p className='end-right--text'>Nạp ngay</p>
-                    <SVG src={ArrowWhite} className="end-right--img"/>
-                </h4>
             </div>
         </>
     );

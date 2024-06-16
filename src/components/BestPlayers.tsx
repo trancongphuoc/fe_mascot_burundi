@@ -43,13 +43,11 @@ function BestPlayers({statusGame} : BestPlayersPro) {
     useEffect(() => {
         let isMounted = true;
 
-        if (statusGame === "END") {
+        if (statusGame === "PREPARESTART") {
             getTopUsers()
                 .then(users => {
                     const updateUsers = [...users];
-                    if (isMounted) {
-                        setTopUser(updateUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)));
-                    }
+                    if (isMounted) setTopUser(updateUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)));
                 })
                 .catch(error => {
                     setTopUser([])
