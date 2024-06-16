@@ -93,7 +93,7 @@
         border-right: 0.1px solid $color-eucalyptus;
 
         >*:not(:last-child) { margin-right: 19px; }
-        padding-top: 8px;
+        padding-top: 9.5px;
 
         .card__main {
             display: grid;
@@ -122,7 +122,7 @@
                 color: $color-green-jungle;
                 font-family: 'Yeseva One';
                 line-height: 1;
-                margin-bottom: -1px;
+                font-size: 9px;
             }
 
             &--background {

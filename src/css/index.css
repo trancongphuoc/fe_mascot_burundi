@@ -957,7 +957,7 @@ h4 {
   justify-content: center;
   border-left: 0.1px solid #32DAB1;
   border-right: 0.1px solid #32DAB1;
-  padding-top: 8px;
+  padding-top: 9.5px;
 }
 .section-myInfo__cards > *:not(:last-child) {
   margin-right: 19px;
@@ -987,7 +987,7 @@ h4 {
   color: #29B89A;
   font-family: "Yeseva One";
   line-height: 1;
-  margin-bottom: -1px;
+  font-size: 9px;
 }
 .section-myInfo__cards .card__main--background {
   grid-area: 2/1/3/2;
