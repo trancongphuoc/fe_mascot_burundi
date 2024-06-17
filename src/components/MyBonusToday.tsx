@@ -35,8 +35,10 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
     const [bettingCards, setBettingCards] = useState< BetZodiacCard[]>([]);
 
     const formatNumber = (num:number) => {
+
         if (num >= 1000000) {
-          return (num / 1000).toFixed(1) + 'k'; // Convert millions to 'm'
+            const formattedNum = (num / 1000).toFixed(1) + 'k';
+            return formattedNum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         // } else if (num >= 1000) {
         //   return (num / 1000).toFixed(1) + 'k'; // Convert thousands to 'k'
         } else {
