@@ -9,7 +9,7 @@ export const doNothing = async (): Promise<void> => {
       return;
     }
 
-    const response = await api.get(`/rest/zodiac-game/do-nothing`, {
+    const response = await api.post(`/rest/zodiac-game/do-nothing`, {}, {
       headers: { 'Authorization': `Bearer ${token}` },
     });
 

@@ -38,7 +38,7 @@ import { bettingCard } from '../api/bettingCard';
 import toast, { Toaster, resolveValue } from 'react-hot-toast';
 import SVG from 'react-inlinesvg';
 import { useOnlineStatus } from '../api/checkDisconnect';
-// import { doNothing } from '../api/doNothing';
+import { doNothing } from '../api/doNothing';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -220,12 +220,7 @@ useEffect(() => {
     }
 
     if (statusGame == "COUNTDOWN") {
-      // doNothing();
-
-      
-      
- 
-
+      doNothing();
     }
 
     switch (statusGame) {
