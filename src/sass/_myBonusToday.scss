@@ -38,9 +38,13 @@
             font-weight: 400;
         }
 
+        .totalIcoin {
+            display: flex;
+        }
+
         &--img {
             width: 16px;
-            height: auto;
+            height: 16px;
             margin-right: 6px;
             transform: translateY(-1px);
         }
@@ -57,9 +61,10 @@
         justify-self: end;
 
         display: flex;
+        grid-template-columns: max-content 1fr;
 
         color: $color-white;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 300;
         line-height: 1;
 
@@ -75,6 +80,19 @@
             margin-right: 11px;
             max-width: 7px;
             height: auto;
+        }
+    }
+
+    @media (max-width: 375px) {
+        .header-left {
+            display: grid;
+            justify-content: center;
+            line-height: 1.2;
+            font-size: 12px;
+        }
+
+        .header-right {
+            font-size: 12px;
         }
     }
 
@@ -169,7 +187,7 @@
     .end {
         grid-area: 3 / 1 / 4 / 3;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: max-content max-content;
         grid-template-rows: min-content;
 
         justify-content: space-between;

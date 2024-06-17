@@ -34,20 +34,16 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
 
     const [bettingCards, setBettingCards] = useState< BetZodiacCard[]>([]);
 
-    const formatNumber = (num:number) => {
-
+    const formatNumber = (num: number) => {
         if (num >= 1000000) {
            const formattedNum = (num / 1000).toFixed(1) + 'k';
             return formattedNum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        // } else if (num >= 1000) {
-        //   return (num / 1000).toFixed(1) + 'k'; // Convert thousands to 'k'
         } else {
-          return num.toLocaleString('en-US').replace(/,/g, '.'); // No change for numbers less than 1000
+          return num.toLocaleString('en-US').replace(/,/g, '.');
         }
       };
 
     useEffect(()=> {
-        console.log('check fb', fbId)
         const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
@@ -124,10 +120,8 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
   const callbackMyWallet = () => {
     // Check if flutter_inappwebview object and callHandler method are available
     if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
-      // Call the callHandler method with the handler name and shareLink variable
       window.flutter_inappwebview.callHandler('callbackMyWallet');
     } else {
-      // Log an error message if flutter_inappwebview or callHandler is not available
       console.log('window.flutter_inappwebview or callHandler is not available');
     }
   }
@@ -142,8 +136,11 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                 
                 <div className="header-left">
                     <p className='header-left--text'>Thưởng hôm nay:</p>
-                    <SVG className='header-left--img' src={Icoin}/>
-                    <p className='header-left--icoin'>{formatNumber(betUser?.totalIcoinWinToday ?? 0)}</p>
+                    <div className="totalIcoin">
+                        <SVG className='header-left--img' src={Icoin}/>
+                        <p className='header-left--icoin'>{formatNumber(betUser?.totalIcoinWinToday ?? 0)}</p>
+                    </div>
+
                 </div>
 
                 <div onClick={onOpen} className="header-right">
