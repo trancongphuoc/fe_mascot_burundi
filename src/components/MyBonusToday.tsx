@@ -6,13 +6,14 @@ import SVG from 'react-inlinesvg';
 import { useEffect, useState } from 'react';
 import { DataSnapshot, off, onValue, ref } from 'firebase/database';
 import { db } from '../firebase/config';
-import bgMyBonus from '../assets/bg_my_bonus_new.svg';
+// import bgMyBonus from '../assets/bg_my_bonus_new.svg';
 import bgHeader from '../assets/bg_my_bonus_today.png';
 
 interface BetUser extends User {
     bettingCards?: BetZodiacCard[];
     isWin?: boolean;
     totalIcoinWin?: number;
+    totalIcoinWinToday?: number;
 }
 
 
@@ -80,6 +81,7 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                     bettingCards: cards,
                     isWin: data.isWin,
                     totalIcoinWin: data.totalIcoinWin ?? 0,
+                    totalIcoinWinToday: data.totalIcoinWinToday ?? 0,
                 };
                 setBetUser(user);  
                 onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin ?? 0});          
@@ -129,7 +131,7 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                 <div className="header-left">
                     <p className='header-left--text'>Thưởng hôm nay:</p>
                     <SVG className='header-left--img' src={Icoin}/>
-                    <p className='header-left--icoin'>{(betUser?.totalIcoinWin ?? 0).toLocaleString('en-US').replace(/,/g, '.')}</p>
+                    <p className='header-left--icoin'>{(betUser?.totalIcoinWinToday ?? 0).toLocaleString('en-US').replace(/,/g, '.')}</p>
                 </div>
 
                 <div onClick={onOpen} className="header-right">
