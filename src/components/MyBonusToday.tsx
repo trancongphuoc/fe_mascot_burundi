@@ -37,7 +37,7 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
     const formatNumber = (num:number) => {
 
         if (num >= 1000000) {
-            const formattedNum = (num / 1000).toFixed(1) + 'k';
+           const formattedNum = (num / 1000).toFixed(1) + 'k';
             return formattedNum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         // } else if (num >= 1000) {
         //   return (num / 1000).toFixed(1) + 'k'; // Convert thousands to 'k'
