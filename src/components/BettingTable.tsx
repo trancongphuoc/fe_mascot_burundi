@@ -5,7 +5,8 @@ import { db } from '../firebase/config';
 import SVG from 'react-inlinesvg';
 import bgCardNormal from '../assets/bg_card_nomarl.svg';
 import bgCardSelect from '../assets/bg_card_selected.svg';
-import bbBettingTable from '../assets/frame_betting_table.svg';
+// import bbBettingTable from '../assets/frame_betting_table.svg';
+import bettingFrame from '../assets/bg_betting_frame.png';
 
 
 interface BettingTableProps {
@@ -58,7 +59,9 @@ export function BettingTable({ onSelectCard, statusGame }: BettingTableProps) {
         <div className="betting-table mt-5px">
             <CountDown className='betting-table--counter' statusGame={statusGame}/>
 
-            <SVG src={bbBettingTable} className='betting-table__bg' cacheRequests={true}/>
+            {/* <SVG src={bbBettingTable} className='betting-table__bg' cacheRequests={true}/> */}
+
+            <img src={bettingFrame} className='betting-table__bg'/>
 
             <div className="betting-table__content">
                 {betCards.map((betCard, index) => (
