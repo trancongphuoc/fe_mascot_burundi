@@ -893,12 +893,26 @@ h4 {
   align-items: center;
   justify-items: left;
   background-color: #054254;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .section-myInfo__bg {
   grid-area: 1/1/2/-1;
   z-index: 2;
   width: 100%;
   height: 38px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .section-myInfo .header-left {
   grid-area: 1/1/2/2;
@@ -1364,10 +1378,7 @@ h4 {
   grid-area: 3/1/6/4;
   z-index: 5;
   width: 100%;
-  height: auto;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: center;
+  height: 100%;
   outline: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
@@ -2237,6 +2248,13 @@ h4 {
   grid-template-columns: 1fr;
   margin: 100px auto;
   justify-items: center;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .history-game-popup__bg {
   grid-area: 1/1/-1/-1;
@@ -2346,6 +2364,13 @@ h4 {
   grid-template-columns: 1;
   grid-template-rows: 59px 23px min-content;
   margin: 0 auto;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .mine-popup__bg {
   grid-area: 1/1/-1/-1;

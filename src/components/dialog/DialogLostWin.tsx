@@ -1,8 +1,8 @@
 import bgCardSelected from '../../assets/bg_card_selected_light.svg';
 import TextCongratution from '../../assets/text_congregation.svg';
 import TextApologize from '../../assets/text_apologize.svg';
-import BgContentWin from '../../assets/bg_content_win.svg';
-import BgContentLost from '../../assets/bg_content_lost.svg';
+import BgContentWin from '../../assets/bg_content_win.png';
+import BgContentLost from '../../assets/bg_content_lost.png';
 import BgHeaderLost from '../../assets/bg_header_lost.svg';
 import BgHeaderWin from '../../assets/bg_header_short_win.svg';
 import Icoin from '../../assets/icoin.svg';
@@ -117,7 +117,9 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
         transition={{ type: 'just'}}
         className="lost-popup"
         >
-        <SVG src={dialogType == "WIN" ? win.bgContent : lost.bgContent} className="lost--BgContent mb--1px" onClick={e => {e.stopPropagation()}}/>
+        {/* <SVG src={dialogType == "WIN" ? win.bgContent : lost.bgContent} className="lost--BgContent mb--1px" onClick={e => {e.stopPropagation()}}/> */}
+        <img src={dialogType == "WIN" ? win.bgContent : lost.bgContent} className="lost--BgContent mb--1px" onClick={e => {e.stopPropagation()}}/>
+
         <SVG src={bgCardSelected} className="lost--zodiac-background" onClick={e => {e.stopPropagation()}}/>
         <SVG src={zodiac} className="lost--zodiac-card" onClick={e => {e.stopPropagation()}}/>
         <SVG src={BgLighter} className="lost--BgLighter" onClick={e => {e.stopPropagation()}}/>

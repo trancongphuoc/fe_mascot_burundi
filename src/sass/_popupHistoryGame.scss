@@ -13,6 +13,8 @@
 
     justify-items: center;
 
+    @include non_select;
+
     &__bg {
         grid-area: 1 / 1 / -1 / -1;
         z-index: -1;

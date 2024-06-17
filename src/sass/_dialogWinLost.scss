@@ -98,10 +98,8 @@
             grid-area: 3 / 1 / 6 / 4;
             z-index: 5;
             width: 100%;
-            height: auto;
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            background-position: center;
+            height: 100%;
+
             @include non_select;
         }
     
