@@ -34,6 +34,16 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
 
     const [bettingCards, setBettingCards] = useState< BetZodiacCard[]>([]);
 
+    const formatNumber = (num:number) => {
+        if (num >= 1000000) {
+          return (num / 1000).toFixed(1) + 'k'; // Convert millions to 'm'
+        // } else if (num >= 1000) {
+        //   return (num / 1000).toFixed(1) + 'k'; // Convert thousands to 'k'
+        } else {
+          return num.toLocaleString('en-US').replace(/,/g, '.'); // No change for numbers less than 1000
+        }
+      };
+
     useEffect(()=> {
         console.log('check fb', fbId)
         const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
@@ -131,7 +141,7 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                 <div className="header-left">
                     <p className='header-left--text'>Thưởng hôm nay:</p>
                     <SVG className='header-left--img' src={Icoin}/>
-                    <p className='header-left--icoin'>{(betUser?.totalIcoinWinToday ?? 0).toLocaleString('en-US').replace(/,/g, '.')}</p>
+                    <p className='header-left--icoin'>{formatNumber(betUser?.totalIcoinWinToday ?? 0)}</p>
                 </div>
 
                 <div onClick={onOpen} className="header-right">
@@ -158,7 +168,8 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                     <div className="end-left">
                         <p className='end-left--text'>Tổng của tôi:</p>
                         <SVG src={Icoin} className="end-left--img"/>
-                        <p className='end-left--icoin'>{totalIcoin.toLocaleString('en-US').replace(/,/g, '.')}</p>
+                        {/* <p className='end-left--icoin'>{totalIcoin.toLocaleString('en-US').replace(/,/g, '.')}</p> */}
+                        <p className='end-left--icoin'>{formatNumber(totalIcoin)}</p>
                     </div>
                     <h4 className='end-right' onClick={callbackMyWallet}>
                         <p className='end-right--text'>Nạp ngay</p>
