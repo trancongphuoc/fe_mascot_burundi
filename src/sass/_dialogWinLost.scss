@@ -4,8 +4,6 @@
     $outer-color-bottom: map-get($params, outer-color-bottom);
     $middle-width: map-get($params, middle-width);
     $inner-width: map-get($params, inner-width);
-    $crown-left: map-get($params, crown-left);
-    $crown-top: map-get($params, crown-top);
 
     display: grid;
     justify-items: center;
@@ -16,13 +14,12 @@
         grid-area: 1 / 1 / 2 / 2;
         width: 28px;
         align-self: start;
-        justify-self: end;
+        justify-self: center;
 
         position: relative;
 
-        right: 22%;
-        top: -18%;
-
+        right: calc(($outer-width / 5.5) * -1);
+        top: calc(($outer-width / 5.2) * -1);;
     }
 
     &--url {
@@ -282,8 +279,6 @@
                     outer-width: 57px,
                     middle-width: 53px,
                     inner-width: 49px,
-                    crown-left: -24px,
-                    crown-top: -15px,
                 ));
                 padding-right: 4px;
             }
@@ -293,8 +288,6 @@
                     outer-width: 57px,
                     middle-width: 53px,
                     inner-width: 49px,
-                    crown-left: -24px,
-                    crown-top: -15px,
                 ));
                 padding-left: 4px;
             }
@@ -304,8 +297,6 @@
                     outer-width: 62px,
                     middle-width: 59px,
                     inner-width: 55px,
-                    crown-left: -22px,
-                    crown-top: -15px,
                 ));
                 padding-bottom: 14px;
             }

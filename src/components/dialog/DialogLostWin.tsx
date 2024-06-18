@@ -18,9 +18,9 @@ import LineRightLost from '../../assets/line_right_lost.svg';
 
 import SVG from 'react-inlinesvg';
 import { motion } from 'framer-motion';
-// import useAudio from './UseAudio';
-// import winAudio from '../../public/sounds/crowd_victory.wav';
-// import lostAudio from '../../public/sounds/crowd_disappointed.wav';
+// import useAudio from '../UseAudio';
+// import winAudio from '../../../public/sounds/crowd_victory.wav';
+// import lostAudio from '../../../public/sounds/crowd_disappointed.wav';
 
 interface DialogLostWinProps {
   onClose: () => void;
@@ -48,17 +48,17 @@ const crown = [CrownGold, CrownSliver, CrownBronze];
 
 
 // const top123: User[] = [{
-//   name: "Dong Hoang Linh",
+//   name: "Dasd asdasdasas as",
 //   profileImageLink: "123",
 //   totalIcoin: 123
 // },
 // {
-//   name: "Dong Hoang Linh",
+//   name: "Dong Hoangasdasd Linh",
 //   profileImageLink: "123",
 //   totalIcoin: 12312
 // },
 // {
-//   name: "Dong Hoang Linh",
+//   name: "Dong inh",
 //   profileImageLink: "123",
 //   totalIcoin: 12
 // },
@@ -93,10 +93,11 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
   const renderDialogContent = () => {
     switch (dialogType) {
       case 'LOST':
-        // playLostAudio()
+        console.log('check lost win')
+        // playLostAudio();
         return contentLost;
       case 'WIN':
-        // playWinAudio()
+        // playWinAudio();
         return contentWin;
       default:
         return null;
