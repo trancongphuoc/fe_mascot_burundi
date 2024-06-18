@@ -2,12 +2,10 @@ import axios from 'axios';
 // const BASE_URL = 'http://localhost:5173';
 const BASE_URL_DEV = 'https://ikara-development.appspot.com';
 
-
 const api = axios.create({
-    baseURL: 'https://ikara-development.appspot.com',
+    baseURL: window.location.hostname == "localhost" ? BASE_URL_DEV : window.location.origin,
 });
    
 export default api;
-export { BASE_URL_DEV };
 
 export const token = window.sessionStorage.getItem('token');
