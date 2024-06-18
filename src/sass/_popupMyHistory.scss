@@ -10,24 +10,24 @@
 
 .mine-popup {
     max-width: 382px;
-    width: 100%;
-    height: auto;
+    height: 85vh;
 
     display: grid;
     justify-content: center;
     align-content: center;
 
     grid-template-columns: 1;
-    grid-template-rows: 59px 23px min-content;
+    grid-template-rows: 59px 23px 1fr;
 
-    margin: 0 auto;
+
+    margin: 0 16px;
 
     @include non_select;
 
     &__bg {
         grid-area: 1 / 1 / -1 / -1;
         width: 100%;
-        height: 80vh;
+        height: 100%;
         z-index: -1;
     }
 
@@ -71,10 +71,10 @@
         grid-area: 3 / 1 / 4 / 2;
         overflow-y: auto;
         scrollbar-width: auto;
-        height: 69.3vh;
+        height: 98.7%;
 
         margin: 0 7px;
-        margin-bottom: 10px;
+        clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 5% 100%, 0% 95%);
     }
 
     .item {
@@ -144,14 +144,14 @@
                 &__card--bg {
                     grid-area: 2 / 1 / 3 / 2;
                     z-index: 1;
-                    width: 100%;
+                    max-width: 100%;
                     height: auto;
                 }
 
                 &__card--zodiac {
                     grid-area: 2 / 1 / 3 / 2;
                     z-index: 2;
-                    width: 70%;
+                    max-width: 70%;
                     height: auto;
                 }
 

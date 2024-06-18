@@ -65,9 +65,11 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
       className='mine-popup'>
 
         {/* <SVG src={bgMyHistory} className="mine-popup__bg"/> */}
+
         <img src={bgMyHistory} className="mine-popup__bg"/>
 
         <SVG src={ loading ? TextHistory : ''} className="mine-popup--header mt-7px mb-12-5px"/>
+        
         <div className="mine-popup__title mb-7px">
             <p className="mine-popup__title--head1">Ván</p>
             <p className="mine-popup__title--head2">Mức cược</p>
