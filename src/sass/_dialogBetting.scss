@@ -209,7 +209,7 @@
         z-index: 5;
 
         @include non_select;
-        @include non_decor_button;
+        @include non_decor_button;  
     
         &::before {
             content: '';

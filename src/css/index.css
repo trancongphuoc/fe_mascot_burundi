@@ -67,7 +67,7 @@ body {
 }
 .heading-secondary {
   color: #5fdabc;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 16px;
   line-height: 1;
 }
@@ -2743,7 +2743,7 @@ h4 {
 .betting-table__card--players {
   margin-top: 4px;
   font-size: 10px;
-  font-weight: 300;
+  font-weight: 400;
   color: #ffffff;
   line-height: 1.1;
 }
