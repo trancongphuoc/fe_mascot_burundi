@@ -28,15 +28,17 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
     if (!stakes || !zodiacGameId || !zodiacCardSelect) {
       if (!stakes) {
         toast.dismiss();
-        toast(`Thiếu stake`, { duration: 2000, position: 'bottom-center'});
+        toast("Thiếu tiền cược", { duration: 2000, position: 'bottom-center'});
       } else if (!zodiacGameId) {
         toast.dismiss();
-        toast(`Thiếu thông tin game id`, { duration: 2000, position: 'bottom-center'});
+        toast("Thiếu thông tin game", { duration: 2000, position: 'bottom-center'});
       } else if (!zodiacCardSelect) {
         toast.dismiss();
-        toast(`Thiếu card select`, { duration: 2000, position: 'bottom-center'});
+        toast("Thiếu card select", { duration: 2000, position: 'bottom-center'});
+      } else {
+        toast.dismiss();
+        toast("Đặt cược lỗi", { duration: 2000, position: 'bottom-center'});
       }
-      // toast(`Thiếu thông tin ${stakes}-${zodiacGameId}-${zodiacCardSelect}`, { duration: 2000, position: 'bottom-center',  className: 'custom-toast'});
       onClose();
       return;
     }
@@ -48,14 +50,14 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
     betIcoin(betCard);
   };
 
-
   const handleStake = (stake: number) => {
     if (stake) {
       const totalIcoinString = window.sessionStorage.getItem('totalIcoin');
       const totalIcoin = totalIcoinString !== null ? parseInt(totalIcoinString, 10) : 0;
       console.log('xxxx', totalIcoin)
       if (stake <= totalIcoin) {
-        setStakes(prevStake => prevStake + stake)
+        const initStake = stakes;
+        setStakes(initStake)
       } else {
         openDepositPupup();
       }
