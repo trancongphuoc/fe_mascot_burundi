@@ -36,6 +36,10 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+      new Image().src = bgMyHistory;
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetchMyHistory();
