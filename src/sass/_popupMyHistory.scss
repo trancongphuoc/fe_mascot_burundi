@@ -19,7 +19,6 @@
     grid-template-columns: 1;
     grid-template-rows: 59px 23px 1fr;
 
-
     margin: 0 16px;
 
     @include non_select;
@@ -71,7 +70,7 @@
         grid-area: 3 / 1 / 4 / 2;
         overflow-y: auto;
         scrollbar-width: auto;
-        height: 98.7%;
+        height: calc(85vh - 89px);
 
         margin: 0 7px;
         clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 5% 100%, 0% 95%);

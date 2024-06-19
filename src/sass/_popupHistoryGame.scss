@@ -1,14 +1,14 @@
 .history-game-popup {
     max-width: 382px;
-    height: 85vh;
+    height: 84.3vh;
 
     display: grid;
     justify-content: center;
     align-content: center;
 
-    grid-template-rows: min-content min-content 1fr;
+    grid-template-rows: 50px 49px 1fr;
     grid-template-columns: 1fr;
-    margin: 0 16px;
+    margin: 6px 16px 0 16px;
 
     justify-items: center;
 
@@ -85,7 +85,7 @@
         overscroll-behavior: none;
 
         width: 100%;
-        height: 99%;
+        height: calc(84.3vh - 107px);
 
         align-content: start;
 

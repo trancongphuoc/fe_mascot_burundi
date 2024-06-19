@@ -39,6 +39,7 @@ import toast, { Toaster, resolveValue } from 'react-hot-toast';
 import SVG from 'react-inlinesvg';
 import { useOnlineStatus } from '../api/checkDisconnect';
 import { doNothing } from '../api/doNothing';
+import Loading from '../components/Loading';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -99,6 +100,8 @@ function Home() {
   const [selectCard, setSelectCard] = useState<BetZodiacCard | null>(null);
 
   const [totalIcoinWin, setTotalIcoinWin] = useState(0);
+
+  const [isLoading, setIsLoading] = useState(true);
   // get win or not
   const handleIsWin = (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => {
     if (data.totalIcoinWin) {
@@ -193,6 +196,8 @@ useEffect(() => {
                   zodiacCard: zodiacCard,
                   topUser: topUsers,
               });
+
+              if (isLoading) setIsLoading(false)
           }
       };
 
@@ -351,6 +356,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
 
   return (
+    isLoading ? <Loading className='home_loading'/> :
     <div className='main'>
     
       <Toaster>
