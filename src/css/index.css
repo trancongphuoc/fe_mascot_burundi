@@ -713,6 +713,13 @@ h4 {
   grid-template-columns: 1fr;
   grid-template-rows: min-content min-content 1fr;
   margin: 0 16px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .best-players__bg {
   grid-area: 1/1/-1/-1;

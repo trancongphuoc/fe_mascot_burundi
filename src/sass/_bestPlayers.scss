@@ -5,6 +5,8 @@
     grid-template-rows: min-content min-content 1fr;
     margin: 0 16px;
 
+    @include non_select;   
+
     &__bg {
         grid-area: 1 / 1 / -1 / -1;
         z-index: -1;

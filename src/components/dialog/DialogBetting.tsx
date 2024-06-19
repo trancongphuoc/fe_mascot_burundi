@@ -54,9 +54,8 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
     if (stake) {
       const totalIcoinString = window.sessionStorage.getItem('totalIcoin');
       const totalIcoin = totalIcoinString !== null ? parseInt(totalIcoinString, 10) : 0;
-      console.log('xxxx', totalIcoin)
-      if (stake <= totalIcoin) {
-        const initStake = stakes + stake;
+      const initStake = stakes + stake;
+      if (initStake <= totalIcoin) {
         setStakes(initStake)
       } else {
         openDepositPupup();
