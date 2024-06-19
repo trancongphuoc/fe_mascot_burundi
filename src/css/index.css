@@ -1509,7 +1509,7 @@ h4 {
 .lost-popup .lost__secondary {
   grid-area: 3/1/4/4;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   color: #ffffff;
   text-align: center;
   line-height: 1.15;
@@ -1544,7 +1544,7 @@ h4 {
   line-height: 1;
   color: #ffffff;
   font-size: 14px;
-  font-weight: 350;
+  font-weight: 400;
   margin-bottom: 20px;
   z-index: 7;
   outline: none;
@@ -1649,7 +1649,7 @@ h4 {
   color: #ffffff;
   line-height: 1;
   font-size: 13px;
-  font-weight: 350;
+  font-weight: 400;
   margin-bottom: 3px;
   text-align: center;
 }
@@ -1732,7 +1732,7 @@ h4 {
   color: #ffffff;
   line-height: 1;
   font-size: 13px;
-  font-weight: 350;
+  font-weight: 400;
   margin-bottom: 3px;
   text-align: center;
 }
@@ -1815,7 +1815,7 @@ h4 {
   color: #ffffff;
   line-height: 1;
   font-size: 13px;
-  font-weight: 350;
+  font-weight: 400;
   margin-bottom: 3px;
   text-align: center;
 }
@@ -1918,7 +1918,7 @@ h4 {
     color: #ffffff;
     line-height: 1;
     font-size: 13px;
-    font-weight: 350;
+    font-weight: 400;
     margin-bottom: 3px;
     text-align: center;
   }
@@ -1994,7 +1994,7 @@ h4 {
     color: #ffffff;
     line-height: 1;
     font-size: 13px;
-    font-weight: 350;
+    font-weight: 400;
     margin-bottom: 3px;
     text-align: center;
   }
@@ -2070,7 +2070,7 @@ h4 {
     color: #ffffff;
     line-height: 1;
     font-size: 13px;
-    font-weight: 350;
+    font-weight: 400;
     margin-bottom: 3px;
     text-align: center;
   }
@@ -2124,7 +2124,7 @@ h4 {
 .win__secondary {
   grid-area: 3/1/4/4;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   color: #ffffff;
   text-align: center;
   line-height: 1.15;
@@ -2142,7 +2142,7 @@ h4 {
 @media (max-width: 375px) {
   .win__secondary {
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1;
     margin-bottom: 5px;
     margin-top: 20px;
@@ -2157,7 +2157,7 @@ h4 {
 }
 .win__secondary--text {
   font-size: 16px;
-  font-weight: 350;
+  font-weight: 400;
   color: #ffffff;
   text-align: center;
   z-index: 7;
@@ -2636,7 +2636,8 @@ h4 {
   border-radius: 10px;
   margin: 0 auto;
   padding: 20px 39px 25px 39px;
-  margin-bottom: 50px;
+  position: relative;
+  bottom: 8%;
   z-index: 9;
 }
 

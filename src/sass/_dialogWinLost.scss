@@ -45,7 +45,7 @@
         color: $color-white;
         line-height: 1;
         font-size: 13px;
-        font-weight: 350;
+        font-weight: 400;
         margin-bottom: 3px;
         text-align: center;
     }
@@ -153,7 +153,7 @@
         &__secondary { 
             grid-area: 3 / 1 / 4 / 4;
             font-size: 16px;
-            font-weight: 300;
+            font-weight: 400;
             color: $color-white;
             text-align: center;
             line-height: 1.15;
@@ -179,7 +179,7 @@
             line-height: 1;
             color: $color-white;
             font-size: 14px;
-            font-weight: 350;
+            font-weight: 400;
             margin-bottom: 20px;
             z-index: 7;
             @include non_select;
@@ -341,7 +341,7 @@
     &__secondary {
         grid-area: 3 / 1 / 4 / 4;
         font-size: 16px;
-        font-weight: 300;
+        font-weight: 400;
         color: $color-white;
         text-align: center;
         line-height: 1.15;
@@ -355,7 +355,7 @@
     @media (max-width: 375px) {
         &__secondary {
             font-size: 14px;
-            font-weight: 300;
+            font-weight: 400;
             line-height: 1;
             margin-bottom: 5px;
             margin-top: 20px;
@@ -365,7 +365,7 @@
 
     &__secondary--text {
         font-size: 16px;
-        font-weight: 350;
+        font-weight: 400;
         color: $color-white;
         text-align: center;
         z-index: 7;
