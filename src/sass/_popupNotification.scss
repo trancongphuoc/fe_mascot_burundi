@@ -3,24 +3,20 @@
 
     max-width: 327px;
     height: auto;
-    display: grid;
 
+    display: grid;
     grid-template-rows: min-content min-content;
     grid-template-columns: 1fr 1fr;
-
     justify-content: center;
     justify-items: center;
-    
     align-content: center;
 
     border-radius: 10px;
     margin: 0 auto;
     padding: 20px 39px 25px 39px;
 
-    // remove
     position: relative;
-    bottom: 8%;
-    //
+    top: 39.3%;
 
     z-index: 9;
 }
