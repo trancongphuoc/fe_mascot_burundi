@@ -1,4 +1,4 @@
-@mixin topUser($params) {
+@mixin topUser1($params) {
     $outer-width: map-get($params, outer-width);
     $outer-color-top: map-get($params, outer-color-top);
     $outer-color-bottom: map-get($params, outer-color-bottom);
@@ -31,23 +31,76 @@
             middle-width: $middle-width,
             inner-width: $inner-width,
         ));
-        margin-bottom: 5px;
-    }
-
-    @media (max-width: 375px) {
-        margin-bottom: 4px;
-        &--url {
-            margin-bottom: 3px;
-        }
+        margin-bottom: 7px;
     }
 
     &--name {
         color: $color-white;
-        line-height: 1;
+        line-height: 1.1;
         font-size: 14px;
         font-weight: 400;
-        margin-bottom: 3px;
+        margin-bottom: 1.5px;
         text-align: center;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        width: 100%;   
+        padding: 0 10px;
+    }
+}
+
+@mixin topUser23($params) {
+    $outer-width: map-get($params, outer-width);
+    $outer-color-top: map-get($params, outer-color-top);
+    $outer-color-bottom: map-get($params, outer-color-bottom);
+    $middle-width: map-get($params, middle-width);
+    $inner-width: map-get($params, inner-width);
+
+    display: grid;
+    justify-items: center;
+    align-content: end;
+    margin-bottom: 11px;
+
+    &--img {
+        grid-area: 1 / 1 / 2 / 2;
+        width: 28px;
+        align-self: start;
+        justify-self: center;
+
+        position: relative;
+
+        right: calc(($outer-width / 5.5) * -1);
+        top: calc(($outer-width / 4.6) * -1);;
+    }
+
+    &--url {
+        grid-area: 1 / 1 / 2 / 2;
+        @include avatarTwoLayer((
+            outer-width: $outer-width,
+            outer-color-top: $outer-color-top,
+            outer-color-bottom: $outer-color-bottom,
+            middle-width: $middle-width,
+            inner-width: $inner-width,
+        ));
+        margin-bottom: 7px;
+    }
+
+    &--name {
+        color: $color-white;
+        line-height: 1.1;
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 1.5px;
+        text-align: center;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        width: 100%;   
+        padding: 0 10px;
     }
 }
 
@@ -196,15 +249,14 @@
     
         &__no3 {
             grid-area: 5 / 3 / 6 / 4;
-            @include topUser((
+            @include topUser23((
                 outer-width: 67px,
                 outer-color-top: $color-lost-av-no3-t,
                 outer-color-bottom: $color-lost-av-no3-b,
                 middle-width: 63px,
                 inner-width: 59px,
-                crown-left: -20%,
-                crown-top: -15px,
             ));
+
             padding-right: 4px;
             z-index: 7;
             @include non_select;
@@ -212,7 +264,7 @@
     
         &__no2 {
             grid-area: 5 / 1 / 6 / 2;
-            @include topUser((
+            @include topUser23((
                 outer-width: 67px,
                 outer-color-top: $color-lost-av-no2-t,
                 outer-color-bottom: $color-lost-av-no2-b,
@@ -221,6 +273,10 @@
                 crown-left: -20%,
                 crown-top: -15px,
             ));
+
+
+            
+
             padding-left: 4px;
             z-index: 7;
             @include non_select;
@@ -228,7 +284,7 @@
     
         &__no1 {
             grid-area: 5 / 2 / 6 / 3;
-            @include topUser((
+            @include topUser1((
                 outer-width: 77px,
                 outer-color-top: $color-lost-av-no1-b,
                 outer-color-bottom: $color-lost-av-no1-t,
@@ -240,67 +296,6 @@
             padding-bottom: 19.5px;
             z-index: 7;
             @include non_select;
-        }
-
-        @media (max-width: 375px) {
-            &--tertiary {
-                margin-bottom: 13px;
-            }
-
-            &--BgHeader {
-                max-width: 270px;
-                transform: translateY(22px);
-            }
-
-            &__secondary { 
-                &--text1{
-                    font-size: 14px;
-                    font-weight: 300;
-                    line-height: 1;
-                    margin-bottom: 2px
-                };
-
-                &--text2{
-                    font-size: 14px;
-                    font-weight: 300;
-                    line-height: 1;
-                };
-    
-                margin-bottom: 5px;
-                margin-top: 18px;
-            }
-
-            &--tertiary {
-                font-size: 12px;
-                margin-bottom: 13px;
-            }
-
-            &__no3 {
-                @include topUser((
-                    outer-width: 57px,
-                    middle-width: 53px,
-                    inner-width: 49px,
-                ));
-                padding-right: 4px;
-            }
-        
-            &__no2 {
-                @include topUser((
-                    outer-width: 57px,
-                    middle-width: 53px,
-                    inner-width: 49px,
-                ));
-                padding-left: 4px;
-            }
-        
-            &__no1 {
-                @include topUser((
-                    outer-width: 62px,
-                    middle-width: 59px,
-                    inner-width: 55px,
-                ));
-                padding-bottom: 14px;
-            }
         }
     
         &__totalIcoin {

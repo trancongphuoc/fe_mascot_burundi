@@ -22,6 +22,10 @@ import { motion } from 'framer-motion';
 // import winAudio from '../../../public/sounds/crowd_victory.wav';
 // import lostAudio from '../../../public/sounds/crowd_disappointed.wav';
 
+import { handleErrorAvartar } from '../DefaultUserAvartar';
+
+
+
 interface DialogLostWinProps {
   onClose: () => void;
   dialogType: DialogType;
@@ -48,19 +52,19 @@ const crown = [CrownGold, CrownSliver, CrownBronze];
 
 
 // const top123: User[] = [{
-//   name: "Dasd asdasdasas as",
+//   name: "Trần Tuấn Hùng",
 //   profileImageLink: "123",
-//   totalIcoin: 123
+//   totalIcoin: 1000
 // },
 // {
-//   name: "Dong Hoangasdasd Linh",
+//   name: "Lê Hải Yến",
 //   profileImageLink: "123",
-//   totalIcoin: 12312
+//   totalIcoin: 3000
 // },
 // {
-//   name: "Dong inh",
+//   name: "Ngọc Hoàng",
 //   profileImageLink: "123",
-//   totalIcoin: 12
+//   totalIcoin: 900
 // },
 // ]
 
@@ -68,6 +72,9 @@ const crown = [CrownGold, CrownSliver, CrownBronze];
 const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac, totalIcoin, dialogType}) => {
 
   console.log('check dialogType', dialogType);
+
+
+
 
   const contentLost = <>
                       <SVG src={TextApologize} className="lost--primary-text" onClick={e => {e.stopPropagation()}}/>
@@ -135,8 +142,10 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
           <div className={`lost__no${index + 1}`} key={index} onClick={e => {e.stopPropagation()}}>
             <SVG className={`lost__no${index + 1}--img`} src={crown[index]}/>
             <div className={`lost__no${index + 1}--url`}>
-              <img src={user.profileImageLink} alt="avatar user" />
-            </div>
+              <img src={user.profileImageLink} alt="avatar user"    
+              onError={handleErrorAvartar}      
+              />
+            </div>  
             <p className={`lost__no${index + 1}--name`}>{user.name}</p>
             <div className="lost__totalIcoin">
               <SVG className="lost__totalIcoin--img" src={Icoin}/>
