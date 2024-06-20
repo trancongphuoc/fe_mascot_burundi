@@ -5,6 +5,7 @@ import Icoin from '../assets/icoin.svg';
 import SVG from 'react-inlinesvg';
 import bgBestPlayers from '../assets/bg_best_players.png';
 import { getTopUsers } from '../firebase/bestPlayers';
+import { handleErrorAvartar } from './DefaultUserAvartar';
 
 interface BestPlayersPro {
     statusGame: StatusGame
@@ -69,7 +70,12 @@ function BestPlayers({statusGame} : BestPlayersPro) {
                 {
                     topUsers.map((user, index) => (
                         <li className={`content${index}`} key={index}>
-                            <img src={user.profileImageLink} alt="avatar" className={`content${index}--img`}></img>
+                            <img 
+                                src={user.profileImageLink}
+                                alt="avatar"
+                                className={`content${index}--img`}
+                                onError={handleErrorAvartar}      
+                                />
                             <p className={`content${index}--name`}>{user.name}</p>
                             <p className={`content${index}--text`}>Thưởng ván trước:</p>
                             <div className={`content${index}__icoin`}>
