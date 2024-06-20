@@ -12,6 +12,7 @@ interface PopupRuleProps {
 const PopupRule: React.FC<PopupRuleProps> = ({ onClose, title, leftContentButton, rightContentButton, rightHandlerButton}) => {
   return (
     <PopupCenter
+      className='popup-overlay-center'
       onClick={onClose}
       classNameChild='noti'
     >

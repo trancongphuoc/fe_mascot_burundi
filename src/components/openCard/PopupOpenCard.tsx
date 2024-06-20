@@ -33,7 +33,7 @@ const PopupOpenCard: React.FC<PopupOpenCardProps> = ({ onClose, zodiacUrl }) => 
 
   return (
     <PopupCenter
-      classname='popup-overlay-history'
+      className='popup-overlay-history'
       onClick={onClose}
       classNameChild='open-card'
     >

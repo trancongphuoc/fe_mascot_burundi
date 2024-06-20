@@ -5,10 +5,10 @@ interface PopupCenterProps {
     children: ReactNode;
     onClick?: MouseEventHandler<HTMLDivElement>;
     classNameChild: string,
-    classname: string,
+    className: string,
 }
 
-export default function PopupCenter({children, onClick, classNameChild: classNameChild, classname: className = "popup-overlay-center"} : PopupCenterProps) {
+export default function PopupCenter({children, onClick, classNameChild: classNameChild, className: className = "popup-overlay-center"} : PopupCenterProps) {
     return (
             <motion.div
             initial={{ opacity: 0 }}

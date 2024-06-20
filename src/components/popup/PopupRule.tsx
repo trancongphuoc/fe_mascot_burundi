@@ -23,7 +23,7 @@ const PopupRule: React.FC<PopupRuleProps> = ({ onClose }) => {
 
   return (
     <PopupCenter
-     classname='popup-overlay-history'
+     className='popup-overlay-history'
       onClick={onClose}
       classNameChild='rule'
     >

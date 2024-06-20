@@ -65,7 +65,7 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
 
   return (
     <PopupCenter
-      classname='popup-overlay-history'
+      className='popup-overlay-history'
       onClick={onClose}
       classNameChild='mine-popup'>
 

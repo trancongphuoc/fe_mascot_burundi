@@ -46,7 +46,7 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs }) => 
 
   return (
     <PopupCenter
-    classname='popup-overlay-history'
+    className='popup-overlay-history'
     onClick={onClose}
     classNameChild='history-game-popup'>
         {/* <SVG src={bgHistoryGame} className="history-game-popup__bg" /> */}
