@@ -1605,7 +1605,7 @@ h4 {
   height: 67px;
   border-radius: 50%;
   overflow: hidden;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
 }
 .lost-popup .lost__no3--url::before, .lost-popup .lost__no3--url::after {
   content: "";
@@ -1651,7 +1651,7 @@ h4 {
 .lost-popup .lost__no3--name {
   color: #ffffff;
   line-height: 1;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   margin-bottom: 3px;
   text-align: center;
@@ -1688,7 +1688,7 @@ h4 {
   height: 67px;
   border-radius: 50%;
   overflow: hidden;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
 }
 .lost-popup .lost__no2--url::before, .lost-popup .lost__no2--url::after {
   content: "";
@@ -1734,7 +1734,7 @@ h4 {
 .lost-popup .lost__no2--name {
   color: #ffffff;
   line-height: 1;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   margin-bottom: 3px;
   text-align: center;
@@ -1771,7 +1771,7 @@ h4 {
   height: 77px;
   border-radius: 50%;
   overflow: hidden;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
 }
 .lost-popup .lost__no1--url::before, .lost-popup .lost__no1--url::after {
   content: "";
@@ -1817,7 +1817,7 @@ h4 {
 .lost-popup .lost__no1--name {
   color: #ffffff;
   line-height: 1;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   margin-bottom: 3px;
   text-align: center;
@@ -1872,7 +1872,7 @@ h4 {
     height: 57px;
     border-radius: 50%;
     overflow: hidden;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
   }
   .lost-popup .lost__no3--url::before, .lost-popup .lost__no3--url::after {
     content: "";
@@ -1920,7 +1920,7 @@ h4 {
   .lost-popup .lost__no3--name {
     color: #ffffff;
     line-height: 1;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     margin-bottom: 3px;
     text-align: center;
@@ -1948,7 +1948,7 @@ h4 {
     height: 57px;
     border-radius: 50%;
     overflow: hidden;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
   }
   .lost-popup .lost__no2--url::before, .lost-popup .lost__no2--url::after {
     content: "";
@@ -1996,7 +1996,7 @@ h4 {
   .lost-popup .lost__no2--name {
     color: #ffffff;
     line-height: 1;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     margin-bottom: 3px;
     text-align: center;
@@ -2024,7 +2024,7 @@ h4 {
     height: 62px;
     border-radius: 50%;
     overflow: hidden;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
   }
   .lost-popup .lost__no1--url::before, .lost-popup .lost__no1--url::after {
     content: "";
@@ -2072,7 +2072,7 @@ h4 {
   .lost-popup .lost__no1--name {
     color: #ffffff;
     line-height: 1;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     margin-bottom: 3px;
     text-align: center;
@@ -2100,7 +2100,7 @@ h4 {
 .lost-popup .lost__totalIcoin--icoin {
   color: #ffffff;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   z-index: 7;
   outline: none;
