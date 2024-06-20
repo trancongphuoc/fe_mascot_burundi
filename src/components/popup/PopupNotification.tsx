@@ -13,7 +13,7 @@ const PopupRule: React.FC<PopupRuleProps> = ({ onClose, title, leftContentButton
   return (
     <PopupCenter
       onClick={onClose}
-      className='noti'
+      classNameChild='noti'
     >
       <p className="content">{title}</p>
       <button className="button_left" onClick={onClose}>{leftContentButton}</button>

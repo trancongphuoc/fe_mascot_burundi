@@ -4,23 +4,24 @@ import { MouseEventHandler, ReactNode } from 'react';
 interface PopupCenterProps {
     children: ReactNode;
     onClick?: MouseEventHandler<HTMLDivElement>;
-    className: string,
+    classNameChild: string,
+    classname: string,
 }
 
-export default function PopupCenter({children, onClick, className} : PopupCenterProps) {
+export default function PopupCenter({children, onClick, classNameChild: classNameChild, classname: className = "popup-overlay-center"} : PopupCenterProps) {
     return (
             <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClick}
-            className="popup-overlay-center"
+            className={className}
             >
                 <motion.div 
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.5 }}
-                    className={className}
+                    className={classNameChild}
                     onClick={e => e.stopPropagation()}
                 > {children}</motion.div>
             </motion.div>

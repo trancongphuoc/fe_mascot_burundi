@@ -65,8 +65,9 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
 
   return (
     <PopupCenter
+      classname='popup-overlay-history'
       onClick={onClose}
-      className='mine-popup'>
+      classNameChild='mine-popup'>
 
         {/* <SVG src={bgMyHistory} className="mine-popup__bg"/> */}
 

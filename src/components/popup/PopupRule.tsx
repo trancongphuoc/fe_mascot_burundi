@@ -23,8 +23,9 @@ const PopupRule: React.FC<PopupRuleProps> = ({ onClose }) => {
 
   return (
     <PopupCenter
+     classname='popup-overlay-history'
       onClick={onClose}
-      className='rule'
+      classNameChild='rule'
     >
         <p className='rule--primary mt-20px'>Thể lệ Đoán Linh Vật</p>
         <img 

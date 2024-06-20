@@ -637,6 +637,23 @@ h4 {
   z-index: 8;
 }
 
+.popup-overlay-history {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-rows: min-content;
+  grid-template-columns: max-content;
+  padding-bottom: 2vh;
+  z-index: 7;
+}
+
 .home_loading {
   display: flex;
   justify-content: center;
