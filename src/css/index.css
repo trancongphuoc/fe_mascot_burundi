@@ -1607,6 +1607,7 @@ h4 {
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
+  padding-bottom: var(--safe-area-inset-bottom);
 }
 .lost-popup .lost__no3--img {
   grid-area: 1/1/2/2;
@@ -1687,6 +1688,7 @@ h4 {
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
+  padding-bottom: var(--safe-area-inset-bottom);
 }
 .lost-popup .lost__no2--img {
   grid-area: 1/1/2/2;
@@ -1758,7 +1760,7 @@ h4 {
   justify-items: center;
   align-content: end;
   margin-bottom: 11px;
-  padding-bottom: 19.5px;
+  padding-bottom: calc(19.5px + var(--safe-area-inset-bottom));
   z-index: 7;
   outline: none;
   -webkit-tap-highlight-color: transparent;

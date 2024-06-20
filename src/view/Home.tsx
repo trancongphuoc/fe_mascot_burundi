@@ -234,25 +234,25 @@ useEffect(() => {
       case 'PREPARESTART':
         break;
       case 'COUNTDOWN':
-      //   if (openDepositIcoin) setOpenDepositIcoin(prevValue => !prevValue);
-      //   if (openLostWin) setOpenLostWin(prevValue => !prevValue);
-      //   if (openRule) setOpenRule(prevValue => !prevValue);
-      //   if (openHistoryGame) setOpenHistoryGame(prevValue => !prevValue);
-      //   if (openMyHistory) setOpenMyHistory(prevValue => !prevValue);
+        if (openDepositIcoin) setOpenDepositIcoin(prevValue => !prevValue);
+        if (openLostWin) setOpenLostWin(prevValue => !prevValue);
+        if (openRule) setOpenRule(prevValue => !prevValue);
+        if (openHistoryGame) setOpenHistoryGame(prevValue => !prevValue);
+        if (openMyHistory) setOpenMyHistory(prevValue => !prevValue);
 
-      //   setBetCards([]);
-      //   setBetSuccess(true);
-      //   break;
-      // case 'RESULTWAITING':
-      //   break;
-      // case 'RESULT':
-      //   if (openDepositIcoin) setOpenDepositIcoin(prevValue => !prevValue);
-      //   if (openRule) setOpenRule(prevValue => !prevValue);
-      //   if (openHistoryGame) setOpenHistoryGame(prevValue => !prevValue);
+        setBetCards([]);
+        setBetSuccess(true);
+        break;
+      case 'RESULTWAITING':
+        break;
+      case 'RESULT':
+        if (openDepositIcoin) setOpenDepositIcoin(prevValue => !prevValue);
+        if (openRule) setOpenRule(prevValue => !prevValue);
+        if (openHistoryGame) setOpenHistoryGame(prevValue => !prevValue);
 
-      //   if (openMyHistory) setOpenMyHistory(prevValue => !prevValue);
+        if (openMyHistory) setOpenMyHistory(prevValue => !prevValue);
 
-      //   if (!openGameResult) setOpenGameResult(prevValue => !prevValue);
+        if (!openGameResult) setOpenGameResult(prevValue => !prevValue);
         break;
       case 'END':
         break;
