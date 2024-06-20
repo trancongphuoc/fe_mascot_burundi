@@ -609,6 +609,9 @@ h4 {
   display: grid;
   justify-content: center;
   align-content: center;
+  grid-template-rows: min-content;
+  grid-template-columns: max-content;
+  padding-bottom: 2vh;
   z-index: 7;
 }
 
