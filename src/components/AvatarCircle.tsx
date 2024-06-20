@@ -1,3 +1,5 @@
+import { handleErrorAvartar } from "./DefaultUserAvartar";
+
 interface CardProps {
     avatarUrl: string;
     className: string; // Define the type of the card prop
@@ -5,7 +7,7 @@ interface CardProps {
 
 function AvatarCircle({avatarUrl, className} : CardProps) {
     return (
-        <img src={avatarUrl} alt="avatar" className={className}></img>
+        <img src={avatarUrl} alt="avatar" className={className}  onError={handleErrorAvartar}></img>
     );
 }
 
