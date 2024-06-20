@@ -1760,7 +1760,7 @@ h4 {
   justify-items: center;
   align-content: end;
   margin-bottom: 11px;
-  padding-bottom: calc(19.5px + var(--safe-area-inset-bottom));
+  padding-bottom: calc(19.5px + env(--safe-area-inset-bottom));
   z-index: 7;
   outline: none;
   -webkit-tap-highlight-color: transparent;

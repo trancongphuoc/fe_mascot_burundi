@@ -293,7 +293,7 @@
                 crown-left: -35%,          
                 crown-top: -60%,
             ));
-            padding-bottom: calc(19.5px + var(--safe-area-inset-bottom)) ;
+            padding-bottom: calc(19.5px + env(--safe-area-inset-bottom)) ;
             z-index: 7;
             @include non_select;
         }
