@@ -98,7 +98,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
 
         <div key={'stake-10'}
           onClick={(e) => {
-            e.stopPropagation()
+            // e.stopPropagation()
             console.log(window.sessionStorage.getItem('totalIcoin')); 
             handleStake(10);
           }}
@@ -107,7 +107,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <div
           key={'stake-100'}
           onClick={(e) => {
-            e.stopPropagation();
+            // e.stopPropagation();
             // clickAudioRef();
             handleStake(100)
           }}
@@ -116,7 +116,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <div
           key={'stake-1000'}
           onClick={(e) => {
-            e.stopPropagation()
+            // e.stopPropagation()
             // clickAudioRef();
             handleStake(1000)
           }}
