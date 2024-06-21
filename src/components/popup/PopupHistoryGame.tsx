@@ -5,11 +5,16 @@ import { GameHistory } from '../../model/GameHistory';
 import { fetchGameHistory } from '../../api/getGameHistory';
 // import bgHistoryGame from '../../assets/bg_history_game.svg';
 import bgHistoryGame from '../../assets/bg_game_history.png';
+import bgHistoryGame75 from '../../assets/bg_game_history_0_75x.png';
+
 import BgCard from '../../assets/bg_card_normal_light.svg';
 import StickIcon from  '../../assets/icon_stick.svg';
 import TextResult from '../../assets/text-result.svg';
 import Loading from '../Loading';
 import PopupCenter from './PopupCenter';
+
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 
 interface PopupHistoryProps {
   onClose: () => void;
@@ -36,7 +41,6 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs }) => 
         }
       } catch (error) {
         console.error('Error fetching game history:', error);
-        // Handle error here, e.g., show a message to the user
       }
       setLoading(false);
     };
@@ -50,7 +54,22 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs }) => 
     onClick={onClose}
     classNameChild='history-game-popup'>
         {/* <SVG src={bgHistoryGame} className="history-game-popup__bg" /> */}
-        <img src={bgHistoryGame} className="history-game-popup__bg" />
+        {/* <img src={bgHistoryGame} className="history-game-popup__bg" /> */}
+
+        <div className="history-game-popup__bg">
+          <LazyLoadImage
+                    alt='history game'
+                    src={bgHistoryGame} 
+                    placeholderSrc={bgHistoryGame75}
+                    width="100%"
+                  />
+            
+        </div>
+
+  
+
+
+
         <SVG src={TextResult} className="history-game-popup--header" />
 
         <div className="history-game-popup__title mt-7px">
