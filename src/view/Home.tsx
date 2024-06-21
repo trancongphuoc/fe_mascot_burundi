@@ -351,6 +351,15 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
   }
 
 
+  useEffect(() => {
+    const safeAreaBottom = getComputedStyle(document.documentElement)
+      .getPropertyValue('--safe-area-inset-bottom');
+    setSafeAreaInsetBottom(parseInt(safeAreaBottom, 10) || 0);
+  }, []);
+
+  const [safeAreaInsetBottom, setSafeAreaInsetBottom] = useState(0);
+
+
   return (
     isLoading ? <Loading className='home_loading'/> :
     <div className='main'>
@@ -374,6 +383,8 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
           </div>
         )}
       </Toaster>
+
+      <h1>{safeAreaInsetBottom}</h1>
       
       <header className='section-header u-margin-top-huge1'>
         <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />
@@ -466,3 +477,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 }
 
 export default Home;
+function setSafeAreaInsetBottom(arg0: number) {
+  throw new Error('Function not implemented.');
+}
+
