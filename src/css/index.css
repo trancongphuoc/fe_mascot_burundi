@@ -677,6 +677,7 @@ h4 {
   grid-template-rows: repeat(5, min-content);
   justify-content: stretch;
   justify-items: stretch;
+  margin-bottom: env(safe-area-inset-bottom);
 }
 
 .section-header {
