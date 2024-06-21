@@ -61,8 +61,7 @@ interface ZodiacCard {
   name: string,
 }
 
-
-function Home() {
+export default function Home() {
   // Use the parameters as needed in your component
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -475,9 +474,3 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
     </div>
   );
 }
-
-export default Home;
-function setSafeAreaInsetBottom(arg0: number) {
-  throw new Error('Function not implemented.');
-}
-
