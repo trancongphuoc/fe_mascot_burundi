@@ -349,14 +349,27 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
     }
   }
 
+  const [safeAreaBottom, setSafeAreaBottom] = useState(0);
+  const [AreaBottom, setAreaBottom] = useState(0);
 
   useEffect(() => {
-    const safeAreaBottom = getComputedStyle(document.documentElement)
-      .getPropertyValue('--safe-area-inset-bottom');
-    setSafeAreaInsetBottom(parseInt(safeAreaBottom, 10) || 0);
-  }, []);
+    const calculateSafeAreaBottom = () => {
+      const fullHeight = window.innerHeight;
+      const viewportHeight = window.visualViewport ? window.visualViewport.height : fullHeight;
+      // const safeAreaBottomHeight = fullHeight - viewportHeight;
+      setSafeAreaBottom(fullHeight);
+      setAreaBottom(viewportHeight)
+    };
 
-  const [safeAreaInsetBottom, setSafeAreaInsetBottom] = useState(0);
+    // Calculate initially
+    calculateSafeAreaBottom();
+
+    // Recalculate on window resize
+    window.addEventListener('resize', calculateSafeAreaBottom);
+    return () => {
+      window.removeEventListener('resize', calculateSafeAreaBottom);
+    };
+  }, []);
 
 
   return (
@@ -383,7 +396,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         )}
       </Toaster>
 
-      <h1>{safeAreaInsetBottom}</h1>
+      <h1>{safeAreaBottom} / {AreaBottom}</h1>
       
       <header className='section-header u-margin-top-huge1'>
         <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />
