@@ -349,29 +349,6 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
     }
   }
 
-  const [safeAreaBottom, setSafeAreaBottom] = useState(0);
-  const [AreaBottom, setAreaBottom] = useState(0);
-
-  useEffect(() => {
-    const calculateSafeAreaBottom = () => {
-      const fullHeight = window.innerHeight;
-      const viewportHeight = window.visualViewport ? window.visualViewport.height : fullHeight;
-      // const safeAreaBottomHeight = fullHeight - viewportHeight;
-      setSafeAreaBottom(fullHeight);
-      setAreaBottom(viewportHeight)
-    };
-
-    // Calculate initially
-    calculateSafeAreaBottom();
-
-    // Recalculate on window resize
-    window.addEventListener('resize', calculateSafeAreaBottom);
-    return () => {
-      window.removeEventListener('resize', calculateSafeAreaBottom);
-    };
-  }, []);
-
-
   return (
     isLoading ? <Loading className='home_loading'/> :
     <div className='main'>
@@ -395,9 +372,6 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
           </div>
         )}
       </Toaster>
-
-      <h1>{safeAreaBottom} / {AreaBottom}</h1>
-      
       <header className='section-header u-margin-top-huge1'>
         <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />
         <p className='heading-secondary'>Hôm nay {game?.noGameToday} Ván</p>
