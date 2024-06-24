@@ -25,29 +25,29 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
 
 
   const sendDataOut = () => {
-    if (!stakes || !zodiacGameId || !zodiacCardSelect) {
-      if (!stakes) {
-        toast.dismiss();
-        toast("Thiếu tiền cược", { duration: 2000, position: 'bottom-center'});
-      } else if (!zodiacGameId) {
+    if (!zodiacGameId || !zodiacCardSelect) {
+      if (!zodiacGameId) {
         toast.dismiss();
         toast("Thiếu thông tin game", { duration: 2000, position: 'bottom-center'});
       } else if (!zodiacCardSelect) {
         toast.dismiss();
         toast("Thiếu card select", { duration: 2000, position: 'bottom-center'});
-      } else {
-        toast.dismiss();
-        toast("Đặt cược lỗi", { duration: 2000, position: 'bottom-center'});
       }
       onClose();
       return;
     }
+
+    if (!stakes) {
+      toast.dismiss();
+      toast("Thiếu tiền cược", { duration: 2000, position: 'bottom-center'});
+    } else {
     const betCard: BetZodiacCard = {
       ...zodiacCardSelect,
       totalIcoinBetting: stakes ?? 0,
     }
     onClose();
     betIcoin(betCard);
+  }
   };
 
   const handleStake = (stake: number) => {
