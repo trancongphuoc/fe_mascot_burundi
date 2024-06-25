@@ -38,7 +38,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
     }
 
     if (!stakes) {
-      toast.dismiss();
+      toast.remove();
       toast("Thiếu tiền cược", { duration: 2000, position: 'bottom-center'});
     } else {
     const betCard: BetZodiacCard = {

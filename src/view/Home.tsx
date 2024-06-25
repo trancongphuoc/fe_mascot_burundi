@@ -31,7 +31,7 @@ import { ShortGameHistory } from '../components/ShortGameHistory';
 import PopupOpenCard from '../components/openCard/PopupOpenCard';
 
 import { joinGameZodiac } from '../api/joinGameZodiac';
-import { BettingTable } from '../components/BettingTable';
+import BettingTable from '../components/bettingTable/BettingTable';
 import { getToken } from '../api/getToken';
 import { useLocation } from 'react-router-dom';
 import { bettingCard } from '../api/bettingCard';
@@ -349,6 +349,30 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
     }
   }
 
+  const [effectiveType, setEffectiveType] = useState<string | null>(null);
+
+  useEffect(() => {
+    const navigatorConnection = (navigator as any).connection;
+
+    const updateNetworkStatus = () => {
+      if (navigatorConnection) {
+        setEffectiveType(navigatorConnection.effectiveType);
+      }
+    };
+
+    updateNetworkStatus();
+
+    if (navigatorConnection) {
+      navigatorConnection.addEventListener('change', updateNetworkStatus);
+    }
+
+    return () => {
+      if (navigatorConnection) {
+        navigatorConnection.removeEventListener('change', updateNetworkStatus);
+      }
+    };
+  }, []);
+
   return (
     isLoading ? <Loading className='home_loading'/> :
     <div className='main'>
@@ -372,6 +396,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
           </div>
         )}
       </Toaster>
+      <h1>{effectiveType}</h1>
       <header className='section-header u-margin-top-huge1'>
         <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />
         <p className='heading-secondary'>Hôm nay {game?.noGameToday} Ván</p>

@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
-import CountDown from './CountDown';
+import CountDown from '../CountDown';
 import { off, onValue, ref } from 'firebase/database';
-import { db } from '../firebase/config';
-import SVG from 'react-inlinesvg';
-import bgCardNormal from '../assets/bg_card_nomarl.svg';
-import bgCardSelect from '../assets/bg_card_selected.svg';
+import { db } from '../../firebase/config';
+// import SVG from 'react-inlinesvg';
+// import bgCardNormal from '../../assets/bg_card_nomarl.svg';
+// import bgCardSelect from '../../assets/bg_card_selected.svg';
 // import bbBettingTable from '../assets/frame_betting_table.svg';
-import bettingFrame from '../assets/bg_betting_frame.png';
+import bettingFrame from '../../assets/bg_betting_frame.png';
+import ZodiacCard from './ZodiacCard';
 
 
 interface BettingTableProps {
@@ -15,7 +16,7 @@ interface BettingTableProps {
     statusGame: StatusGame;
 }
 
-export function BettingTable({ onSelectCard, statusGame }: BettingTableProps) {
+export default function BettingTable({ onSelectCard, statusGame }: BettingTableProps) {
     const [betCards, setBetCard] = useState<ZodiacCardModel[]>([]);
     const [selectCardId, setSelectCardId] = useState('');
 
@@ -65,29 +66,32 @@ export function BettingTable({ onSelectCard, statusGame }: BettingTableProps) {
 
             <div className="betting-table__content">
                 {betCards.map((betCard, index) => (
-                    <div 
-                        key={index}
-                        onClick={() => handleSetectCard(betCard)}
-                        className="betting-table__card">
+                    <ZodiacCard key={betCard.id} index={index} betCard={betCard} selectCardId={selectCardId} handleSelectedCard={handleSetectCard}/>
+                    // <div 
+                    //     key={index}
+                    //     onClick={() => handleSetectCard(betCard)}
+                    //     className="betting-table__card">
 
-                        <p className='betting-table__card--no'>{index + 1}</p>
-                            <SVG
-                                src={bgCardSelect}
-                                className='betting-table__card--bgNormal'
-                                style={{zIndex: betCard.id === selectCardId ? 2 : 1,
-                                    opacity: betCard.id === selectCardId ? 1 : 0
-                                }}/> 
-                            <SVG
-                                src={bgCardNormal}
-                                className='betting-table__card--bgSelected'
-                                style={{zIndex: betCard.id === selectCardId ? 1 : 2,
-                                    opacity: betCard.id === selectCardId ? 0 : 1
-                                }}/>
+                    //     <p className='betting-table__card--no'>{index + 1}</p>
+
+                    //     <SVG
+                    //         src={bgCardSelect}
+                    //         className='betting-table__card--bgNormal'
+                    //         style={{zIndex: betCard.id === selectCardId ? 2 : 1,
+                    //             opacity: betCard.id === selectCardId ? 1 : 0
+                    //         }}/> 
+                    //     <SVG
+                    //         src={bgCardNormal}
+                    //         className='betting-table__card--bgSelected'
+                    //         style={{zIndex: betCard.id === selectCardId ? 1 : 2,
+                    //             opacity: betCard.id === selectCardId ? 0 : 1
+                    //         }}/>
+
                         
-                        <SVG src={betCard.imageUrl} cacheRequests={true} className='betting-table__card--zodiac'/>
-                        <p className='betting-table__card--bonus'>x{betCard.multiply}</p> 
-                        <p className='betting-table__card--players'>{betCard.counter} người</p>
-                    </div>
+                    //     <SVG src={betCard.imageUrl} cacheRequests={true} className='betting-table__card--zodiac'/>
+                    //     <p className='betting-table__card--bonus'>x{betCard.multiply}</p> 
+                    //     <p className='betting-table__card--players'>{betCard.counter} người</p>
+                    // </div>
                 ))}
             </div>
         </div>
