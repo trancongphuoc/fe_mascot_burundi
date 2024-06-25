@@ -14,7 +14,7 @@ import Rule from '../assets/rule.svg';
 
 import MyHistory from '../components/MyBonusToday';
 import BestPlayers from '../components/BestPlayers';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import DialogBetting from '../components/dialog/DialogBetting';
 import DialogLost from '../components/dialog/DialogLostWin';
 import PopupRule from '../components/popup/PopupRule';
@@ -63,6 +63,7 @@ interface ZodiacCard {
 
 export default function Home() {
   // Use the parameters as needed in your component
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const parameters = queryParams.get('parameters');
@@ -89,12 +90,13 @@ export default function Home() {
   //dialog disconnnect
   const [openDisconnect, setOpenDisconnect] = useState(false);
 
-  const [dialogType, setDialogType] = useState<DialogType>('LOST');
+  // const [dialogType, setDialogType] = useState<DialogType>('LOST');
 
-  const [fbId, setFbId] = useState('');
-  
-  //joint game
-  const [joinGame, setJoinGame] = useState(false);
+  const dialogTypeRef = useRef<DialogType>('LOST');
+
+  const fbIdRef = useRef<string>('')
+  const jointGameRef = useRef<boolean>(false);
+
   //get select card
   const [selectCard, setSelectCard] = useState<BetZodiacCard | null>(null);
 
@@ -110,9 +112,9 @@ export default function Home() {
 
     if (typeof data.isWin === 'boolean') {
       if (data.isWin) {
-        setDialogType('WIN');
+        dialogTypeRef.current = 'WIN';
       } else {
-        setDialogType('LOST');
+        dialogTypeRef.current ='LOST';
       }
   } else {
       console.log("Win status is undefined or not a boolean.");
@@ -124,10 +126,12 @@ useEffect(() => {
   const fetchTokenAndJoinGame = async () => {
     if (parameters) {
       try {
+        console.log('step 1')
         let decodedParams = atob(parameters);
         let data = JSON.parse(decodedParams);
         await getToken(data);
       } catch (error) {
+        console.log('step ', parameters)
         window.sessionStorage.setItem('token', parameters);
       }
     } else {
@@ -138,9 +142,10 @@ useEffect(() => {
       const data = await joinGameZodiac();
       console.log('join game data return', data);
       if (data !== null && data !== "FAILED") {
+        console.log('step 4');
         window.sessionStorage.setItem('facebookUserId', data);
-        setJoinGame(true);
-        setFbId(data);
+        jointGameRef.current = true;
+        fbIdRef.current = data;
         console.log('join game success');
       } else {
         console.log('call join game failed');
@@ -151,11 +156,11 @@ useEffect(() => {
   };
 
   fetchTokenAndJoinGame();
-}, [parameters]);
+}, []);
 
 
   useEffect(() => { 
-    console.log('joinGame', joinGame)
+    console.log('joinGame', jointGameRef.current)
     const fetchGameInfo = async () => {
       const stateRef = ref(db, 'zodiacGame/state');
 
@@ -323,12 +328,6 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
   }
 };
 
-  // const updateOnlineStatus = () => {
-  //   const onlineStatus = navigator.onLine;
-  //   setOpenDisconnect(!onlineStatus)
-
-  // };
-
   const updateOnlineStatus = useCallback(() => {
     const onlineStatus = navigator.onLine;
     setOpenDisconnect(!onlineStatus)
@@ -415,7 +414,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
       <MyHistory
         onOpen={() => setOpenMyHistory(true)}
         onUserDataChange={handleIsWin}
-        fbId={fbId}
+        fbId={fbIdRef.current}
         betCards={betCards}
         betSuccess={betSuccess}
         statusGame={game?.status ?? 'NONE'}
@@ -443,7 +442,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         {openLostWin && <DialogLost
                             onClose={() => setOpenLostWin(false)}
                       
-                            dialogType={dialogType}
+                            dialogType={dialogTypeRef.current}
                             totalIcoin={totalIcoinWin}
                             topUsers={game?.topUser ?? []}
                             zodiac={game?.zodiacCard.imgUrl ?? ''} />}
