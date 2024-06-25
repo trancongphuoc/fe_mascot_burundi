@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import AvatarCircle from "./AvatarCircle";
 import { onValue, ref, off } from "firebase/database";
 import { db } from "../firebase/config";
+import { handleErrorAvartar } from "./DefaultUserAvartar";
 
 export default function Players() {
     const [players, setPlayers] = useState<User[]>([]);
@@ -45,8 +45,13 @@ export default function Players() {
 
     return (
         <div className="result__right">
-            {players.slice(0, 5).map((player, index) => (
-                <AvatarCircle key={index} avatarUrl={player.profileImageLink} className="avatar mr-5px" />
+            {players.slice(0, 5).map((player) => (
+                <img 
+                    key={player.profileImageLink}
+                    src={player.profileImageLink}
+                    alt="avatar"
+                    className="avatar mr-5px"
+                    onError={handleErrorAvartar} />
             ))}
             {(players.length > 5) && <h2 className='result__right--number'>{number}</h2>}
         </div>
