@@ -19,12 +19,14 @@ export default function ZodiacCard({betCard, handleSelectedCard, index, selectCa
         <p className='betting-table__card--no'>{index + 1}</p>
 
         <SVG
+            key='bgNormal'
             src={bgCardSelect}
             className='betting-table__card--bgNormal'
             style={{zIndex: isActive ? 2 : 1,
                 opacity: isActive ? 1 : 0
             }}/> 
         <SVG
+            key='bgSelected'
             src={bgCardNormal}
             className='betting-table__card--bgSelected'
             style={{zIndex: isActive ? 1 : 2,
