@@ -26,8 +26,8 @@ const LazyImage = ({ lowResSrc, highResSrc, alt, className } :LazyImagePro ) => 
         src={src}
         alt={alt}
         style={{
-        transition: 'opacity 0.5s ease-in-out',
-        opacity: loaded ? 1 : 0.5,
+        // transition: 'opacity 0.2s ease-in-out',
+        opacity: loaded ? 1 : 1,
       }}
         onClick={(e) => e.stopPropagation()} 
     />
