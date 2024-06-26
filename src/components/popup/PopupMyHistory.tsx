@@ -9,8 +9,11 @@ import { useEffect, useState } from 'react';
 import { fetchMyHistory } from '../../api/getMyHistory';
 // import bgMyHistory from '../../assets/bg_my_history.svg';
 import bgMyHistory from '../../assets/bg_my_history.png';
+import bgMyHistory075x from '../../assets/bg_my_history_075x.png';
 import Loading from '../Loading';
 import PopupCenter from './PopupCenter';
+import LazyImage from '../LazyImage';
+
 
 interface PopupMineResultProps {
   onClose: () => void;
@@ -71,7 +74,14 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
 
         {/* <SVG src={bgMyHistory} className="mine-popup__bg"/> */}
 
-        <img src={bgMyHistory} className="mine-popup__bg"/>
+        {/* <img src={bgMyHistory} className="mine-popup__bg"/> */}
+
+        <LazyImage
+          lowResSrc={bgMyHistory075x}
+          highResSrc={bgMyHistory}
+          alt='my history'
+          className="mine-popup__bg"
+        />
 
         <SVG src={ loading ? TextHistory : ''} className="mine-popup--header mt-7px mb-12-5px"/>
         
