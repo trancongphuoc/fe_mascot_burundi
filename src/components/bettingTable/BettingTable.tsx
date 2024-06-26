@@ -66,7 +66,13 @@ export default function BettingTable({ onSelectCard, statusGame }: BettingTableP
 
             <div className="betting-table__content">
                 {betCards.map((betCard, index) => (
-                    <ZodiacCard key={betCard.id} index={index} betCard={betCard} selectCardId={selectCardId} handleSelectedCard={handleSetectCard}/>
+                    <ZodiacCard
+                        key={betCard.id}
+                        index={index}
+                        betCard={betCard}
+                        selectCardId={selectCardId}
+                        handleSelectedCard={handleSetectCard}
+                    />
                     // <div 
                     //     key={index}
                     //     onClick={() => handleSetectCard(betCard)}
