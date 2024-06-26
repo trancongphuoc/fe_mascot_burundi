@@ -2048,7 +2048,7 @@ h4 {
   align-content: center;
   grid-template-rows: 50px 49px 1fr;
   grid-template-columns: 1fr;
-  margin: 6px 16px 0 16px;
+  padding-top: 6px;
   justify-items: center;
   outline: none;
   -webkit-tap-highlight-color: transparent;
@@ -2088,7 +2088,7 @@ h4 {
   line-height: 1;
 }
 .history-game-popup__card {
-  width: 100%;
+  max-width: 100%;
   display: grid;
   align-content: center;
   justify-content: center;
@@ -2103,7 +2103,7 @@ h4 {
 }
 .history-game-popup__card--zodiac {
   grid-area: 1/1/-1/-1;
-  width: 60%;
+  max-width: 60%;
   height: auto;
 }
 .history-game-popup__loading {

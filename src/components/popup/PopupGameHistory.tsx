@@ -4,33 +4,28 @@ import SVG from 'react-inlinesvg';
 import { GameHistory } from '../../model/GameHistory';
 import { fetchGameHistory } from '../../api/getGameHistory';
 // import bgHistoryGame from '../../assets/bg_history_game.svg';
-import bgHistoryGame from '../../assets/bg_game_history.png';
-import bgHistoryGame75 from '../../assets/bg_game_history_0_75x.png';
+// import bgHistoryGame from '../../assets/bg_game_history.png';
+// import bgHistoryGame75 from '../../assets/bg_game_history_0_75x.png';
+
+import bgGameHistory075x from '../../assets/bg_game_history_075x.png';
+import bgGameHistory2x from '../../assets/bg_game_history_2x.png';
 
 import BgCard from '../../assets/bg_card_normal_light.svg';
 import StickIcon from  '../../assets/icon_stick.svg';
 import TextResult from '../../assets/text-result.svg';
 import Loading from '../Loading';
 import PopupCenter from './PopupCenter';
+import LazyImage from '../LazyImage';
 
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-
-interface PopupHistoryProps {
+interface PopupGameHistoryProps {
   onClose: () => void;
   zodiacs: string[];
 }
 
-const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs }) => {
+const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ onClose, zodiacs }) => {
   const [gameHistory, setGameHistory] = useState<GameHistory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const preloadImages = [bgHistoryGame];
-    preloadImages.forEach(image => {
-      new Image().src = image;
-    });
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,19 +51,12 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs }) => 
         {/* <SVG src={bgHistoryGame} className="history-game-popup__bg" /> */}
         {/* <img src={bgHistoryGame} className="history-game-popup__bg" /> */}
 
-        <div className="history-game-popup__bg">
-          <LazyLoadImage
-                    alt='history game'
-                    src={bgHistoryGame} 
-                    placeholderSrc={bgHistoryGame75}
-                    width="100%"
-                  />
-            
-        </div>
-
-  
-
-
+        <LazyImage
+          lowResSrc={bgGameHistory075x}
+          highResSrc={bgGameHistory2x}
+          alt='history game'
+          className='history-game-popup__bg'
+        />
 
         <SVG src={TextResult} className="history-game-popup--header" />
 
@@ -107,4 +95,4 @@ const PopupHistoryGame: React.FC<PopupHistoryProps> = ({ onClose, zodiacs }) => 
   );
 };
 
-export default PopupHistoryGame;
+export default PopupGameHistory;

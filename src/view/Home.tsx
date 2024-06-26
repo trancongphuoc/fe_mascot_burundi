@@ -18,7 +18,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import DialogBetting from '../components/dialog/DialogBetting';
 import DialogLost from '../components/dialog/DialogLostWin';
 import PopupRule from '../components/popup/PopupRule';
-import PopupHistoryGame from '../components/popup/PopupHistoryGame';
+import PopupGameHistory from '../components/popup/PopupGameHistory';
 import PopupMyHistory from '../components/popup/PopupMyHistory';
 import PopupNotification from '../components/popup/PopupNotification';
 
@@ -439,7 +439,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
 
 
-        {openLostWin && <DialogLost
+        {openBetting && <DialogLost
                             onClose={() => setOpenLostWin(false)}
                       
                             dialogType={dialogTypeRef.current}
@@ -450,7 +450,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
 
 
-        {openHistoryGame && <PopupHistoryGame
+        {openHistoryGame && <PopupGameHistory
                               onClose={() => setOpenHistoryGame(false)}
                               zodiacs={img}/>}
         {openMyHistory && <PopupMyHistory onClose={()=> setOpenMyHistory(false)}/>}
