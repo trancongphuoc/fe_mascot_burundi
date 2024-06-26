@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import bgCardSelect from '../../assets/bg_card_selected.svg';
 import Icoin from '../../assets/icoin.svg';
-import BgContent from '../../assets/bg_content_win.svg';
+// import BgContent from '../../assets/bg_content_win.svg';
+import BgContent075x from '../../assets/bg_content_betting_075x.png';
+import BgContent2x from '../../assets/bg_content_betting_2x.png';
+
+
 import BgHeader from '../../assets/bg_header_betting.svg';
 import BgLighter from '../../assets/bg_lighter.svg';
 import { motion } from 'framer-motion';
 import SVG from 'react-inlinesvg';
 // import useAudio from './UseAudio';
 import toast from 'react-hot-toast';
+import LazyImage from '../LazyImage';
 
 interface DialogBettingProps {
   onClose: () => void;
@@ -80,7 +85,15 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         className="betting-popup"
         aria-modal="true">
         
-        <SVG src={BgContent} className="betting--BgContent" onClick={(e) => e.stopPropagation()}/>
+        {/* <SVG src={BgContent} className="betting--BgContent" onClick={(e) => e.stopPropagation()}/> */}
+
+        <LazyImage
+          lowResSrc={BgContent075x}
+          highResSrc={BgContent2x}
+          alt='betting'
+          className='betting--BgContent'
+        />
+        
         <SVG src={bgCardSelect} className="betting--zodiac-background" onClick={(e) => e.stopPropagation()}/>
         {zodiacCardSelect.imageUrl && <SVG
                                         src={zodiacCardSelect.imageUrl}

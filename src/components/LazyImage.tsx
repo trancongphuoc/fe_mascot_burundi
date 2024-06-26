@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 interface LazyImagePro {
     lowResSrc: string,
     highResSrc: string,
     alt: string,
-    className: string
+    className: string,
 }
 
 const LazyImage = ({ lowResSrc, highResSrc, alt, className } :LazyImagePro ) => {
@@ -29,6 +29,7 @@ const LazyImage = ({ lowResSrc, highResSrc, alt, className } :LazyImagePro ) => 
         transition: 'opacity 0.5s ease-in-out',
         opacity: loaded ? 1 : 0.5,
       }}
+        onClick={(e) => e.stopPropagation()} 
     />
   );
 };

@@ -1175,7 +1175,7 @@ h4 {
   grid-area: 3/1/6/4;
   z-index: 5;
   width: 100%;
-  height: auto;
+  height: 253px;
   transform: translateY(1px);
 }
 .betting--BgLighter {
