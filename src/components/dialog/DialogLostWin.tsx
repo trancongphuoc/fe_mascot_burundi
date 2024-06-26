@@ -1,8 +1,13 @@
 import bgCardSelected from '../../assets/bg_card_selected_light.svg';
 import TextCongratution from '../../assets/text_congregation.svg';
 import TextApologize from '../../assets/text_apologize.svg';
-import BgContentWin from '../../assets/bg_content_win.png';
-import BgContentLost from '../../assets/bg_content_lost.png';
+
+import BgContentWin075x from '../../assets/bg_content_betting_075x.png';
+import BgContentWin2x from '../../assets/bg_content_betting_2x.png';
+
+import BgContentLost075x from '../../assets/bg_content_lost_075x.png';
+import BgContentLost2x from '../../assets/bg_content_lost_2x.png';
+
 import BgHeaderLost from '../../assets/bg_header_lost.svg';
 import BgHeaderWin from '../../assets/bg_header_short_win.svg';
 import Icoin from '../../assets/icoin.svg';
@@ -23,6 +28,7 @@ import { motion } from 'framer-motion';
 // import lostAudio from '../../../public/sounds/crowd_disappointed.wav';
 
 import { handleErrorAvartar } from '../DefaultUserAvartar';
+import LazyImage from '../LazyImage';
 
 
 
@@ -36,14 +42,16 @@ interface DialogLostWinProps {
 
 const lost = {
   bgHeader: BgHeaderLost,
-  bgContent: BgContentLost,
+  bgContent075x: BgContentLost075x,
+  bgContent2x: BgContentLost2x,
   lineLeft: LineLeftLost,
   lineRight: LineRightLost
 }
 
 const win = {
   bgHeader: BgHeaderWin,
-  bgContent: BgContentWin,
+  bgContent075x: BgContentWin075x,
+  bgContent2x: BgContentWin2x,
   lineLeft: LineLeftWin,
   lineRight: LineRightWin
 }
@@ -125,7 +133,10 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
         className="lost-popup"
         >
         {/* <SVG src={dialogType == "WIN" ? win.bgContent : lost.bgContent} className="lost--BgContent mb--1px" onClick={e => {e.stopPropagation()}}/> */}
-        <img src={dialogType == "WIN" ? win.bgContent : lost.bgContent} className="lost--BgContent mb--1px" onClick={e => {e.stopPropagation()}}/>
+
+        {dialogType == "WIN" ? 
+          <LazyImage lowResSrc={win.bgContent075x} highResSrc={win.bgContent2x} alt={'win dialog'} className='lost--BgContent mb--1px'/> : 
+          <LazyImage lowResSrc={lost.bgContent075x} highResSrc={lost.bgContent2x} alt={'lost dialog'} className='lost--BgContent mb--1px'/>}
 
         <SVG src={bgCardSelected} className="lost--zodiac-background" onClick={e => {e.stopPropagation()}}/>
         <SVG src={zodiac} className="lost--zodiac-card" onClick={e => {e.stopPropagation()}}/>
