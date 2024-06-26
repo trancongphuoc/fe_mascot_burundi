@@ -224,10 +224,10 @@ useEffect(() => {
     fetchStatus();
     fetchGameInfo();
 
-    // if (statusGame != "COUNTDOWN") {
-    //   if (openDepositIcoin) setOpenDepositIcoin(prevValue => !prevValue);
-    //   if (openBetting) setOpenBetting((prevRule) => !prevRule);
-    // }
+    if (statusGame != "COUNTDOWN") {
+      if (openDepositIcoin) setOpenDepositIcoin(prevValue => !prevValue);
+      if (openBetting) setOpenBetting((prevRule) => !prevRule);
+    }
 
     if (statusGame == "COUNTDOWN") {
       doNothing();
@@ -239,24 +239,24 @@ useEffect(() => {
       case 'PREPARESTART':
         break;
       case 'COUNTDOWN':
-      //   if (openLostWin) setOpenLostWin(prevValue => !prevValue);
-      //   if (openRule) setOpenRule(prevValue => !prevValue);
-      //   if (openHistoryGame) setOpenHistoryGame(prevValue => !prevValue);
-      //   if (openMyHistory) setOpenMyHistory(prevValue => !prevValue);
+        if (openLostWin) setOpenLostWin(prevValue => !prevValue);
+        if (openRule) setOpenRule(prevValue => !prevValue);
+        if (openHistoryGame) setOpenHistoryGame(prevValue => !prevValue);
+        if (openMyHistory) setOpenMyHistory(prevValue => !prevValue);
 
-      //   setBetCards([]);
-      //   setBetSuccess(true);
-      //   break;
-      // case 'RESULTWAITING':
+        setBetCards([]);
+        setBetSuccess(true);
+        break;
+      case 'RESULTWAITING':
         
-      //   break;
-      // case 'RESULT':
-      //   if (openRule) setOpenRule(prevValue => !prevValue);
-      //   if (openHistoryGame) setOpenHistoryGame(prevValue => !prevValue);
+        break;
+      case 'RESULT':
+        if (openRule) setOpenRule(prevValue => !prevValue);
+        if (openHistoryGame) setOpenHistoryGame(prevValue => !prevValue);
 
-      //   if (openMyHistory) setOpenMyHistory(prevValue => !prevValue);
+        if (openMyHistory) setOpenMyHistory(prevValue => !prevValue);
 
-      //   if (!openGameResult) setOpenGameResult(prevValue => !prevValue);
+        if (!openGameResult) setOpenGameResult(prevValue => !prevValue);
         break;
       case 'END':
         break;
@@ -426,7 +426,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
       <AnimatePresence>
         {openRule && <PopupRule onClose={()=> setOpenRule(false)} />}
 
-        {true && selectCard && (
+        {openBetting && selectCard && (
                                         <DialogBetting
                                             onClose={() => {
                                               setOpenBetting(false);
@@ -439,7 +439,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
 
 
-        {openBetting && <DialogLost
+        {openLostWin && <DialogLost
                             onClose={() => setOpenLostWin(false)}
                       
                             dialogType={dialogTypeRef.current}
