@@ -225,8 +225,8 @@ useEffect(() => {
     fetchGameInfo();
 
     if (statusGame != "COUNTDOWN") {
-      if (openDepositIcoin) setOpenDepositIcoin(prevValue => !prevValue);
-      if (openBetting) setOpenBetting((prevRule) => !prevRule);
+      if (openDepositIcoin) setOpenDepositIcoin(false);
+      if (openBetting) setOpenBetting(false);
     }
 
     if (statusGame == "COUNTDOWN") {

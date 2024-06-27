@@ -30,7 +30,7 @@ import { motion } from 'framer-motion';
 
 import { handleErrorAvartar } from '../DefaultUserAvartar';
 import LazyImage from '../LazyImage';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 
 
