@@ -1,5 +1,5 @@
 import { DataSnapshot, off, onValue, ref } from 'firebase/database';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { db } from '../firebase/config';
 
 interface CountdownProps {
