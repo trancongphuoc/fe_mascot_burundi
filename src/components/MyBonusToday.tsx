@@ -96,11 +96,11 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
             }
         };
 
-        // if (statusGame === "RESULT") {
+        if (statusGame === "PREPARESTART") {
             onValue(stateRef, handleData);
-        // } else {
-        //     off(stateRef, 'value', handleData);
-        // }        
+        } else {
+            off(stateRef, 'value', handleData);
+        }        
         return () => off(stateRef, 'value', handleData);
     }, [statusGame, fbId]);
 

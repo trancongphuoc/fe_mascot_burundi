@@ -30,8 +30,11 @@
         max-width: 135px;
         height: 29px;
 
-        background: -webkit-linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
-        background: linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
+        background-size: 100% 100%;
+        background-image: url(../assets//bg_countdown.svg);
+
+        // background: -webkit-linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
+        // background: linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
 
         padding: 7px 25px 9px 25px;
         padding: 7px 25px 9px 25px;
@@ -80,15 +83,19 @@
             margin-top: 2px;
             padding: 2px 18px;
     
-            background: linear-gradient(to left, transparent,#094348 25%, #0A5B62 50%,#094348 75%, transparent);
-            background: -webkit-linear-gradient(to left, transparent,#094348 25%, #0A5B62 50%,#094348 75%, transparent);
+            // background: linear-gradient(to left, transparent,#094348 25%, #0A5B62 50%,#094348 75%, transparent);
+            // background: -webkit-linear-gradient(to left, transparent,#094348 25%, #0A5B62 50%,#094348 75%, transparent);
             
             font-size: 12px;
             font-weight: 400;
     
             line-height: 1;
             color: $color-aquamarine-medium;
+
             background-size: 100% 100%;
+            background-image: url(../assets/bg_bonus.svg);
+
+
         }
     
         &--players {    

@@ -61,6 +61,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
       const totalIcoin = totalIcoinString !== null ? parseInt(totalIcoinString, 10) : 0;
       const initStake = stakes + stake;
       if (initStake <= totalIcoin) {
+        clickAudioRef();
         setStakes(initStake)
       } else {
         openDepositPupup();
@@ -121,7 +122,6 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           key={'stake-100'}
           onClick={(e) => {
             e.stopPropagation();
-            clickAudioRef();
             handleStake(100);
           }}
           className="betting--button-2">+100
@@ -130,7 +130,6 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           key={'stake-1000'}
           onClick={(e) => {
             e.stopPropagation();
-            clickAudioRef();
             handleStake(1000);
           }}
           className="betting--button-3">+1000

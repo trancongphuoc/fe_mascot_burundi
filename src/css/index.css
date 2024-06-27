@@ -2475,8 +2475,8 @@ h4 {
   line-height: 1;
   max-width: 135px;
   height: 29px;
-  background: -webkit-linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
-  background: linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
+  background-size: 100% 100%;
+  background-image: url(../assets//bg_countdown.svg);
   padding: 7px 25px 9px 25px;
   padding: 7px 25px 9px 25px;
   margin: 1px auto;
@@ -2529,13 +2529,12 @@ h4 {
 .betting-table__card--bonus {
   margin-top: 2px;
   padding: 2px 18px;
-  background: linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
-  background: -webkit-linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
   font-size: 12px;
   font-weight: 400;
   line-height: 1;
   color: #5fdabc;
   background-size: 100% 100%;
+  background-image: url(../assets/bg_bonus.svg);
 }
 .betting-table__card--players {
   margin-top: 4px;
