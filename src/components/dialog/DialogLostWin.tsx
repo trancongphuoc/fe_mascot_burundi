@@ -24,7 +24,7 @@ import LineRightLost from '../../assets/line_right_lost.svg';
 import SVG from 'react-inlinesvg';
 import { motion } from 'framer-motion';
 import useAudio from '../UseAudio';
-import winAudio from '../../../public/sounds/crowd_victory.wav';
+import winAudio from '../../../public/sounds/audio_win.wav';
 import lostAudio from '../../../public/sounds/crowd_disappointed.wav';
 
 import { handleErrorAvartar } from '../DefaultUserAvartar';
