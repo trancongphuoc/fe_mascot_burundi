@@ -97,7 +97,7 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
         };
 
         //listen when fail betting
-        if (statusGame !== "RESULT" && statusGame !== "END") {
+        if (statusGame !== "RESULT" && statusGame !== "END" && statusGame !== "RESULTWAITING") {
             onValue(stateRef, handleData);
         } else {
             off(stateRef, 'value', handleData);
