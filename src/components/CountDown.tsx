@@ -7,7 +7,7 @@ interface CountdownProps {
   statusGame: StatusGame;
 }
 
-const Countdown: React.FC<CountdownProps> = ({ className, statusGame }) => {
+export default function Countdown({ className, statusGame } : CountdownProps) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -26,8 +26,8 @@ const Countdown: React.FC<CountdownProps> = ({ className, statusGame }) => {
 }, [statusGame]);
 
   return (
-      <p className={className}>Đếm ngược {count}</p>
+    <div className={className}>
+      <p >Đếm ngược {count}</p>
+    </div>
   );
 };
-
-export default Countdown;

@@ -32,7 +32,7 @@
 
         background: -webkit-linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
         background: linear-gradient(to left, transparent, #094348 25%, #0A5B62 50%, #094348 75%, transparent);
-        
+
         padding: 7px 25px 9px 25px;
         padding: 7px 25px 9px 25px;
         margin: 1px auto;
@@ -81,6 +81,8 @@
             padding: 2px 18px;
     
             background: linear-gradient(to left, transparent,#094348 25%, #0A5B62 50%,#094348 75%, transparent);
+            background: -webkit-linear-gradient(to left, transparent,#094348 25%, #0A5B62 50%,#094348 75%, transparent);
+            
             font-size: 12px;
             font-weight: 400;
     
