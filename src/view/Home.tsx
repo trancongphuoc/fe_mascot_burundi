@@ -100,13 +100,13 @@ export default function Home() {
   //get select card
   const [selectCard, setSelectCard] = useState<BetZodiacCard | null>(null);
 
-  const [totalIcoinWin, setTotalIcoinWin] = useState(0);
+  const totalIcoinWinRef = useRef<number>(0);
 
   const [isLoading, setIsLoading] = useState(true);
   // get win or not
   const handleIsWin = (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => {
     if (data.totalIcoinWin) {
-      setTotalIcoinWin(data.totalIcoinWin);
+      totalIcoinWinRef.current = data.totalIcoinWin;
     }
    console.log('check icoin win: ', data.totalIcoinWin)
 
@@ -443,7 +443,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                             onClose={() => setOpenLostWin(false)}
                       
                             dialogType={dialogTypeRef.current}
-                            totalIcoin={totalIcoinWin}
+                            totalIcoin={totalIcoinWinRef.current}
                             topUsers={game?.topUser ?? []}
                             zodiac={game?.zodiacCard.imgUrl ?? ''} />}
 

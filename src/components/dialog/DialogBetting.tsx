@@ -10,7 +10,7 @@ import BgHeader from '../../assets/bg_header_betting.svg';
 import BgLighter from '../../assets/bg_lighter.svg';
 import { motion } from 'framer-motion';
 import SVG from 'react-inlinesvg';
-// import useAudio from './UseAudio';
+import useAudio from '../UseAudio';
 import toast from 'react-hot-toast';
 import LazyImage from '../LazyImage';
 
@@ -25,8 +25,8 @@ interface DialogBettingProps {
 const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect, betIcoin, openDepositPupup }) => {
   const [stakes, setStakes] = useState(0);
 
-  // const clickAudioRef = useAudio('/zodiac-game/public/sounds/confirm_button.wav');
-  // const confirmRef = useAudio('/zodiac-game/public/sounds/stake_button.wav');
+  const clickAudioRef =  useAudio('/zodiac-game/public/sounds/confirm_button.wav');
+  const confirmRef = useAudio('/zodiac-game/public/sounds/stake_button.wav');
 
 
   const sendDataOut = () => {
@@ -121,25 +121,26 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
           key={'stake-100'}
           onClick={(e) => {
             e.stopPropagation();
-            // clickAudioRef();
-            handleStake(100)
+            clickAudioRef();
+            handleStake(100);
           }}
           className="betting--button-2">+100
         </div>
         <div
           key={'stake-1000'}
           onClick={(e) => {
-            e.stopPropagation()
-            // clickAudioRef();
-            handleStake(1000)
+            e.stopPropagation();
+            clickAudioRef();
+            handleStake(1000);
           }}
           className="betting--button-3">+1000
         </div>
 
         <div
           onClick={(e) => {
-            e.stopPropagation()
-            sendDataOut()
+            e.stopPropagation();
+            confirmRef();
+            sendDataOut();
           }}
           className="betting__confirm mb-34px mt-14-5px">
           <p className="betting__confirm--text">Xác nhận</p>
