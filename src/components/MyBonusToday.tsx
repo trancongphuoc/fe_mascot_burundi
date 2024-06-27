@@ -31,6 +31,7 @@ interface MyInfoBetResultModel {
 function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataChange} : MyInfoBetResultModel) {
     const [betUser, setBetUser] = useState<BetUser>()
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
+    const [icoinWinToday, setIIcoinWinToday] = useState<number>(0);
 
     const [bettingCards, setBettingCards] = useState< BetZodiacCard[]>([]);
 
@@ -92,16 +93,19 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                     totalIcoinWinToday: data.totalIcoinWinToday ?? 0,
                 };
                 setBetUser(user);  
-                onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin ?? 0});          
+                onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin ?? 0});   
+                if (statusGame === 'PREPARESTART') {
+                    setIIcoinWinToday(user.totalIcoinWinToday ?? 0);
+                }       
             }
         };
 
         //listen when fail betting
-        if (statusGame !== "RESULT" && statusGame !== "END" && statusGame !== "RESULTWAITING") {
+        // if (statusGame !== "RESULT" && statusGame !== "END" && statusGame !== "RESULTWAITING") {
             onValue(stateRef, handleData);
-        } else {
-            off(stateRef, 'value', handleData);
-        }        
+        // } else {
+        //     off(stateRef, 'value', handleData);
+        // }        
         return () => off(stateRef, 'value', handleData);
     }, [statusGame, fbId]);
 
@@ -139,7 +143,7 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                     <p className='header-left--text'>Thưởng hôm nay:</p>
                     <div className="totalIcoin">
                         <SVG className='header-left--img' src={Icoin}/>
-                        <p className='header-left--icoin'>{formatNumber(betUser?.totalIcoinWinToday ?? 0)}</p>
+                        <p className='header-left--icoin'>{formatNumber(icoinWinToday)}</p>
                     </div>
 
                 </div>

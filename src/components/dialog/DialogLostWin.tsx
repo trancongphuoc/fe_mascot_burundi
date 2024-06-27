@@ -24,9 +24,9 @@ import LineRightLost from '../../assets/line_right_lost.svg';
 import SVG from 'react-inlinesvg';
 import { motion } from 'framer-motion';
 
-import useAudio from '../UseAudio';
-import winAudio from '../../../public/sounds/audio_win.wav';
-import lostAudio from '../../../public/sounds/audio_lost.wav';
+// import useAudio from '../UseAudio';
+// import winAudio from '../../../public/sounds/audio_win.wav';
+// import lostAudio from '../../../public/sounds/audio_lost.wav';
 
 import { handleErrorAvartar } from '../DefaultUserAvartar';
 import LazyImage from '../LazyImage';
@@ -101,16 +101,16 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
                       </div>
                     </>;
 
-  const playLostAudio = useAudio(lostAudio);
-  const playWinAudio = useAudio(winAudio);
+  // const playLostAudio = useAudio(lostAudio);
+  // const playWinAudio = useAudio(winAudio);
 
-  useEffect(() =>{
-    if (dialogType === 'LOST') {
-      playLostAudio();
-    } else if (dialogType === 'WIN') {
-      playWinAudio();
-    }
-  },[])
+  // useEffect(() =>{
+  //   if (dialogType === 'LOST') {
+  //     playLostAudio();
+  //   } else if (dialogType === 'WIN') {
+  //     playWinAudio();
+  //   }
+  // },[])
 
   const renderDialogContent = () => {
     switch (dialogType) {

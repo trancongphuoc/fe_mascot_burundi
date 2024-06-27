@@ -114,7 +114,7 @@ export default function Home() {
       if (data.isWin) {
         dialogTypeRef.current = 'WIN';
       } else {
-        dialogTypeRef.current ='LOST';
+        dialogTypeRef.current = 'LOST';
       }
   } else {
       console.log("Win status is undefined or not a boolean.");

@@ -10,9 +10,12 @@ import BgHeader from '../../assets/bg_header_betting.svg';
 import BgLighter from '../../assets/bg_lighter.svg';
 import { motion } from 'framer-motion';
 import SVG from 'react-inlinesvg';
-import useAudio from '../UseAudio';
 import toast from 'react-hot-toast';
 import LazyImage from '../LazyImage';
+
+// import useAudio from '../UseAudio';
+// import audioConfirm from '../../../public/sounds/confirm_button.wav';
+// import audioBet from '../../../public/sounds/stake_button.wav';
 
 interface DialogBettingProps {
   onClose: () => void;
@@ -25,8 +28,8 @@ interface DialogBettingProps {
 const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect, betIcoin, openDepositPupup }) => {
   const [stakes, setStakes] = useState(0);
 
-  const clickAudioRef =  useAudio('/zodiac-game/public/sounds/confirm_button.wav');
-  const confirmRef = useAudio('/zodiac-game/public/sounds/stake_button.wav');
+  // const clickAudioRef =  useAudio(audioBet);
+  // const confirmRef = useAudio(audioConfirm);
 
 
   const sendDataOut = () => {
@@ -61,7 +64,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
       const totalIcoin = totalIcoinString !== null ? parseInt(totalIcoinString, 10) : 0;
       const initStake = stakes + stake;
       if (initStake <= totalIcoin) {
-        clickAudioRef();
+        // clickAudioRef();
         setStakes(initStake)
       } else {
         openDepositPupup();
@@ -113,7 +116,6 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <button key={'stake-10'}
           onClick={(e) => {
             e.stopPropagation()
-            console.log(window.sessionStorage.getItem('totalIcoin')); 
             handleStake(10);
           }}
           className="betting--button">+10
@@ -138,7 +140,7 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
         <button
           onClick={(e) => {
             e.stopPropagation();
-            confirmRef();
+            // confirmRef();
             sendDataOut();
           }}
           className="betting__confirm mb-34px mt-14-5px">

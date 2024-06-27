@@ -3,7 +3,7 @@ import BgCardWin from '../../assets/bg_card_selected.svg';
 
 import TextHistory from '../../assets/text-mine-history.svg';
 import IcoinLost from '../../assets/icoin-lost.svg';
-import IcoinWin from '../../assets/icoin.svg'
+import IcoinWin from '../../assets/icoin_small.svg';
 import SVG from 'react-inlinesvg';
 import { useEffect, useState } from 'react';
 import { fetchMyHistory } from '../../api/getMyHistory';
