@@ -40,6 +40,7 @@ import SVG from 'react-inlinesvg';
 import { useOnlineStatus } from '../api/checkDisconnect';
 import { doNothing } from '../api/doNothing';
 import Loading from '../components/Loading';
+import useNetworkStatus from '../api/useNetworkStatus';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -90,8 +91,6 @@ export default function Home() {
   //dialog disconnnect
   const [openDisconnect, setOpenDisconnect] = useState(false);
 
-  // const [dialogType, setDialogType] = useState<DialogType>('LOST');
-
   const dialogTypeRef = useRef<DialogType>('LOST');
 
   const fbIdRef = useRef<string>('')
@@ -102,7 +101,7 @@ export default function Home() {
 
   const totalIcoinWinRef = useRef<number>(0);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   // get win or not
   const handleIsWin = (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => {
     if (data.totalIcoinWin) {
@@ -120,7 +119,6 @@ export default function Home() {
       console.log("Win status is undefined or not a boolean.");
   }
 };
-
 
 useEffect(() => {
   const fetchTokenAndJoinGame = async () => {
@@ -244,8 +242,8 @@ useEffect(() => {
         if (openHistoryGame) setOpenHistoryGame(prevValue => !prevValue);
         if (openMyHistory) setOpenMyHistory(prevValue => !prevValue);
 
-        setBetCards([]);
-        setBetSuccess(true);
+        betCardRef.current = [];
+        betSuccessRef.current = true;
         break;
       case 'RESULTWAITING':
         
@@ -268,6 +266,8 @@ useEffect(() => {
 
   }, [statusGame]);
 
+
+
   const handleCardSelection = (card: ZodiacCardModel) => {
     console.log('step 1')
     if (statusGame === "COUNTDOWN") {
@@ -284,16 +284,13 @@ useEffect(() => {
     }
   };
 
-
-//list card betting
-const [betCards, setBetCards] = useState<BetZodiacCard[]>([]); 
-  //failed betting
-const [betSuccess, setBetSuccess] = useState(true);
+const betCardRef = useRef<BetZodiacCard[]>([]);
+const betSuccessRef = useRef<boolean>(true);
 
 // send icoin betting
 const betGame = async (zodiacCard: BetZodiacCard) => {
   let cardFound = false;
-  const updatedBetCards = betCards.map((card) => {
+  const updatedBetCards = betCardRef.current.map((card) => {
     if (card.id === zodiacCard.id) {
       cardFound = true;
       return {
@@ -312,20 +309,21 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
     toast.dismiss();
     toast('Đặt cược tối đa 4 lá linh vật', { duration: 2000, position: 'bottom-center'});
   } else {
-    setBetCards(updatedBetCards);
-  }
-
-
-  try {
-    const data = await bettingCard(game?.transactionId ?? 0, zodiacCard.totalIcoinBetting ?? 0, zodiacCard.id);
-    if (data !== "OK") {
-      setBetSuccess(false);
+    toast.dismiss();
+    betCardRef.current = updatedBetCards;
+    try {
+      const data = await bettingCard(game?.transactionId ?? 0, zodiacCard.totalIcoinBetting ?? 0, zodiacCard.id);
+      if (data !== "OK") {
+        betSuccessRef.current = false;
+      }
+    } catch (error) {
+      console.error('Error betting:', error);
+      betSuccessRef.current = false;
     }
-    console.log('check betting', data);
-  } catch (error) {
-    console.error('Error betting:', error);
-    setBetSuccess(false);
   }
+
+
+
 };
 
   const updateOnlineStatus = useCallback(() => {
@@ -348,32 +346,15 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
     }
   }
 
-  const [effectiveType, setEffectiveType] = useState<string | null>(null);
+  //use effect to this networkstatus
+  const effectiveType = useNetworkStatus();
 
-  useEffect(() => {
-    const navigatorConnection = (navigator as any).connection;
-
-    const updateNetworkStatus = () => {
-      if (navigatorConnection) {
-        setEffectiveType(navigatorConnection.effectiveType);
-      }
-    };
-
-    updateNetworkStatus();
-
-    if (navigatorConnection) {
-      navigatorConnection.addEventListener('change', updateNetworkStatus);
-    }
-
-    return () => {
-      if (navigatorConnection) {
-        navigatorConnection.removeEventListener('change', updateNetworkStatus);
-      }
-    };
-  }, []);
+  if (isLoading) {
+    return <Loading className='home_loading'/>
+  }
 
   return (
-    isLoading ? <Loading className='home_loading'/> :
+    // isLoading ? <Loading className='home_loading'/> :
     <div className='main'>
     
       <Toaster>
@@ -415,8 +396,8 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         onOpen={() => setOpenMyHistory(true)}
         onUserDataChange={handleIsWin}
         fbId={fbIdRef.current}
-        betCards={betCards}
-        betSuccess={betSuccess}
+        betCards={betCardRef.current}
+        betSuccess={betSuccessRef.current}
         statusGame={game?.status ?? 'NONE'}
         />
    
