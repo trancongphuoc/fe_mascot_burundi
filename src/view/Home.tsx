@@ -157,6 +157,15 @@ useEffect(() => {
   fetchTokenAndJoinGame();
 }, []);
 
+const handleLoading = () => {
+  setIsLoading(false);
+}
+
+useEffect(()=>{
+  window.addEventListener("load",handleLoading);
+  return () => window.removeEventListener("load",handleLoading);
+  },[])
+
 
   useEffect(() => { 
     console.log('joinGame', jointGameRef.current)
@@ -223,10 +232,9 @@ useEffect(() => {
     fetchStatus();
     fetchGameInfo();
 
-    if (statusGame != "COUNTDOWN") {
-      if (openDepositIcoin) setOpenDepositIcoin(false);
-      if (openBetting) setOpenBetting(false);
-    }
+    // if (statusGame != "COUNTDOWN") {
+
+    // }
 
     if (statusGame == "COUNTDOWN") {
       doNothing();
@@ -234,8 +242,12 @@ useEffect(() => {
 
     switch (statusGame) {
       case 'NONE':
+        if (openDepositIcoin) setOpenDepositIcoin(false);
+        if (openBetting) setOpenBetting(false);
         break;
       case 'PREPARESTART':
+        if (openDepositIcoin) setOpenDepositIcoin(false);
+        if (openBetting) setOpenBetting(false);
         break;
       case 'COUNTDOWN':
         if (openLostWin) setOpenLostWin(false);
@@ -247,9 +259,14 @@ useEffect(() => {
         betSuccessRef.current = true;
         break;
       case 'RESULTWAITING':
+        if (openDepositIcoin) setOpenDepositIcoin(false);
+        if (openBetting) setOpenBetting(false);
         
         break;
       case 'RESULT':
+        if (openDepositIcoin) setOpenDepositIcoin(false);
+        if (openBetting) setOpenBetting(false);
+
         if (openRule) setOpenRule(false);
         if (openHistoryGame) setOpenHistoryGame(false);
 
@@ -259,6 +276,9 @@ useEffect(() => {
         if (!openGameResult) setOpenGameResult(true);
         break;
       case 'END':
+
+        if (openDepositIcoin) setOpenDepositIcoin(false);
+        if (openBetting) setOpenBetting(false);
         break;
 
     }
@@ -324,9 +344,6 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
       betSuccessRef.current = false;
     }
   }
-
-
-
 };
 
   const updateOnlineStatus = useCallback(() => {
