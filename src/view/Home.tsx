@@ -93,13 +93,9 @@ export default function Home() {
   const [openDisconnect, setOpenDisconnect] = useState(false);
 
   const dialogTypeRef = useRef<DialogType>('LOST');
-
   const fbIdRef = useRef<string>('')
   const jointGameRef = useRef<boolean>(false);
-
-  //get select card
-  const [selectCard, setSelectCard] = useState<BetZodiacCard | null>(null);
-
+  const selectedCardRef = useRef<BetZodiacCard | null>(null);
   const totalIcoinWinRef = useRef<number>(0);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -297,7 +293,8 @@ useEffect(()=>{
         ...card,
         transactionId: game?.transactionId ?? 0,
       };
-      setSelectCard(betCard);
+
+      selectedCardRef.current = betCard;
       setOpenBetting(true);
       setHidden('hidden');
     } else {
@@ -435,14 +432,15 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
           setHidden('scroll');
           setOpenRule(false)}} />}
 
-        {openBetting && selectCard && (
+        {openBetting && selectedCardRef.current && (
                                         <DialogBetting
                                             onClose={() => {
                                               setHidden('scroll');
                                               setOpenBetting(false);
-                                              setSelectCard(null);
+                                              // setSelectCard(null);
+                                              selectedCardRef.current = null
                                             }}
-                                            zodiacCardSelect={selectCard}
+                                            zodiacCardSelect={selectedCardRef.current}
                                             betIcoin={betGame}
                                             openDepositPupup={() => setOpenDepositIcoin(true)}
                                             zodiacGameId={game?.transactionId ?? 0}/>)}
