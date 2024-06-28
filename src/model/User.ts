@@ -13,7 +13,7 @@
 interface User {
     language?: string,
     facebookUserId?: string,
-    profileImageLink: string,
+    profileImageLink?: string,
     name: string,
     uid?: string,
     totalIcoin?: number,

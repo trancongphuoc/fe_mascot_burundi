@@ -19,7 +19,7 @@ export default function Players() {
                         const playerData = data[playerId];
                         const player: User = {
                             facebookUserId: playerData.facebookUserId,
-                            profileImageLink: playerData.profileImageLink,
+                            profileImageLink: playerData.profileImageLink ?? '',
                             name: playerData.name,
                             uid: playerData.uid,
                             totalIcoin: playerData.totalIcoin,
