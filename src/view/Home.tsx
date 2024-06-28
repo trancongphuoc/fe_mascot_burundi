@@ -41,6 +41,7 @@ import { useOnlineStatus } from '../api/checkDisconnect';
 import { doNothing } from '../api/doNothing';
 import Loading from '../components/Loading';
 import useNetworkStatus from '../api/useNetworkStatus';
+import setHidden from '../utils/setBodyScroll';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -237,10 +238,10 @@ useEffect(() => {
       case 'PREPARESTART':
         break;
       case 'COUNTDOWN':
-        if (openLostWin) setOpenLostWin(prevValue => !prevValue);
-        if (openRule) setOpenRule(prevValue => !prevValue);
-        if (openHistoryGame) setOpenHistoryGame(prevValue => !prevValue);
-        if (openMyHistory) setOpenMyHistory(prevValue => !prevValue);
+        if (openLostWin) setOpenLostWin(false);
+        if (openRule) setOpenRule(false);
+        if (openHistoryGame) setOpenHistoryGame(false);
+        if (openMyHistory) setOpenMyHistory(false);
 
         betCardRef.current = [];
         betSuccessRef.current = true;
@@ -249,12 +250,13 @@ useEffect(() => {
         
         break;
       case 'RESULT':
-        if (openRule) setOpenRule(prevValue => !prevValue);
-        if (openHistoryGame) setOpenHistoryGame(prevValue => !prevValue);
+        if (openRule) setOpenRule(false);
+        if (openHistoryGame) setOpenHistoryGame(false);
 
-        if (openMyHistory) setOpenMyHistory(prevValue => !prevValue);
+        if (openMyHistory) setOpenMyHistory(false);
 
-        if (!openGameResult) setOpenGameResult(prevValue => !prevValue);
+        setHidden('hidden');
+        if (!openGameResult) setOpenGameResult(true);
         break;
       case 'END':
         break;
@@ -277,6 +279,7 @@ useEffect(() => {
       };
       setSelectCard(betCard);
       setOpenBetting(true);
+      setHidden('hidden');
     } else {
       toast.remove();
       toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
@@ -382,18 +385,24 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         <p className='heading-secondary'>Hôm nay {game?.noGameToday} Ván</p>
         <SVG
           src={Rule}
-          onClick={() => setOpenRule(true)}
+          onClick={() => {
+            setHidden('hidden');
+            setOpenRule(true)}}
           className='section-header__rule'/>
       </header>
 
       <div className="result mt-7-5px">
-        <ShortGameHistory openDialog={()=> {setOpenHistoryGame(true)}}  statusGame={game?.status ?? 'NONE'}/>
+        <ShortGameHistory openDialog={()=> {
+          setHidden('hidden');
+          setOpenHistoryGame(true);}}  statusGame={game?.status ?? 'NONE'}/>
         <Players/>
       </div>
 
       <BettingTable onSelectCard={handleCardSelection} openBetting={true} statusGame={statusGame ?? "NONE"}/>
       <MyHistory
-        onOpen={() => setOpenMyHistory(true)}
+        onOpen={() => {
+          setHidden('hidden');
+          setOpenMyHistory(true)}}
         onUserDataChange={handleIsWin}
         fbId={fbIdRef.current}
         betCards={betCardRef.current}
@@ -405,11 +414,14 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
       {/* Dialog when click */}
       <AnimatePresence>
-        {openRule && <PopupRule onClose={()=> setOpenRule(false)} />}
+        {openRule && <PopupRule onClose={()=> {
+          setHidden('scroll');
+          setOpenRule(false)}} />}
 
         {openBetting && selectCard && (
                                         <DialogBetting
                                             onClose={() => {
+                                              setHidden('scroll');
                                               setOpenBetting(false);
                                               setSelectCard(null);
                                             }}
@@ -421,7 +433,10 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
 
         {openLostWin && <DialogLost
-                            onClose={() => setOpenLostWin(false)}
+                            onClose={() => {
+                              setHidden('scroll');
+                              setOpenLostWin(false)}
+                            }
                       
                             dialogType={dialogTypeRef.current}
                             totalIcoin={totalIcoinWinRef.current}
@@ -432,13 +447,21 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
 
         {openHistoryGame && <PopupGameHistory
-                              onClose={() => setOpenHistoryGame(false)}
+                              onClose={() => {
+                                setHidden('scroll');
+                                setOpenHistoryGame(false)}
+                              }
                               zodiacs={img}/>}
-        {openMyHistory && <PopupMyHistory onClose={()=> setOpenMyHistory(false)}/>}
+        {openMyHistory && <PopupMyHistory onClose={()=> {
+                                setHidden('scroll');
+                                setOpenMyHistory(false)}
+                              }/>}
 
         {openDepositIcoin && <PopupNotification 
                                 key={'deposit'}
-                                onClose={() => setOpenDepositIcoin(false)} 
+                                onClose={() => {
+                                  setHidden('scroll');
+                                  setOpenDepositIcoin(false)}} 
                                 title = 'Bạn không đủ iCoin để chơi vui lòng nạp thêm!'
                                 leftContentButton = 'Huỷ'
                                 rightContentButton = 'Nạp thêm'
@@ -447,7 +470,9 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
         {openDisconnect && <PopupNotification 
                                 key={'disconnect'}
-                                onClose={() => setOpenDisconnect(false)} 
+                                onClose={() => {
+                                  setHidden('scroll');
+                                  setOpenDisconnect(false)}} 
                                 title = 'Đường truyền không ổn định, vui lòng kiểm tra kết nối mạng'
                                 leftContentButton = 'Thoát'
                                 rightContentButton = 'Kết nối lại'
@@ -460,9 +485,10 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
       {openGameResult && <PopupOpenCard
                               onClose={()=> {
-                                              setOpenGameResult(false)
-                                               setOpenLostWin(true)}}
-                                               zodiacUrl={game?.zodiacCard.imgUrl ?? ''}/>}
+                                setOpenGameResult(false)
+                                setOpenLostWin(true)}}
+                                zodiacUrl={game?.zodiacCard.imgUrl ?? ''}
+      />}
     </div>
   );
 }
