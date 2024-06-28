@@ -73,24 +73,15 @@ export default function Home() {
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
 
   const [statusGame, setStatusGame] = useState<StatusGame>('NONE');
-  //open card
   const [openGameResult, setOpenGameResult] = useState(false);
-  //open rule
   const [openRule, setOpenRule] = useState(false);
-  //open lost win
   const [openLostWin, setOpenLostWin] = useState(false);
-  //open history game
   const [openHistoryGame, setOpenHistoryGame] = useState(false);
-  //open betting
   const [openBetting, setOpenBetting] = useState(false);
-  //open my history
   const [openMyHistory, setOpenMyHistory] = useState(false);
-
-  //dialog deposit iCoin
   const [openDepositIcoin, setOpenDepositIcoin] = useState(false);
-
-  //dialog disconnnect
   const [openDisconnect, setOpenDisconnect] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const dialogTypeRef = useRef<DialogType>('LOST');
   const fbIdRef = useRef<string>('')
@@ -98,8 +89,7 @@ export default function Home() {
   const selectedCardRef = useRef<BetZodiacCard | null>(null);
   const totalIcoinWinRef = useRef<number>(0);
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  // get win or not
+
   const handleIsWin = (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => {
     if (data.totalIcoinWin) {
       totalIcoinWinRef.current = data.totalIcoinWin;
@@ -157,9 +147,9 @@ const handleLoading = () => {
   setIsLoading(false);
 }
 
-useEffect(()=>{
-  window.addEventListener("load",handleLoading);
-  return () => window.removeEventListener("load",handleLoading);
+  useEffect(()=>{
+    window.addEventListener("load",handleLoading);
+    return () => window.removeEventListener("load",handleLoading);
   },[])
 
 
@@ -251,12 +241,17 @@ useEffect(()=>{
         if (openHistoryGame) setOpenHistoryGame(false);
         if (openMyHistory) setOpenMyHistory(false);
 
+        // set for 
+        setHidden('scroll');
+
         betCardRef.current = [];
         betSuccessRef.current = true;
         break;
       case 'RESULTWAITING':
         if (openDepositIcoin) setOpenDepositIcoin(false);
         if (openBetting) setOpenBetting(false);
+
+        setHidden('scroll');
         
         break;
       case 'RESULT':
@@ -300,7 +295,7 @@ useEffect(()=>{
     } else {
       toast.remove();
       toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
-      if (openBetting) setOpenBetting((prevRule) => !prevRule);
+      // if (openBetting) setOpenBetting((prevRule) => !prevRule);
     }
   };
 
@@ -371,7 +366,6 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
   }
 
   return (
-    // isLoading ? <Loading className='home_loading'/> :
     <div className='main'>
     
       <Toaster>
@@ -437,7 +431,6 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                                             onClose={() => {
                                               setHidden('scroll');
                                               setOpenBetting(false);
-                                              // setSelectCard(null);
                                               selectedCardRef.current = null
                                             }}
                                             zodiacCardSelect={selectedCardRef.current}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PopupCenter from '../popup/PopupCenter';
 import LottieAnimation from './AnimationOpenCard';
 import animationData from '../../assets/json/animation_open_card.json';
@@ -9,7 +9,7 @@ interface PopupOpenCardProps {
   zodiacUrl: string;
 }
 
-const PopupOpenCard: React.FC<PopupOpenCardProps> = ({ onClose, zodiacUrl }) => {
+const PopupOpenCard = ({ onClose, zodiacUrl }: PopupOpenCardProps) => {
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
 
   const handleAnimationComplete = () => {

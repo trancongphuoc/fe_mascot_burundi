@@ -22,7 +22,7 @@ interface PopupMineResultProps {
 interface MyHistory {
   time: Date,
   noGame: number,
-  totalIcoinWin: number | null,
+  totalIcoinWin: number,
   totalIcoinBetting: number,
   zodiacCardId: string,
   zodiacCards: BetZodiacCard[],
@@ -54,7 +54,7 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
             totalIcoinBetting: history.totalIcoinBetting ?? 0,
             zodiacCardId: history.zodiacCardId,
             zodiacCards: history.zodiacCards,
-            netIcoin: (history.totalIcoinWin ?? 0) - (history.totalIcoinBetting ?? 0),
+            // netIcoin: (history.totalIcoinWin ?? 0) - (history.totalIcoinBetting ?? 0),
           }));
           setMyHistory(myHistories);
         }
@@ -119,11 +119,9 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
                     </div>
              
                     <div className="item__icoin">
-                      <p className={mine.netIcoin > 0 ? "item__icoin--data-win" : "item__icoin--data-lost"}>
-                            {mine.netIcoin > 0 ?
-                            `+${mine.netIcoin}` :
-                            mine.netIcoin}</p>
-                      <SVG className="item__icoin--img" src={mine.netIcoin > 0 ? IcoinWin : IcoinLost}/>
+                      <p className={mine.totalIcoinWin > 0 ? "item__icoin--data-win" : "item__icoin--data-lost"}>
+                            {mine.totalIcoinWin > 0 ? `+${mine.totalIcoinWin}` : 0}</p>
+                      <SVG className="item__icoin--img" src={IcoinWin}/>
                     </div>
                   </div>
                 ))
