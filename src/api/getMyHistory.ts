@@ -1,3 +1,4 @@
+import { isSameDay } from '../utils/utils';
 import api from './axios';
 
 export const fetchMyHistory = async () => {
@@ -12,10 +13,10 @@ export const fetchMyHistory = async () => {
       headers: { 'Authorization': `Bearer ${token}` },
     });
 
-    console.log('my history', response.data);
-
     if (response.data.status === "OK" && Array.isArray(response.data.data.zodiacGameUserList)) {
-      return response.data.data.zodiacGameUserList;
+      const now = Date.now();
+      const filteredList = response.data.data.zodiacGameUserList.filter((item: any) => isSameDay(item.addTime ?? 0, now));
+      return filteredList;
     } else {
       console.error('Unexpected response structure:', response.data);
       return null;
