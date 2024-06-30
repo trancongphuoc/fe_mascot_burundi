@@ -8,6 +8,7 @@ import { DataSnapshot, off, onValue, ref } from 'firebase/database';
 import { db } from '../firebase/config';
 // import bgMyBonus from '../assets/bg_my_bonus_new.svg';
 import bgHeader from '../assets/bg_my_bonus_today.png';
+import { formatNumber } from '../utils/utils';
 
 interface BetUser extends User {
     bettingCards?: BetZodiacCard[];
@@ -33,15 +34,6 @@ function MyHistory({onOpen, statusGame, betCards, betSuccess, onUserDataChange} 
     const [icoinWinToday, setIIcoinWinToday] = useState<number>(0);
     const [bettingCards, setBettingCards] = useState< BetZodiacCard[]>([]);
     const [fbId, setFbId] = useState<string>('')
-
-    const formatNumber = (num: number) => {
-        if (num >= 1000000) {
-           const formattedNum = (num / 1000).toFixed(1) + 'k';
-            return formattedNum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        } else {
-          return num.toLocaleString('en-US').replace(/,/g, '.');
-        }
-      };
 
     useEffect(()=> {
         setFbId(window.sessionStorage.getItem('fbId') ?? '');

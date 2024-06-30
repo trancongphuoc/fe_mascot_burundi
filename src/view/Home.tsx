@@ -30,9 +30,7 @@ import Players from '../components/Players';
 import { ShortGameHistory } from '../components/ShortGameHistory';
 import PopupOpenCard from '../components/openCard/PopupOpenCard';
 
-import { joinGameZodiac } from '../api/joinGameZodiac';
 import BettingTable from '../components/bettingTable/BettingTable';
-import { getToken } from '../api/getToken';
 
 import { bettingCard } from '../api/bettingCard';
 import toast, { Toaster, resolveValue } from 'react-hot-toast';
@@ -66,7 +64,6 @@ interface ZodiacCard {
 }
 
 export default function Home() {
-  // Use the parameters as needed in your component
   const parameters = useQueryParams();
 
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
@@ -310,15 +307,13 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
   useOnlineStatus(updateOnlineStatus);
 
   // call flutter
-  const callbackMyWallet = () => {  // Check if flutter_inappwebview object and callHandler method are available
+  const callbackMyWallet = () => {
     if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
-      // Call the callHandler method with the handler name and shareLink variable
       window.flutter_inappwebview.callHandler('callbackMyWallet');
-      setOpenDepositIcoin(false);
     } else {
-      // Log an error message if flutter_inappwebview or callHandler is not available
       console.log('window.flutter_inappwebview or callHandler is not available');
     }
+    setOpenDepositIcoin(false);
   }
 
   //use effect to this networkstatus

@@ -6,6 +6,7 @@ import SVG from 'react-inlinesvg';
 import bgBestPlayers from '../assets/bg_best_players.png';
 import { getTopUsers } from '../firebase/bestPlayers';
 import { handleErrorAvartar } from './DefaultUserAvartar';
+import { formatNumber } from '../utils/utils';
 
 interface BestPlayersPro {
     statusGame: StatusGame
@@ -79,7 +80,7 @@ function BestPlayers({statusGame} : BestPlayersPro) {
                             <p className={`content${index}--name`}>{user.name}</p>
                             <p className={`content${index}--text`}>Thưởng ván trước:</p>
                             <div className={`content${index}__icoin`}>
-                                <p className={`content${index}__icoin--data`}>{user.totalIcoin}</p>
+                                <p className={`content${index}__icoin--data`}>{formatNumber(user.totalIcoin ?? 0)}</p>
                                 <img src={Icoin} alt="icoin" className="content1__icoin--img"></img>
                             </div>
                         </li>

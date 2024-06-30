@@ -30,6 +30,7 @@ import { motion } from 'framer-motion';
 
 import { handleErrorAvartar } from '../DefaultUserAvartar';
 import LazyImage from '../LazyImage';
+import { formatNumber } from '../../utils/utils';
 // import { useEffect } from 'react';
 
 
@@ -169,7 +170,7 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
             <p className={`lost__no${index + 1}--name`}>{user.name}</p>
             <div className="lost__totalIcoin">
               <SVG className="lost__totalIcoin--img" src={Icoin}/>
-              <p className="lost__totalIcoin--icoin">{user.totalIcoin}</p>
+              <p className="lost__totalIcoin--icoin">{formatNumber(user.totalIcoin ?? 0)}</p>
             </div>
           </div>
         ))}

@@ -13,6 +13,7 @@ import bgMyHistory075x from '../../assets/bg_my_history_075x.png';
 import Loading from '../Loading';
 import PopupCenter from './PopupCenter';
 import LazyImage from '../LazyImage';
+import { formatNumber } from '../../utils/utils';
 
 
 interface PopupMineResultProps {
@@ -111,7 +112,7 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
                             <p className="bet--bonus">x{card.multiply}</p>
                             <div className="bet__icoin">
                               <SVG className="bet__icoin--img" src={card.id === mine.zodiacCardId ? IcoinWin : IcoinLost}/>
-                              <p className="bet__icoin--data">{card.totalIcoinBetting}</p>
+                              <p className="bet__icoin--data">{formatNumber(card.totalIcoinBetting)}</p>
                             </div>
                           </div>
                         ))
@@ -120,7 +121,7 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
              
                     <div className="item__icoin">
                       <p className={mine.totalIcoinWin > 0 ? "item__icoin--data-win" : "item__icoin--data-lost"}>
-                            {mine.totalIcoinWin > 0 ? `+${mine.totalIcoinWin}` : 0}</p>
+                            {mine.totalIcoinWin > 0 ? `+${formatNumber(mine.totalIcoinWin)}` : 0}</p>
                       <SVG className="item__icoin--img" src={IcoinWin}/>
                     </div>
                   </div>
