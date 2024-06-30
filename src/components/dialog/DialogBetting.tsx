@@ -25,7 +25,13 @@ interface DialogBettingProps {
   openDepositPupup: () => void;
 }
 
-const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zodiacCardSelect, betIcoin, openDepositPupup }) => {
+const DialogBetting = ({
+  onClose,
+  zodiacGameId,
+  zodiacCardSelect,
+  betIcoin,
+  openDepositPupup
+} : DialogBettingProps) => {
   const [stakes, setStakes] = useState(0);
 
   // const clickAudioRef =  useAudio(audioBet);
@@ -49,13 +55,13 @@ const DialogBetting: React.FC<DialogBettingProps> = ({ onClose, zodiacGameId, zo
       toast.remove();
       toast("Thiếu tiền cược", { duration: 2000, position: 'bottom-center'});
     } else {
-    const betCard: BetZodiacCard = {
-      ...zodiacCardSelect,
-      totalIcoinBetting: stakes ?? 0,
+      const betCard: BetZodiacCard = {
+        ...zodiacCardSelect,
+        totalIcoinBetting: stakes ?? 0,
+      }
+      onClose();
+      betIcoin(betCard);
     }
-    onClose();
-    betIcoin(betCard);
-  }
   };
 
   const handleStake = (stake: number) => {
