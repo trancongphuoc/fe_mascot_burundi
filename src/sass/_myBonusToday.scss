@@ -26,11 +26,12 @@
         grid-area: 1 / 1 / 2 / 2;
         z-index: 2;
         display: flex;
+        flex-wrap: wrap;
 
         color: $color-baby-chick;
         font-size: 14px;
         font-weight: 300;
-        line-height: 1;
+        line-height: 1.2;
 
         padding-left: 11px;
         padding-top: 2px;
@@ -88,8 +89,6 @@
 
     @media (max-width: 375px) {
         .header-left {
-            display: grid;
-            justify-content: center;
             line-height: 1.2;
             font-size: 12px;
         }
