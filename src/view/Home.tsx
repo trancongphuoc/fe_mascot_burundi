@@ -266,12 +266,13 @@ const betSuccessRef = useRef<boolean>(true);
 // send icoin betting
 const betGame = async (zodiacCard: BetZodiacCard) => {
   let cardFound = false;
+  
   const updatedBetCards = betCardRef.current.map((card) => {
     if (card.id === zodiacCard.id) {
       cardFound = true;
       return {
         ...card,
-        totalIcoinBetting: (card.totalIcoinBetting || 0) + (zodiacCard.totalIcoinBetting || 0),
+        totalIcoinBetting: (card.totalIcoinBetting ?? 0) + (zodiacCard.totalIcoinBetting ?? 0),
       };
     }
     return card;
