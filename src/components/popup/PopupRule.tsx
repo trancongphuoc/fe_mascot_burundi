@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { RULE_CONTENTS } from '../../model/RuleContent';
 import PopupCenter from './PopupCenter';
@@ -7,7 +7,7 @@ interface PopupRuleProps {
   onClose: () => void;
 }
 
-const PopupRule: React.FC<PopupRuleProps> = ({ onClose }) => {
+const PopupRule = ({ onClose }: PopupRuleProps) => {
   const [currentRuleIndex, setCurrentRuleIndex] = useState(0);
 
   useEffect(() => {

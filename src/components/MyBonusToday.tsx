@@ -22,18 +22,17 @@ interface MyInfoBetResultModel {
     onOpen: () => void;
     onUserDataChange: (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => void;
     statusGame: StatusGame,
-    fbId: string,
     betCards: BetZodiacCard[],
     betSuccess: boolean,
     // deposit: () => void;
 }
 
-function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataChange} : MyInfoBetResultModel) {
+function MyHistory({onOpen, statusGame, betCards, betSuccess, onUserDataChange} : MyInfoBetResultModel) {
     const [betUser, setBetUser] = useState<BetUser>()
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
     const [icoinWinToday, setIIcoinWinToday] = useState<number>(0);
-
     const [bettingCards, setBettingCards] = useState< BetZodiacCard[]>([]);
+    const [fbId, setFbId] = useState<string>('')
 
     const formatNumber = (num: number) => {
         if (num >= 1000000) {
@@ -45,6 +44,7 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
       };
 
     useEffect(()=> {
+        setFbId(window.sessionStorage.getItem('fbId') ?? '');
         const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
@@ -52,7 +52,6 @@ function MyHistory({onOpen, statusGame, fbId, betCards, betSuccess, onUserDataCh
                 setTotalIcoin(data);  
                 window.sessionStorage.setItem('totalIcoin', data);   
             }
-                 
         };
         onValue(stateRef, handleData);
         return () => off(stateRef, 'value', handleData);

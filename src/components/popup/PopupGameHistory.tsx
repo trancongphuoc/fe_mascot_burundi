@@ -62,12 +62,12 @@ const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ onClose, zodiacs })
 
         <div className="history-game-popup__title mt-7px">
           <p className="history-game-popup__title--no">Ván</p>
-          {zodiacs.map((zodiac, index) => (
-            <div key={index} className="history-game-popup__card">
+          {zodiacs.map((zodiac, index) => {
+            return <div key={index} className="history-game-popup__card">
               <SVG src={BgCard} className="history-game-popup__card--Bg" />
               <SVG src={zodiac} className="history-game-popup__card--zodiac" />
             </div>
-          ))}
+          })}
         </div>
 
         {loading ? (

@@ -33,15 +33,17 @@ import PopupOpenCard from '../components/openCard/PopupOpenCard';
 import { joinGameZodiac } from '../api/joinGameZodiac';
 import BettingTable from '../components/bettingTable/BettingTable';
 import { getToken } from '../api/getToken';
-import { useLocation } from 'react-router-dom';
+
 import { bettingCard } from '../api/bettingCard';
 import toast, { Toaster, resolveValue } from 'react-hot-toast';
 import SVG from 'react-inlinesvg';
 import { useOnlineStatus } from '../api/checkDisconnect';
 import { doNothing } from '../api/doNothing';
 import Loading from '../components/Loading';
-import useNetworkStatus from '../api/useNetworkStatus';
+// import useNetworkStatus from '../api/useNetworkStatus';
 import setHidden from '../utils/setBodyScroll';
+import { useQueryParams } from '../utils/utils';
+import { fetchTokenAndJoinGame } from '../utils/fetchTokenAndJoinGame';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -65,10 +67,7 @@ interface ZodiacCard {
 
 export default function Home() {
   // Use the parameters as needed in your component
-
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const parameters = queryParams.get('parameters');
+  const parameters = useQueryParams();
 
   const [game, setGame] = useState<ZodiacGameData | null>(null); 
 
@@ -84,8 +83,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const dialogTypeRef = useRef<DialogType>('LOST');
-  const fbIdRef = useRef<string>('')
-  const jointGameRef = useRef<boolean>(false);
   const selectedCardRef = useRef<BetZodiacCard | null>(null);
   const totalIcoinWinRef = useRef<number>(0);
 
@@ -108,40 +105,8 @@ export default function Home() {
 };
 
 useEffect(() => {
-  const fetchTokenAndJoinGame = async () => {
-    if (parameters) {
-      try {
-        console.log('step 1')
-        let decodedParams = atob(parameters);
-        let data = JSON.parse(decodedParams);
-        await getToken(data);
-      } catch (error) {
-        console.log('step ', parameters)
-        window.sessionStorage.setItem('token', parameters);
-      }
-    } else {
-      console.log('no parameters');
-    }
-
-    try {
-      const data = await joinGameZodiac();
-      console.log('join game data return', data);
-      if (data !== null && data !== "FAILED") {
-        console.log('step 4');
-        window.sessionStorage.setItem('facebookUserId', data);
-        jointGameRef.current = true;
-        fbIdRef.current = data;
-        console.log('join game success');
-      } else {
-        console.log('call join game failed');
-      }
-    } catch (error) {
-      console.log('error join game', error);
-    }
-  };
-
-  fetchTokenAndJoinGame();
-}, []);
+  fetchTokenAndJoinGame(parameters);
+}, [parameters]);
 
 const handleLoading = () => {
   setIsLoading(false);
@@ -154,7 +119,6 @@ const handleLoading = () => {
 
 
   useEffect(() => { 
-    console.log('joinGame', jointGameRef.current)
     const fetchGameInfo = async () => {
       const stateRef = ref(db, 'zodiacGame/state');
 
@@ -346,8 +310,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
   useOnlineStatus(updateOnlineStatus);
 
   // call flutter
-  const callbackMyWallet = () => {
-    // Check if flutter_inappwebview object and callHandler method are available
+  const callbackMyWallet = () => {  // Check if flutter_inappwebview object and callHandler method are available
     if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
       // Call the callHandler method with the handler name and shareLink variable
       window.flutter_inappwebview.callHandler('callbackMyWallet');
@@ -359,7 +322,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
   }
 
   //use effect to this networkstatus
-  const effectiveType = useNetworkStatus();
+  // const effectiveType = useNetworkStatus();
 
   if (isLoading) {
     return <Loading className='home_loading'/>
@@ -387,7 +350,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
           </div>
         )}
       </Toaster>
-      <h1>{effectiveType}</h1>
+      {/* <h1>{effectiveType}</h1> */}
       <header className='section-header u-margin-top-huge1'>
         <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />
         <p className='heading-secondary'>Hôm nay {game?.noGameToday} Ván</p>
@@ -412,7 +375,6 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
           setHidden('hidden');
           setOpenMyHistory(true)}}
         onUserDataChange={handleIsWin}
-        fbId={fbIdRef.current}
         betCards={betCardRef.current}
         betSuccess={betSuccessRef.current}
         statusGame={game?.status ?? 'NONE'}
