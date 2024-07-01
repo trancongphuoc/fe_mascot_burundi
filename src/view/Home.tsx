@@ -82,6 +82,7 @@ export default function Home() {
   const dialogTypeRef = useRef<DialogType>('LOST');
   const selectedCardRef = useRef<BetZodiacCard | null>(null);
   const totalIcoinWinRef = useRef<number>(0);
+  const fbIdRef = useRef<string>('');
 
 
   const handleIsWin = (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => {
@@ -102,7 +103,12 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchTokenAndJoinGame(parameters);
+    const fetchAndSetFbId = async () => {
+      const fbId = await fetchTokenAndJoinGame(parameters);
+      fbIdRef.current = fbId;
+    };
+
+    fetchAndSetFbId();
   }, [parameters]);
 
   const handleLoading = () => {
@@ -385,6 +391,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         betCards={betCardRef.current}
         betSuccess={betSuccessRef.current}
         statusGame={game?.status ?? 'NONE'}
+        fbId={fbIdRef.current}
         />
    
       <BestPlayers statusGame={game?.status ?? "NONE"}/>

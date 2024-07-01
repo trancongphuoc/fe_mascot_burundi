@@ -3,10 +3,12 @@ import { getToken } from "../api/getToken";
 import { joinGameZodiac } from "../api/joinGameZodiac";
 
 export const fetchTokenAndJoinGame = async (parameters: string | null | undefined) => {
+    let fbId = '';
+
     if (!parameters) {
       console.log('no para', parameters);
       toast('Lỗi không đăng nhập', { duration: 2000, position: 'bottom-center' });
-      return;
+      return fbId;
     }
   
     try {
@@ -21,6 +23,7 @@ export const fetchTokenAndJoinGame = async (parameters: string | null | undefine
     try {
       const data = await joinGameZodiac();
       if (data && data !== "FAILED") {
+        fbId = data;
         window.sessionStorage.setItem('fbId', data);
         console.log('join game success', data);
       } else {
@@ -29,4 +32,5 @@ export const fetchTokenAndJoinGame = async (parameters: string | null | undefine
     } catch (error) {
       console.log('error join game', error);
     }
+    return fbId;
   };
