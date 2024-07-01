@@ -180,8 +180,14 @@ export default function Home() {
     fetchGameInfo();
 
     if (statusGame != "COUNTDOWN") {
-      if (openDepositIcoin) setOpenDepositIcoin(false);
-      if (openBetting) setOpenBetting(false);
+      if (openDepositIcoin) {
+        setOpenDepositIcoin(false);
+        setHidden('scroll');
+      };
+      if (openBetting) {
+        setOpenBetting(false);
+        setHidden('scroll');
+      };
     }
 
     if (statusGame == "COUNTDOWN") {
@@ -198,26 +204,43 @@ export default function Home() {
 
         break;
       case 'COUNTDOWN':
-        if (openLostWin) setOpenLostWin(false);
-        if (openRule) setOpenRule(false);
-        if (openHistoryGame) setOpenHistoryGame(false);
-        if (openMyHistory) setOpenMyHistory(false);
-
-        // set for 
-        setHidden('scroll');
-
+        if (openLostWin) {
+          setOpenLostWin(false);
+          setHidden('scroll');
+        };
+        if (openRule) {
+          setOpenRule(false)
+          setHidden('scroll');
+        };
+        if (openHistoryGame) {
+          setOpenHistoryGame(false)
+          setHidden('scroll');
+        };
+        if (openMyHistory) {
+          setOpenMyHistory(false)
+          setHidden('scroll');
+        };
         break;
-      case 'RESULTWAITING':
-        setHidden('scroll');
-        
+      case 'RESULTWAITING':        
         break;
       case 'RESULT':
-        if (openRule) setOpenRule(false);
-        if (openHistoryGame) setOpenHistoryGame(false);
-        if (openMyHistory) setOpenMyHistory(false);
+        if (openRule) {
+          setOpenRule(false)
+          setHidden('scroll');
+        };
+        if (openHistoryGame) {
+          setOpenHistoryGame(false)
+          setHidden('scroll');
+        };
+        if (openMyHistory) {
+          setOpenMyHistory(false)
+          setHidden('scroll');
+        };
 
-        setHidden('hidden');
-        if (!openGameResult) setOpenGameResult(true);
+        if (!openGameResult) {
+          setOpenGameResult(true)
+          setHidden('hidden');
+        };
         break;
       case 'END':
         break;
