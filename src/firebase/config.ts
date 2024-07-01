@@ -13,6 +13,21 @@ const firebaseConfigDEV = {
   measurementId: "G-0ECG4DD0GD"
 };
 
-const app = initializeApp(firebaseConfigDEV);
+const firebaseConfigPRO = {
+  apiKey: "AIzaSyBKBvFB4YEp65cs-EywaC-rcimh9lh4ga4",
+  authDomain: "ikara4m.firebaseapp.com",
+  databaseURL: "https://ikara4m.firebaseio.com",
+  projectId: "ikara4m",
+  storageBucket: "ikara4m.appspot.com",
+  messagingSenderId: "366287804041",
+  appId: "1:366287804041:web:86dd7e7c9c839c3a97d858",
+  measurementId: "G-LDQYNCQJL4"
+};
+
+
+const finalFirebaseConfig =  window.location.hostname.includes("ikara4m") ?
+                            firebaseConfigPRO : firebaseConfigDEV ;
+
+const app = initializeApp(finalFirebaseConfig);
 export const analytics = getAnalytics(app);    
 export const db = getDatabase();  
