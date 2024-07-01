@@ -96,18 +96,18 @@ export default function Home() {
       } else {
         dialogTypeRef.current = 'LOST';
       }
-  } else {
-      console.log("Win status is undefined or not a boolean.");
+    } else {
+        console.log("Win status is undefined or not a boolean.");
+    }
+  };
+
+  useEffect(() => {
+    fetchTokenAndJoinGame(parameters);
+  }, [parameters]);
+
+  const handleLoading = () => {
+    setIsLoading(false);
   }
-};
-
-useEffect(() => {
-  fetchTokenAndJoinGame(parameters);
-}, [parameters]);
-
-const handleLoading = () => {
-  setIsLoading(false);
-}
 
   useEffect(()=>{
     window.addEventListener("load",handleLoading);
@@ -179,9 +179,10 @@ const handleLoading = () => {
     fetchStatus();
     fetchGameInfo();
 
-    // if (statusGame != "COUNTDOWN") {
-
-    // }
+    if (statusGame != "COUNTDOWN") {
+      if (openDepositIcoin) setOpenDepositIcoin(false);
+      if (openBetting) setOpenBetting(false);
+    }
 
     if (statusGame == "COUNTDOWN") {
       doNothing();
@@ -189,12 +190,12 @@ const handleLoading = () => {
 
     switch (statusGame) {
       case 'NONE':
-        if (openDepositIcoin) setOpenDepositIcoin(false);
-        if (openBetting) setOpenBetting(false);
         break;
       case 'PREPARESTART':
-        if (openDepositIcoin) setOpenDepositIcoin(false);
-        if (openBetting) setOpenBetting(false);
+
+        betCardRef.current = [];
+        betSuccessRef.current = true;
+
         break;
       case 'COUNTDOWN':
         if (openLostWin) setOpenLostWin(false);
@@ -205,32 +206,20 @@ const handleLoading = () => {
         // set for 
         setHidden('scroll');
 
-        betCardRef.current = [];
-        betSuccessRef.current = true;
         break;
       case 'RESULTWAITING':
-        if (openDepositIcoin) setOpenDepositIcoin(false);
-        if (openBetting) setOpenBetting(false);
-
         setHidden('scroll');
         
         break;
       case 'RESULT':
-        if (openDepositIcoin) setOpenDepositIcoin(false);
-        if (openBetting) setOpenBetting(false);
-
         if (openRule) setOpenRule(false);
         if (openHistoryGame) setOpenHistoryGame(false);
-
         if (openMyHistory) setOpenMyHistory(false);
 
         setHidden('hidden');
         if (!openGameResult) setOpenGameResult(true);
         break;
       case 'END':
-
-        if (openDepositIcoin) setOpenDepositIcoin(false);
-        if (openBetting) setOpenBetting(false);
         break;
 
     }
@@ -256,7 +245,6 @@ const handleLoading = () => {
     } else {
       toast.remove();
       toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
-      // if (openBetting) setOpenBetting((prevRule) => !prevRule);
     }
   };
 
