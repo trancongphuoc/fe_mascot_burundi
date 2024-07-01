@@ -28,8 +28,6 @@ const firebaseConfigPRO = {
 const finalFirebaseConfig =  window.location.hostname.includes("ikara4m") ?
                             firebaseConfigPRO : firebaseConfigDEV;
 
-console.log('check data', finalFirebaseConfig);
-
 const app = initializeApp(finalFirebaseConfig);
 export const analytics = getAnalytics(app);    
 export const db = getDatabase();  
