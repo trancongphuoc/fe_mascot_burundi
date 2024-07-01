@@ -1,8 +1,8 @@
 import axios from 'axios';
-const BASE_URL_DEV = 'https://ikara-development.appspot.com';
 
 const api = axios.create({
-    baseURL: window.location.hostname == "localhost" ? BASE_URL_DEV : window.location.origin,
+    baseURL: window.location.hostname == "localhost" ?
+            import.meta.env.VITE_DEV_URL : window.location.origin,
 });
    
 export default api;
