@@ -1,4 +1,4 @@
-const callbackMyWallet = () => {
+export const callbackMyWallet = () => {
     if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
       window.flutter_inappwebview.callHandler('callbackMyWallet');
     } else {

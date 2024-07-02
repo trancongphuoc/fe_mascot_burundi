@@ -12,7 +12,7 @@ import pig from '../assets/pig.svg';
 import PrimaryText from '../assets/primary-text.svg';
 import Rule from '../assets/rule.svg';
 
-import MyHistory from '../components/MyBonusToday';
+import MyHistory from '../components/myBonusDay/MyBonusToday';
 import BestPlayers from '../components/BestPlayers';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import DialogBetting from '../components/dialog/DialogBetting';
@@ -278,7 +278,7 @@ export default function Home() {
   };
 
 const betCardRef = useRef<BetZodiacCard[]>([]);
-const betSuccessRef = useRef<boolean>(true);
+const betSuccessRef = useRef<boolean>(false);
 
 // send icoin betting
 const betGame = async (zodiacCard: BetZodiacCard) => {

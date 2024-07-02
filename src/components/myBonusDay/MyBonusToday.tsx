@@ -1,14 +1,17 @@
 
-import Icoin from '../assets/icoin.svg';
-import ArrowWhite from '../assets/arrow-white.svg';
-import Background from '../assets/background_card_small.svg';
+import Icoin from '../../assets/icoin.svg';
+import ArrowWhite from '../../assets/arrow-white.svg';
+import Background from '../../assets/background_card_small.svg';
 import SVG from 'react-inlinesvg';
 import { useEffect, useState } from 'react';
 import { DataSnapshot, off, onValue, ref } from 'firebase/database';
-import { db } from '../firebase/config';
+import { db } from '../../firebase/config';
 // import bgMyBonus from '../assets/bg_my_bonus_new.svg';
-import bgHeader from '../assets/bg_my_bonus_today.png';
-import { formatNumber } from '../utils/utils';
+import bgHeader from '../../assets/bg_my_bonus_today.png';
+import { formatNumber } from '../../utils/utils';
+import { callbackMyWallet } from '../../utils/functions';
+import MyTotalIcoin from './MyTotalIcoin';
+import BettingCard from './BettingCard';
 
 interface BetUser extends User {
     bettingCards?: BetZodiacCard[];
@@ -16,8 +19,6 @@ interface BetUser extends User {
     totalIcoinWin?: number;
     totalIcoinWinToday?: number;
 }
-
-
 
 interface MyInfoBetResultModel {
     onOpen: () => void;
@@ -31,25 +32,8 @@ interface MyInfoBetResultModel {
 
 function MyHistory({onOpen, statusGame, betCards, betSuccess, onUserDataChange, fbId} : MyInfoBetResultModel) {
     const [betUser, setBetUser] = useState<BetUser>()
-    const [totalIcoin, setTotalIcoin] = useState<number>(0);
     const [icoinWinToday, setIIcoinWinToday] = useState<number>(0);
     const [bettingCards, setBettingCards] = useState< BetZodiacCard[]>([]);
-    // const [fbId, setFbId] = useState<string>('')
-
-    useEffect(()=> {
-        // setFbId(window.sessionStorage.getItem('fbId') ?? '');
-        console.log('check fbId', fbId);
-        const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
-        const handleData = (snapshot: any) => {
-            const data = snapshot.val();
-            if (data) {
-                setTotalIcoin(data);  
-                window.sessionStorage.setItem('totalIcoin', data);   
-            }
-        };
-        onValue(stateRef, handleData);
-        return () => off(stateRef, 'value', handleData);
-    },[totalIcoin, fbId])
 
     useEffect(() => {
         const stateRef = ref(db, `/zodiacGame/players/${fbId}`);
@@ -114,17 +98,6 @@ function MyHistory({onOpen, statusGame, betCards, betSuccess, onUserDataChange, 
         }
     }, [betSuccess, betUser]); 
 
-      // call flutter
-  const callbackMyWallet = () => {
-    // Check if flutter_inappwebview object and callHandler method are available
-    if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
-      window.flutter_inappwebview.callHandler('callbackMyWallet');
-    } else {
-      console.log('window.flutter_inappwebview or callHandler is not available');
-    }
-  }
-
-
     return (
         <>  
             <div className="section-myInfo mt-22px">
@@ -147,27 +120,13 @@ function MyHistory({onOpen, statusGame, betCards, betSuccess, onUserDataChange, 
                 </div>
                
                 <div className="section-myInfo__cards">
-                    {   
-                    bettingCards.map((betCard, index) => (
-                            <div key={index} className="card__main">
-                                <p className="card__main--background-color">&nbsp;</p>
-                                <p className="card__main--header">{betCard.id.split('_').slice(-1)}</p>
-                                <SVG src={Background} className="card__main--background"/>
-                                <SVG src={betCard.imageUrl} className="card__main--zodiac"/>
-                                <p className='card__main--bonus'>x{betCard.multiply}</p>
-                                <h4 className='card__main--icoin'>{betCard.totalIcoinBetting} iCoin</h4>
-                            </div>
-                        ))
+                    {
+                        bettingCards.map((betCard) => (<BettingCard betCard={betCard} />))
                     }
                 </div>
 
                 <div className="end">
-                    <div className="end-left">
-                        <p className='end-left--text'>Tổng của tôi:</p>
-                        <SVG src={Icoin} className="end-left--img"/>
-                        {/* <p className='end-left--icoin'>{totalIcoin.toLocaleString('en-US').replace(/,/g, '.')}</p> */}
-                        <p className='end-left--icoin'>{formatNumber(totalIcoin)}</p>
-                    </div>
+                    <MyTotalIcoin fbId={fbId}/>
                     <h4 className='end-right' onClick={callbackMyWallet}>
                         <p className='end-right--text'>Nạp ngay</p>
                         <SVG src={ArrowWhite} className="end-right--img"/>

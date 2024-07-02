@@ -9,7 +9,7 @@ interface PopupRuleProps {
   rightHandlerButton: () => void;
 }
 
-const PopupRule: React.FC<PopupRuleProps> = ({ onClose, title, leftContentButton, rightContentButton, rightHandlerButton}) => {
+const PopupRule = ({ onClose, title, leftContentButton, rightContentButton, rightHandlerButton} : PopupRuleProps) => {
   return (
     <PopupCenter
       className='popup-overlay-center'
