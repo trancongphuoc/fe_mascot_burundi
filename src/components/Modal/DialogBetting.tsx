@@ -12,6 +12,7 @@ import { motion } from 'framer-motion';
 import SVG from 'react-inlinesvg';
 import toast from 'react-hot-toast';
 import LazyImage from '../LazyImage';
+import { log } from '../../utils/log';
 
 // import useAudio from '../UseAudio';
 // import audioConfirm from '../../../public/sounds/confirm_button.wav';
@@ -32,6 +33,8 @@ const DialogBetting = ({
   betIcoin,
   openDepositPupup
 } : DialogBettingProps) => {
+  log('<DialogBetting />')
+
   const [stakes, setStakes] = useState(0);
 
   // const clickAudioRef =  useAudio(audioBet);
