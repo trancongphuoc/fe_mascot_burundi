@@ -8,7 +8,7 @@ import { db } from '../../firebase/config';
 // import bgMyBonus from '../assets/bg_my_bonus_new.svg';
 import bgHeader from '../../assets/bg_my_bonus_today.png';
 import { formatNumber } from '../../utils/utils';
-import { callbackMyWallet } from '../../utils/functions';
+import { callbackFlutter } from '../../utils/functions';
 import MyTotalIcoin from './MyTotalIcoin';
 import BettingCard from './BettingCard';
 
@@ -123,7 +123,7 @@ function MyHistory({onOpen, statusGame, betCards, betSuccess, onUserDataChange, 
 
                 <div className="end">
                     <MyTotalIcoin fbId={fbId}/>
-                    <h4 className='end-right' onClick={callbackMyWallet}>
+                    <h4 className='end-right' onClick={() => callbackFlutter('callbackMyWallet')}>
                         <p className='end-right--text'>Nạp ngay</p>
                         <SVG src={ArrowWhite} className="end-right--img"/>
                     </h4>

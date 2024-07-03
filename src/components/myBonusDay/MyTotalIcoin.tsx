@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import SVG from 'react-inlinesvg';
 import Icoin from '../../assets/icoin.svg';
@@ -10,7 +10,8 @@ interface MyTotalIcoinProps {
     fbId: string
 }
 
-export default function MyTotalIcoin({ fbId }: MyTotalIcoinProps) {
+//TODO: fix have no pass fbId
+const MyTotalIcoin = memo(function MyTotalIcoin({ fbId }: MyTotalIcoinProps) {
     log('<MyTotalIcoin />');
 
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
@@ -36,4 +37,6 @@ export default function MyTotalIcoin({ fbId }: MyTotalIcoinProps) {
                 <p className='end-left--icoin'>{formatNumber(totalIcoin)}</p>
         </div>
     );
-};
+});
+
+export default MyTotalIcoin;

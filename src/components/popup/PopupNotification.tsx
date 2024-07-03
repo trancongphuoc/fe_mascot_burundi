@@ -1,3 +1,4 @@
+import { log } from '../../utils/log';
 import PopupCenter from './PopupCenter';
 
 interface PopupRuleProps {
@@ -9,6 +10,7 @@ interface PopupRuleProps {
 }
 
 const PopupRule = ({ onClose, title, leftContentButton, rightContentButton, rightHandlerButton} : PopupRuleProps) => {
+  log('<PopRule />');
   return (
     <PopupCenter
       className='popup-overlay-center'

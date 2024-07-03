@@ -32,6 +32,8 @@ import PopupOpenCard from '../components/openCard/PopupOpenCard';
 
 import BettingTable from '../components/bettingTable/BettingTable';
 
+import Header from '../components/Header.tsx';
+
 import { bettingCard } from '../api/bettingCard';
 import toast, { Toaster, resolveValue } from 'react-hot-toast';
 import SVG from 'react-inlinesvg';
@@ -42,6 +44,8 @@ import Loading from '../components/Loading';
 import setHidden from '../utils/setBodyScroll';
 import { useQueryParams } from '../utils/utils';
 import { fetchTokenAndJoinGame } from '../utils/fetchTokenAndJoinGame';
+import { callbackFlutter } from '../utils/functions';
+import { log } from '../utils/log';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -111,14 +115,20 @@ export default function Home() {
     fetchAndSetFbId();
   }, [parameters]);
 
-  const handleLoading = () => {
-    setIsLoading(false);
-  }
-
-  useEffect(()=>{
-    window.addEventListener("load",handleLoading);
-    return () => window.removeEventListener("load",handleLoading);
+  const handleRuleClick = useCallback(() => {
+    {() => {
+      setHidden('hidden');
+      setOpenRule(true)}}
   },[])
+
+  // const handleLoading = () => {
+  //   setIsLoading(false);
+  // }
+
+  // useEffect(()=>{
+  //   window.addEventListener("load",handleLoading);
+  //   return () => window.removeEventListener("load",handleLoading);
+  // },[])
 
 
   useEffect(() => { 
@@ -162,7 +172,10 @@ export default function Home() {
                   topUser: topUsers,
               });
 
-              if (isLoading) setIsLoading(false)
+              if (isLoading) {
+                setIsLoading(false);
+                callbackFlutter('callbackDisableLoading');
+              }
           }
       };
 
@@ -261,7 +274,7 @@ export default function Home() {
 
 
   const handleCardSelection = (card: ZodiacCardModel) => {
-    console.log('step 1')
+    log('function select card');
     if (statusGame === "COUNTDOWN") {
       const betCard: BetZodiacCard = {
         ...card,
@@ -282,6 +295,7 @@ const betSuccessRef = useRef<boolean>(false);
 
 // send icoin betting
 const betGame = async (zodiacCard: BetZodiacCard) => {
+  log('function betting');
   let cardFound = false;
   
   const updatedBetCards = betCardRef.current.map((card) => {
@@ -318,6 +332,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 };
 
   const updateOnlineStatus = useCallback(() => {
+    log('function update online status');
     const onlineStatus = navigator.onLine;
     setOpenDisconnect(!onlineStatus)
   }, []);
@@ -326,11 +341,8 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
   // call flutter
   const callbackMyWallet = () => {
-    if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
-      window.flutter_inappwebview.callHandler('callbackMyWallet');
-    } else {
-      console.log('window.flutter_inappwebview or callHandler is not available');
-    }
+    log('function call wallet')
+    callbackFlutter('callbackMyWallet')
     if (openDepositIcoin) setOpenDepositIcoin(false);
   }
 
@@ -364,16 +376,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         )}
       </Toaster>
       {/* <h1>{effectiveType}</h1> */}
-      <header className='section-header u-margin-top-huge1'>
-        <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />
-        <p className='heading-secondary'>Hôm nay {game?.noGameToday} Ván</p>
-        <SVG
-          src={Rule}
-          onClick={() => {
-            setHidden('hidden');
-            setOpenRule(true)}}
-          className='section-header__rule'/>
-      </header>
+      <Header gameNo={game?.noGameToday} onClickRule={handleRuleClick}/>
 
       <div className="result mt-7-5px">
         <ShortGameHistory openDialog={()=> {
