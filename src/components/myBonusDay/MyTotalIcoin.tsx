@@ -4,19 +4,22 @@ import SVG from 'react-inlinesvg';
 import Icoin from '../../assets/icoin.svg';
 import { formatNumber } from "../../utils/utils";
 import { off, onValue, ref } from "firebase/database";
+import { log } from "../../utils/log";
 
 interface MyTotalIcoinProps {
     fbId: string
 }
 
 export default function MyTotalIcoin({ fbId }: MyTotalIcoinProps) {
+    log('<MyTotalIcoin />');
+
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
 
     useEffect(()=> {
         const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
-            if (data) {
+            if (data && data != totalIcoin) {
                 setTotalIcoin(data);  
                 window.sessionStorage.setItem('totalIcoin', data);   
             }
@@ -33,4 +36,4 @@ export default function MyTotalIcoin({ fbId }: MyTotalIcoinProps) {
                 <p className='end-left--icoin'>{formatNumber(totalIcoin)}</p>
         </div>
     );
-}
+};

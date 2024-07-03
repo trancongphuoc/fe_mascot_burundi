@@ -331,7 +331,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
     } else {
       console.log('window.flutter_inappwebview or callHandler is not available');
     }
-    setOpenDepositIcoin(false);
+    if (openDepositIcoin) setOpenDepositIcoin(false);
   }
 
   //use effect to this networkstatus

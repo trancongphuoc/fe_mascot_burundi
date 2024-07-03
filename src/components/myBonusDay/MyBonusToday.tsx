@@ -1,7 +1,6 @@
 
 import Icoin from '../../assets/icoin.svg';
 import ArrowWhite from '../../assets/arrow-white.svg';
-import Background from '../../assets/background_card_small.svg';
 import SVG from 'react-inlinesvg';
 import { useEffect, useState } from 'react';
 import { DataSnapshot, off, onValue, ref } from 'firebase/database';
@@ -111,7 +110,6 @@ function MyHistory({onOpen, statusGame, betCards, betSuccess, onUserDataChange, 
                         <SVG className='header-left--img' src={Icoin}/>
                         <p className='header-left--icoin'>{formatNumber(icoinWinToday)}</p>
                     </div>
-
                 </div>
 
                 <div onClick={onOpen} className="header-right">
@@ -120,9 +118,7 @@ function MyHistory({onOpen, statusGame, betCards, betSuccess, onUserDataChange, 
                 </div>
                
                 <div className="section-myInfo__cards">
-                    {
-                        bettingCards.map((betCard) => (<BettingCard betCard={betCard} />))
-                    }
+                    {bettingCards.map((betCard) => (<BettingCard betCard={betCard} />))}
                 </div>
 
                 <div className="end">

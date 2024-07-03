@@ -1,4 +1,3 @@
-import React from 'react';
 import PopupCenter from './PopupCenter';
 
 interface PopupRuleProps {
