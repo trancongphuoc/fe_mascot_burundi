@@ -31,6 +31,9 @@
     outline: none;
     -webkit-tap-highlight-color: transparent; 
 
+    @include non_select;
+    pointer-events: none;
+
     &__rule {
         justify-self: end;
     }
@@ -39,6 +42,8 @@
         top: 0;
         left: 0;
     }
+
+
 }
 
 .result {
@@ -65,6 +70,9 @@
         display: flex;
         align-items: center;
         justify-content: right;
+
+        @include non_select;
+        pointer-events: none;
 
         &--number {
             font-size: 12px;

@@ -28,6 +28,9 @@
     align-items: end;
     margin: 0 auto;
 
+    @include non_select;
+    pointer-events: none;
+
 }
 
 .betting {

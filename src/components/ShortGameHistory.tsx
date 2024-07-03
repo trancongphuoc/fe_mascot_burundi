@@ -37,7 +37,7 @@ const ShortGameHistory = memo(function ShortGameHistory ({openDialog, statusGame
               setGameHistories(gameHistoriesList);
           }
       };
-      if (statusGame === "COUNTDOWN") {
+      if (statusGame === 'PREPARESTART') {
         onValue(stateRef, handleData);
       } else {
         off(stateRef, 'value', handleData);

@@ -28,6 +28,9 @@
     align-items: center;
     justify-items: center;
 
+    @include non_select;
+    pointer-events: none;
+
     &--tornado {
         grid-area: 1 / 1 / 2 / 2;
         z-index: 1;

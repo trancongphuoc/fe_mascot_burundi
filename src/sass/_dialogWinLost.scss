@@ -143,6 +143,9 @@
     justify-items: center;
     align-content: end;
 
+    @include non_select;
+    pointer-events: none;
+
     .lost {
         &--BgContent {
             grid-area: 3 / 1 / 6 / 4;

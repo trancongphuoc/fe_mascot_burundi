@@ -77,6 +77,8 @@
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 @mixin non_decor_button {

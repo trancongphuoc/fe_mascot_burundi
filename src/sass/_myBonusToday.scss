@@ -12,14 +12,14 @@
 
     background-color: $color-sherpa-blue;
 
-    @include non_select;
-
     &__bg {
         grid-area: 1 / 1 / 2 / -1;
         z-index: 2;
         width: 100%;
         height: 38px;
+
         @include non_select;
+        pointer-events: none;
     }
 
     .header-left {
@@ -35,6 +35,9 @@
 
         padding-left: 11px;
         padding-top: 2px;
+
+        @include non_select;
+        pointer-events: none;
 
         &--text {
             margin-right: 6px;
@@ -91,6 +94,8 @@
         .header-left {
             line-height: 1.2;
             font-size: 12px;
+            @include non_select;
+            pointer-events: none;
         }
 
         .header-right {
@@ -112,8 +117,8 @@
         border-left: 0.1px solid $color-eucalyptus;
         border-right: 0.1px solid $color-eucalyptus;
 
-        // >*:not(:last-child) { margin-right: 19px; }
-        // padding-top: 9.5px;
+        @include non_select;
+        pointer-events: none;
 
         .card__main {
             display: grid;
@@ -214,6 +219,9 @@
         color: $color-white;
         padding-bottom: $padding-bottom;
         align-self: end;
+
+        @include non_select;
+        pointer-events: none;
 
         &--text {
             font-size: 13px;
