@@ -11,6 +11,7 @@ import { formatNumber } from '../../utils/utils';
 import { callbackFlutter } from '../../utils/functions';
 import MyTotalIcoin from './MyTotalIcoin';
 import BettingCard from './BettingCard';
+import { log } from '../../utils/log';
 
 interface BetUser extends User {
     bettingCards?: BetZodiacCard[];
@@ -30,6 +31,7 @@ interface MyInfoBetResultModel {
 }
 
 function MyHistory({onOpen, statusGame, betCards, betSuccess, onUserDataChange, fbId} : MyInfoBetResultModel) {
+    log('<MyHistory />')
     const [betUser, setBetUser] = useState<BetUser>()
     const [icoinWinToday, setIIcoinWinToday] = useState<number>(0);
     const [bettingCards, setBettingCards] = useState< BetZodiacCard[]>([]);

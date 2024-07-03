@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Card from "./Card";
 import Arrow from '../assets/arrow.svg';
 import { db } from "../firebase/config";
 import { off, onValue, ref } from "firebase/database";
+import { log } from "../utils/log";
 
 interface ShortGameHistoryProps {
   openDialog: () => void;
   statusGame: StatusGame;
 }
 
-export function ShortGameHistory ({openDialog, statusGame}: ShortGameHistoryProps) {
+const ShortGameHistory = memo(function ShortGameHistory ({openDialog, statusGame}: ShortGameHistoryProps) {
+    log('<ShortGameHistory />')
     const [gameHistories, setGameHistories] = useState<ZodiacCardModel[]>([])
 
     useEffect(()=> {
@@ -55,4 +57,6 @@ export function ShortGameHistory ({openDialog, statusGame}: ShortGameHistoryProp
           <img src={Arrow} alt="card_background" />
         </div>
     );
-}
+})
+
+export default ShortGameHistory;

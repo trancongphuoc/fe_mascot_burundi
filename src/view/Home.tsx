@@ -9,9 +9,6 @@ import snake from '../assets/snake.svg';
 import horse from '../assets/horse.svg';
 import pig from '../assets/pig.svg';
 
-import PrimaryText from '../assets/primary-text.svg';
-import Rule from '../assets/rule.svg';
-
 import MyHistory from '../components/myBonusDay/MyBonusToday';
 import BestPlayers from '../components/BestPlayers';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -27,7 +24,7 @@ import { ref, onValue, off } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
 
 import Players from '../components/Players';
-import { ShortGameHistory } from '../components/ShortGameHistory';
+import ShortGameHistory from '../components/ShortGameHistory';
 import PopupOpenCard from '../components/openCard/PopupOpenCard';
 
 import BettingTable from '../components/bettingTable/BettingTable';
@@ -36,7 +33,7 @@ import Header from '../components/Header.tsx';
 
 import { bettingCard } from '../api/bettingCard';
 import toast, { Toaster, resolveValue } from 'react-hot-toast';
-import SVG from 'react-inlinesvg';
+
 import { useOnlineStatus } from '../api/checkDisconnect';
 import { doNothing } from '../api/doNothing';
 import Loading from '../components/Loading';
@@ -337,6 +334,11 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
     setOpenDisconnect(!onlineStatus)
   }, []);
 
+  const handleGameHistory = useCallback(() => {
+    setHidden('hidden');
+    setOpenHistoryGame(true);
+  },[]);
+
   useOnlineStatus(updateOnlineStatus);
 
   // call flutter
@@ -375,13 +377,13 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
           </div>
         )}
       </Toaster>
-      {/* <h1>{effectiveType}</h1> */}
       <Header gameNo={game?.noGameToday} onClickRule={handleRuleClick}/>
 
       <div className="result mt-7-5px">
-        <ShortGameHistory openDialog={()=> {
-          setHidden('hidden');
-          setOpenHistoryGame(true);}}  statusGame={game?.status ?? 'NONE'}/>
+        <ShortGameHistory 
+          openDialog={handleGameHistory}  
+          statusGame={game?.status ?? 'NONE'}
+        />
         <Players/>
       </div>
 
