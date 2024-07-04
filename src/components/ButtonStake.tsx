@@ -1,7 +1,7 @@
-import { ReactNode, useRef } from "react";
+import { ReactNode } from "react";
 import { log } from "../utils/log";
 
-import audioBet from '../../public/sounds/stake_audio.wav';
+// import audioBet from '../../public/sounds/stake_audio.wav';
 
 interface ButtonStakeProps {
   children: ReactNode,

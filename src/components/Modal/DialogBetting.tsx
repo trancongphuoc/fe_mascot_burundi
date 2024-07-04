@@ -17,7 +17,7 @@ import ButtonStake from '../ButtonStake';
 
 import useAudio from '../UseAudio';
 import audioConfirm from '../../../public/sounds/confirm_button.wav';
-import audioBet from '../../../public/sounds/stake_audio.wav';
+// import audioBet from '../../../public/sounds/stake_audio.wav';
 import AudioPlayer from './Audiobutton';
 
 interface DialogBettingProps {
@@ -39,7 +39,7 @@ const DialogBetting = ({
 
   const [stakes, setStakes] = useState(0);
 
-  const clickAudioRef =  useAudio(audioBet);
+  // const clickAudioRef =  useAudio(audioBet);
   const confirmRef = useAudio(audioConfirm);
 
   useAudio

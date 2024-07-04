@@ -20,6 +20,7 @@
 
         @include non_select;
         pointer-events: none;
+        @include non_decor_button;
     }
 
     .header-left {

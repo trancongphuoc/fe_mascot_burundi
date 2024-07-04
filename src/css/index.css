@@ -970,6 +970,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
+  border: none;
+  background-color: transparent;
 }
 .section-myInfo .header-left {
   grid-area: 1/1/2/2;
