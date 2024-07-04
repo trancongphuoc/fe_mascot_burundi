@@ -1237,7 +1237,6 @@ h4 {
   user-select: none;
   user-select: none;
   -webkit-user-drag: none;
-  pointer-events: none;
 }
 
 .betting--BgContent {
@@ -1341,7 +1340,7 @@ h4 {
   font-weight: 500;
   line-height: 1;
 }
-.betting--button {
+.betting--button-1 {
   grid-area: 4/1/5/2;
   text-align: center;
   line-height: 32px;
@@ -1410,15 +1409,6 @@ h4 {
   width: 86px;
   height: 32px;
   background-image: url(../assets/background-button.svg);
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  user-select: none;
-  -webkit-user-drag: none;
   border: none;
   background-color: transparent;
 }

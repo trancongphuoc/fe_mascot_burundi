@@ -29,7 +29,7 @@
     margin: 0 auto;
 
     @include non_select;
-    pointer-events: none;
+    // pointer-events: none;
 
 }
 
@@ -124,7 +124,7 @@
         }
     }
 
-    &--button {
+    &--button-1 {
         grid-area: 4 / 1 / 5 / 2;
         text-align: center;
         line-height: 32px;
@@ -188,7 +188,7 @@
         height: 32px;
         background-image: url(../assets/background-button.svg);
 
-        @include non_select;
+        // @include non_select;
         @include non_decor_button;
     }
 

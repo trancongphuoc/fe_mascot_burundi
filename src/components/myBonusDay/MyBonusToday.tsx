@@ -30,8 +30,8 @@ interface MyInfoBetResultModel {
     // deposit: () => void;
 }
 
-function MyHistory({onOpen, statusGame, betCards, betSuccess, onUserDataChange, fbId} : MyInfoBetResultModel) {
-    log('<MyHistory />')
+function MyBonusToday({onOpen, statusGame, betCards, betSuccess, onUserDataChange, fbId} : MyInfoBetResultModel) {
+    log('<MyBonusToday />')
     const [betUser, setBetUser] = useState<BetUser>()
     const [icoinWinToday, setIIcoinWinToday] = useState<number>(0);
     const [bettingCards, setBettingCards] = useState< BetZodiacCard[]>([]);
@@ -135,4 +135,4 @@ function MyHistory({onOpen, statusGame, betCards, betSuccess, onUserDataChange, 
     );
 }
 
-export default MyHistory;
+export default MyBonusToday;

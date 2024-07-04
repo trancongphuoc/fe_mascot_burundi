@@ -9,7 +9,7 @@ import snake from '../assets/snake.svg';
 import horse from '../assets/horse.svg';
 import pig from '../assets/pig.svg';
 
-import MyHistory from '../components/myBonusDay/MyBonusToday';
+import MyBonusToday from '../components/myBonusDay/MyBonusToday';
 import BestPlayers from '../components/BestPlayers';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import DialogBetting from '../components/Modal/DialogBetting.tsx';
@@ -388,7 +388,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
       </div>
 
       <BettingTable onSelectCard={handleCardSelection} openBetting={true} statusGame={statusGame ?? "NONE"}/>
-      <MyHistory
+      <MyBonusToday
         onOpen={() => {
           setHidden('hidden');
           setOpenMyHistory(true)}}
