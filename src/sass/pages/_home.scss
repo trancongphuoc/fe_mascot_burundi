@@ -32,10 +32,10 @@
     -webkit-tap-highlight-color: transparent; 
 
     @include non_select;
-    pointer-events: none;
 
     &__rule {
         justify-self: end;
+        @include non_decor_button;
     }
 
     &__logo--left {

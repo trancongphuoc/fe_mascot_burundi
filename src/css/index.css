@@ -690,10 +690,11 @@ h4 {
   user-select: none;
   user-select: none;
   -webkit-user-drag: none;
-  pointer-events: none;
 }
 .section-header__rule {
   justify-self: end;
+  border: none;
+  background-color: transparent;
 }
 .section-header__logo--left {
   top: 0;

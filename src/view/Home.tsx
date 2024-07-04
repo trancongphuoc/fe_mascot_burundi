@@ -113,11 +113,10 @@ export default function Home() {
   }, [parameters]);
 
   const handleRuleClick = useCallback(() => {
-    {() => {
       log('function open rule')
       setHidden('hidden');
-      setOpenRule(true)}}
-  },[])
+      setOpenRule(true)
+  },[]);
 
   // const handleLoading = () => {
   //   setIsLoading(false);
