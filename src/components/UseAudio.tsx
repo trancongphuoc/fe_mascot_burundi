@@ -4,6 +4,7 @@ const useAudio = (audioSrc: string) => {
   const audioRef = useRef<HTMLAudioElement>(new Audio(audioSrc));
 
   const playAudio = useCallback(() => {
+    console.log('call audio')
     const audio = audioRef.current;
     audio.currentTime = 0;
     audio.play().catch((error) => {

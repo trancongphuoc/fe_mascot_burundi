@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import bgCardSelect from '../../assets/bg_card_selected.svg';
 import Icoin from '../../assets/icoin.svg';
 // import BgContent from '../../assets/bg_content_win.svg';
@@ -15,9 +15,9 @@ import LazyImage from '../LazyImage';
 import { log } from '../../utils/log';
 import ButtonStake from '../ButtonStake';
 
-// import useAudio from '../UseAudio';
-// import audioConfirm from '../../../public/sounds/confirm_button.wav';
-// import audioBet from '../../../public/sounds/stake_button.wav';
+import useAudio from '../UseAudio';
+import audioConfirm from '../../../public/sounds/confirm_button.wav';
+import audioBet from '../../../public/sounds/stake_button.wav';
 
 interface DialogBettingProps {
   onClose: () => void;
@@ -38,11 +38,12 @@ const DialogBetting = ({
 
   const [stakes, setStakes] = useState(0);
 
-  // const clickAudioRef =  useAudio(audioBet);
-  // const confirmRef = useAudio(audioConfirm);
+  const clickAudioRef =  useAudio(audioBet);
+  const confirmRef = useAudio(audioConfirm);
 
 
   const sendDataOut = () => {
+    confirmRef();
     if (!zodiacGameId) {
       toast.dismiss();
       toast("Thiếu thông tin game", { duration: 2000, position: 'bottom-center'});
@@ -65,16 +66,15 @@ const DialogBetting = ({
     }
     onClose();
     betIcoin(betCard);
-    
   };
 
-  const handleStake = (stake: number) => {
+  const handleStake = function (stake: number) {
     if (stake) {
       const totalIcoinString = window.sessionStorage.getItem('totalIcoin');
       const totalIcoin = totalIcoinString !== null ? parseInt(totalIcoinString, 10) : 0;
       const initStake = stakes + stake;
       if (initStake <= totalIcoin) {
-        // clickAudioRef();
+        clickAudioRef();
         setStakes(initStake)
       } else {
         openDepositPupup();
