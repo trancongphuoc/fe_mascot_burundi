@@ -117,6 +117,7 @@
 
             @include non_select;
             @include non_decor_button;
+            pointer-events: none;
         }
 
         &--bgSelected {
@@ -128,6 +129,7 @@
 
             @include non_select;
             @include non_decor_button;
+            pointer-events: none;
         }
     
         &--zodiac {
