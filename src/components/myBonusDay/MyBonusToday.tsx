@@ -8,10 +8,10 @@ import { db } from '../../firebase/config';
 // import bgMyBonus from '../assets/bg_my_bonus_new.svg';
 import bgHeader from '../../assets/bg_my_bonus_today.png';
 import { formatNumber } from '../../utils/utils';
-import { callbackFlutter } from '../../utils/functions';
 import MyTotalIcoin from './MyTotalIcoin';
 import BettingCard from './BettingCard';
 import { log } from '../../utils/log';
+import DepositIcoin from './DepositIcoin';
 
 interface BetUser extends User {
     bettingCards?: BetZodiacCard[];
@@ -125,10 +125,7 @@ function MyBonusToday({onOpen, statusGame, betCards, betSuccess, onUserDataChang
 
                 <div className="end">
                     <MyTotalIcoin fbId={fbId}/>
-                    <h4 className='end-right' onClick={() => callbackFlutter('callbackMyWallet')}>
-                        <p className='end-right--text'>Nạp ngay</p>
-                        <SVG src={ArrowWhite} className="end-right--img"/>
-                    </h4>
+                    <DepositIcoin />
                 </div>
             </div>
         </>

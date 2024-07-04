@@ -252,10 +252,15 @@
 
         display: flex;
         justify-content: end;
-        align-content: end;
+        align-items: center;
   
+
+
         color: $color-white;
         padding-bottom: $padding-bottom;
+
+        @include non_decor_button;
+        @include non_select;
 
         &--text {
             margin-right: 6px;

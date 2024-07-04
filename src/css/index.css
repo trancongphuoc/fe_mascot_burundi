@@ -1187,9 +1187,20 @@ h4 {
   justify-self: end;
   display: flex;
   justify-content: end;
-  align-content: end;
+  align-items: center;
   color: #ffffff;
   padding-bottom: 5.5px;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .section-myInfo .end-right--text {
   margin-right: 6px;

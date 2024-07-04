@@ -114,6 +114,7 @@ export default function Home() {
 
   const handleRuleClick = useCallback(() => {
     {() => {
+      log('function open rule')
       setHidden('hidden');
       setOpenRule(true)}}
   },[])
