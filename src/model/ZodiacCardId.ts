@@ -17,6 +17,7 @@ type ZodiacCardId = 'ZODIAC_CARD_1' |
                 'ZODIAC_CARD_8';
 
 interface ZodiacCardModel {
+    cardId?: number;
     counter?: number,
     id: string,
     imageUrl: string,

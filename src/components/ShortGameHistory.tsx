@@ -25,7 +25,9 @@ const ShortGameHistory = memo(function ShortGameHistory ({openDialog, statusGame
               for (const gameHistoryId in data) {
                   if (Object.hasOwnProperty.call(data, gameHistoryId)) {
                       const gameHistoryData = data[gameHistoryId];
+                      const idCard = Math.random() * 1000;
                       const player: ZodiacCardModel = {
+                          cardId: idCard,
                           id: gameHistoryData.id ?? '',
                           imageUrl: gameHistoryData.imageUrl ?? '',
                           name: gameHistoryData.name,
@@ -37,7 +39,7 @@ const ShortGameHistory = memo(function ShortGameHistory ({openDialog, statusGame
               setGameHistories(gameHistoriesList);
           }
       };
-      if (statusGame === 'PREPARESTART') {
+      if (statusGame === 'PREPARESTART' || gameHistories.length === 0) {
         onValue(stateRef, handleData);
       } else {
         off(stateRef, 'value', handleData);
@@ -51,8 +53,12 @@ const ShortGameHistory = memo(function ShortGameHistory ({openDialog, statusGame
     return (
         <div className="result__left" onClick={openDialog}>
           <p className='result__left--text'>Kết quả</p>
-          {gameHistories.map((result, index) => (
-            <Card key={index} card={result.imageUrl} className="card--zodiac__small" classNameBackground="card--zodiac__background--small mr-4px" />
+          {gameHistories.map((result) => (
+            <Card
+              key={result.cardId}
+              card={result.imageUrl}
+              className="card--zodiac__small"
+              classNameBackground="card--zodiac__background--small mr-4px" />
           ))}
           <img src={Arrow} alt="card_background" />
         </div>
