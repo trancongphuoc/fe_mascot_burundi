@@ -155,6 +155,7 @@
             max-height: calc(253px + env(safe-area-inset-bottom) / 2) ;
 
             @include non_select;
+            pointer-events: none;
         }
     
         &--BgLighter {

@@ -40,6 +40,9 @@
         width: 100%;
         height: 253px;
         transform: translateY(1px);
+
+        @include non_select;
+        pointer-events: none;
     }
 
     &--BgLighter {

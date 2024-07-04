@@ -6,6 +6,7 @@
     margin: 0 16px;
 
     @include non_select;   
+    pointer-events: none;
 
     &__bg {
         grid-area: 1 / 1 / -1 / -1;
