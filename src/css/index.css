@@ -27,6 +27,8 @@ html {
   user-select: none;
   user-select: none;
   -webkit-user-drag: none;
+  border: none;
+  background-color: transparent;
 }
 
 body {

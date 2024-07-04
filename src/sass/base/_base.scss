@@ -23,6 +23,7 @@ html {
     overscroll-behavior: none;
 
     @include non_select;
+    @include non_decor_button;
 }
 
 body {
