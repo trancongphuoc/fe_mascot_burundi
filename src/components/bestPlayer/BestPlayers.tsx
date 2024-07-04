@@ -1,12 +1,11 @@
 
-import { useEffect, useState } from 'react';
-import SecondaryText from '../assets/best-players-logo.svg';
-import Icoin from '../assets/icoin.svg';
+import { memo, useEffect, useState } from 'react';
+import SecondaryText from '../../assets/best-players-logo.svg';
 import SVG from 'react-inlinesvg';
-import bgBestPlayers from '../assets/bg_best_players.png';
-import { getTopUsers } from '../firebase/bestPlayers';
-import { handleErrorAvartar } from './DefaultUserAvartar';
-import { formatNumber } from '../utils/utils';
+import bgBestPlayers from '../../assets/bg_best_players.png';
+import { getTopUsers } from '../../firebase/bestPlayers';
+import { log } from '../../utils/log';
+import BestUser from './BestUser';
 
 interface BestPlayersPro {
     statusGame: StatusGame
@@ -21,7 +20,8 @@ interface User {
 }
 
 
-function BestPlayers({statusGame} : BestPlayersPro) {
+const BestPlayers = memo(function BestPlayers({statusGame} : BestPlayersPro) {
+    log('<BestPlayers />');
 
     const [topUsers, setTopUser] = useState<User[]>([])
 
@@ -45,7 +45,7 @@ function BestPlayers({statusGame} : BestPlayersPro) {
     useEffect(() => {
         let isMounted = true;
 
-        if (statusGame === "PREPARESTART") {
+        if (statusGame === "PREPARESTART" || topUsers.length === 0) {
             getTopUsers()
                 .then(users => {
                     const updateUsers = [...users];
@@ -70,25 +70,16 @@ function BestPlayers({statusGame} : BestPlayersPro) {
             <ol className="contents">
                 {
                     topUsers.map((user, index) => (
-                        <li className={`content${index}`} key={index}>
-                            <img 
-                                src={user.profileImageLink}
-                                alt="avatar"
-                                className={`content${index}--img`}
-                                onError={handleErrorAvartar}      
-                                />
-                            <p className={`content${index}--name`}>{user.name}</p>
-                            <p className={`content${index}--text`}>Thưởng ván trước:</p>
-                            <div className={`content${index}__icoin`}>
-                                <p className={`content${index}__icoin--data`}>{formatNumber(user.totalIcoin ?? 0)}</p>
-                                <img src={Icoin} alt="icoin" className="content1__icoin--img"></img>
-                            </div>
-                        </li>
+                        <BestUser
+                            index={index}
+                            profileImageLink={user.profileImageLink ?? ''}
+                            name={user.name ?? 'unknow'}
+                            totalIcoin={user.totalIcoin ?? 0}/>
                     ))
                 }
             </ol>
         </div>
     );
-}
+})
 
 export default BestPlayers;

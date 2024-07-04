@@ -10,7 +10,7 @@ import horse from '../assets/horse.svg';
 import pig from '../assets/pig.svg';
 
 import MyBonusToday from '../components/myBonusDay/MyBonusToday';
-import BestPlayers from '../components/BestPlayers';
+import BestPlayers from '../components/bestPlayer/BestPlayers.tsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import DialogBetting from '../components/Modal/DialogBetting.tsx';
 import DialogLost from '../components/Modal/DialogLostWin.tsx';
@@ -116,7 +116,7 @@ export default function Home() {
       log('function open rule')
       setHidden('hidden');
       setOpenRule(true)
-  },[]);
+  },[]); 
 
   // const handleLoading = () => {
   //   setIsLoading(false);
