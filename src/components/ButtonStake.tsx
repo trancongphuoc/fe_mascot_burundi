@@ -1,5 +1,7 @@
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 import { log } from "../utils/log";
+
+import audioBet from '../../public/sounds/stake_audio.wav';
 
 interface ButtonStakeProps {
   children: ReactNode,
@@ -7,7 +9,7 @@ interface ButtonStakeProps {
   className: string,
 }
 
-const ButtonStake = ({children, handleClick, className} : ButtonStakeProps) => {
+const ButtonStake = ({children, handleClick, className} : ButtonStakeProps) => {    
     log('<ButtonStake />')
     return (
         <button
