@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import bgCardSelect from '../../assets/bg_card_selected.svg';
 import Icoin from '../../assets/icoin.svg';
 // import BgContent from '../../assets/bg_content_win.svg';
@@ -17,7 +17,7 @@ import ButtonStake from '../ButtonStake';
 
 import useAudio from '../UseAudio';
 import audioConfirm from '../../../public/sounds/confirm_button.wav';
-import audioBet from '../../../public/sounds/stake_button.wav';
+import audioBet from '../../../public/sounds/stake_audio.wav';
 
 interface DialogBettingProps {
   onClose: () => void;
