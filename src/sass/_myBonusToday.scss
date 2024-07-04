@@ -76,6 +76,7 @@
         line-height: 1;
 
         padding-top: 1px;
+        @include non_select;
 
         &--text {
             margin-right: 6px;

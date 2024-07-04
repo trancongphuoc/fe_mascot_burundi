@@ -1022,6 +1022,15 @@ h4 {
   font-weight: 300;
   line-height: 1;
   padding-top: 1px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .section-myInfo .header-right--text {
   margin-right: 6px;
