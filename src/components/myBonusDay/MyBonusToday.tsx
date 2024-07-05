@@ -72,7 +72,7 @@ function MyBonusToday({onOpen, statusGame, betCards, betSuccess, onUserDataChang
                 };
                 setBetUser(user);  
                 onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin ?? 0});   
-                if (statusGame === 'PREPARESTART') {
+                if (statusGame !== "RESULT" && statusGame !== "RESULTWAITING") {
                     setIIcoinWinToday(user.totalIcoinWinToday ?? 0);
                 }       
             }

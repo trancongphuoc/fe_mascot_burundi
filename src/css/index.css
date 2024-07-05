@@ -410,6 +410,16 @@ h4 {
   margin-bottom: -1px !important;
 }
 
+.card--zodiac {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
 .card--zodiac__background-selected {
   background-image: url("../assets/card-background-selected.svg");
   background-size: 100% 100%;
@@ -435,6 +445,14 @@ h4 {
   align-items: center;
   width: 22px;
   height: 29px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .card--zodiac__background--medium {
   background-image: url("../assets/card-background-selected.svg");
@@ -447,6 +465,15 @@ h4 {
   width: 80%;
   height: auto;
   object-fit: fit;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 .betting-card__background--medium {

@@ -1,17 +1,21 @@
 .card--zodiac {
 
+    @include non_select;
     &__background-selected {
         @include basicBackgroundCard('../assets/card-background-selected.svg');
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+
     }
 
     &__background--small {
         @include basicBackgroundCard('../assets/bg_card_normal_light.svg');
         width: 22px;
         height: 29px;
+
+        @include non_select;
     }
 
     &__background--medium {
@@ -26,6 +30,9 @@
         width: 80%;
         height: auto;
         object-fit: fit;
+
+        @include non_select;
+        pointer-events: none;
     }
 }
 

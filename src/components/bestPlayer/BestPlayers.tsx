@@ -71,6 +71,7 @@ const BestPlayers = memo(function BestPlayers({statusGame} : BestPlayersPro) {
                 {
                     topUsers.map((user, index) => (
                         <BestUser
+                            key={user.facebookUserId}
                             index={index}
                             profileImageLink={user.profileImageLink ?? ''}
                             name={user.name ?? 'unknow'}

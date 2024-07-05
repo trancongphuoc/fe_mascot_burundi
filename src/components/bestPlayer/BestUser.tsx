@@ -13,7 +13,7 @@ interface BestUserProps {
 export default function BestUser({index, profileImageLink, name, totalIcoin} : BestUserProps) {
     log('<BestUser />')
     return (
-        <li className={`content${index}`} key={profileImageLink}>
+        <li className={`content${index}`}>
             <AvatarCircle avatarUrl={profileImageLink} className={`content${index}--img`}/>
             <p className={`content${index}--name`}>{name}</p>
             <p className={`content${index}--text`}>Thưởng ván trước:</p>
