@@ -419,8 +419,6 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                                             openDepositPupup={() => setOpenDepositIcoin(true)}
                                             zodiacGameId={game?.transactionId ?? 0}/>)}
 
-
-
         {openLostWin && <DialogLost
                             onClose={() => {
                               setHidden('scroll');
@@ -432,15 +430,13 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
                             topUsers={game?.topUser ?? []}
                             zodiac={game?.zodiacCard.imgUrl ?? ''} />}
 
-
-
-
         {openHistoryGame && <PopupGameHistory
                               onClose={() => {
                                 setHidden('scroll');
                                 setOpenHistoryGame(false)}
                               }
                               zodiacs={img}/>}
+
         {openMyHistory && <PopupMyHistory onClose={()=> {
                                 setHidden('scroll');
                                 setOpenMyHistory(false)}

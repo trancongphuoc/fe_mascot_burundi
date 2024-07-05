@@ -19,6 +19,7 @@ import useAudio from '../UseAudio';
 import audioConfirm from '../../../public/sounds/confirm_button.wav';
 // import audioBet from '../../../public/sounds/stake_audio.wav';
 import AudioPlayer from './Audiobutton';
+import AnimatedCounter from '../animation/AnimatedCounter';
 
 interface DialogBettingProps {
   onClose: () => void;
@@ -37,7 +38,7 @@ const DialogBetting = ({
 } : DialogBettingProps) => {
   log('<DialogBetting />')
 
-  const [stakes, setStakes] = useState(0);
+  const [bettingIcoin, setBettingIcoin] = useState({ from: 0, to:0 });
 
   // const clickAudioRef =  useAudio(audioBet);
   const confirmRef = useAudio(audioConfirm);
@@ -63,7 +64,7 @@ const DialogBetting = ({
       toast("Thiếu card select", { duration: 2000, position: 'bottom-center'});
       return;
     }
-    if (!stakes) {
+    if (bettingIcoin.to == 0) {
       toast.remove();
       toast("Thiếu tiền cược", { duration: 2000, position: 'bottom-center'});
       return;
@@ -71,25 +72,33 @@ const DialogBetting = ({
 
     const betCard: BetZodiacCard = {
       ...zodiacCardSelect,
-      totalIcoinBetting: stakes ?? 0,
+      totalIcoinBetting: bettingIcoin.to ?? 0,
     }
     onClose();
     betIcoin(betCard);
   };
 
-  const handleStake = useCallback((stake: number) => {
+  const handleStake = (stake: number) => {
     if (stake) {
       const totalIcoinString = window.sessionStorage.getItem('totalIcoin');
       const totalIcoin = totalIcoinString !== null ? parseInt(totalIcoinString, 10) : 0;
-      const initStake = stakes + stake;
-      if (initStake <= totalIcoin) {
-        // clickAudioRef();
-        setStakes(prevStake => prevStake + stake)
+
+      const newStake = bettingIcoin.to + stake;
+      if (newStake <= totalIcoin) {
+        const oldBetting = bettingIcoin.to;
+
+        setBettingIcoin(prevState => ({
+          ...prevState,
+          from: oldBetting,
+          to: newStake,
+        }));
       } else {
         openDepositPupup();
       }
+    } else {
+      console.log('no stake')
     }
-  },[])
+  }
 
   return (
     <motion.div
@@ -129,7 +138,8 @@ const DialogBetting = ({
 
         <div className="betting__totalIcoin mb-15px mt-28px" onClick={(e) => e.stopPropagation()}>
           <img className="betting__totalIcoin--img" src={Icoin} alt="Icoin" />
-          <p className="betting__totalIcoin--icoin">{stakes}</p>
+          {/* <p className="betting__totalIcoin--icoin">{stakes}</p> */}
+          <AnimatedCounter from={bettingIcoin.from} to={bettingIcoin.to}/>
         </div>
 
         <ButtonStake handleClick={() => handleStake(10)}  className="betting--button-1">
