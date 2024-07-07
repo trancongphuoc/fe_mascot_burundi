@@ -148,32 +148,17 @@
 
     &--button-1 {
         grid-area: 4 / 1 / 5 / 2;
-        text-align: center;
-        line-height: 32px;
-        color: $color-2;
-        font-weight: 900;
-        font-family: 'Roboto';
-        font-size: 17px;    
-        -webkit-text-stroke: .5px #ffffff;
         align-self: end;
         z-index: 5;
-
-        @include non_select;
-        @include non_decor_button;
-
         width: 86px;
         height: 32px;
-        background-image: url(../assets/background-button.svg);
-
         justify-self: end;
     }
 
     &--button-2 {
         grid-area: 4 / 2 / 4 / 3;
         align-self: end;
-
         z-index: 5;
-
         width: 86px;
         height: 32px;
     }
