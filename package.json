@@ -12,6 +12,7 @@
     "compile:sass": "sass src/sass/main.scss src/css/index.css -w"
   },
   "dependencies": {
+    "@million/lint": "^1.0.0-rc.76",
     "axios": "^1.7.2",
     "firebase": "^10.12.1",
     "framer-motion": "^11.2.6",

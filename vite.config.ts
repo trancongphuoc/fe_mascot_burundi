@@ -1,10 +1,11 @@
-  import { defineConfig } from 'vite'
-  import react from '@vitejs/plugin-react-swc'
+  import { defineConfig } from 'vite';
+  import react from '@vitejs/plugin-react-swc';
+  import MillionLint from "@million/lint";
 
   // https://vitejs.dev/config/
   export default defineConfig(({ mode }) => {
     return {
-      plugins: [react()],
+      plugins: [react(), MillionLint.vite()],
       base: '/zodiac-game',
       build: {
         outDir: 'dist', // Ensure this is set to your desired output directory
