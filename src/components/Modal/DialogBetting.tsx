@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import {  useState } from 'react';
 import bgCardSelect from '../../assets/bg_card_selected.svg';
 import Icoin from '../../assets/icoin.svg';
 // import BgContent from '../../assets/bg_content_win.svg';
@@ -18,8 +18,9 @@ import ButtonStake from '../ButtonStake';
 import useAudio from '../UseAudio';
 import audioConfirm from '../../../public/sounds/confirm_button.wav';
 // import audioBet from '../../../public/sounds/stake_audio.wav';
-import AudioPlayer from './Audiobutton';
+// import AudioPlayer from './Audiobutton';
 import AnimatedCounter from '../animation/AnimatedCounter';
+import ButtonMoving from '../ButtonMoving';
 
 interface DialogBettingProps {
   onClose: () => void;
@@ -141,24 +142,28 @@ const DialogBetting = ({
           {/* <p className="betting__totalIcoin--icoin">{stakes}</p> */}
           <AnimatedCounter from={bettingIcoin.from} to={bettingIcoin.to}/>
         </div>
+        <ButtonMoving
+          content={'+10'}
+          setClick={ () => handleStake(10)}
+          cssClass="betting--button-1"
+        />
 
-        <ButtonStake handleClick={() => handleStake(10)}  className="betting--button-1">
-          <p>+10</p>
-        </ButtonStake>
+        <ButtonMoving
+          content={'+100'}
+          setClick={ () => handleStake(100)}
+          cssClass="betting--button-2"
+        />
 
-        <ButtonStake handleClick={() => handleStake(100)}  className="betting--button-2">
-          <p>+100</p>
-        </ButtonStake>
-
-        <ButtonStake handleClick={() => handleStake(1000)}  className="betting--button-3">
-          <p>+1000</p>
-        </ButtonStake>
+        <ButtonMoving
+          content={'+1000'}
+          setClick={ () => handleStake(1000)}
+          cssClass="betting--button-3"
+        />
 
         <ButtonStake handleClick={sendDataOut}  className="betting__confirm mb-34px mt-14-5px">
          <p className="betting__confirm--text">Xác nhận</p>
         </ButtonStake>
-
-        <AudioPlayer></AudioPlayer>
+  
       </motion.div>
     </motion.div>
   );

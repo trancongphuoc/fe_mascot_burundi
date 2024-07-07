@@ -7,7 +7,7 @@ interface BettingCardProps {
 
 export default function BettingCard({ betCard }: BettingCardProps) {
     return (
-        <div key={betCard.id} className="card__main">
+        <div className="card__main">
             <p className="card__main--background-color">&nbsp;</p>
             <p className="card__main--header">{betCard.id.split('_').slice(-1)}</p>
             <SVG src={Background} className="card__main--background"/>

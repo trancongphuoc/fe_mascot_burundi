@@ -691,6 +691,32 @@ h4 {
   z-index: 7;
 }
 
+.button-moving {
+  background-image: url(../assets/background-button.svg);
+  text-align: center;
+  display: grid;
+  justify-items: center;
+}
+.button-moving--content {
+  -webkit-text-stroke: 0.5px #ffffff;
+  font-weight: 900;
+  color: #136761;
+  font-size: 17px;
+  line-height: 32px;
+  font-family: "Roboto";
+  pointer-events: none;
+}
+.button-moving--button {
+  border: none;
+  background-color: transparent;
+  -webkit-text-stroke: 0.5px #ffffff;
+  font-weight: 900;
+  color: #136761;
+  font-size: 17px;
+  line-height: 32px;
+  font-family: "Roboto";
+}
+
 .home_loading {
   display: flex;
   justify-content: center;
@@ -1395,6 +1421,27 @@ h4 {
   font-weight: 500;
   line-height: 1;
 }
+.betting--button-content {
+  text-align: center;
+  line-height: 32px;
+  color: #136761;
+  font-weight: 900;
+  font-family: "Roboto";
+  font-size: 17px;
+  -webkit-text-stroke: 0.5px #ffffff;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  border: none;
+  background-color: transparent;
+  width: 86px;
+  height: 32px;
+}
 .betting--button-1 {
   grid-area: 4/1/5/2;
   text-align: center;
@@ -1423,47 +1470,18 @@ h4 {
 }
 .betting--button-2 {
   grid-area: 4/2/4/3;
-  text-align: center;
-  line-height: 32px;
-  color: #136761;
-  font-weight: 900;
-  font-family: "Roboto";
-  font-size: 17px;
-  -webkit-text-stroke: 0.5px #ffffff;
   align-self: end;
-  text-decoration: none;
   z-index: 5;
   width: 86px;
   height: 32px;
-  background-image: url(../assets/background-button.svg);
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  border: none;
-  background-color: transparent;
 }
 .betting--button-3 {
   grid-area: 4/3/4/4;
-  text-align: center;
-  line-height: 32px;
-  color: #136761;
-  font-weight: 900;
-  font-family: "Roboto";
-  font-size: 17px;
-  justify-self: start;
-  -webkit-text-stroke: 0.5px #ffffff;
   align-self: end;
+  justify-self: start;
   z-index: 5;
   width: 86px;
   height: 32px;
-  background-image: url(../assets/background-button.svg);
-  border: none;
-  background-color: transparent;
 }
 .betting__confirm {
   justify-self: center;

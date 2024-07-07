@@ -120,7 +120,7 @@ function MyBonusToday({onOpen, statusGame, betCards, betSuccess, onUserDataChang
                 </div>
                
                 <div className="section-myInfo__cards">
-                    {bettingCards.map((betCard) => (<BettingCard betCard={betCard} />))}
+                    {bettingCards.map((betCard) => (<BettingCard key={betCard.cardId} betCard={betCard} />))}
                 </div>
 
                 <div className="end">
