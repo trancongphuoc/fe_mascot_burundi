@@ -1,21 +1,19 @@
 .button-moving {
     background-image: url(../assets/background-button.svg);
     text-align: center;
-    display: grid;
-    justify-items: center;
+    display: flex;
+    justify-content: center;
+    
+
+    @include non_decor_button;
+    -webkit-text-stroke: .5px #ffffff;
+    font-weight: 900;
+    color: $color-2;
+    font-size: 17px;   
+    line-height: 32px;
+    font-family: 'Roboto';
 
     &--content {
-        -webkit-text-stroke: .5px #ffffff;
-        font-weight: 900;
-        color: $color-2;
-        font-size: 17px;   
-        line-height: 32px;
-        font-family: 'Roboto';
-        pointer-events: none; 
-    }
-
-    &--button {
-        @include non_decor_button;
         -webkit-text-stroke: .5px #ffffff;
         font-weight: 900;
         color: $color-2;

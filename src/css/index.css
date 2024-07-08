@@ -694,21 +694,18 @@ h4 {
 .button-moving {
   background-image: url(../assets/background-button.svg);
   text-align: center;
-  display: grid;
-  justify-items: center;
-}
-.button-moving--content {
+  display: flex;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
   -webkit-text-stroke: 0.5px #ffffff;
   font-weight: 900;
   color: #136761;
   font-size: 17px;
   line-height: 32px;
   font-family: "Roboto";
-  pointer-events: none;
 }
-.button-moving--button {
-  border: none;
-  background-color: transparent;
+.button-moving--content {
   -webkit-text-stroke: 0.5px #ffffff;
   font-weight: 900;
   color: #136761;
@@ -1328,7 +1325,6 @@ h4 {
   -o-user-select: none;
   user-select: none;
   -webkit-user-drag: none;
-  pointer-events: none;
 }
 .betting--BgLighter {
   grid-area: 1/1/2/4;

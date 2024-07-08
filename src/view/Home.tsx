@@ -171,14 +171,6 @@ export default function Home() {
                   topUser: topUsers,
               });
 
-              // setIsLoading(prevState =>  {
-              //   console.log('check log')
-              //   if (prevState) {
-              //     callbackFlutter('callbackDisableLoading');
-              //     return false;
-              //   }
-              //   return true;
-              // });
               if (isLoadingRef.current) {
                 callbackFlutter('callbackDisableLoading');
                 isLoadingRef.current = false;

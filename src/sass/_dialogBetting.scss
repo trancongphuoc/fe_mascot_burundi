@@ -29,8 +29,6 @@
     margin: 0 auto;
 
     @include non_select;
-    // pointer-events: none;
-
 }
 
 .betting {
@@ -42,7 +40,6 @@
         transform: translateY(1px);
 
         @include non_select;
-        pointer-events: none;
     }
 
     &--BgLighter {

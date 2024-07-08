@@ -26,7 +26,7 @@ const ButtonMoving = ({content, setClick, cssClass} : ButtonMovingProps) => {
   };
 
   return (
-    <div className={`${cssClass} button-moving`}>
+    <button className={`${cssClass} button-moving`} onClick={(e) => handleClick(e)}>
       {texts.map((text) => (
           <motion.p 
               key={text.id}
@@ -37,9 +37,9 @@ const ButtonMoving = ({content, setClick, cssClass} : ButtonMovingProps) => {
               style={{ position: 'absolute' }}
               className='button-moving--content'>{content}
           </motion.p>
-      ))}
-      <button className='button-moving--button' onClick={(e) => handleClick(e)}>{content}</button>
-    </div>
+      ))}{content}
+      {/* <button className='button-moving--button' onClick={(e) => handleClick(e)}>{content}</button> */}
+    </button>
   );
 };
 
