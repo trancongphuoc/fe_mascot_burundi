@@ -78,7 +78,9 @@ export default function Home() {
   const [openMyHistory, setOpenMyHistory] = useState(false);
   const [openDepositIcoin, setOpenDepositIcoin] = useState(false);
   const [openDisconnect, setOpenDisconnect] = useState(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  // const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const isLoadingRef = useRef<boolean>(true);
 
   const dialogTypeRef = useRef<DialogType>('LOST');
   const selectedCardRef = useRef<BetZodiacCard | null>(null);
@@ -169,9 +171,17 @@ export default function Home() {
                   topUser: topUsers,
               });
 
-              if (isLoading) {
-                setIsLoading(false);
+              // setIsLoading(prevState =>  {
+              //   console.log('check log')
+              //   if (prevState) {
+              //     callbackFlutter('callbackDisableLoading');
+              //     return false;
+              //   }
+              //   return true;
+              // });
+              if (isLoadingRef.current) {
                 callbackFlutter('callbackDisableLoading');
+                isLoadingRef.current = false;
               }
           }
       };
@@ -351,7 +361,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
   //use effect to this networkstatus
   // const effectiveType = useNetworkStatus();
 
-  if (isLoading) {
+  if (isLoadingRef.current) {
     return <Loading className='home_loading'/>
   }
 

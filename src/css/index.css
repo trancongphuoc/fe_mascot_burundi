@@ -1421,27 +1421,6 @@ h4 {
   font-weight: 500;
   line-height: 1;
 }
-.betting--button-content {
-  text-align: center;
-  line-height: 32px;
-  color: #136761;
-  font-weight: 900;
-  font-family: "Roboto";
-  font-size: 17px;
-  -webkit-text-stroke: 0.5px #ffffff;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  border: none;
-  background-color: transparent;
-  width: 86px;
-  height: 32px;
-}
 .betting--button-1 {
   grid-area: 4/1/5/2;
   align-self: end;
