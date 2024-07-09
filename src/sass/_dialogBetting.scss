@@ -162,9 +162,6 @@
         text-decoration: none;
         text-transform: uppercase;
         color: $color-5;
-        font-size: 19px;
-        font-weight: 600;
-        line-height: 46px;
         border-radius: 23px;
         overflow: hidden;
         z-index: 5;
@@ -204,6 +201,9 @@
             position: relative;
             z-index: 5;
             margin: 0;
+            font-size: 19px;
+            font-weight: 600;
+            line-height: 46px;
 
             &::before {
                 content: '';

@@ -6,7 +6,7 @@ import { GameInfoContext } from '../../store/game-info_context';
 
 const PopupRule = () => {
   const [currentRuleIndex, setCurrentRuleIndex] = useState(0);
-  const { setRule: openRule } = useContext(GameInfoContext);
+  const { setModal } = useContext(GameInfoContext);
 
   useEffect(() => {
     RULE_CONTENTS.forEach((rule) => {
@@ -22,7 +22,7 @@ const PopupRule = () => {
   return (
     <PopupCenter
      className='popup-overlay-history'
-      onClick={() => openRule("CLOSE")}
+      onClick={() => setModal({ state: "CLOSE", type: "RULE"})}
       classNameChild='rule'
     >
         <p className='rule--primary mt-20px'>Thể lệ Đoán Linh Vật</p>

@@ -27,7 +27,7 @@ const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ zodiacs }) => {
   const [gameHistories, setGameHistories] = useState<GameHistory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const { setGameHistory } = useContext(GameInfoContext)
+  const { setModal } = useContext(GameInfoContext)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,7 +48,7 @@ const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ zodiacs }) => {
   return (
     <PopupCenter
     className='popup-overlay-history'
-    onClick={() => setGameHistory("CLOSE")}
+    onClick={() => setModal({state: "CLOSE", type: "GAMEHISTORY"})}
     classNameChild='history-game-popup'>
         {/* <SVG src={bgHistoryGame} className="history-game-popup__bg" /> */}
         {/* <img src={bgHistoryGame} className="history-game-popup__bg" /> */}

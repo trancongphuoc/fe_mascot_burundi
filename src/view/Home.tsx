@@ -17,7 +17,7 @@ import DialogLost from '../components/Modal/DialogLostWin.tsx';
 import PopupRule from '../components/popup/PopupRule';
 import PopupGameHistory from '../components/popup/PopupGameHistory';
 import PopupMyHistory from '../components/popup/PopupMyHistory';
-import PopupNotification from '../components/popup/PopupNotification';
+import PopupNotification from '../components/popup/PopupDisconnect.tsx';
 
 import { db } from '../firebase/config';
 import { ref, onValue, off } from "firebase/database";
@@ -42,29 +42,24 @@ import { fetchTokenAndJoinGame } from '../utils/fetchTokenAndJoinGame';
 import { callbackFlutter } from '../utils/functions';
 import { log } from '../utils/log';
 import { GameInfoContext } from '../store/game-info_context.tsx';
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import ShortInfoGame from '../components/shortInfoGame/ShortInfoGame.tsx';
+import PopupDisconnect from '../components/popup/PopupDisconnect.tsx';
+import PopupDeposit from '../components/popup/PopupDeposit.tsx';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
 
 
-interface ZodiacGameData {
-  isPause: boolean,
-  noGameToday: number,
-  status: StatusGame,
-  transactionId: number,
-  zodiacCard: ZodiacCard,
-  topUser?: User[],
+// interface ZodiacGameData {
+//   isPause: boolean,
+//   noGameToday: number,
+//   status: StatusGame,
+//   transactionId: number,
+//   zodiacCard: ZodiacCard,
+//   topUser?: User[],
   
-}
-
-interface ZodiacCard {
-  id: string,
-  imgUrl: string,
-  multiply: number,
-  name: string,
-}
+// }
 
 interface GameInfo {
   stateGame : StatusGame,
@@ -84,7 +79,7 @@ export default function Home() {
   const [openGameResult, setOpenGameResult] = useState(false);
   const [openRule, setOpenRule] = useState(false);
   const [openLostWin, setOpenLostWin] = useState(false);
-  const [openGameHistory, setOpenHistoryGame] = useState(false);
+  const [openGameHistory, setOpenGameHistory] = useState(false);
   const [openBetting, setOpenBetting] = useState(false);
   const [openMyHistory, setOpenMyHistory] = useState(false);
   const [openDepositIcoin, setOpenDepositIcoin] = useState(false);
@@ -96,12 +91,14 @@ export default function Home() {
   const totalIcoinWinRef = useRef<number>(0);
   const fbIdRef = useRef<string>('');
 
-  const cardResultRef = useRef<ZodiacCard | null>();
+  const cardResultRef = useRef<ZodiacCard | null>(null);
   const topUserRef = useRef<User[]>([]);
   const noGameRef = useRef<number>(0);
   const transactionId = useRef<number>(0);
 
-  const gameInfoCtx = useContext(GameInfoContext);
+  const zodiacImgs = useRef<ZodiacCardModel[]>([])
+
+  // const gameInfoCtx = useContext(GameInfoContext);
 
 
   const handleIsWin = (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => {
@@ -129,22 +126,6 @@ export default function Home() {
 
     fetchAndSetFbId();
   }, [parameters]);
-
-  const handleRuleClick = useCallback((stateModal : modalState) => {
-    switch (stateModal) {
-      case "OPEN":
-          setHidden('hidden');
-          // setOpenRule(true)
-        break;
-      case "CLOSE":
-          setHidden('scroll');
-          // setOpenRule(false)
-        break;
-      default:
-        console.warn(`Unknown stateModal: ${stateModal}`);
-    }
-    setOpenRule(prevState => !prevState)
-},[]); 
 
   // const handleLoading = () => {
   //   setIsLoading(false);
@@ -189,7 +170,7 @@ export default function Home() {
                   }
               }
               cardResultRef.current = { ...zodiacCard }
-              topUserRef.current = [...topUsers] ?? [];
+              topUserRef.current = [...topUsers];
               noGameRef.current = data.noGameToday ?? 0;
               transactionId.current = data.transactionId ?? 0;
               setStatusGame(data.status);
@@ -270,7 +251,7 @@ export default function Home() {
           setHidden('scroll');
         };
         if (openGameHistory) {
-          setOpenHistoryGame(false)
+          setOpenGameHistory(false)
           setHidden('scroll');
         };
         if (openMyHistory) {
@@ -286,7 +267,7 @@ export default function Home() {
           setHidden('scroll');
         };
         if (openGameHistory) {
-          setOpenHistoryGame(false)
+          setOpenGameHistory(false)
           setHidden('scroll');
         };
         if (openMyHistory) {
@@ -375,49 +356,54 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
     setOpenDisconnect(!onlineStatus)
   }, []);
 
-  const handleGameHistory = useCallback((stateModal : modalState) => {
-    switch (stateModal) {
-      case "OPEN":
-          setHidden('hidden');
-          // setOpenRule(true)
-        break;
-      case "CLOSE":
-          setHidden('scroll');
-          // setOpenRule(false)
-        break;
-      default:
-        console.warn(`Unknown stateModal: ${stateModal}`);
-    }
-    setOpenHistoryGame(prevState => !prevState)
-},[]); 
 
   useOnlineStatus(updateOnlineStatus);
 
-  // call flutter
-  const callbackMyWallet = () => {
-    log('function call wallet')
-    callbackFlutter('callbackMyWallet')
-    if (openDepositIcoin) setOpenDepositIcoin(false);
+
+const handleModal = useCallback((stateModal : ModalSet) => {
+  switch (stateModal.state) {
+    case "OPEN":
+        setHidden('hidden');
+      break;
+    case "CLOSE":
+        setHidden('scroll');
+      break;
+    default:
+      console.warn(`Unknown stateModal: ${stateModal}`);
   }
 
-  const handleMyGameHistory = useCallback((stateModal : modalState) => {
-    switch (stateModal) {
-      case "OPEN":
-          setHidden('hidden');
-          // setOpenRule(true)
-        break;
-      case "CLOSE":
-          setHidden('scroll');
-          // setOpenRule(false)
-        break;
-      default:
-        console.warn(`Unknown stateModal: ${stateModal}`);
-    }
-    setOpenMyHistory(prevState => !prevState)
+  switch (stateModal.type) {
+    case "RULE":
+      setOpenRule(prevState => !prevState)
+      break;
+    case "BETTING":
+      setOpenBetting(prevState => !prevState);
+      selectedCardRef.current = null;
+      break;
+    case "WINLOST":
+      setOpenLostWin(prevState => !prevState)
+      break;
+    case "GAMEHISTORY":
+      setOpenGameHistory(prevState => !prevState)
+      break;
+    case "MYHISTORY":
+      setOpenMyHistory(prevState => !prevState)
+      break;
+    case "DEPOSIT":
+      setOpenDepositIcoin(prevState => !prevState);
+      break;
+    case "DISCONNECT":
+      setOpenDisconnect(prevState => !prevState);
+      break;
+    case "GAMERESULT":
+      setOpenGameResult(prevState => !prevState);
+      setOpenLostWin(prevState => !prevState);
+      break;
+    default:
+      break;
+  }
 },[]); 
 
-  //use effect to this networkstatus
-  // const effectiveType = useNetworkStatus();
 
   if (isLoadingRef.current) {
     return <Loading className='home_loading'/>
@@ -427,9 +413,8 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
     stateGame: gameInfo.stateGame,
     transactionId: gameInfo.transactionId,
     noGame: noGameRef.current,
-    setGameHistory: handleGameHistory,
-    setRule: handleRuleClick,
-    setMyGameHistory: handleMyGameHistory,
+    cardResult: cardResultRef.current,
+    setModal: handleModal,
   }
 
   return (
@@ -457,7 +442,7 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
         <Header/>
         <ShortInfoGame/>
 
-        <BettingTable onSelectCard={handleCardSelection} openBetting={true} statusGame={statusGame ?? "NONE"}/>
+        <BettingTable onSelectCard={handleCardSelection} />
         
         <MyBonusToday
           onUserDataChange={handleIsWin}
@@ -474,22 +459,11 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
           {openBetting && selectedCardRef.current && (
                                           <DialogBetting
-                                              onClose={() => {
-                                                setHidden('scroll');
-                                                setOpenBetting(false);
-                                                selectedCardRef.current = null
-                                              }}
                                               zodiacCardSelect={selectedCardRef.current}
                                               betIcoin={betGame}
-                                              openDepositPupup={() => setOpenDepositIcoin(true)}
                                               zodiacGameId={transactionId.current ?? 0}/>)}
 
           {openLostWin && <DialogLost
-                              onClose={() => {
-                                setHidden('scroll');
-                                setOpenLostWin(false)}
-                              }
-                        
                               dialogType={dialogTypeRef.current}
                               totalIcoin={totalIcoinWinRef.current}
                               topUsers={topUserRef.current ?? []}
@@ -499,37 +473,13 @@ const betGame = async (zodiacCard: BetZodiacCard) => {
 
           {openMyHistory && <PopupMyHistory />}
 
-          {openDepositIcoin && <PopupNotification 
-                                  key={'deposit'}
-                                  onClose={() => {
-                                    setHidden('scroll');
-                                    setOpenDepositIcoin(false)}} 
-                                  title = 'Bạn không đủ iCoin để chơi vui lòng nạp thêm!'
-                                  leftContentButton = 'Huỷ'
-                                  rightContentButton = 'Nạp thêm'
-                                  rightHandlerButton = {callbackMyWallet}
-                                  />}
+          {openDepositIcoin && <PopupDeposit />}
 
-          {openDisconnect && <PopupNotification 
-                                  key={'disconnect'}
-                                  onClose={() => {
-                                    setHidden('scroll');
-                                    setOpenDisconnect(false)}} 
-                                  title = 'Đường truyền không ổn định, vui lòng kiểm tra kết nối mạng'
-                                  leftContentButton = 'Thoát'
-                                  rightContentButton = 'Kết nối lại'
-                                  rightHandlerButton = {() => {
-                                    window.location.reload();
-                                  }}
-                                  />}
+          {openDisconnect && <PopupDisconnect />}
 
         </AnimatePresence>
 
-        {openGameResult && <PopupOpenCard
-                                onClose={()=> {
-                                  setOpenGameResult(false)
-                                  setOpenLostWin(true)}}
-                                  zodiacUrl={cardResultRef.current?.imgUrl ?? ''}
+        {openGameResult && <PopupOpenCard zodiacUrl={cardResultRef.current?.imgUrl ?? ''}
         />}
       </div>
     </GameInfoContext.Provider>

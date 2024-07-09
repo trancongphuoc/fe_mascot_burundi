@@ -13,13 +13,12 @@ import { GameInfoContext } from '../../store/game-info_context';
 
 interface BettingTableProps {
     onSelectCard: (card: ZodiacCardModel) => void;
-    openBetting: boolean;
-    statusGame: StatusGame;
 }
 
-export default function BettingTable({ onSelectCard, statusGame }: BettingTableProps) {
+export default function BettingTable({ onSelectCard }: BettingTableProps) {
     const [betCards, setBetCard] = useState<ZodiacCardModel[]>([]);
     const [selectCardId, setSelectCardId] = useState('');
+    const { stateGame, transactionId} = useContext(GameInfoContext);
 
     useEffect(() => {
         const stateRef = ref(db, '/zodiacGame/zodiacCards');
@@ -55,7 +54,7 @@ export default function BettingTable({ onSelectCard, statusGame }: BettingTableP
     const handleSetectCard = useCallback((cardId: ZodiacCardModel): void => {
         setSelectCardId(cardId.id);
         onSelectCard(cardId);
-    }, [selectCardId, statusGame]);
+    }, [selectCardId, stateGame, transactionId]);
 
     return (
         <div className="betting-table mt-5px">

@@ -18,7 +18,7 @@ const ShortGameHistory = function ShortGameHistory () {
     log('<ShortGameHistory />')
     const [gameHistories, setGameHistories] = useState<ZodiacCardHistory[]>([])
 
-    const { stateGame, transactionId, setGameHistory} = useContext(GameInfoContext);
+    const { stateGame, transactionId, setModal} = useContext(GameInfoContext);
 
     useEffect(()=> {
       const stateRef = ref(db, '/zodiacGame/state/zodiacCardsRecent');
@@ -57,7 +57,7 @@ const ShortGameHistory = function ShortGameHistory () {
 
 
     return (
-        <div className="result__left" onClick={() => setGameHistory("OPEN")}>
+        <div className="result__left" onClick={() => setModal({ state: "CLOSE", type: "GAMEHISTORY"})}>
           <p className='result__left--text'>Kết quả</p>
           {gameHistories.map((result) => (
             <Card

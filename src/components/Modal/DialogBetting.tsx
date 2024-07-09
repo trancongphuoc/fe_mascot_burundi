@@ -1,4 +1,4 @@
-import {  useState } from 'react';
+import {  useState, useContext } from 'react';
 import bgCardSelect from '../../assets/bg_card_selected.svg';
 import Icoin from '../../assets/icoin.svg';
 // import BgContent from '../../assets/bg_content_win.svg';
@@ -21,25 +21,25 @@ import audioConfirm from '../../../public/sounds/confirm_button.wav';
 // import AudioPlayer from './Audiobutton';
 import AnimatedCounter from '../animation/AnimatedCounter';
 import ButtonMoving from '../ButtonMoving';
+import { GameInfoContext } from '../../store/game-info_context';
 
 interface DialogBettingProps {
-  onClose: () => void;
+  // onClose: () => void;
   zodiacGameId: number;
   zodiacCardSelect: ZodiacCardModel;
   betIcoin: (zodiacCard: BetZodiacCard) => void;
-  openDepositPupup: () => void;
 }
 
 const DialogBetting = ({
-  onClose,
+  // onClose,
   zodiacGameId,
   zodiacCardSelect,
   betIcoin,
-  openDepositPupup
 } : DialogBettingProps) => {
   log('<DialogBetting />')
 
   const [bettingIcoin, setBettingIcoin] = useState({ from: 0, to:0 });
+  const { setModal } = useContext(GameInfoContext);
 
   // const clickAudioRef =  useAudio(audioBet);
   const confirmRef = useAudio(audioConfirm);
@@ -75,7 +75,7 @@ const DialogBetting = ({
       ...zodiacCardSelect,
       totalIcoinBetting: bettingIcoin.to ?? 0,
     }
-    onClose();
+    setModal({ state: "CLOSE", type: "BETTING" });
     betIcoin(betCard);
   };
 
@@ -94,7 +94,7 @@ const DialogBetting = ({
           to: newStake,
         }));
       } else {
-        openDepositPupup();
+        setModal({ state: "OPEN", type: "DEPOSIT" });
       }
     } else {
       console.log('no stake')
@@ -107,7 +107,7 @@ const DialogBetting = ({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="betting-popup-overlay"
-      onClick={onClose}
+      onClick={ () => setModal({ state: "CLOSE", type: "BETTING" })}
       transition={{ type: 'just'}}
       aria-labelledby="betting-dialog-title"
       role="dialog">
@@ -161,7 +161,7 @@ const DialogBetting = ({
         />
 
         <ButtonStake handleClick={sendDataOut}  className="betting__confirm mb-34px mt-14-5px">
-         <p className="betting__confirm--text">Xác nhận</p>
+          <p className="betting__confirm--text">Xác nhận</p>
         </ButtonStake>
   
       </motion.div>

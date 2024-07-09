@@ -1,20 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import PopupCenter from '../popup/PopupCenter';
 import LottieAnimation from './AnimationOpenCard';
 import animationData from '../../assets/json/animation_open_card.json';
 import SVG from 'react-inlinesvg';
+import { GameInfoContext } from '../../store/game-info_context';
 
 interface PopupOpenCardProps {
-  onClose: () => void;
   zodiacUrl: string;
 }
 
-const PopupOpenCard = ({ onClose, zodiacUrl }: PopupOpenCardProps) => {
+const PopupOpenCard = ({ zodiacUrl }: PopupOpenCardProps) => {
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
-
-  const handleAnimationComplete = () => {
-    onClose();
-  };
+  const { setModal } = useContext(GameInfoContext);
 
   useEffect(() => {
     const showSvgTimer = setTimeout(() => {
@@ -34,7 +31,6 @@ const PopupOpenCard = ({ onClose, zodiacUrl }: PopupOpenCardProps) => {
   return (
     <PopupCenter
       className='popup-overlay-history'
-      onClick={onClose}
       classNameChild='open-card'
     >
         <LottieAnimation
@@ -42,7 +38,7 @@ const PopupOpenCard = ({ onClose, zodiacUrl }: PopupOpenCardProps) => {
         style={{ width: 300, height: 300 }}
         speed={1}
         direction={1}
-        onComplete={handleAnimationComplete}
+        onComplete={ () => setModal({state: "CLOSE", type: "GAMERESULT"})}
         className='open-card--lottie-animation'
       />
        {isAnimationComplete && <SVG src={zodiacUrl} className='open-card--img'/>}

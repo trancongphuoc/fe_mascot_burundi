@@ -24,11 +24,11 @@ export default function Countdown() {
           setCount(amountExpect);
         }
     };
-    if (stateGame == "COUNTDOWN" || stateGame == "RESULTWAITING") {
+    // if (stateGame == "COUNTDOWN" || stateGame == "RESULTWAITING") {
       onValue(stateRef, handleData)
-    } else {
-      off(stateRef, 'value', handleData)
-    }
+    // } else {
+    //   off(stateRef, 'value', handleData)
+    // }
     return () => off(stateRef, 'value', handleData);
 
 }, [stateGame]);

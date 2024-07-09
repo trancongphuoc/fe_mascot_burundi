@@ -32,11 +32,12 @@ import { handleErrorAvartar } from '../DefaultUserAvartar';
 import LazyImage from '../LazyImage';
 import { formatNumber } from '../../utils/utils';
 // import { useEffect } from 'react';
+import { GameInfoContext } from '../../store/game-info_context';
+import { useContext } from 'react';
 
 
 
 interface DialogLostWinProps {
-  onClose: () => void;
   dialogType: DialogType;
   totalIcoin: number;
   topUsers: User[];
@@ -80,7 +81,9 @@ const crown = [CrownGold, CrownSliver, CrownBronze];
 // ]
 
 
-const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac, totalIcoin, dialogType}) => {
+const DialogLostWin = ({ topUsers, zodiac, totalIcoin, dialogType}: DialogLostWinProps) => {
+
+  const { setModal} = useContext(GameInfoContext);
 
   console.log('check dialogType', dialogType);
 
@@ -131,7 +134,7 @@ const DialogLostWin: React.FC<DialogLostWinProps> = ({ onClose, topUsers, zodiac
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      onClick={onClose}
+      onClick={() => setModal({state: "CLOSE", type: "WINLOST"})}
       className="lost-popup-overlay">
       <motion.div
         initial={{ opacity: 0, y: 50}}

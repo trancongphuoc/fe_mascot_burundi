@@ -1,10 +1,19 @@
 import { createContext } from "react";
 
-export const GameInfoContext = createContext({
+type GameInfoContextType = {
+    stateGame: StatusGame;
+    transactionId: number;
+    noGame: number;
+    cardResult: ZodiacCard | null;
+    setModal: (_state: ModalSet) => void;
+    
+};
+
+
+export const GameInfoContext = createContext<GameInfoContextType>({
     stateGame: "NONE",
     transactionId: 0,
     noGame: 0,
-    setGameHistory: (state : modalState) => {},
-    setRule: (state : modalState) => {},
-    setMyGameHistory: (state : modalState) => {},
+    cardResult: null,
+    setModal: (_state : ModalSet) => {},
 });

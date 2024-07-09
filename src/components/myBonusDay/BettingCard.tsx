@@ -13,7 +13,7 @@ export default function BettingCard({ betCard }: BettingCardProps) {
             <SVG src={Background} className="card__main--background"/>
             <SVG src={betCard.imageUrl} className="card__main--zodiac"/>
             <p className='card__main--bonus'>x{betCard.multiply}</p>
-        <h4 className='card__main--icoin'>{betCard.totalIcoinBetting} iCoin</h4>
-    </div>
+            <p className='card__main--icoin'>{betCard.totalIcoinBetting} iCoin</p>
+        </div>
     )
 }

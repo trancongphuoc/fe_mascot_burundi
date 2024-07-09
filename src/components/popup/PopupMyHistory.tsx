@@ -35,7 +35,7 @@ const PopupMineResult = () => {
 
   const [myHistory, setMyHistory] = useState<MyHistory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const { setMyGameHistory } = useContext(GameInfoContext);
+  const { setModal } = useContext(GameInfoContext);
 
   useEffect(() => {
       new Image().src = bgMyHistory;
@@ -68,7 +68,7 @@ const PopupMineResult = () => {
   return (
     <PopupCenter
       className='popup-overlay-history'
-      onClick={() => setMyGameHistory("CLOSE")}
+      onClick={() => setModal({ state: "CLOSE", type: "MYHISTORY"})}
       classNameChild='mine-popup'>
 
         {/* <SVG src={bgMyHistory} className="mine-popup__bg"/> */}
