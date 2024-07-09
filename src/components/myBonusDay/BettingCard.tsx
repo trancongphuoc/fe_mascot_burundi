@@ -1,11 +1,12 @@
 import SVG from 'react-inlinesvg';
 import Background from '../../assets/background_card_small.svg';
+import ToltalIcoinBetting from './TotalIcoinBetting';
 
 interface BettingCardProps {
     betCard: BetZodiacCard,
 }
 
-export default function BettingCard({ betCard }: BettingCardProps) {
+const BettingCard =  ({ betCard }: BettingCardProps) => {
     return (
         <div className="card__main">
             <p className="card__main--background-color">&nbsp;</p>
@@ -13,7 +14,9 @@ export default function BettingCard({ betCard }: BettingCardProps) {
             <SVG src={Background} className="card__main--background"/>
             <SVG src={betCard.imageUrl} className="card__main--zodiac"/>
             <p className='card__main--bonus'>x{betCard.multiply}</p>
-            <p className='card__main--icoin'>{betCard.totalIcoinBetting} iCoin</p>
+            <ToltalIcoinBetting bettingIcoin={betCard.totalIcoinBetting ?? 0} />
         </div>
     )
 }
+
+export default BettingCard;

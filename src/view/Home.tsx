@@ -17,7 +17,6 @@ import DialogLost from '../components/Modal/DialogLostWin.tsx';
 import PopupRule from '../components/popup/PopupRule';
 import PopupGameHistory from '../components/popup/PopupGameHistory';
 import PopupMyHistory from '../components/popup/PopupMyHistory';
-import PopupNotification from '../components/popup/PopupDisconnect.tsx';
 
 import { db } from '../firebase/config';
 import { ref, onValue, off } from "firebase/database";
@@ -404,17 +403,16 @@ const handleModal = useCallback((stateModal : ModalSet) => {
   }
 },[]); 
 
-
-  if (isLoadingRef.current) {
-    return <Loading className='home_loading'/>
-  }
-
   const ctxValue = {
     stateGame: gameInfo.stateGame,
     transactionId: gameInfo.transactionId,
     noGame: noGameRef.current,
     cardResult: cardResultRef.current,
     setModal: handleModal,
+  }
+
+  if (isLoadingRef.current) {
+    return <Loading className='home_loading'/>
   }
 
   return (
