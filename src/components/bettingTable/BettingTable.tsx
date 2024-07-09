@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
-import CountDown from '../CountDown';
+import { useCallback, useEffect, useState, useContext } from 'react';
+import CountDown from './CountDown';
 import { off, onValue, ref } from 'firebase/database';
 import { db } from '../../firebase/config';
 // import SVG from 'react-inlinesvg';
@@ -8,6 +8,7 @@ import { db } from '../../firebase/config';
 // import bbBettingTable from '../assets/frame_betting_table.svg';
 import bettingFrame from '../../assets/bg_betting_frame.png';
 import ZodiacCard from './ZodiacCard';
+import { GameInfoContext } from '../../store/game-info_context';
 
 
 interface BettingTableProps {
@@ -58,7 +59,7 @@ export default function BettingTable({ onSelectCard, statusGame }: BettingTableP
 
     return (
         <div className="betting-table mt-5px">
-            <CountDown className='betting-table--counter' statusGame={statusGame}/>
+            <CountDown />
 
             {/* <SVG src={bbBettingTable} className='betting-table__bg' cacheRequests={true}/> */}
 
@@ -73,31 +74,6 @@ export default function BettingTable({ onSelectCard, statusGame }: BettingTableP
                         selectCardId={selectCardId}
                         handleSelectedCard={handleSetectCard}
                     />
-                    // <div 
-                    //     key={index}
-                    //     onClick={() => handleSetectCard(betCard)}
-                    //     className="betting-table__card">
-
-                    //     <p className='betting-table__card--no'>{index + 1}</p>
-
-                    //     <SVG
-                    //         src={bgCardSelect}
-                    //         className='betting-table__card--bgNormal'
-                    //         style={{zIndex: betCard.id === selectCardId ? 2 : 1,
-                    //             opacity: betCard.id === selectCardId ? 1 : 0
-                    //         }}/> 
-                    //     <SVG
-                    //         src={bgCardNormal}
-                    //         className='betting-table__card--bgSelected'
-                    //         style={{zIndex: betCard.id === selectCardId ? 1 : 2,
-                    //             opacity: betCard.id === selectCardId ? 0 : 1
-                    //         }}/>
-
-                        
-                    //     <SVG src={betCard.imageUrl} cacheRequests={true} className='betting-table__card--zodiac'/>
-                    //     <p className='betting-table__card--bonus'>x{betCard.multiply}</p> 
-                    //     <p className='betting-table__card--players'>{betCard.counter} người</p>
-                    // </div>
                 ))}
             </div>
         </div>

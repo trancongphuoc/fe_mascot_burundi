@@ -1,0 +1,2 @@
+
+type modalState = "OPEN" | "CLOSE";

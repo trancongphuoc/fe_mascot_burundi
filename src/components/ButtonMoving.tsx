@@ -38,7 +38,6 @@ const ButtonMoving = ({content, setClick, cssClass} : ButtonMovingProps) => {
               className='button-moving--content'>{content}
           </motion.p>
       ))}{content}
-      {/* <button className='button-moving--button' onClick={(e) => handleClick(e)}>{content}</button> */}
     </button>
   );
 };

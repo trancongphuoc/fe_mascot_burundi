@@ -1,17 +1,18 @@
 
 import Icoin from '../../assets/icoin.svg';
 import ArrowWhite from '../../assets/arrow-white.svg';
-import SVG from 'react-inlinesvg';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { DataSnapshot, off, onValue, ref } from 'firebase/database';
 import { db } from '../../firebase/config';
 // import bgMyBonus from '../assets/bg_my_bonus_new.svg';
 import bgHeader from '../../assets/bg_my_bonus_today.png';
-import { formatNumber } from '../../utils/utils';
 import MyTotalIcoin from './MyTotalIcoin';
 import BettingCard from './BettingCard';
 import { log } from '../../utils/log';
 import DepositIcoin from './DepositIcoin';
+import { GameInfoContext } from '../../store/game-info_context';
+import IcoinWinToday from './IcoinWinTody';
+import NoGameToday from './NoGameToday';
 
 interface BetUser extends User {
     bettingCards?: BetZodiacCard[];
@@ -21,20 +22,21 @@ interface BetUser extends User {
 }
 
 interface MyInfoBetResultModel {
-    onOpen: () => void;
+    // onOpen: () => void;
     onUserDataChange: (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => void;
-    statusGame: StatusGame,
     betCards: BetZodiacCard[],
     betSuccess: boolean,
     fbId: string,
     // deposit: () => void;
 }
 
-function MyBonusToday({onOpen, statusGame, betCards, betSuccess, onUserDataChange, fbId} : MyInfoBetResultModel) {
+function MyBonusToday({ betCards, betSuccess, onUserDataChange, fbId} : MyInfoBetResultModel) {
     log('<MyBonusToday />')
     const [betUser, setBetUser] = useState<BetUser>()
-    const [icoinWinToday, setIIcoinWinToday] = useState<number>(0);
+    const [icoinWinToday, setIcoinWinToday] = useState<number>(0);
     const [bettingCards, setBettingCards] = useState< BetZodiacCard[]>([]);
+
+    const { stateGame, transactionId } =  useContext(GameInfoContext);
 
     useEffect(() => {
         const stateRef = ref(db, `/zodiacGame/players/${fbId}`);
@@ -72,9 +74,16 @@ function MyBonusToday({onOpen, statusGame, betCards, betSuccess, onUserDataChang
                 };
                 setBetUser(user);  
                 onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin ?? 0});   
-                if (statusGame !== "RESULT" && statusGame !== "RESULTWAITING") {
-                    setIIcoinWinToday(user.totalIcoinWinToday ?? 0);
-                }       
+                if (stateGame !== "RESULT" && stateGame !== "END") {
+                    setIcoinWinToday(user.totalIcoinWinToday ?? 0);
+                } else {
+                    if (user.isWin) {
+                        const iconValue = (user.totalIcoinWinToday ?? 0) - ( user.totalIcoinWin ?? 0)
+                        setIcoinWinToday(iconValue)
+                    } else {
+                        setIcoinWinToday(user.totalIcoinWinToday ?? 0);
+                    }
+                }
             }
         };
 
@@ -85,7 +94,7 @@ function MyBonusToday({onOpen, statusGame, betCards, betSuccess, onUserDataChang
         //     off(stateRef, 'value', handleData);
         // }        
         return () => off(stateRef, 'value', handleData);
-    }, [statusGame, fbId]);
+    }, [stateGame, transactionId, fbId]);
 
     useEffect(() => {
         if (betSuccess) {
@@ -108,16 +117,10 @@ function MyBonusToday({onOpen, statusGame, betCards, betSuccess, onUserDataChang
                 
                 <div className="header-left">
                     <p className='header-left--text'>Thưởng hôm nay:</p>
-                    <div className="totalIcoin">
-                        <SVG className='header-left--img' src={Icoin}/>
-                        <p className='header-left--icoin'>{formatNumber(icoinWinToday)}</p>
-                    </div>
+                    <IcoinWinToday icoinImg={Icoin} icoinWinToday={icoinWinToday} />
                 </div>
 
-                <div onClick={onOpen} className="header-right">
-                    <p className='header-right--text'>Số lần đoán hôm nay: {betUser?.noBettingToday ?? 0}</p>
-                    <SVG className='header-right--arrow' src={ArrowWhite}/>
-                </div>
+                <NoGameToday arrowImg={ArrowWhite} noGameToday={betUser?.noBettingToday ?? 0} />
                
                 <div className="section-myInfo__cards">
                     {bettingCards.map((betCard) => (<BettingCard key={betCard.cardId} betCard={betCard} />))}

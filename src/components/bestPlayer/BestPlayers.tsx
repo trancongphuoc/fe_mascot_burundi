@@ -1,15 +1,18 @@
 
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import SecondaryText from '../../assets/best-players-logo.svg';
 import SVG from 'react-inlinesvg';
 import bgBestPlayers from '../../assets/bg_best_players.png';
-import { getTopUsers } from '../../firebase/bestPlayers';
+// import { getTopUsers } from '../../firebase/bestPlayers';
 import { log } from '../../utils/log';
 import BestUser from './BestUser';
+import { GameInfoContext } from '../../store/game-info_context';
+import { off, onValue, ref } from 'firebase/database';
+import { db } from '../../firebase/config';
 
-interface BestPlayersPro {
-    statusGame: StatusGame
-}
+// interface BestPlayersPro {
+//     statusGame: StatusGame
+// }
 
 interface User {
     facebookUserId?: string;
@@ -20,10 +23,11 @@ interface User {
 }
 
 
-const BestPlayers = memo(function BestPlayers({statusGame} : BestPlayersPro) {
+const BestPlayers = function BestPlayers() {
     log('<BestPlayers />');
 
     const [topUsers, setTopUser] = useState<User[]>([])
+    const { stateGame, transactionId } = useContext(GameInfoContext);
 
     // const top123: User[] = [{
     //     name: "Dong Hoang Linh",
@@ -43,24 +47,33 @@ const BestPlayers = memo(function BestPlayers({statusGame} : BestPlayersPro) {
     // ]
 
     useEffect(() => {
-        let isMounted = true;
-
-        if (statusGame === "PREPARESTART" || topUsers.length === 0) {
-            getTopUsers()
-                .then(users => {
-                    const updateUsers = [...users];
-                    if (isMounted) setTopUser(updateUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)));
-                })
-                .catch(error => {
-                    setTopUser([])
-                    console.error('Error fetching top users:', error)
+        const stateRef = ref(db, '/zodiacGame/state/topUsers');
+        const handleData = (snapshot: any) => {
+            const data = snapshot.val();
+            if (data) {
+                const topUsers: User[] = Object.keys(data).map(userId => {
+                    const userData = data[userId];
+                    return {
+                        facebookUserId: userData.facebookUserId ?? '',
+                        name: userData.name ?? '',
+                        profileImageLink: userData.profileImageLink ?? '',
+                        totalIcoin: userData.totalIcoin,
+                        uid: userData.uid,
+                    };
                 });
-        }
-
-        return () => {
-            isMounted = false;
+                setTopUser([...topUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0))]);
+            } else {
+                setTopUser([]);
+            }
         };
-    }, [statusGame]);
+
+        if (stateGame !== "RESULT" && stateGame !== "RESULTWAITING" && stateGame !== "END") {
+            onValue(stateRef, handleData)
+          } else {
+            off(stateRef, 'value', handleData)
+          }
+        return () => off(stateRef, 'value', handleData);
+    }, [stateGame, transactionId]);
 
     return (    
         <div className="best-players mb-4-5px mt-30px">
@@ -81,6 +94,6 @@ const BestPlayers = memo(function BestPlayers({statusGame} : BestPlayersPro) {
             </ol>
         </div>
     );
-})
+}
 
 export default BestPlayers;

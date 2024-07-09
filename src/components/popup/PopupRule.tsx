@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { RULE_CONTENTS } from '../../model/RuleContent';
 import PopupCenter from './PopupCenter';
+import { GameInfoContext } from '../../store/game-info_context';
 
-interface PopupRuleProps {
-  onClose: () => void;
-}
-
-const PopupRule = ({ onClose }: PopupRuleProps) => {
+const PopupRule = () => {
   const [currentRuleIndex, setCurrentRuleIndex] = useState(0);
+  const { setRule: openRule } = useContext(GameInfoContext);
 
   useEffect(() => {
     RULE_CONTENTS.forEach((rule) => {
@@ -24,7 +22,7 @@ const PopupRule = ({ onClose }: PopupRuleProps) => {
   return (
     <PopupCenter
      className='popup-overlay-history'
-      onClick={onClose}
+      onClick={() => openRule("CLOSE")}
       classNameChild='rule'
     >
         <p className='rule--primary mt-20px'>Thể lệ Đoán Linh Vật</p>

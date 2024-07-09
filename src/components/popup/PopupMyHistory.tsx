@@ -5,7 +5,7 @@ import TextHistory from '../../assets/text-mine-history.svg';
 import IcoinLost from '../../assets/icoin-lost.svg';
 import IcoinWin from '../../assets/icoin_small.svg';
 import SVG from 'react-inlinesvg';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { fetchMyHistory } from '../../api/getMyHistory';
 // import bgMyHistory from '../../assets/bg_my_history.svg';
 import bgMyHistory from '../../assets/bg_my_history.png';
@@ -14,11 +14,8 @@ import Loading from '../Loading';
 import PopupCenter from './PopupCenter';
 import LazyImage from '../LazyImage';
 import { formatNumber } from '../../utils/utils';
+import { GameInfoContext } from '../../store/game-info_context';  
 
-
-interface PopupMineResultProps {
-  onClose: () => void;
-}
 
 interface MyHistory {
   time: Date,
@@ -34,10 +31,11 @@ interface BetZodiacCard extends ZodiacCardModel {
   totalIcoinBetting: number,
 }
 
-const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
+const PopupMineResult = () => {
 
   const [myHistory, setMyHistory] = useState<MyHistory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const { setMyGameHistory } = useContext(GameInfoContext);
 
   useEffect(() => {
       new Image().src = bgMyHistory;
@@ -70,7 +68,7 @@ const PopupMineResult: React.FC<PopupMineResultProps> = ({ onClose }) => {
   return (
     <PopupCenter
       className='popup-overlay-history'
-      onClick={onClose}
+      onClick={() => setMyGameHistory("CLOSE")}
       classNameChild='mine-popup'>
 
         {/* <SVG src={bgMyHistory} className="mine-popup__bg"/> */}

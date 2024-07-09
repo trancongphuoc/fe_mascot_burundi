@@ -4,6 +4,7 @@ import SVG from 'react-inlinesvg';
 
 import bgCard from '../../assets/bg_card_normal.png';
 import bgCardSelect from '../../assets/bg_card_normal_select.png';
+import BettingPLayers from './BettingPlayer';
 
 interface ZodiacCardPro {
     index: number,
@@ -55,6 +56,6 @@ export default function ZodiacCard({betCard, handleSelectedCard, index, selectCa
         
         <SVG src={betCard.imageUrl} cacheRequests={true} className='betting-table__card--zodiac'/>
         <p className='betting-table__card--bonus'>x{betCard.multiply}</p> 
-        <p className='betting-table__card--players'>{betCard.counter} người</p>
+        <BettingPLayers numberOfPlayer={betCard.counter ?? 0}/>
     </div>
 }

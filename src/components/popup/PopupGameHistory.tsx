@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import SVG from 'react-inlinesvg';
 
 import { GameHistory } from '../../model/GameHistory';
@@ -16,23 +16,25 @@ import TextResult from '../../assets/text-result.svg';
 import Loading from '../Loading';
 import PopupCenter from './PopupCenter';
 import LazyImage from '../LazyImage';
+import { GameInfoContext } from '../../store/game-info_context';
 
 
 interface PopupGameHistoryProps {
-  onClose: () => void;
   zodiacs: string[];
 }
 
-const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ onClose, zodiacs }) => {
-  const [gameHistory, setGameHistory] = useState<GameHistory[]>([]);
+const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ zodiacs }) => {
+  const [gameHistories, setGameHistories] = useState<GameHistory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const { setGameHistory } = useContext(GameInfoContext)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetchGameHistory();
         if (data != null) {
-          setGameHistory(data);
+          setGameHistories(data);
         }
       } catch (error) {
         console.error('Error fetching game history:', error);
@@ -46,7 +48,7 @@ const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ onClose, zodiacs })
   return (
     <PopupCenter
     className='popup-overlay-history'
-    onClick={onClose}
+    onClick={() => setGameHistory("CLOSE")}
     classNameChild='history-game-popup'>
         {/* <SVG src={bgHistoryGame} className="history-game-popup__bg" /> */}
         {/* <img src={bgHistoryGame} className="history-game-popup__bg" /> */}
@@ -74,7 +76,7 @@ const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ onClose, zodiacs })
           <Loading className="history-game-popup__loading"/>
         ) : (
           <div className="history-game-popup__content">
-            {gameHistory.map((game, index) => (
+            {gameHistories.map((game, index) => (
               <div key={index} className="history-game-popup__item">
                 <p className='history-game-popup__item--index'>{game.noGame}</p>
                 {[...Array(8)].map((_, i) => (
