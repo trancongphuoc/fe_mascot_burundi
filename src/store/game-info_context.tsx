@@ -8,6 +8,7 @@ type GameInfoContextType = {
     setModal: (_state: ModalSet) => void;
     selectedCard: BetZodiacCard | null;
     setSelectedCard: (_card: ZodiacCardModel) => void;
+    betting: (_card: BetZodiacCard) => void;
     
 };
 
@@ -20,4 +21,5 @@ export const GameInfoContext = createContext<GameInfoContextType>({
     setModal: (_state : ModalSet) => {},
     selectedCard: null,
     setSelectedCard: (_card: ZodiacCardModel) => {},
+    betting: (_card: BetZodiacCard) => {}
 });

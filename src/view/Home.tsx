@@ -294,12 +294,12 @@ export default function Home() {
   const handleCardSelection = (card: ZodiacCardModel) => {
     log('function select card');
     if (statusGame === "COUNTDOWN") {
-      const betCard: BetZodiacCard = {
+        const betCard: BetZodiacCard = {
         ...card,
         transactionId: transactionId.current ?? 0,
       };
 
-      selectedCardRef.current = betCard;
+      selectedCardRef.current = {...betCard};
       setOpenBetting(true);
       setHidden('hidden');
     } else {
@@ -312,7 +312,7 @@ const betCardRef = useRef<BetZodiacCard[]>([]);
 const betSuccessRef = useRef<boolean>(false);
 
 // send icoin betting
-const betGame = async (zodiacCard: BetZodiacCard) => {
+const handleBetting = async (zodiacCard: BetZodiacCard) => {
   log('function betting');
   let cardFound = false;
   
@@ -411,6 +411,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
     selectedCard: selectedCardRef.current,
     setModal: handleModal,
     setSelectedCard: handleCardSelection,
+    betting: handleBetting,
   }
 
   if (isLoadingRef.current) {
@@ -441,27 +442,21 @@ const handleModal = useCallback((stateModal : ModalSet) => {
         </Toaster>
         <Header/>
         <ShortInfoGame/>
-
-        <BettingTable onSelectCard={handleCardSelection} />
-        
+        <BettingTable />
         <MyBonusToday
           onUserDataChange={handleIsWin}
           betCards={betCardRef.current}
           betSuccess={betSuccessRef.current}
           fbId={fbIdRef.current}
           />
-    
         <BestPlayers/>
 
         {/* Dialog when click */}
+
         <AnimatePresence>
           {openRule && <PopupRule />}
 
-          {openBetting && selectedCardRef.current && (
-                                          <DialogBetting
-                                              zodiacCardSelect={selectedCardRef.current}
-                                              betIcoin={betGame}
-                                              zodiacGameId={transactionId.current ?? 0}/>)}
+          {openBetting && selectedCardRef.current && <DialogBetting />}
 
           {openLostWin && <DialogLost
                               dialogType={dialogTypeRef.current}

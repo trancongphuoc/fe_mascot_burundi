@@ -23,28 +23,16 @@ import AnimatedCounter from '../animation/AnimatedCounter';
 import ButtonMoving from '../ButtonMoving';
 import { GameInfoContext } from '../../store/game-info_context';
 
-interface DialogBettingProps {
-  // onClose: () => void;
-  zodiacGameId: number;
-  zodiacCardSelect: ZodiacCardModel;
-  betIcoin: (zodiacCard: BetZodiacCard) => void;
-}
 
-const DialogBetting = ({
-  // onClose,
-  zodiacGameId,
-  zodiacCardSelect,
-  betIcoin,
-} : DialogBettingProps) => {
+
+const DialogBetting = () => {
   log('<DialogBetting />')
 
   const [bettingIcoin, setBettingIcoin] = useState({ from: 0, to:0 });
-  const { setModal } = useContext(GameInfoContext);
+  const { setModal, selectedCard, transactionId, betting } = useContext(GameInfoContext);
 
   // const clickAudioRef =  useAudio(audioBet);
   const confirmRef = useAudio(audioConfirm);
-
-  useAudio
 
   // function playAudio () {
   //   const audio = useAudio(audioBet);
@@ -55,12 +43,12 @@ const DialogBetting = ({
 
   const sendDataOut = () => {
     confirmRef();
-    if (!zodiacGameId) {
+    if (!transactionId) {
       toast.dismiss();
       toast("Thiếu thông tin game", { duration: 2000, position: 'bottom-center'});
       return;
     }
-    if (!zodiacCardSelect) {
+    if (!selectedCard) {
       toast.dismiss();
       toast("Thiếu card select", { duration: 2000, position: 'bottom-center'});
       return;
@@ -72,11 +60,12 @@ const DialogBetting = ({
     }
 
     const betCard: BetZodiacCard = {
-      ...zodiacCardSelect,
+      ...selectedCard,
       totalIcoinBetting: bettingIcoin.to ?? 0,
     }
+
     setModal({ state: "CLOSE", type: "BETTING" });
-    betIcoin(betCard);
+    betting(betCard);
   };
 
   const handleStake = (stake: number) => {
@@ -128,8 +117,8 @@ const DialogBetting = ({
         />
         
         <SVG src={bgCardSelect} className="betting--zodiac-background" onClick={(e) => e.stopPropagation()}/>
-        {zodiacCardSelect.imageUrl && <SVG
-                                        src={zodiacCardSelect.imageUrl}
+        {selectedCard?.imageUrl && <SVG
+                                        src={selectedCard?.imageUrl ?? ""}
                                         onClick={(e) => e.stopPropagation()}
                                         className="betting--zodiac-card" />}
         <SVG src={BgLighter} className="betting--BgLighter" onClick={(e) => e.stopPropagation()}/>

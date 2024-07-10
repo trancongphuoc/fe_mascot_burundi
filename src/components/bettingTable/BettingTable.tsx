@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import CountDown from './CountDown';
 import { off, onValue, ref } from 'firebase/database';
 import { db } from '../../firebase/config';
@@ -11,14 +11,13 @@ import ZodiacCard from './ZodiacCard';
 import { GameInfoContext } from '../../store/game-info_context';
 
 
-interface BettingTableProps {
-    onSelectCard: (card: ZodiacCardModel) => void;
-}
+// interface BettingTableProps {
+//     onSelectCard: (card: ZodiacCardModel) => void;
+// }
 
-export default function BettingTable({ onSelectCard }: BettingTableProps) {
+export default function BettingTable() {
     const [betCards, setBetCard] = useState<ZodiacCardModel[]>([]);
-    const [selectCardId, setSelectCardId] = useState('');
-    const { stateGame, transactionId} = useContext(GameInfoContext);
+    const { stateGame, transactionId } = useContext(GameInfoContext);
 
     useEffect(() => {
         const stateRef = ref(db, '/zodiacGame/zodiacCards');
@@ -49,12 +48,12 @@ export default function BettingTable({ onSelectCard }: BettingTableProps) {
         return () => {
             off(stateRef, 'value', handleData);
         };
-    }, []);
+    }, [stateGame, transactionId]);
 
-    const handleSetectCard = useCallback((cardId: ZodiacCardModel): void => {
-        setSelectCardId(cardId.id);
-        onSelectCard(cardId);
-    }, [selectCardId, stateGame, transactionId]);
+    // const handleSetectCard = useCallback((cardId: ZodiacCardModel): void => {
+    //     // setSelectCardId(cardId.id);
+    //     onSelectCard(cardId);
+    // }, [stateGame, transactionId]);
 
     return (
         <div className="betting-table mt-5px">
@@ -70,8 +69,6 @@ export default function BettingTable({ onSelectCard }: BettingTableProps) {
                         key={betCard.id}
                         index={index}
                         betCard={betCard}
-                        selectCardId={selectCardId}
-                        handleSelectedCard={handleSetectCard}
                     />
                 ))}
             </div>

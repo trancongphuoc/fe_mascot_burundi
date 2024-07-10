@@ -5,19 +5,21 @@ import SVG from 'react-inlinesvg';
 import bgCard from '../../assets/bg_card_normal.png';
 import bgCardSelect from '../../assets/bg_card_normal_select.png';
 import BettingPLayers from './BettingPlayer';
+import { GameInfoContext } from '../../store/game-info_context';
+import { useContext } from 'react';
 
 interface ZodiacCardPro {
     index: number,
     betCard: ZodiacCardModel,
-    selectCardId: string,
-    handleSelectedCard: (betCard: ZodiacCardModel) => void
-}
-export default function ZodiacCard({betCard, handleSelectedCard, index, selectCardId}: ZodiacCardPro) {
 
-    const isActive = selectCardId === betCard.id;
+}
+export default function ZodiacCard({betCard, index}: ZodiacCardPro) {
+    const { selectedCard, setSelectedCard } = useContext(GameInfoContext);
+
+    const isActive = selectedCard?.id === betCard.id;
 
     return <div 
-        onClick={() => handleSelectedCard(betCard)}
+        onClick={() => setSelectedCard(betCard)}
         className="betting-table__card">
 
         <p className='betting-table__card--no'>{index + 1}</p>
@@ -54,7 +56,7 @@ export default function ZodiacCard({betCard, handleSelectedCard, index, selectCa
             }}/> */}
 
         
-        <SVG src={betCard.imageUrl} cacheRequests={true} className='betting-table__card--zodiac'/>
+        <SVG src={betCard.imageUrl} className='betting-table__card--zodiac'/>
         <p className='betting-table__card--bonus'>x{betCard.multiply}</p> 
         <BettingPLayers numberOfPlayer={betCard.counter ?? 0}/>
     </div>
