@@ -408,7 +408,9 @@ const handleModal = useCallback((stateModal : ModalSet) => {
     transactionId: gameInfo.transactionId,
     noGame: noGameRef.current,
     cardResult: cardResultRef.current,
+    selectedCard: selectedCardRef.current,
     setModal: handleModal,
+    setSelectedCard: handleCardSelection,
   }
 
   if (isLoadingRef.current) {

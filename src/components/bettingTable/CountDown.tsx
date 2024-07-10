@@ -1,6 +1,5 @@
 import { DataSnapshot, off, onValue, ref } from 'firebase/database';
-import { useState, useEffect, useContext } from 'react';
-import { GameInfoContext } from '../../store/game-info_context';
+import { useState, useEffect } from 'react';
 import { db } from '../../firebase/config';
 import { log } from '../../utils/log';
 
@@ -12,7 +11,6 @@ import { log } from '../../utils/log';
 export default function Countdown() {
   log('<Countdown />')
   const [count, setCount] = useState(0);
-  const { stateGame } = useContext(GameInfoContext);
 
   useEffect(() => {
     const stateRef = ref(db, '/zodiacGame/state/countDown');
@@ -31,7 +29,7 @@ export default function Countdown() {
     // }
     return () => off(stateRef, 'value', handleData);
 
-}, [stateGame]);
+}, [setCount]);
 
   return (
     <div className='betting-table--counter'>

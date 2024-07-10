@@ -13,13 +13,13 @@ import { GameInfoContext } from '../store/game-info_context';
 const Header = function Header() {
     log('<Header />');
 
-    const { noGame, setRule: openRule } = useContext( GameInfoContext )
+    const { noGame, setModal} = useContext( GameInfoContext )
 
     return (
         <header className='section-header u-margin-top-huge1'>
             <SVG src={PrimaryText} className='u-margin-minus-bottom-big' />
             <p className='heading-secondary'>Hôm nay {noGame ?? 0} Ván</p>
-            <SVG src={Rule} className='section-header__rule' onClick={() => openRule("OPEN")}/>   
+            <SVG src={Rule} className='section-header__rule' onClick={() =>setModal({state: "OPEN", type: "RULE"})}/>   
         </header>
     );
 };
