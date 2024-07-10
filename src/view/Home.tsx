@@ -164,6 +164,8 @@ export default function Home() {
                 transactionId: data.transactionId ?? 0,
               }))
 
+    
+
               // setGame({
               //     isPause: data.isPause,
               //     noGameToday: data.noGameToday,

@@ -150,7 +150,7 @@ const DialogBetting = () => {
         />
 
         <ButtonStake handleClick={sendDataOut}  className="betting__confirm mb-34px mt-14-5px">
-          <p className="betting__confirm--text">Xác nhận</p>
+          xác nhận
         </ButtonStake>
   
       </motion.div>

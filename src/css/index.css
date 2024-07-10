@@ -1455,6 +1455,10 @@ h4 {
   border-radius: 23px;
   overflow: hidden;
   z-index: 5;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 46px;
+  background-image: url(../assets/bg_confirm_btn.svg);
   outline: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
@@ -1465,46 +1469,6 @@ h4 {
   -webkit-user-drag: none;
   border: none;
   background-color: transparent;
-}
-.betting__confirm::before {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 234px;
-  height: 38px;
-  border-radius: 23px;
-  background-image: linear-gradient(to bottom, #FEE65E, #FFDB23);
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.betting__confirm::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 23px;
-  background-image: linear-gradient(to bottom, #FFBF5C, #FFF3C4);
-  z-index: 1;
-  border: 1.5px solid #136761;
-}
-.betting__confirm--text {
-  position: relative;
-  z-index: 5;
-  margin: 0;
-  font-size: 19px;
-  font-weight: 600;
-  line-height: 46px;
-}
-.betting__confirm--text::before {
-  content: "";
-  width: 20px;
-  height: auto;
-  display: inline-block;
 }
 
 .lost-popup-overlay {

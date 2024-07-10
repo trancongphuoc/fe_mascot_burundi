@@ -166,51 +166,57 @@
         overflow: hidden;
         z-index: 5;
 
-        @include non_select;
-        @include non_decor_button;  
-    
-        &::before {
-            content: '';
-            position: absolute;
-            display: block;
-            width: 234px;
-            height: 38px;
-            border-radius: 23px;
-            background-image: linear-gradient(to bottom, $color-6, $color-7);
-            z-index: 2;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    
-        &::after {
-            content: '';
-            display: block ;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 23px;
-            background-image: linear-gradient(to bottom, $color-3, $color-4);
-            z-index: 1;
-            border: 1.5px solid $color-2;
-        }
-
-        &--text {
-            position: relative;
-            z-index: 5;
-            margin: 0;
             font-size: 19px;
             font-weight: 600;
             line-height: 46px;
 
-            &::before {
-                content: '';
-                width: 20px;
-                height: auto;
-                display: inline-block;
-            }
-        }
+        background-image: url(../assets/bg_confirm_btn.svg);
+
+        @include non_select;
+        @include non_decor_button;  
+    
+        // &::before {
+        //     content: '';
+        //     position: absolute;
+        //     display: block;
+        //     width: 234px;
+        //     height: 38px;
+        //     border-radius: 23px;
+        //     background-image: linear-gradient(to bottom, $color-6, $color-7);
+        //     z-index: 2;
+        //     top: 50%;
+        //     left: 50%;
+        //     transform: translate(-50%, -50%);
+        // }
+    
+        // &::after {
+        //     content: '';
+        //     display: block ;
+        //     position: absolute;
+        //     top: 0;
+        //     left: 0;
+        //     right: 0;
+        //     bottom: 0;
+        //     border-radius: 23px;
+        //     background-image: linear-gradient(to bottom, $color-3, $color-4);
+        //     z-index: 1;
+        //     border: 1.5px solid $color-2;
+        // }
+
+        // &--text {
+        //     position: relative;
+        //     z-index: 5;
+        //     margin: 0;
+        //     font-size: 19px;
+        //     font-weight: 600;
+        //     line-height: 46px;
+
+        //     &::before {
+        //         content: '';
+        //         width: 20px;
+        //         height: auto;
+        //         display: inline-block;
+        //     }
+        // }
     }
 }
