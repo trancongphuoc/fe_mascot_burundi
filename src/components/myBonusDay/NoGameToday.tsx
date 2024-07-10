@@ -12,10 +12,10 @@ interface NoGameTodayProps {
 const NoGameToday = memo(function NoGameToday ({ arrowImg, noGameToday}: NoGameTodayProps) {
     log('<NoGameToday />')
     
-    const { setMyGameHistory } =  useContext(GameInfoContext);
+    const { setModal } =  useContext(GameInfoContext);
 
     return (
-        <div onClick={ () => setMyGameHistory("OPEN") } className="header-right">
+        <div onClick={ () => setModal({state: "OPEN", type: "MYHISTORY"}) } className="header-right">
             <p className='header-right--text'>Số lần đoán hôm nay: {noGameToday}</p>
             <SVG className='header-right--arrow' src={arrowImg}/>
         </div>)

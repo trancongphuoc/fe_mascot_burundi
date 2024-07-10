@@ -5,13 +5,10 @@ import animationData from '../../assets/json/animation_open_card.json';
 import SVG from 'react-inlinesvg';
 import { GameInfoContext } from '../../store/game-info_context';
 
-interface PopupOpenCardProps {
-  zodiacUrl: string;
-}
 
-const PopupOpenCard = ({ zodiacUrl }: PopupOpenCardProps) => {
+const PopupOpenCard = () => {
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
-  const { setModal } = useContext(GameInfoContext);
+  const { setModal, cardResult } = useContext(GameInfoContext);
 
   useEffect(() => {
     const showSvgTimer = setTimeout(() => {
@@ -41,7 +38,7 @@ const PopupOpenCard = ({ zodiacUrl }: PopupOpenCardProps) => {
         onComplete={ () => setModal({state: "CLOSE", type: "GAMERESULT"})}
         className='open-card--lottie-animation'
       />
-       {isAnimationComplete && <SVG src={zodiacUrl} className='open-card--img'/>}
+       {isAnimationComplete && <SVG src={cardResult?.imgUrl ?? ""} className='open-card--img'/>}
     </PopupCenter>
   );
 };

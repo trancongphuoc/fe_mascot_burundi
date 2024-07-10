@@ -40,7 +40,6 @@ import { useContext } from 'react';
 interface DialogLostWinProps {
   dialogType: DialogType;
   totalIcoin: number;
-  topUsers: User[];
   zodiac: string;
 }
 
@@ -81,9 +80,9 @@ const crown = [CrownGold, CrownSliver, CrownBronze];
 // ]
 
 
-const DialogLostWin = ({ topUsers, zodiac, totalIcoin, dialogType}: DialogLostWinProps) => {
+const DialogLostWin = ({zodiac, totalIcoin, dialogType}: DialogLostWinProps) => {
 
-  const { setModal} = useContext(GameInfoContext);
+  const { setModal, topUsers } = useContext(GameInfoContext);
 
   console.log('check dialogType', dialogType);
 

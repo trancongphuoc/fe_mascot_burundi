@@ -49,23 +49,6 @@ import PopupDeposit from '../components/popup/PopupDeposit.tsx';
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
 
-
-// interface ZodiacGameData {
-//   isPause: boolean,
-//   noGameToday: number,
-//   status: StatusGame,
-//   transactionId: number,
-//   zodiacCard: ZodiacCard,
-//   topUser?: User[],
-  
-// }
-
-interface GameInfo {
-  stateGame : StatusGame,
-  transactionId: number,
-
-}
-
 export default function Home() {
   const parameters = useQueryParams();
 
@@ -95,7 +78,7 @@ export default function Home() {
   const noGameRef = useRef<number>(0);
   const transactionId = useRef<number>(0);
 
-  const zodiacImgs = useRef<ZodiacCardModel[]>([])
+  // const zodiacImgs = useRef<ZodiacCardModel[]>([])
 
   // const gameInfoCtx = useContext(GameInfoContext);
 
@@ -409,6 +392,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
     noGame: noGameRef.current,
     cardResult: cardResultRef.current,
     selectedCard: selectedCardRef.current,
+    topUsers: topUserRef.current,
     setModal: handleModal,
     setSelectedCard: handleCardSelection,
     betting: handleBetting,
@@ -461,7 +445,6 @@ const handleModal = useCallback((stateModal : ModalSet) => {
           {openLostWin && <DialogLost
                               dialogType={dialogTypeRef.current}
                               totalIcoin={totalIcoinWinRef.current}
-                              topUsers={topUserRef.current ?? []}
                               zodiac={cardResultRef.current?.imgUrl ?? ''} />}
 
           {openGameHistory && <PopupGameHistory zodiacs={img}/>}
@@ -474,8 +457,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
 
         </AnimatePresence>
 
-        {openGameResult && <PopupOpenCard zodiacUrl={cardResultRef.current?.imgUrl ?? ''}
-        />}
+        {openGameResult && <PopupOpenCard />}
       </div>
     </GameInfoContext.Provider>
     
