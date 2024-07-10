@@ -64,7 +64,7 @@ const DialogBetting = () => {
       totalIcoinBetting: bettingIcoin.to ?? 0,
     }
 
-    setModal({ state: "CLOSE", type: "BETTING" });
+    // setModal({ state: "CLOSE", type: "BETTING" });
     betting(betCard);
   };
 

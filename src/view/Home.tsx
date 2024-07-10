@@ -298,6 +298,9 @@ const betSuccessRef = useRef<boolean>(false);
 
 // send icoin betting
 const handleBetting = async (zodiacCard: BetZodiacCard) => {
+  setOpenBetting(prevState => !prevState);
+  
+
   log('function betting');
   let cardFound = false;
   
@@ -332,6 +335,7 @@ const handleBetting = async (zodiacCard: BetZodiacCard) => {
       betSuccessRef.current = false;
     }
   }
+  selectedCardRef.current = null;
 };
 
   const updateOnlineStatus = useCallback(() => {

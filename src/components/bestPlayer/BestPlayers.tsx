@@ -3,7 +3,7 @@ import { useEffect, useContext } from 'react';
 import SecondaryText from '../../assets/best-players-logo.svg';
 import SVG from 'react-inlinesvg';
 import bgBestPlayers from '../../assets/bg_best_players.png';
-import { getTopUsers } from '../../firebase/bestPlayers';
+// import { getTopUsers } from '../../firebase/bestPlayers';
 import { log } from '../../utils/log';
 import BestUser from './BestUser';
 import { GameInfoContext } from '../../store/game-info_context';

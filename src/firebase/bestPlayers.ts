@@ -9,7 +9,7 @@ interface User {
     uid: string;
 }
 
-export const getTopUsers = (): Promise<User[]> => {
+const getTopUsers = (): Promise<User[]> => {
     return new Promise((resolve, reject) => {
         const stateRef = ref(db, '/zodiacGame/state/topUsers');
         const handleData = (snapshot: any) => {
@@ -38,3 +38,5 @@ export const getTopUsers = (): Promise<User[]> => {
         onValue(stateRef, handleData, handleError);
     });
 };
+
+export default getTopUsers;
