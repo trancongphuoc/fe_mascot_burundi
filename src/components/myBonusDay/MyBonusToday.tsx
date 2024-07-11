@@ -87,12 +87,8 @@ function MyBonusToday({ betCards, betSuccess, onUserDataChange, fbId} : MyInfoBe
             }
         };
 
-        //listen when fail betting
-        // if (statusGame !== "RESULT" && statusGame !== "END" && statusGame !== "RESULTWAITING") {
-            onValue(stateRef, handleData);
-        // } else {
-        //     off(stateRef, 'value', handleData);
-        // }        
+        onValue(stateRef, handleData);
+      
         return () => off(stateRef, 'value', handleData);
     }, [stateGame, transactionId, fbId]);
 
@@ -100,13 +96,13 @@ function MyBonusToday({ betCards, betSuccess, onUserDataChange, fbId} : MyInfoBe
         if (betSuccess) {
             setBettingCards(betCards);
         }
-    }, [betSuccess, betCards]);
+    }, [betSuccess, betCards, transactionId]);
     
     useEffect(() => {
         if (!betSuccess) {
             setBettingCards(betUser?.bettingCards ?? []);
         }
-    }, [betSuccess, betUser]); 
+    }, [betSuccess, betUser, transactionId]); 
 
     return (
         <>  
