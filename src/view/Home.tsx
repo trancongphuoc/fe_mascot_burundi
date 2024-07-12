@@ -45,6 +45,7 @@ import { GameInfoContext } from '../store/game-info_context.tsx';
 import ShortInfoGame from '../components/shortInfoGame/ShortInfoGame.tsx';
 import PopupDisconnect from '../components/popup/PopupDisconnect.tsx';
 import PopupDeposit from '../components/popup/PopupDeposit.tsx';
+import PopupOpenCircle from '../components/openCard/PopupOpenCircle.tsx';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -59,6 +60,8 @@ export default function Home() {
   const [gameInfo, setGameInfo] = useState<GameInfo>({stateGame: "NONE", transactionId: 0 })
 
   const [openGameResult, setOpenGameResult] = useState(false);
+  const [openGameCircle, setopenGameCircle] = useState(false);
+
   const [openRule, setOpenRule] = useState(false);
   const [openLostWin, setOpenLostWin] = useState(false);
   const [openGameHistory, setOpenGameHistory] = useState(false);
@@ -259,14 +262,22 @@ export default function Home() {
           setHidden('scroll');
         };
 
+        if (!openGameCircle) {
+          setopenGameCircle(true)
+          setHidden('hidden');
+        };
+        break;
+      case 'END':
+
+      if (openGameCircle) {
+        setopenGameCircle(false)
+        setHidden('scroll');
+      };
         if (!openGameResult) {
           setOpenGameResult(true)
           setHidden('hidden');
         };
         break;
-      case 'END':
-        break;
-
     }
 
     toast.dismiss();
@@ -383,6 +394,9 @@ const handleModal = useCallback((stateModal : ModalSet) => {
     case "DISCONNECT":
       setOpenDisconnect(prevState => !prevState);
       break;
+    case "GAMECIRCLE":
+      setopenGameCircle(prevState => !prevState);
+      break;
     case "GAMERESULT":
       setOpenGameResult(prevState => !prevState);
       setOpenLostWin(prevState => !prevState);
@@ -464,6 +478,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
         </AnimatePresence>
 
         {openGameResult && <PopupOpenCard />}
+        {openGameCircle && <PopupOpenCircle />}
       </div>
     </GameInfoContext.Provider>
     

@@ -7,6 +7,7 @@ type ModalType = "RULE" |
                 "MYHISTORY" |
                 "DEPOSIT" |
                 "DISCONNECT" |
+                "GAMECIRCLE" |
                 "GAMERESULT";
 
 interface ModalSet {

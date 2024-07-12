@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import PopupCenter from '../popup/PopupCenter';
 import LottieAnimation from './AnimationOpenCard';
-import animationData from '../../assets/json/animation_open_card.json';
+import animationData from '../../assets/json/game_ketqua3s.json';
 import SVG from 'react-inlinesvg';
 import { GameInfoContext } from '../../store/game-info_context';
 
@@ -13,11 +13,11 @@ const PopupOpenCard = () => {
   useEffect(() => {
     const showSvgTimer = setTimeout(() => {
       setIsAnimationComplete(true);
-    }, 5500); // 5.5 seconds delay
+    }, 1500); // 5.5 seconds delay
 
     const hideSvgTimer = setTimeout(() => {
       setIsAnimationComplete(false);
-    }, 7500); // 7 seconds delay
+    }, 2700); // 7 seconds delay
 
     return () => {
       clearTimeout(showSvgTimer);
