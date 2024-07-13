@@ -1,14 +1,13 @@
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import PopupCenter from '../popup/PopupCenter';
 import LottieAnimation from './AnimationOpenCard';
 import animationData from '../../assets/json/game_xoay.json';
-import SVG from 'react-inlinesvg';
 import { GameInfoContext } from '../../store/game-info_context';
 
 
 const PopupOpenCircle = () => {
   // const [isAnimationComplete, setIsAnimationComplete] = useState(false);
-  const { setModal, cardResult } = useContext(GameInfoContext);
+  const { setModal } = useContext(GameInfoContext);
 
   // useEffect(() => {
   //   const showSvgTimer = setTimeout(() => {

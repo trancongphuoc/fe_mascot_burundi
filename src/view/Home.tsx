@@ -221,14 +221,28 @@ export default function Home() {
 
     switch (statusGame) {
       case 'NONE':
+        if (openGameResult) {
+          setOpenGameResult(false)
+          setHidden('scroll');
+        };
         break;
       case 'PREPARESTART':
 
         betCardRef.current = [];
         betSuccessRef.current = true;
 
+        if (openGameResult) {
+          setOpenGameResult(false)
+          setHidden('scroll');
+        };
+
         break;
       case 'COUNTDOWN':
+        if (openGameResult) {
+          setOpenGameResult(false)
+          setHidden('scroll');
+        };
+
         if (openLostWin) {
           setOpenLostWin(false);
           setHidden('scroll');
@@ -246,7 +260,11 @@ export default function Home() {
           setHidden('scroll');
         };
         break;
-      case 'RESULTWAITING':        
+      case 'RESULTWAITING':   
+        if (openGameResult) {
+          setOpenGameResult(false)
+          setHidden('scroll');
+        };     
         break;
       case 'RESULT':
         if (openRule) {

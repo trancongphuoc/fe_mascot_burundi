@@ -1,5 +1,5 @@
 
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import SecondaryText from '../../assets/best-players-logo.svg';
 import SVG from 'react-inlinesvg';
 import bgBestPlayers from '../../assets/bg_best_players.png';
@@ -7,8 +7,8 @@ import bgBestPlayers from '../../assets/bg_best_players.png';
 import { log } from '../../utils/log';
 import BestUser from './BestUser';
 import { GameInfoContext } from '../../store/game-info_context';
-// import { off, onValue, ref } from 'firebase/database';
-// import { db } from '../../firebase/config';
+import { off, onValue, ref } from 'firebase/database';
+import { db } from '../../firebase/config';
 
 // interface BestPlayersPro {
 //     statusGame: StatusGame
@@ -26,8 +26,8 @@ import { GameInfoContext } from '../../store/game-info_context';
 const BestPlayers = function BestPlayers() {
     log('<BestPlayers />');
 
-    // const [topUsers, setTopUser] = useState<User[]>([])
-    const { stateGame, transactionId, topUsers } = useContext(GameInfoContext);
+    const [topUsers, setTopUser] = useState<User[]>([])
+    const { stateGame, transactionId } = useContext(GameInfoContext);
 
     // const top123: User[] = [{
     //     name: "Dong Hoang Linh",
@@ -47,32 +47,32 @@ const BestPlayers = function BestPlayers() {
     // ]
 
     useEffect(() => {
-        // const stateRef = ref(db, '/zodiacGame/state/topUsers');
-        // const handleData = (snapshot: any) => {
-        //     const data = snapshot.val();
-        //     if (data) {
-        //         const topUsers: User[] = Object.keys(data).map(userId => {
-        //             const userData = data[userId];
-        //             return {
-        //                 facebookUserId: userData.facebookUserId ?? '',
-        //                 name: userData.name ?? '',
-        //                 profileImageLink: userData.profileImageLink ?? '',
-        //                 totalIcoin: userData.totalIcoin,
-        //                 uid: userData.uid,
-        //             };
-        //         });
-        //         setTopUser([...topUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0))]);
-        //     } else {
-        //         setTopUser([]);
-        //     }
-        // };
+        const stateRef = ref(db, '/zodiacGame/state/topUsers');
+        const handleData = (snapshot: any) => {
+            const data = snapshot.val();
+            if (data) {
+                const topUsers: User[] = Object.keys(data).map(userId => {
+                    const userData = data[userId];
+                    return {
+                        facebookUserId: userData.facebookUserId ?? '',
+                        name: userData.name ?? '',
+                        profileImageLink: userData.profileImageLink ?? '',
+                        totalIcoin: userData.totalIcoin,
+                        uid: userData.uid,
+                    };
+                });
+                setTopUser([...topUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0))]);
+            } else {
+                setTopUser([]);
+            }
+        };
 
-        // if (stateGame !== "RESULT" && stateGame !== "RESULTWAITING" && stateGame !== "END") {
-        //     onValue(stateRef, handleData)
-        //   } else {
-        //     off(stateRef, 'value', handleData)
-        //   }
-        // return () => off(stateRef, 'value', handleData);
+        if (stateGame !== "RESULT" && stateGame !== "RESULTWAITING" && stateGame !== "END") {
+            onValue(stateRef, handleData)
+          } else {
+            off(stateRef, 'value', handleData)
+          }
+        return () => off(stateRef, 'value', handleData);
 
 
     }, [stateGame, transactionId]);
