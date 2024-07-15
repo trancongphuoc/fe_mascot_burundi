@@ -29,6 +29,7 @@ const ButtonMoving = ({content, setClick, cssClass} : ButtonMovingProps) => {
     <button className={`${cssClass} button-moving`} onClick={(e) => handleClick(e)}>
       {texts.map((text) => (
           <motion.p 
+              onClick={(e) => e.stopPropagation()}
               key={text.id}
               initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 0, y: -100 }}
