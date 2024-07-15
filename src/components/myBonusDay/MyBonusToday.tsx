@@ -105,6 +105,10 @@ function MyBonusToday({ betCards, onUserDataChange, fbId} : MyInfoBetResultModel
     //     }
     // }, [betSuccess, betUser, transactionId]); 
 
+    useEffect(() => {
+        setBettingCards(betCards);
+    },[betCards, transactionId])
+
     return (
         <>  
             <div className="section-myInfo mt-22px">
@@ -124,7 +128,7 @@ function MyBonusToday({ betCards, onUserDataChange, fbId} : MyInfoBetResultModel
                 </div>
 
                 <div className="end">
-                    <MyTotalIcoin fbId={fbId}/>
+                    <MyTotalIcoin fbId={fbId} />
                     <DepositIcoin />
                 </div>
             </div>

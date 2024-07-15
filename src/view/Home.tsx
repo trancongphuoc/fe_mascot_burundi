@@ -342,7 +342,7 @@ const handleBetting = async (zodiacCard: BetZodiacCard) => {
       // betSuccessRef.current = false;
     }
   }
-  selectedCardRef.current = null;
+  // selectedCardRef.current = null;
 };
 
   const updateOnlineStatus = useCallback(() => {
@@ -412,6 +412,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
     setModal: handleModal,
     setSelectedCard: handleCardSelection,
     betting: handleBetting,
+    iCoinWinTheGame: totalIcoinWinRef.current ?? 0
   }
 
   if (isLoadingRef.current) {
