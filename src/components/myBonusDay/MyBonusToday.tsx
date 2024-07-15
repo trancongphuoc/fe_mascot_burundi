@@ -25,12 +25,11 @@ interface MyInfoBetResultModel {
     // onOpen: () => void;
     onUserDataChange: (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => void;
     betCards: BetZodiacCard[],
-    betSuccess: boolean,
     fbId: string,
     // deposit: () => void;
 }
 
-function MyBonusToday({ betCards, betSuccess, onUserDataChange, fbId} : MyInfoBetResultModel) {
+function MyBonusToday({ betCards, onUserDataChange, fbId} : MyInfoBetResultModel) {
     log('<MyBonusToday />')
     const [betUser, setBetUser] = useState<BetUser>()
     const [icoinWinToday, setIcoinWinToday] = useState<number>(0);
@@ -43,7 +42,7 @@ function MyBonusToday({ betCards, betSuccess, onUserDataChange, fbId} : MyInfoBe
         const handleData = (snapshot: DataSnapshot) => {
             const data = snapshot.val();
             if (data) {
-                const cards: BetZodiacCard[] = [];
+                const firebaseCards: BetZodiacCard[] = [];
                 if (data.bettingCards) {
                     for (const cardsId in data.bettingCards) {
                         if (Object.hasOwnProperty.call(data.bettingCards, cardsId)) {
@@ -55,10 +54,12 @@ function MyBonusToday({ betCards, betSuccess, onUserDataChange, fbId} : MyInfoBe
                                 multiply: cardId.multiply ?? 0,
                                 totalIcoinBetting: cardId.totalIcoinBetting ?? 0,
                             };
-                            cards.push(card);
+                            firebaseCards.push(card);
                         }
                     }
                 }
+
+                setBettingCards(firebaseCards);
             
                 const user: BetUser = {
                     facebookUserId: data.facebookUserId,
@@ -67,7 +68,7 @@ function MyBonusToday({ betCards, betSuccess, onUserDataChange, fbId} : MyInfoBe
                     uid: data.uid,
                     totalIcoin: data.totalIcoin,
                     noBettingToday: data.noBettingToday,
-                    bettingCards: cards,
+                    bettingCards: firebaseCards,
                     isWin: data.isWin,
                     totalIcoinWin: data.totalIcoinWin ?? 0,
                     totalIcoinWinToday: data.totalIcoinWinToday ?? 0,
@@ -92,17 +93,17 @@ function MyBonusToday({ betCards, betSuccess, onUserDataChange, fbId} : MyInfoBe
         return () => off(stateRef, 'value', handleData);
     }, [stateGame, transactionId, fbId]);
 
-    useEffect(() => {
-        if (betSuccess) {
-            setBettingCards(betCards);
-        }
-    }, [betSuccess, betCards, transactionId]);
+    // useEffect(() => {
+    //     if (betSuccess) {
+    //         setBettingCards(betCards);
+    //     }
+    // }, [betSuccess, betCards, transactionId]);
     
-    useEffect(() => {
-        if (!betSuccess) {
-            setBettingCards(betUser?.bettingCards ?? []);
-        }
-    }, [betSuccess, betUser, transactionId]); 
+    // useEffect(() => {
+    //     if (!betSuccess) {
+    //         setBettingCards(betUser?.bettingCards ?? []);
+    //     }
+    // }, [betSuccess, betUser, transactionId]); 
 
     return (
         <>  

@@ -36,7 +36,7 @@ import { doNothing } from '../api/doNothing';
 import Loading from '../components/Loading';
 // import useNetworkStatus from '../api/useNetworkStatus';
 import setHidden from '../utils/setBodyScroll';
-import { useQueryParams } from '../utils/utils';
+import { updateNewBetCards, useQueryParams } from '../utils/utils';
 import { fetchTokenAndJoinGame } from '../utils/fetchTokenAndJoinGame';
 import { callbackFlutter } from '../utils/functions';
 import { log } from '../utils/log';
@@ -155,7 +155,10 @@ export default function Home() {
                   }
               }
               cardResultRef.current = { ...zodiacCard }
-              topUserRef.current = [...topUsers];
+              if (data.status && data.status !== "RESULT" && data.status !== "RESULTWAITING" && data.status !== "END") {
+                topUserRef.current = [...topUsers].sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0));
+              }
+
               noGameRef.current = data.noGameToday ?? 0;
               transactionId.current = data.transactionId ?? 0;
               setStatusGame(data.status);
@@ -190,18 +193,6 @@ export default function Home() {
 
   };
 
-  //get status
-  // const fetchStatus = async () => {
-  //     const stateRef = ref(db, 'zodiacGame/state/status');
-  //     onValue(stateRef, (snapshot) => {
-  //       const data = snapshot.val();
-  //       if (data && data !== statusGame) {
-  //         setStatusGame(data);  
-  //       }
-  //     });
-  //   };
-    
-  //   fetchStatus();
     fetchGameInfo();
 
     if (statusGame != "COUNTDOWN") {
@@ -209,6 +200,7 @@ export default function Home() {
         setOpenDepositIcoin(false);
         setHidden('scroll');
       };
+      
       if (openBetting) {
         setOpenBetting(false);
         setHidden('scroll');
@@ -229,7 +221,7 @@ export default function Home() {
       case 'PREPARESTART':
 
         betCardRef.current = [];
-        betSuccessRef.current = true;
+        // betSuccessRef.current = true;
 
         if (openGameResult) {
           setOpenGameResult(false)
@@ -323,31 +315,15 @@ export default function Home() {
   };
 
 const betCardRef = useRef<BetZodiacCard[]>([]);
-const betSuccessRef = useRef<boolean>(false);
+// const betSuccessRef = useRef<boolean>(false);
 
 // send icoin betting
 const handleBetting = async (zodiacCard: BetZodiacCard) => {
-  setOpenBetting(prevState => !prevState);
-  
-
   log('function betting');
-  let cardFound = false;
+
+  const oldBetCards = [...betCardRef.current.map(card => ({...card}))]
+  const updatedBetCards = updateNewBetCards(zodiacCard, betCardRef.current);
   
-  const updatedBetCards = betCardRef.current.map((card) => {
-    if (card.id === zodiacCard.id) {
-      cardFound = true;
-      return {
-        ...card,
-        totalIcoinBetting: (card.totalIcoinBetting ?? 0) + (zodiacCard.totalIcoinBetting ?? 0),
-      };
-    }
-    return card;
-  });
-
-  if (!cardFound) {
-    updatedBetCards.push(zodiacCard);
-  }
-
   if (updatedBetCards.length > 4) {
     toast.dismiss();
     toast('Đặt cược tối đa 4 lá linh vật', { duration: 2000, position: 'bottom-center'});
@@ -357,11 +333,13 @@ const handleBetting = async (zodiacCard: BetZodiacCard) => {
     try {
       const data = await bettingCard(transactionId.current ?? 0, zodiacCard.totalIcoinBetting ?? 0, zodiacCard.id);
       if (data !== "OK") {
-        betSuccessRef.current = false;
+        // betSuccessRef.current = false;
+        betCardRef.current = oldBetCards;
       }
     } catch (error) {
       console.error('Error betting:', error);
-      betSuccessRef.current = false;
+      betCardRef.current = oldBetCards;
+      // betSuccessRef.current = false;
     }
   }
   selectedCardRef.current = null;
@@ -468,9 +446,8 @@ const handleModal = useCallback((stateModal : ModalSet) => {
         <MyBonusToday
           onUserDataChange={handleIsWin}
           betCards={betCardRef.current}
-          betSuccess={betSuccessRef.current}
           fbId={fbIdRef.current}
-          />
+        />
         <BestPlayers/>
 
         {/* Dialog when click */}

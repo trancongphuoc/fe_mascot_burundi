@@ -26,3 +26,16 @@ export function isSameDay(timestamp1: number, timestamp2: number): boolean {
       date1.getFullYear() === date2.getFullYear()
     );
 }
+
+export const updateNewBetCards = (zodiacCard: BetZodiacCard, oldBetCards: BetZodiacCard[]): BetZodiacCard[] => {
+  const newOldBetCard = oldBetCards.map(card => ({...card}));
+  const cardIndex = newOldBetCard.findIndex(card => card.id === zodiacCard.id);
+  if (cardIndex !== -1) {
+    return newOldBetCard.map((card, index) => 
+      index === cardIndex
+      ? {...card, totalIcoinBetting: (card.totalIcoinBetting ?? 0) + (zodiacCard.totalIcoinBetting ?? 0)}
+      : card);
+  } else {
+    return [...oldBetCards, zodiacCard]
+  }
+}
