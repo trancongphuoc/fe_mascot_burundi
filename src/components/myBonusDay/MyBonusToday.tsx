@@ -13,6 +13,7 @@ import DepositIcoin from './DepositIcoin';
 import { GameInfoContext } from '../../store/game-info_context';
 import IcoinWinToday from './IcoinWinTody';
 import NoGameToday from './NoGameToday';
+import toast from 'react-hot-toast';
 
 interface BetUser extends User {
     bettingCards?: BetZodiacCard[];
@@ -106,7 +107,13 @@ function MyBonusToday({ betCards, onUserDataChange, fbId} : MyInfoBetResultModel
     // }, [betSuccess, betUser, transactionId]); 
 
     useEffect(() => {
-        setBettingCards(betCards);
+        if (betCards.length <= 4) {
+            setBettingCards(betCards);
+        } else {
+            toast.dismiss();
+            toast('Đặt cược tối đa 4 lá linh vật', { duration: 2000, position: 'bottom-center'});
+        }
+
     },[betCards, transactionId])
 
     return (
