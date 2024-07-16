@@ -27,10 +27,10 @@ interface MyInfoBetResultModel {
     onUserDataChange: (data: { isWin?: boolean | undefined; totalIcoinWin?: number | undefined }) => void;
     betCards: BetZodiacCard[],
     fbId: string,
-    // deposit: () => void;
+    setFirebaseData: (_ : BetZodiacCard[]) => void;
 }
 
-function MyBonusToday({ betCards, onUserDataChange, fbId} : MyInfoBetResultModel) {
+function MyBonusToday({ betCards, onUserDataChange, fbId, setFirebaseData} : MyInfoBetResultModel) {
     log('<MyBonusToday />')
     const [betUser, setBetUser] = useState<BetUser>()
     const [icoinWinToday, setIcoinWinToday] = useState<number>(0);
@@ -61,6 +61,7 @@ function MyBonusToday({ betCards, onUserDataChange, fbId} : MyInfoBetResultModel
                 }
 
                 setBettingCards(firebaseCards);
+                setFirebaseData(firebaseCards);
             
                 const user: BetUser = {
                     facebookUserId: data.facebookUserId,

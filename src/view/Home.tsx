@@ -317,6 +317,10 @@ export default function Home() {
 const betCardRef = useRef<BetZodiacCard[]>([]);
 // const betSuccessRef = useRef<boolean>(false);
 
+const setFirebaseData = (zodiacCards: BetZodiacCard[]) => {
+  betCardRef.current = zodiacCards;
+}
+
 // send icoin betting
 const handleBetting = async (zodiacCard: BetZodiacCard) => {
   log('function betting');
@@ -448,6 +452,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
           onUserDataChange={handleIsWin}
           betCards={betCardRef.current}
           fbId={fbIdRef.current}
+          setFirebaseData={setFirebaseData}
         />
         <BestPlayers/>
 
