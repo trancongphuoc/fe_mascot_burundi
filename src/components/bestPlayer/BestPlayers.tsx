@@ -27,7 +27,7 @@ const BestPlayers = function BestPlayers() {
     log('<BestPlayers />');
 
     // const [topUsers, setTopUser] = useState<User[]>([])
-    const { topUsers } = useContext(GameInfoContext);
+    const { topUsers, stateGame } = useContext(GameInfoContext);
 
     // const top123: User[] = [{
     //     name: "Dong Hoang Linh",
@@ -83,7 +83,9 @@ const BestPlayers = function BestPlayers() {
             <img src={bgBestPlayers}  alt={''} className="best-players__bg"/>
             <SVG src={SecondaryText} className='best-players--img mt-6px'/>
             <ol className="contents">
-                {   
+                {    
+                    stateGame && stateGame !== "RESULT" && stateGame !== "RESULTWAITING" &&
+                    stateGame !== "END" &&
                     topUsers.map((user, index) => (
                         <BestUser
                             key={user.facebookUserId}

@@ -7,7 +7,7 @@ interface CardProps {
 
 function AvatarCircle({avatarUrl, className} : CardProps) {
     return (
-        <img src={avatarUrl} alt="avatar" className={className}  onError={handleErrorAvartar}></img>
+        <img src={avatarUrl} alt="user avatar" className={className}  onError={handleErrorAvartar}></img>
     );
 }
 

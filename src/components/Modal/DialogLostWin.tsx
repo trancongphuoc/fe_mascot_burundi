@@ -159,7 +159,7 @@ const DialogLostWin = ({zodiac, totalIcoin, dialogType}: DialogLostWinProps) => 
         <p className="lost--tertiary" onClick={e => {e.stopPropagation()}}>TOP chiến thắng</p>
         <SVG src={dialogType == "WIN" ? win.lineRight : lost.lineRight} className ="lost--light2"/>
 
-        {topUsers.sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)).map((user, index) => (
+        {topUsers.map((user, index) => (
           <div className={`lost__no${index + 1}`} key={index} onClick={e => {e.stopPropagation()}}>
             <SVG className={`lost__no${index + 1}--img`} src={crown[index]}/>
             <div className={`lost__no${index + 1}--url`}>

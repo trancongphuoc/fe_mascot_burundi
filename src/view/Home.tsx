@@ -155,10 +155,7 @@ export default function Home() {
                   }
               }
               cardResultRef.current = { ...zodiacCard }
-              if (data.status && data.status !== "RESULT" && data.status !== "RESULTWAITING" && data.status !== "END") {
-                topUserRef.current = [...topUsers].sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0));
-              }
-
+              topUserRef.current = [...topUsers].sort((a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0));
               noGameRef.current = data.noGameToday ?? 0;
               transactionId.current = data.transactionId ?? 0;
               setStatusGame(data.status);
