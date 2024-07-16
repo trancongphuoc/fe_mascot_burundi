@@ -357,49 +357,75 @@ const handleBetting = async (zodiacCard: BetZodiacCard) => {
 
 
 const handleModal = useCallback((stateModal : ModalSet) => {
-  switch (stateModal.state) {
-    case "OPEN":
-        setHidden('hidden');
-      break;
-    case "CLOSE":
-        setHidden('scroll');
-      break;
-    default:
-      console.warn(`Unknown stateModal: ${stateModal}`);
-  }
 
-  switch (stateModal.type) {
-    case "RULE":
-      setOpenRule(prevState => !prevState)
-      break;
-    case "BETTING":
-      setOpenBetting(prevState => !prevState);
-      selectedCardRef.current = null;
-      break;
-    case "WINLOST":
-      setOpenLostWin(prevState => !prevState)
-      break;
-    case "GAMEHISTORY":
-      setOpenGameHistory(prevState => !prevState)
-      break;
-    case "MYHISTORY":
-      setOpenMyHistory(prevState => !prevState)
-      break;
-    case "DEPOSIT":
-      setOpenDepositIcoin(prevState => !prevState);
-      break;
-    case "DISCONNECT":
-      setOpenDisconnect(prevState => !prevState);
-      break;
-    case "GAMECIRCLE":
-      setopenGameCircle(prevState => !prevState);
-      break;
-    case "GAMERESULT":
-      setOpenGameResult(prevState => !prevState);
-      setOpenLostWin(prevState => !prevState);
-      break;
-    default:
-      break;
+  if (stateModal.state === "OPEN") {
+    setHidden('hidden');
+    switch (stateModal.type) {
+      case "RULE":
+        setOpenRule(true)
+        break;
+      case "BETTING":
+        setOpenBetting(true);
+        break;
+      case "WINLOST":
+        setOpenLostWin(true)
+        break;
+      case "GAMEHISTORY":
+        setOpenGameHistory(true)
+        break;
+      case "MYHISTORY":
+        setOpenMyHistory(true)
+        break;
+      case "DEPOSIT":
+        setOpenDepositIcoin(true);
+        break;
+      case "DISCONNECT":
+        setOpenDisconnect(true);
+        break;
+      case "GAMECIRCLE":
+        setopenGameCircle(true);
+        break;
+      case "GAMERESULT":
+        setOpenGameResult(true);
+        setOpenLostWin(true);
+        break;
+      default:
+        break;
+    }
+  } else {
+    setHidden('scroll');
+    switch (stateModal.type) {
+      case "RULE":
+        setOpenRule(false)
+        break;
+      case "BETTING":
+        setOpenBetting(false);
+        break;
+      case "WINLOST":
+        setOpenLostWin(false)
+        break;
+      case "GAMEHISTORY":
+        setOpenGameHistory(false)
+        break;
+      case "MYHISTORY":
+        setOpenMyHistory(false)
+        break;
+      case "DEPOSIT":
+        setOpenDepositIcoin(false);
+        break;
+      case "DISCONNECT":
+        setOpenDisconnect(false);
+        break;
+      case "GAMECIRCLE":
+        setopenGameCircle(false);
+        break;
+      case "GAMERESULT":
+        setOpenGameResult(false);
+        setOpenLostWin(false);
+        break;
+      default:
+        break;
+    }
   }
 },[]); 
 

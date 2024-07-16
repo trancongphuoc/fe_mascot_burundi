@@ -34,6 +34,7 @@ import { formatNumber } from '../../utils/utils';
 // import { useEffect } from 'react';
 import { GameInfoContext } from '../../store/game-info_context';
 import { useContext } from 'react';
+import AvatarCircle from '../AvatarCircle';
 
 
 
@@ -163,11 +164,7 @@ const DialogLostWin = ({zodiac, totalIcoin, dialogType}: DialogLostWinProps) => 
           <div className={`lost__no${index + 1}`} key={index} onClick={e => {e.stopPropagation()}}>
             <SVG className={`lost__no${index + 1}--img`} src={crown[index]}/>
             <div className={`lost__no${index + 1}--url`}>
-              <img
-                src={user.profileImageLink}
-                alt="avatar user"    
-                onError={handleErrorAvartar}      
-              />
+              <AvatarCircle avatarUrl={user.profileImageLink ?? ''} className={''}/>
             </div>  
             <p className={`lost__no${index + 1}--name`}>{user.name}</p>
             <div className="lost__totalIcoin">
