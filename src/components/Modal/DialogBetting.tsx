@@ -2,8 +2,8 @@ import {  useState, useContext } from 'react';
 import bgCardSelect from '../../assets/bg_card_selected.svg';
 import Icoin from '../../assets/icoin.svg';
 import BgContent from '../../assets/bg_content_win.svg';
-// import BgContent075x from '../../assets/bg_content_betting_075x.png';
-// import BgContent2x from '../../assets/bg_content_betting_2x.png';
+import BgContent075x from '../../assets/bg_content_betting_075x.png';
+import BgContent2x from '../../assets/bg_content_betting_2x.png';
 
 
 import BgHeader from '../../assets/bg_header_betting.svg';
@@ -11,7 +11,7 @@ import BgLighter from '../../assets/bg_lighter.svg';
 import { motion } from 'framer-motion';
 import SVG from 'react-inlinesvg';
 import toast from 'react-hot-toast';
-// import LazyImage from '../LazyImage';
+import LazyImage from '../LazyImage';
 import { log } from '../../utils/log';
 import ButtonStake from '../ButtonStake';
 
@@ -107,7 +107,7 @@ const DialogBetting = () => {
         className="betting-popup"
         aria-modal="true">
         
-        <SVG src={BgContent} className="betting--BgContent" onClick={(e) => e.stopPropagation()}/>
+        {/* <SVG src={BgContent} className="betting--BgContent" onClick={(e) => e.stopPropagation()}/> */}
 
         {/* <img
           src={BgContent}
@@ -116,12 +116,12 @@ const DialogBetting = () => {
           alt='image background betting'
           onClick={(e) => e.stopPropagation()}/> */}
 
-        {/* <LazyImage
+        <LazyImage
           lowResSrc={BgContent075x}
           highResSrc={BgContent2x}
           alt='betting'
           className='betting--BgContent'
-        /> */}
+        />
         
         <SVG src={bgCardSelect} className="betting--zodiac-background" onClick={(e) => e.stopPropagation()}/>
         {selectedCard?.imageUrl && <SVG
@@ -134,7 +134,7 @@ const DialogBetting = () => {
         <p className="betting--text" onClick={(e) => e.stopPropagation()}>Chúc bạn nhận thưởng lớn</p>
 
         <div className="betting__totalIcoin mb-15px mt-28px" onClick={(e) => e.stopPropagation()}>
-          <img className="betting__totalIcoin--img" src={Icoin} alt="Icoin" />
+          <SVG className="betting__totalIcoin--img" src={Icoin}/>
           {/* <p className="betting__totalIcoin--icoin">{stakes}</p> */}
           <AnimatedCounter from={bettingIcoin.from} to={bettingIcoin.to}/>
         </div>

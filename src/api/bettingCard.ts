@@ -34,7 +34,8 @@ export const bettingCard = async (
       return "OK";
     } else {
       toast.dismiss();
-      toast('Đặt cược thất bại', { duration: 2000, position: 'bottom-center'});
+      // toast('Đặt cược thất bại', { duration: 2000, position: 'bottom-center'});
+      toast(response.data.message, { duration: 2000, position: 'bottom-center'});
       return "FAILED";
     }
   } catch (error) {

@@ -33,6 +33,14 @@ const LazyImage = ({ lowResSrc, highResSrc, alt, className } :LazyImagePro ) => 
           e.stopPropagation()
           e.preventDefault()
         }} 
+        onTouchStart={(e) => {
+          e.stopPropagation()
+          e.preventDefault()
+        }}
+        onFocus={(e) => {
+          e.stopPropagation()
+          e.preventDefault()
+        }}
     />
   );
 };

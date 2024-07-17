@@ -40,6 +40,7 @@
         transform: translateY(1px);
 
         @include non_select;
+        -webkit-touch-callout: none;
     }
 
     &--BgLighter {
@@ -113,6 +114,7 @@
 
         &--img {
             width: 16px;
+            height: auto;
             margin-right: 4px;
         }
 
