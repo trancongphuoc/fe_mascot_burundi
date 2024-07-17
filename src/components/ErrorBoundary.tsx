@@ -24,13 +24,13 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     // You can also log the error to an error reporting service
     // logErrorToMyService(error, errorInfo);
     log(`ERROR React WSOD: ${error} ### ${errorInfo}`)
-
+    window.location.reload();
   }
 
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI
-      window.location.reload();
+      return <h1>Something went wrong.</h1>;
     }
 
     return this.props.children; 
