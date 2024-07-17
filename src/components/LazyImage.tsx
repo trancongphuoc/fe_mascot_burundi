@@ -29,7 +29,10 @@ const LazyImage = ({ lowResSrc, highResSrc, alt, className } :LazyImagePro ) => 
         // transition: 'opacity 0.2s ease-in-out',
         opacity: loaded ? 1 : 1,
       }}
-        onClick={(e) => e.stopPropagation()} 
+        onClick={(e) => {
+          e.stopPropagation()
+          e.preventDefault()
+        }} 
     />
   );
 };

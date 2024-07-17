@@ -421,7 +421,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
         break;
       case "GAMERESULT":
         setOpenGameResult(false);
-        setOpenLostWin(false);
+        setOpenLostWin(true);
         break;
       default:
         break;
