@@ -28,7 +28,6 @@ import { motion } from 'framer-motion';
 // import winAudio from '../../../public/sounds/audio_win.wav';
 // import lostAudio from '../../../public/sounds/audio_lost.wav';
 
-import { handleErrorAvartar } from '../DefaultUserAvartar';
 import LazyImage from '../LazyImage';
 import { formatNumber } from '../../utils/utils';
 // import { useEffect } from 'react';
