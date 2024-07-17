@@ -27,6 +27,8 @@ html {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   border: none;
   background-color: transparent;
 }
@@ -421,6 +423,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .card--zodiac__background-selected {
   background-image: url("../assets/card-background-selected.svg");
@@ -456,6 +460,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .card--zodiac__background--medium {
   background-image: url("../assets/card-background-selected.svg");
@@ -477,6 +483,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   pointer-events: none;
 }
 
@@ -754,6 +762,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .section-header__rule {
   justify-self: end;
@@ -795,6 +805,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   pointer-events: none;
 }
 .result__right--number {
@@ -823,6 +835,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   pointer-events: none;
 }
 .best-players__bg {
@@ -840,6 +854,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .best-players--img {
   grid-area: 1/1/2/2;
@@ -1035,6 +1051,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   pointer-events: none;
   border: none;
   background-color: transparent;
@@ -1059,6 +1077,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   pointer-events: none;
 }
 .section-myInfo .header-left--text {
@@ -1099,6 +1119,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .section-myInfo .header-right--text {
   margin-right: 6px;
@@ -1123,6 +1145,8 @@ h4 {
     user-select: none;
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
+    touch-action: none;
+    -webkit-touch-action: none;
     pointer-events: none;
   }
   .section-myInfo .header-right {
@@ -1148,6 +1172,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   pointer-events: none;
 }
 .section-myInfo__cards .card__main {
@@ -1240,6 +1266,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   pointer-events: none;
 }
 .section-myInfo .end-left--text {
@@ -1278,6 +1306,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .section-myInfo .end-right--text {
   margin-right: 6px;
@@ -1325,6 +1355,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 
 .betting--BgContent {
@@ -1342,6 +1374,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   -webkit-touch-callout: none;
 }
 .betting--BgLighter {
@@ -1387,6 +1421,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .betting--text {
   grid-area: 2/1/3/-1;
@@ -1407,6 +1443,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .betting__totalIcoin {
   grid-area: 3/1/4/-1;
@@ -1427,6 +1465,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .betting__totalIcoin--img {
   width: 16px;
@@ -1490,6 +1530,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   border: none;
   background-color: transparent;
 }
@@ -1526,6 +1568,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   pointer-events: none;
 }
 .lost-popup .lost--BgContent {
@@ -1543,6 +1587,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   pointer-events: none;
 }
 .lost-popup .lost--BgLighter {
@@ -1559,6 +1605,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .lost-popup .lost--BgHeader {
   grid-area: 2/1/3/-1;
@@ -1575,6 +1623,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .lost-popup .lost--zodiac-background {
   align-self: center;
@@ -1591,6 +1641,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .lost-popup .lost--zodiac-card {
   grid-area: 1/1/2/-1;
@@ -1607,6 +1659,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   border: none;
   background-color: transparent;
 }
@@ -1627,6 +1681,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   z-index: 7;
   transform: translateY(1px);
   line-height: 1;
@@ -1651,6 +1707,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .lost-popup .lost--light1 {
   grid-area: 4/1/5/2;
@@ -1668,6 +1726,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .lost-popup .lost--tertiary {
   grid-area: 4/2/5/3;
@@ -1686,6 +1746,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .lost-popup .lost--light2 {
   grid-area: 4/3/5/4;
@@ -1703,6 +1765,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .lost-popup .lost__no3 {
   grid-area: 5/3/6/4;
@@ -1721,6 +1785,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   padding-bottom: calc(env(safe-area-inset-bottom) / 2);
 }
 .lost-popup .lost__no3--img {
@@ -1804,6 +1870,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   padding-bottom: calc(env(safe-area-inset-bottom) / 2);
 }
 .lost-popup .lost__no2--img {
@@ -1887,6 +1955,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .lost-popup .lost__no1--img {
   grid-area: 1/1/2/2;
@@ -1972,6 +2042,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .lost-popup .lost__totalIcoin--icoin {
   color: #ffffff;
@@ -1988,6 +2060,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 
 .win--primary-text {
@@ -2003,6 +2077,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .win__secondary {
   grid-area: 3/1/4/4;
@@ -2023,6 +2099,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 @media (max-width: 375px) {
   .win__secondary {
@@ -2040,6 +2118,8 @@ h4 {
     user-select: none;
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
+    touch-action: none;
+    -webkit-touch-action: none;
   }
 }
 .win__secondary--text {
@@ -2057,6 +2137,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .win__totalIcoin {
   display: flex;
@@ -2072,6 +2154,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .win__totalIcoin--img {
   width: 16px;
@@ -2086,6 +2170,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .win__totalIcoin--icoin {
   font-size: 16px;
@@ -2101,6 +2187,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 
 .rule {
@@ -2124,6 +2212,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .rule--primary {
   font-size: 16px;
@@ -2203,6 +2293,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .history-game-popup__bg {
   grid-area: 1/1/-1/-1;
@@ -2320,6 +2412,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .mine-popup__bg {
   grid-area: 1/1/-1/-1;
@@ -2515,6 +2609,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   pointer-events: none;
 }
 .open-card--tornado {
@@ -2569,6 +2665,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 
 .button_left {
@@ -2591,6 +2689,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 
 .button_right {
@@ -2613,6 +2713,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 
 .betting-table {
@@ -2639,6 +2741,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   pointer-events: none;
 }
 .betting-table--counter {
@@ -2664,6 +2768,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
 }
 .betting-table__content {
   grid-area: 2/1/3/2;
@@ -2694,6 +2800,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   border: none;
   background-color: transparent;
 }
@@ -2736,6 +2844,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   border: none;
   background-color: transparent;
   pointer-events: none;
@@ -2755,6 +2865,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   border: none;
   background-color: transparent;
   pointer-events: none;
@@ -2774,6 +2886,8 @@ h4 {
   user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  touch-action: none;
+  -webkit-touch-action: none;
   border: none;
   background-color: transparent;
 }

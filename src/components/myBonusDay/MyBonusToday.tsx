@@ -42,9 +42,9 @@ function MyBonusToday({ betCards, onUserDataChange, fbId, setFirebaseData} : MyI
         const stateRef = ref(db, `/zodiacGame/players/${fbId}`);
         const handleData = (snapshot: DataSnapshot) => {
             const data = snapshot.val();
-            if (data) {
+            if (data && data.bettingCards) {
                 const firebaseCards: BetZodiacCard[] = [];
-                if (data.bettingCards) {
+            
                     for (const cardsId in data.bettingCards) {
                         if (Object.hasOwnProperty.call(data.bettingCards, cardsId)) {
                             const cardId = data.bettingCards[cardsId];
@@ -58,7 +58,7 @@ function MyBonusToday({ betCards, onUserDataChange, fbId, setFirebaseData} : MyI
                             firebaseCards.push(card);
                         }
                     }
-                }
+              
 
                 setBettingCards(firebaseCards);
                 setFirebaseData(firebaseCards);

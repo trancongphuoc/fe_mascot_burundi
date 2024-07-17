@@ -1,7 +1,7 @@
 import {  useState, useContext } from 'react';
 import bgCardSelect from '../../assets/bg_card_selected.svg';
 import Icoin from '../../assets/icoin.svg';
-import BgContent from '../../assets/bg_content_win.svg';
+// import BgContent from '../../assets/bg_content_win.svg';
 import BgContent075x from '../../assets/bg_content_betting_075x.png';
 import BgContent2x from '../../assets/bg_content_betting_2x.png';
 
