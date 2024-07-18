@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import PopupCenter from '../popup/PopupCenter';
 import LottieAnimation from './AnimationOpenCard';
 // import animationData from '../../assets/json/game_xoay.json';
-import animationData from '../../assets/json/p1_gamelinhvat.json';
+import animationData from '../../assets/json/game_xoay.json';
 import { GameInfoContext } from '../../store/game-info_context';
 
 

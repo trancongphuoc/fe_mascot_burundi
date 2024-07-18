@@ -19,7 +19,6 @@ export default function Countdown() {
 
   useEffect(() => {
     let initialRemainingTime = 40;
-    if (stateGame === "COUNTDOWN") {
       const stateRef = ref(db, '/zodiacGame/state/startTime');
 
       get(stateRef).then((snapshot: DataSnapshot) => {
@@ -33,7 +32,6 @@ export default function Countdown() {
       }, 1000);
 
       return () => clearInterval(interval);
-    }
   }, [stateGame, transactionId]);
 
   return (
