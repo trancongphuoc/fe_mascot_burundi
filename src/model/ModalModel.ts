@@ -8,7 +8,8 @@ type ModalType = "RULE" |
                 "DEPOSIT" |
                 "DISCONNECT" |
                 "GAMECIRCLE" |
-                "GAMERESULT";
+                "GAMERESULT" |
+                "MAINTAIN";
 
 interface ModalSet {
     state: ModalState,

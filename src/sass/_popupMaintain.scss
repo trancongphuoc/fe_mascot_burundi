@@ -1,0 +1,47 @@
+.maintain {
+    background: white;
+    position: relative;
+    max-width: 260px;
+    height: auto;
+    display: grid;
+    grid-template-rows: repeat(2, min-content) 49px repeat(2, min-content);
+    justify-content: center;
+    justify-items: center;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: -5px;
+
+    @include non_select;
+
+    &--img {
+        max-width: 226px;
+        max-height: 100px;
+        margin: 18.5px 0 20px 0;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    &__line {
+        display: flex;
+        line-height: 1;
+        margin-top: 50px;
+
+        & > :not(:last-child) {
+            margin-right: 5px;
+        }
+
+        &--selected {
+            width: 19px;
+            height: 2px;
+            background-color: $color-line-3;
+            border-radius: 1px;
+        }
+
+        &--normal {
+            width: 12px;
+            height: 2px;
+            background-color: $color-line-4;
+            border-radius: 1px;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-type StatusGame = 'NONE' | 'PREPARESTART' | 'COUNTDOWN' | 'RESULTWAITING' | 'RESULT' | 'END' | 'NONE';
+type StatusGame = 'NONE' | 'PREPARESTART' | 'COUNTDOWN' | 'RESULTWAITING' | 'RESULT' | 'END';
 
 interface GameInfo {
     stateGame : StatusGame,

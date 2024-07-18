@@ -47,6 +47,8 @@ import PopupDisconnect from '../components/popup/PopupDisconnect.tsx';
 import PopupDeposit from '../components/popup/PopupDeposit.tsx';
 import PopupOpenCircle from '../components/openCard/PopupOpenCircle.tsx';
 // import MaintainModal from '../components/Modal/MaintainModal.tsx';
+// import PopupCenter from '../components/popup/PopupCenter.tsx';
+// import MaintainModal from '../components/Modal/MaintainModal.tsx';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -70,6 +72,7 @@ export default function Home() {
   const [openMyHistory, setOpenMyHistory] = useState(false);
   const [openDepositIcoin, setOpenDepositIcoin] = useState(false);
   const [openDisconnect, setOpenDisconnect] = useState(false);
+  // const [maintain, setMaintain] = useState(false);
 
   const isLoadingRef = useRef<boolean>(true);
   const dialogTypeRef = useRef<DialogType>('LOST');
@@ -162,24 +165,13 @@ export default function Home() {
               noGameRef.current = data.noGameToday ?? 0;
               transactionId.current = data.transactionId ?? 0;
               setStatusGame(data.status);
-
-
+              // setMaintain(data.isPause);
+          
               setGameInfo(prevState => ({
                 ...prevState,
                 stateGame: data.status ?? "NONE",
                 transactionId: data.transactionId ?? 0,
               }))
-
-    
-
-              // setGame({
-              //     isPause: data.isPause,
-              //     noGameToday: data.noGameToday,
-              //     status: data.status,
-              //     transactionId: data.transactionId,
-              //     zodiacCard: zodiacCard,
-              //     topUser: topUsers,
-              // });
 
               if (isLoadingRef.current) {
                 callbackFlutter('callbackDisableLoading');
@@ -221,7 +213,6 @@ export default function Home() {
       case 'PREPARESTART':
 
         betCardRef.current = [];
-        // betSuccessRef.current = true;
 
         if (openGameResult) {
           setOpenGameResult(false)
@@ -504,6 +495,8 @@ const handleModal = useCallback((stateModal : ModalSet) => {
           {openDepositIcoin && <PopupDeposit />}
 
           {openDisconnect && <PopupDisconnect />}
+
+          {/* {true && <MaintainModal/>} */}
 
         </AnimatePresence>
 

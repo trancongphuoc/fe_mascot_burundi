@@ -75,7 +75,10 @@ function MyBonusToday({betCards, onUserDataChange, fbId, setFirebaseData} : MyIn
                     totalIcoinWinToday: data.totalIcoinWinToday || 0,
                 };
                 setBetUser({...user});  
-                onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin });   
+
+                if ((stateGame !== "PREPARESTART" && stateGame !== "END" && stateGame !== "NONE")) {
+                    onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin }); 
+                }  
                 
                 if ((stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") || betCards.length === 0) {
                     setIcoinWinToday(user.totalIcoinWinToday || 0);
