@@ -46,6 +46,7 @@ import ShortInfoGame from '../components/shortInfoGame/ShortInfoGame.tsx';
 import PopupDisconnect from '../components/popup/PopupDisconnect.tsx';
 import PopupDeposit from '../components/popup/PopupDeposit.tsx';
 import PopupOpenCircle from '../components/openCard/PopupOpenCircle.tsx';
+import MaintainModal from '../components/Modal/MaintainModal.tsx';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];

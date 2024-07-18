@@ -41,23 +41,19 @@ const ShortGameHistory = function ShortGameHistory () {
                       gameHistoriesList.push(player);
                   }
               }
-              
-              setGameHistories([...gameHistoriesList]);
+              if (stateGame === "PREPARESTART" || gameHistories.length === 0) {
+                setGameHistories([...gameHistoriesList.map(card => ({...card}))]);
+              }
           }
       };
-      if (stateGame === "PREPARESTART" || gameHistories.length === 0) {
-        onValue(stateRef, handleData);
-      } else {
-        off(stateRef, 'value', handleData);
-      }
-      
+      onValue(stateRef, handleData);      
       return () => off(stateRef, 'value', handleData);
         
   }, [stateGame, transactionId]);
 
 
     return (
-        <div className="result__left" onClick={() => setModal({ state: "CLOSE", type: "GAMEHISTORY"})}>
+        <div className="result__left" onClick={() => setModal({ state: "OPEN", type: "GAMEHISTORY"})}>
           <p className='result__left--text'>Kết quả</p>
           {gameHistories.map((result) => (
             <Card
