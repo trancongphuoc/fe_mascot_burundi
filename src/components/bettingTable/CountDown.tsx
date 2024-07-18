@@ -1,39 +1,40 @@
-import { DataSnapshot, get, off, onValue, ref } from 'firebase/database';
-import { useState, useEffect } from 'react';
+import { DataSnapshot, get, ref } from 'firebase/database';
+import { useState, useEffect, useContext } from 'react';
 import { db } from '../../firebase/config';
 import { log } from '../../utils/log';
+import { GameInfoContext } from '../../store/game-info_context';
+
+const TOTAL_COUNTDOWN : number = 40;
 
 export default function Countdown() {
   log('<Countdown />');
   const [count, setCount] = useState(0);
+  const { stateGame } = useContext(GameInfoContext)
+
+  const differentTime = (startTime: number): number => {
+    const currentTime = Date.now();
+    const elapsed = Math.floor((currentTime - startTime) / 1000)
+    return Math.max(TOTAL_COUNTDOWN - elapsed, 0);
+  }
 
   useEffect(() => {
-    const stateRef = ref(db, '/zodiacGame/state/startTime');
-    const totalCountdown = 40 * 1000; // total countdown time in milliseconds (50 seconds)
-    let initialRemainingTime = 0;
+    let initialRemainingTime = 40;
+    if (stateGame === "COUNTDOWN") {
+      const stateRef = ref(db, '/zodiacGame/state/startTime');
 
-    const handleData = (snapshot: DataSnapshot) => {
-      const startTime = snapshot.val() || 0;
-      const currentTime = Date.now();
-      const elapsed = currentTime - startTime;
-      initialRemainingTime = Math.max(totalCountdown - elapsed, 0);
-      
-      setCount(Math.floor(initialRemainingTime / 1000)); // convert milliseconds to seconds
-    };
+      get(stateRef).then((snapshot: DataSnapshot) => {
+        const startTime = snapshot.val() || 0;
+        initialRemainingTime = differentTime(startTime);
+      });
+        
+      const interval = setInterval(() => {
+        initialRemainingTime -= 1;
+        setCount(Math.max(initialRemainingTime, 0));
+      }, 1000);
 
-    onValue(stateRef, handleData);
-
-    // Set an interval to update the countdown every second
-    const interval = setInterval(() => {
-      initialRemainingTime -= 1000; // decrease remaining time by 1 second (1000 ms)
-      setCount(Math.max(Math.floor(initialRemainingTime / 1000), 0)); // update state with new remaining time
-    }, 1000);
-
-    return () => {
-      off(stateRef, 'value', handleData);
-      clearInterval(interval);
-    };
-  }, [setCount]);
+      return () => clearInterval(interval);
+    }
+  }, [stateGame]);
 
   return (
     <div className='betting-table--counter'>
