@@ -10,26 +10,25 @@ import { GameInfoContext } from "../../store/game-info_context";
 
 interface MyTotalIcoinProps {
     fbId: string,
+    betCards: BetZodiacCard[]
 }
 
 //TODO: fix have no pass fbId
-const MyTotalIcoin = function MyTotalIcoin({ fbId }: MyTotalIcoinProps) {
+const MyTotalIcoin = function MyTotalIcoin({ fbId, betCards }: MyTotalIcoinProps) {
     log('<MyTotalIcoin />');
 
     const [totalIcoin, setTotalIcoin] = useState<number>(0);
-    const  { stateGame,  iCoinWinTheGame} = useContext(GameInfoContext);
+    const  { stateGame } = useContext(GameInfoContext);
 
     useEffect(()=> {
         const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
-            if (data && data != totalIcoin) {
-                let newTotalIcoin = data;
-                if ( stateGame === "RESULTWAITING" || stateGame === "RESULT" || stateGame === "END") {
-                    newTotalIcoin = data - iCoinWinTheGame;
-                }
-                setTotalIcoin(newTotalIcoin);  
-                window.sessionStorage.setItem('totalIcoin', data);   
+            if ((data && data != totalIcoin)) {
+                if ( (stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") || betCards.length === 0) {
+                    setTotalIcoin(data);  
+                    window.sessionStorage.setItem('totalIcoin', data);   
+                }  
             }
         };
         onValue(stateRef, handleData);

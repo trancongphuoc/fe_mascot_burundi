@@ -9,7 +9,7 @@ const TOTAL_COUNTDOWN : number = 40;
 export default function Countdown() {
   log('<Countdown />');
   const [count, setCount] = useState(0);
-  const { stateGame } = useContext(GameInfoContext)
+  const { stateGame, transactionId } = useContext(GameInfoContext)
 
   const differentTime = (startTime: number): number => {
     const currentTime = Date.now();
@@ -34,7 +34,7 @@ export default function Countdown() {
 
       return () => clearInterval(interval);
     }
-  }, [stateGame]);
+  }, [stateGame, transactionId]);
 
   return (
     <div className='betting-table--counter'>

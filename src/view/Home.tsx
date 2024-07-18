@@ -446,7 +446,6 @@ const handleModal = useCallback((stateModal : ModalSet) => {
     setSelectedCard: handleCardSelection,
     betting: handleBetting,
     iCoinWinTheGame: totalIcoinWinRef.current ?? 0,
-    // betCards: betCardRef.current || []
   }
 
   if (isLoadingRef.current) {

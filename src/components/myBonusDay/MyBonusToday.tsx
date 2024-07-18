@@ -4,7 +4,6 @@ import ArrowWhite from '../../assets/arrow-white.svg';
 import { useEffect, useState, useContext } from 'react';
 import { DataSnapshot, off, onValue, ref } from 'firebase/database';
 import { db } from '../../firebase/config';
-// import bgMyBonus from '../assets/bg_my_bonus_new.svg';
 import bgHeader from '../../assets/bg_my_bonus_today.png';
 import MyTotalIcoin from './MyTotalIcoin';
 import BettingCard from './BettingCard';
@@ -42,9 +41,9 @@ function MyBonusToday({betCards, onUserDataChange, fbId, setFirebaseData} : MyIn
         const stateRef = ref(db, `/zodiacGame/players/${fbId}`);
         const handleData = (snapshot: DataSnapshot) => {
             const data = snapshot.val();
-            if (data && data.bettingCards) {
+            if (data) {
                 const firebaseCards: BetZodiacCard[] = [];
-            
+                if (data.bettingCards) {
                     for (const cardsId in data.bettingCards) {
                         if (Object.hasOwnProperty.call(data.bettingCards, cardsId)) {
                             const cardId = data.bettingCards[cardsId];
@@ -59,7 +58,7 @@ function MyBonusToday({betCards, onUserDataChange, fbId, setFirebaseData} : MyIn
                         }
                     }
               
-
+                }
                 setBettingCards([...firebaseCards.map(card => ({...card}))]);
                 setFirebaseData([...firebaseCards.map(card => ({...card}))]);
             
@@ -72,20 +71,14 @@ function MyBonusToday({betCards, onUserDataChange, fbId, setFirebaseData} : MyIn
                     noBettingToday: data.noBettingToday,
                     bettingCards: firebaseCards,
                     isWin: data.isWin,
-                    totalIcoinWin: data.totalIcoinWin ?? 0,
-                    totalIcoinWinToday: data.totalIcoinWinToday ?? 0,
+                    totalIcoinWin: data.totalIcoinWin || 0,
+                    totalIcoinWinToday: data.totalIcoinWinToday || 0,
                 };
                 setBetUser({...user});  
                 onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin });   
-                if (stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") {
-                    setIcoinWinToday(user.totalIcoinWinToday ?? 0);
-                } else {
-                    if (user.isWin) {
-                        const iconValue = (user.totalIcoinWinToday ?? 0) - ( user.totalIcoinWin ?? 0)
-                        setIcoinWinToday(iconValue)
-                    } else {
-                        setIcoinWinToday(user.totalIcoinWinToday ?? 0);
-                    }
+                
+                if ((stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") || betCards.length === 0) {
+                    setIcoinWinToday(user.totalIcoinWinToday || 0);
                 }
             }
         };
@@ -94,18 +87,6 @@ function MyBonusToday({betCards, onUserDataChange, fbId, setFirebaseData} : MyIn
       
         return () => off(stateRef, 'value', handleData);
     }, [stateGame, transactionId, fbId]);
-
-    // useEffect(() => {
-    //     if (betSuccess) {
-    //         setBettingCards(betCards);
-    //     }
-    // }, [betSuccess, betCards, transactionId]);
-    
-    // useEffect(() => {
-    //     if (!betSuccess) {
-    //         setBettingCards(betUser?.bettingCards ?? []);
-    //     }
-    // }, [betSuccess, betUser, transactionId]); 
 
     useEffect(() => {
         if (betCards.length <= 4) {
@@ -132,11 +113,11 @@ function MyBonusToday({betCards, onUserDataChange, fbId, setFirebaseData} : MyIn
                 <NoGameToday arrowImg={ArrowWhite} noGameToday={betUser?.noBettingToday ?? 0} />
                
                 <div className="section-myInfo__cards">
-                    {bettingCards.map((betCard) => (<BettingCard key={`${betCard.id}${betCard.totalIcoinBetting}`} betCard={betCard} />))}
+                    {bettingCards.map((betCard) => (<BettingCard key={betCard.id} betCard={betCard} />))}
                 </div>
 
                 <div className="end">
-                    <MyTotalIcoin fbId={fbId} />
+                    <MyTotalIcoin fbId={fbId} betCards={betCards}/>
                     <DepositIcoin />
                 </div>
             </div>
