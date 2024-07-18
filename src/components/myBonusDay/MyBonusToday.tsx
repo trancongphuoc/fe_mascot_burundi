@@ -30,7 +30,7 @@ interface MyInfoBetResultModel {
     setFirebaseData: (_ : BetZodiacCard[]) => void;
 }
 
-function MyBonusToday({ betCards, onUserDataChange, fbId, setFirebaseData} : MyInfoBetResultModel) {
+function MyBonusToday({betCards, onUserDataChange, fbId, setFirebaseData} : MyInfoBetResultModel) {
     log('<MyBonusToday />')
     const [betUser, setBetUser] = useState<BetUser>()
     const [icoinWinToday, setIcoinWinToday] = useState<number>(0);
@@ -55,13 +55,13 @@ function MyBonusToday({ betCards, onUserDataChange, fbId, setFirebaseData} : MyI
                                 multiply: cardId.multiply ?? 0,
                                 totalIcoinBetting: cardId.totalIcoinBetting ?? 0,
                             };
-                            firebaseCards.push(card);
+                            firebaseCards.push({...card});
                         }
                     }
               
 
-                setBettingCards(firebaseCards);
-                setFirebaseData(firebaseCards);
+                setBettingCards([...firebaseCards.map(card => ({...card}))]);
+                setFirebaseData([...firebaseCards.map(card => ({...card}))]);
             
                 const user: BetUser = {
                     facebookUserId: data.facebookUserId,
@@ -75,9 +75,9 @@ function MyBonusToday({ betCards, onUserDataChange, fbId, setFirebaseData} : MyI
                     totalIcoinWin: data.totalIcoinWin ?? 0,
                     totalIcoinWinToday: data.totalIcoinWinToday ?? 0,
                 };
-                setBetUser(user);  
-                onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin ?? 0});   
-                if (stateGame !== "RESULT" && stateGame !== "END") {
+                setBetUser({...user});  
+                onUserDataChange({ isWin: user.isWin, totalIcoinWin: user.totalIcoinWin });   
+                if (stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") {
                     setIcoinWinToday(user.totalIcoinWinToday ?? 0);
                 } else {
                     if (user.isWin) {
@@ -109,7 +109,7 @@ function MyBonusToday({ betCards, onUserDataChange, fbId, setFirebaseData} : MyI
 
     useEffect(() => {
         if (betCards.length <= 4) {
-            setBettingCards(betCards);
+            setBettingCards([...betCards.map(card => ({...card}))]);
         } else {
             toast.dismiss();
             toast('Đặt cược tối đa 4 lá linh vật', { duration: 2000, position: 'bottom-center'});
@@ -132,7 +132,7 @@ function MyBonusToday({ betCards, onUserDataChange, fbId, setFirebaseData} : MyI
                 <NoGameToday arrowImg={ArrowWhite} noGameToday={betUser?.noBettingToday ?? 0} />
                
                 <div className="section-myInfo__cards">
-                    {bettingCards.map((betCard) => (<BettingCard key={betCard.cardId} betCard={betCard} />))}
+                    {bettingCards.map((betCard) => (<BettingCard key={`${betCard.id}${betCard.totalIcoinBetting}`} betCard={betCard} />))}
                 </div>
 
                 <div className="end">

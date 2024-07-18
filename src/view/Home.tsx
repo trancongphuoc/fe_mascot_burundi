@@ -13,7 +13,7 @@ import MyBonusToday from '../components/myBonusDay/MyBonusToday';
 import BestPlayers from '../components/bestPlayer/BestPlayers.tsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import DialogBetting from '../components/Modal/DialogBetting.tsx';
-import DialogLost from '../components/Modal/DialogLostWin.tsx';
+import DialogWinLost from '../components/Modal/DialogLostWin.tsx';
 import PopupRule from '../components/popup/PopupRule';
 import PopupGameHistory from '../components/popup/PopupGameHistory';
 import PopupMyHistory from '../components/popup/PopupMyHistory';
@@ -46,7 +46,7 @@ import ShortInfoGame from '../components/shortInfoGame/ShortInfoGame.tsx';
 import PopupDisconnect from '../components/popup/PopupDisconnect.tsx';
 import PopupDeposit from '../components/popup/PopupDeposit.tsx';
 import PopupOpenCircle from '../components/openCard/PopupOpenCircle.tsx';
-import MaintainModal from '../components/Modal/MaintainModal.tsx';
+// import MaintainModal from '../components/Modal/MaintainModal.tsx';
 
 
 const img: string[] = [buffalo, tiger, dragon, snake, horse, goat, chicken, pig];
@@ -99,8 +99,10 @@ export default function Home() {
       } else {
         dialogTypeRef.current = 'LOST';
       }
+    } else if ((data.totalIcoinWin || 0) > 0 ) {
+      dialogTypeRef.current = 'WIN';
     } else {
-        console.log("Win status is undefined or not a boolean.");
+      dialogTypeRef.current = 'LOST';
     }
   };
 
@@ -250,7 +252,12 @@ export default function Home() {
           setHidden('scroll');
         };
         break;
-      case 'RESULTWAITING':   
+      case 'RESULTWAITING':
+        if (openDepositIcoin) {
+          setOpenDepositIcoin(false);
+          setHidden('scroll');
+        }
+
         if (openGameResult) {
           setOpenGameResult(false)
           setHidden('scroll');
@@ -322,28 +329,26 @@ const setFirebaseData = (zodiacCards: BetZodiacCard[]) => {
 // send icoin betting
 const handleBetting = async (zodiacCard: BetZodiacCard) => {
   log('function betting');
-
   const oldBetCards = [...betCardRef.current.map(card => ({...card}))]
-  const updatedBetCards = updateNewBetCards(zodiacCard, betCardRef.current);
-  
-  if (updatedBetCards.length > 4) {
-    toast.dismiss();
-    toast('Đặt cược tối đa 4 lá linh vật', { duration: 2000, position: 'bottom-center'});
-  } else {
-    toast.dismiss();
-    betCardRef.current = updatedBetCards;
-    try {
+  try {
+    const updatedBetCards = updateNewBetCards(zodiacCard, betCardRef.current);
+    
+    if (updatedBetCards.length > 4) {
+      toast.dismiss();
+      toast('Đặt cược tối đa 4 lá linh vật', { duration: 2000, position: 'bottom-center'});
+    } else {
+      toast.dismiss();
+      betCardRef.current = updatedBetCards;
       const data = await bettingCard(transactionId.current ?? 0, zodiacCard.totalIcoinBetting ?? 0, zodiacCard.id);
       if (data !== "OK") {
-        // betSuccessRef.current = false;
         betCardRef.current = oldBetCards;
       }
-    } catch (error) {
-      console.error('Error betting:', error);
-      betCardRef.current = oldBetCards;
-      // betSuccessRef.current = false;
     }
+  } catch (error) {
+    console.error('Error betting:', error);
+    betCardRef.current = oldBetCards;
   }
+  
   // selectedCardRef.current = null;
 };
 
@@ -440,7 +445,8 @@ const handleModal = useCallback((stateModal : ModalSet) => {
     setModal: handleModal,
     setSelectedCard: handleCardSelection,
     betting: handleBetting,
-    iCoinWinTheGame: totalIcoinWinRef.current ?? 0
+    iCoinWinTheGame: totalIcoinWinRef.current ?? 0,
+    // betCards: betCardRef.current || []
   }
 
   if (isLoadingRef.current) {
@@ -487,7 +493,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
 
           {openBetting && selectedCardRef.current && <DialogBetting />}
 
-          {openLostWin && <DialogLost
+          {openLostWin && <DialogWinLost
                               dialogType={dialogTypeRef.current}
                               totalIcoin={totalIcoinWinRef.current}
                               zodiac={cardResultRef.current?.imgUrl ?? ''} />}
