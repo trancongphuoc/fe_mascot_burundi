@@ -19,7 +19,7 @@ import PopupGameHistory from '../components/popup/PopupGameHistory';
 import PopupMyHistory from '../components/popup/PopupMyHistory';
 
 import { db } from '../firebase/config';
-import { ref, onValue, off } from "firebase/database";
+import { ref, onValue, off, set } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
 
 import PopupOpenCard from '../components/openCard/PopupOpenCard';
@@ -192,179 +192,129 @@ export default function Home() {
 
     fetchGameInfo();
 
-    if (statusGame != "COUNTDOWN") {
-
-        setOpenDepositIcoin(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          }
-          else {
-            setHidden("hidden");
-            return statePrev
-          }
-        });
-       
-        setOpenBetting(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          } else {
-            setHidden('hidden');
-            return statePrev;
-          }
-          
-        });
-    }
-
-    if (statusGame == "COUNTDOWN") {
-      doNothing();
-    }
-
     switch (statusGame) {
       case 'NONE':
+        setOpenRule(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev})
+        
+        setOpenBetting(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev})
+
+        setOpenGameHistory(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev})
+
+        setOpenDepositIcoin(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev})
+
+        setopenGameCircle(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev})
+
         setOpenGameResult(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          } else {
-            setHidden('hidden');
-            return statePrev
-          }
-        })
-          
+          if (statePrev) return !statePrev
+          else return statePrev})
+
+        setHidden('hidden')
         break;
       case 'PREPARESTART':
 
         betCardRef.current = [];
 
+        setOpenRule(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev})
+        
+        setOpenBetting(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev})
+
         setOpenGameResult(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          } else {
-            setHidden('hidden');
-            return statePrev
-          }
-        })
+          if (statePrev) return !statePrev
+          else return statePrev })
+
+        setHidden('scroll')
 
         break;
       case 'COUNTDOWN':
+        doNothing();
+
         setOpenGameResult(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          } else {
-            setHidden('hidden');
-            return statePrev
-          }
-        })
+          if (statePrev) return !statePrev
+          else return statePrev})
 
         setOpenLostWin(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          } else return statePrev
-        });
+          if (statePrev) return !statePrev
+          else return statePrev });
 
         setOpenRule(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          }
-          else return statePrev
-        })
+          if (statePrev) return !statePrev
+          else return statePrev})
 
         setOpenGameHistory(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          }
-          else return statePrev
-        })
+          if (statePrev) return !statePrev
+          else return statePrev})
 
         setOpenMyHistory(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          }
-          else return statePrev
-        })
+          if (statePrev) return !statePrev
+          else return statePrev})
 
+        setHidden('scroll')
         break;
+
       case 'RESULTWAITING':
         setOpenDepositIcoin(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          }
-          else return statePrev
-        });
+          if (statePrev) return !statePrev
+          else return statePrev});
 
-        setOpenGameResult(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          }
-          else return statePrev
-        })
+        setOpenBetting(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev})
   
         break;
       case 'RESULT':
 
         setOpenRule(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          }
-          else return statePrev
-        })
+          if (statePrev) return !statePrev
+          else return statePrev})
 
         setOpenGameHistory(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          }
-          else return statePrev
-        })
+          if (statePrev) return !statePrev
+          else return statePrev})
   
         setOpenMyHistory(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          }
-          else return statePrev
-        })
-        
+          if (statePrev) return !statePrev
+          else return statePrev})
+
+        setOpenDepositIcoin(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev});
+
+        setOpenBetting(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev})
+
         setopenGameCircle(statePrev => {
-          if (statePrev) {
-            setHidden('hidden');
-            return statePrev
-          }
-          else return !statePrev
-        })
+          if (statePrev) return statePrev
+          else return !statePrev})
 
-
+        setHidden("hidden")
         break;
       case 'END':
 
         setopenGameCircle(statePrev => {
-          if (statePrev) {
-            setHidden('scroll');
-            return !statePrev
-          }
+          if (statePrev) return !statePrev
           else return statePrev
         })
 
-
         setOpenGameResult(statePrev => {
-          if (statePrev) {
-            setHidden('hidden');
-            return statePrev
-          }
+          if (statePrev) return statePrev
           else return !statePrev
         })
-          
+        setHidden("hidden")
         break;
     }
 
