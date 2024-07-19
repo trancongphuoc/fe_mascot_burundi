@@ -84,7 +84,6 @@ export default function Home() {
   const topUserRef = useRef<User[]>([]);
   const noGameRef = useRef<number>(0);
   const transactionId = useRef<number>(0);
-  const countNumberRef = useRef<number>(0);
 
   // const zodiacImgs = useRef<ZodiacCardModel[]>([])
 
@@ -236,7 +235,11 @@ export default function Home() {
           if (statePrev) return !statePrev
           else return statePrev })
 
-        setHidden('scroll')
+        setOpenLostWin(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev });
+
+        setHidden("hidden")
 
         break;
       case 'COUNTDOWN':
@@ -245,10 +248,6 @@ export default function Home() {
         setOpenGameResult(statePrev => {
           if (statePrev) return !statePrev
           else return statePrev})
-
-        setOpenLostWin(statePrev => {
-          if (statePrev) return !statePrev
-          else return statePrev });
 
         setOpenRule(statePrev => {
           if (statePrev) return !statePrev
