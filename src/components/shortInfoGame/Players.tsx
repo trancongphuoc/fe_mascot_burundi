@@ -31,7 +31,7 @@ export default function Players() {
                     }
                 }
 
-                setPlayers([...playersList]);
+                setPlayers([...playersList.map(player => ({...player}))]);
                 const extraPlayers = playersList.length > 5 ? playersList.length - 5 : 0;
                 setNumber(extraPlayers);
             }

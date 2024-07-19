@@ -188,13 +188,20 @@ export default function Home() {
     fetchGameInfo();
 
     if (statusGame != "COUNTDOWN") {
-      if (openDepositIcoin) {
-        setOpenDepositIcoin(false);
-        setHidden('scroll');
-      };
+
+        setOpenDepositIcoin(statePrev => {
+          setHidden('scroll');
+          if (statePrev) return !statePrev
+          else return statePrev
+        });
+       
+
       
       if (openBetting) {
-        setOpenBetting(false);
+        setOpenBetting(statePrev => {
+          if (statePrev) return !statePrev;
+          return statePrev;
+        });
         setHidden('scroll');
       };
     }
@@ -206,7 +213,10 @@ export default function Home() {
     switch (statusGame) {
       case 'NONE':
         if (openGameResult) {
-          setOpenGameResult(false)
+          setOpenGameResult(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          })
           setHidden('scroll');
         };
         break;
@@ -215,72 +225,114 @@ export default function Home() {
         betCardRef.current = [];
 
         if (openGameResult) {
-          setOpenGameResult(false)
+          setOpenGameResult(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          })
           setHidden('scroll');
         };
 
         break;
       case 'COUNTDOWN':
         if (openGameResult) {
-          setOpenGameResult(false)
+          setOpenGameResult(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          })
           setHidden('scroll');
         };
 
         if (openLostWin) {
-          setOpenLostWin(false);
+          setOpenLostWin(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          });
           setHidden('scroll');
         };
         if (openRule) {
-          setOpenRule(false)
+          setOpenRule(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          })
           setHidden('scroll');
         };
         if (openGameHistory) {
-          setOpenGameHistory(false)
+          setOpenGameHistory(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          })
           setHidden('scroll');
         };
         if (openMyHistory) {
-          setOpenMyHistory(false)
+          setOpenMyHistory(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          })
           setHidden('scroll');
         };
         break;
       case 'RESULTWAITING':
         if (openDepositIcoin) {
-          setOpenDepositIcoin(false);
+          setOpenDepositIcoin(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          });
           setHidden('scroll');
         }
 
         if (openGameResult) {
-          setOpenGameResult(false)
+          setOpenGameResult(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          })
           setHidden('scroll');
         };     
         break;
       case 'RESULT':
         if (openRule) {
-          setOpenRule(false)
+          setOpenRule(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          })
           setHidden('scroll');
         };
         if (openGameHistory) {
-          setOpenGameHistory(false)
+          setOpenGameHistory(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          })
           setHidden('scroll');
         };
         if (openMyHistory) {
-          setOpenMyHistory(false)
+          setOpenMyHistory(statePrev => {
+            if (statePrev) return !statePrev
+            else return statePrev
+          })
           setHidden('scroll');
         };
 
         if (!openGameCircle) {
-          setopenGameCircle(true)
+          setopenGameCircle(statePrev => {
+            if (statePrev) return statePrev
+            else return !statePrev
+          })
           setHidden('hidden');
         };
         break;
       case 'END':
 
       if (openGameCircle) {
-        setopenGameCircle(false)
+        setopenGameCircle(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev
+        })
         setHidden('scroll');
       };
         if (!openGameResult) {
-          setOpenGameResult(true)
+          setOpenGameResult(statePrev => {
+            if (statePrev) return statePrev
+            else return !statePrev
+          })
           setHidden('hidden');
         };
         break;
@@ -302,7 +354,10 @@ export default function Home() {
       };
 
       selectedCardRef.current = {...betCard};
-      setOpenBetting(true);
+      setOpenBetting(statePrev => {
+        if (statePrev) return statePrev
+        else return !statePrev
+      });
       setHidden('hidden');
     } else {
       toast.remove();
@@ -359,32 +414,62 @@ const handleModal = useCallback((stateModal : ModalSet) => {
     setHidden('hidden');
     switch (stateModal.type) {
       case "RULE":
-        setOpenRule(true)
+        setOpenRule(statePrev => {
+          if (statePrev) return statePrev
+          else return !statePrev
+        })
         break;
       case "BETTING":
-        setOpenBetting(true);
+        setOpenBetting(statePrev => {
+          if (statePrev) return statePrev
+          else return !statePrev
+        });
         break;
       case "WINLOST":
-        setOpenLostWin(true)
+        setOpenLostWin(statePrev => {
+          if (statePrev) return statePrev
+          else return !statePrev
+        })
         break;
       case "GAMEHISTORY":
-        setOpenGameHistory(true)
+        setOpenGameHistory(statePrev => {
+          if (statePrev) return statePrev
+          else return !statePrev
+        })
         break;
       case "MYHISTORY":
-        setOpenMyHistory(true)
+        setOpenMyHistory(statePrev => {
+          if (statePrev) return statePrev
+          else return !statePrev
+        })
         break;
       case "DEPOSIT":
-        setOpenDepositIcoin(true);
+        setOpenDepositIcoin(statePrev => {
+          if (statePrev) return statePrev
+          else return !statePrev
+        });
         break;
       case "DISCONNECT":
-        setOpenDisconnect(true);
+        setOpenDisconnect(statePrev => {
+          if (statePrev) return statePrev
+          else return !statePrev
+        });
         break;
       case "GAMECIRCLE":
-        setopenGameCircle(true);
+        setopenGameCircle(statePrev => {
+          if (statePrev) return statePrev
+          else return !statePrev
+        });
         break;
       case "GAMERESULT":
-        setOpenGameResult(true);
-        setOpenLostWin(true);
+        setOpenGameResult(statePrev => {
+          if (statePrev) return statePrev
+          else return !statePrev
+        });
+        setOpenLostWin(statePrev => {
+          if (statePrev) return statePrev
+          else return !statePrev
+        });
         break;
       default:
         break;
@@ -393,32 +478,62 @@ const handleModal = useCallback((stateModal : ModalSet) => {
     setHidden('scroll');
     switch (stateModal.type) {
       case "RULE":
-        setOpenRule(false)
+        setOpenRule(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev
+        })
         break;
       case "BETTING":
-        setOpenBetting(false);
+        setOpenBetting(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev
+        });
         break;
       case "WINLOST":
-        setOpenLostWin(false)
+        setOpenLostWin(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev
+        })
         break;
       case "GAMEHISTORY":
-        setOpenGameHistory(false)
+        setOpenGameHistory(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev
+        })
         break;
       case "MYHISTORY":
-        setOpenMyHistory(false)
+        setOpenMyHistory(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev
+        })
         break;
       case "DEPOSIT":
-        setOpenDepositIcoin(false);
+        setOpenDepositIcoin(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev
+        });
         break;
       case "DISCONNECT":
-        setOpenDisconnect(false);
+        setOpenDisconnect(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev
+        });
         break;
       case "GAMECIRCLE":
-        setopenGameCircle(false);
+        setopenGameCircle(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev
+        });
         break;
       case "GAMERESULT":
-        setOpenGameResult(false);
-        setOpenLostWin(true);
+        setOpenGameResult(statePrev => {
+          if (statePrev) return !statePrev
+          else return statePrev
+        });
+        setOpenLostWin(statePrev => {
+          if (statePrev) return statePrev
+          else return !statePrev
+        });
         break;
       default:
         break;
@@ -465,6 +580,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
             </div>
           )}
         </Toaster>
+        <h1>{document.body.style.overflow ?? "unknow"}</h1>
         <Header/>
         <ShortInfoGame/>
         <BettingTable />
@@ -492,7 +608,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
 
           {openMyHistory && <PopupMyHistory />}
 
-          {openDepositIcoin && <PopupDeposit />}
+          {openDepositIcoin && <PopupDeposit key={Math.random()}/>}
 
           {openDisconnect && <PopupDisconnect />}
 

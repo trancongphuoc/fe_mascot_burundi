@@ -4,7 +4,7 @@ import { db } from '../../firebase/config';
 import { log } from '../../utils/log';
 import { GameInfoContext } from '../../store/game-info_context';
 
-const TOTAL_COUNTDOWN : number = 40;
+const TOTAL_COUNTDOWN : number = 35;
 
 export default function Countdown() {
   log('<Countdown />');

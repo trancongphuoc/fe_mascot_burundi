@@ -5,7 +5,7 @@ export default function ShortInfoGame() {
     return (
         <div className="result mt-7-5px">
             <ShortGameHistory />
-            <Players/>
+            <Players />
         </div>
     );
 }
