@@ -133,6 +133,7 @@
         width: 86px;
         height: 32px;
         justify-self: end;
+        touch-action: manipulation;
     }
 
     &--button-2 {
@@ -141,6 +142,7 @@
         z-index: 5;
         width: 86px;
         height: 32px;
+        touch-action: manipulation;
     }
 
     &--button-3 {
@@ -150,9 +152,11 @@
         z-index: 5;
         width: 86px;
         height: 32px;
+        touch-action: manipulation;
     }
 
     &__confirm {
+        touch-action: manipulation;
         justify-self: center;
         align-self: flex-end;
         position: relative;
