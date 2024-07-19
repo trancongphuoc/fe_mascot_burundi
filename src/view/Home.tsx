@@ -84,6 +84,7 @@ export default function Home() {
   const topUserRef = useRef<User[]>([]);
   const noGameRef = useRef<number>(0);
   const transactionId = useRef<number>(0);
+  const countNumberRef = useRef<number>(0);
 
   // const zodiacImgs = useRef<ZodiacCardModel[]>([])
 
@@ -108,6 +109,10 @@ export default function Home() {
       dialogTypeRef.current = 'LOST';
     }
   };
+
+  const handleCountNumber = (countNumber: number) => {
+    countNumberRef.current = countNumber
+  } 
 
   useEffect(() => {
     const fetchAndSetFbId = async () => {
@@ -190,20 +195,26 @@ export default function Home() {
     if (statusGame != "COUNTDOWN") {
 
         setOpenDepositIcoin(statePrev => {
-          setHidden('scroll');
-          if (statePrev) return !statePrev
-          else return statePrev
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          }
+          else {
+            setHidden("hidden");
+            return statePrev
+          }
         });
        
-
-      
-      if (openBetting) {
         setOpenBetting(statePrev => {
-          if (statePrev) return !statePrev;
-          return statePrev;
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          } else {
+            setHidden('hidden');
+            return statePrev;
+          }
+          
         });
-        setHidden('scroll');
-      };
     }
 
     if (statusGame == "COUNTDOWN") {
@@ -212,129 +223,149 @@ export default function Home() {
 
     switch (statusGame) {
       case 'NONE':
-        if (openGameResult) {
-          setOpenGameResult(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          })
-          setHidden('scroll');
-        };
+        setOpenGameResult(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          } else {
+            setHidden('hidden');
+            return statePrev
+          }
+        })
+          
         break;
       case 'PREPARESTART':
 
         betCardRef.current = [];
 
-        if (openGameResult) {
-          setOpenGameResult(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          })
-          setHidden('scroll');
-        };
+        setOpenGameResult(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          } else {
+            setHidden('hidden');
+            return statePrev
+          }
+        })
 
         break;
       case 'COUNTDOWN':
-        if (openGameResult) {
-          setOpenGameResult(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          })
-          setHidden('scroll');
-        };
+        setOpenGameResult(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          } else {
+            setHidden('hidden');
+            return statePrev
+          }
+        })
 
-        if (openLostWin) {
-          setOpenLostWin(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          });
-          setHidden('scroll');
-        };
-        if (openRule) {
-          setOpenRule(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          })
-          setHidden('scroll');
-        };
-        if (openGameHistory) {
-          setOpenGameHistory(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          })
-          setHidden('scroll');
-        };
-        if (openMyHistory) {
-          setOpenMyHistory(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          })
-          setHidden('scroll');
-        };
+        setOpenLostWin(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          }
+          else return statePrev
+        });
+
+        setOpenRule(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          }
+          else return statePrev
+        })
+
+        setOpenGameHistory(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          }
+          else return statePrev
+        })
+
+        setOpenMyHistory(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          }
+          else return statePrev
+        })
+
         break;
       case 'RESULTWAITING':
-        if (openDepositIcoin) {
-          setOpenDepositIcoin(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          });
-          setHidden('scroll');
-        }
+        setOpenDepositIcoin(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          }
+          else return statePrev
+        });
 
-        if (openGameResult) {
-          setOpenGameResult(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          })
-          setHidden('scroll');
-        };     
+        setOpenGameResult(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          }
+          else return statePrev
+        })
+  
         break;
       case 'RESULT':
-        if (openRule) {
-          setOpenRule(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          })
-          setHidden('scroll');
-        };
-        if (openGameHistory) {
-          setOpenGameHistory(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          })
-          setHidden('scroll');
-        };
-        if (openMyHistory) {
-          setOpenMyHistory(statePrev => {
-            if (statePrev) return !statePrev
-            else return statePrev
-          })
-          setHidden('scroll');
-        };
 
-        if (!openGameCircle) {
-          setopenGameCircle(statePrev => {
-            if (statePrev) return statePrev
-            else return !statePrev
-          })
-          setHidden('hidden');
-        };
+        setOpenRule(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          }
+          else return statePrev
+        })
+
+        setOpenGameHistory(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          }
+          else return statePrev
+        })
+  
+        setOpenMyHistory(statePrev => {
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          }
+          else return statePrev
+        })
+        
+        setopenGameCircle(statePrev => {
+          if (statePrev) {
+            setHidden('hidden');
+            return statePrev
+          }
+          else return !statePrev
+        })
+
+
         break;
       case 'END':
 
-      if (openGameCircle) {
         setopenGameCircle(statePrev => {
-          if (statePrev) return !statePrev
+          if (statePrev) {
+            setHidden('scroll');
+            return !statePrev
+          }
           else return statePrev
         })
-        setHidden('scroll');
-      };
-        if (!openGameResult) {
-          setOpenGameResult(statePrev => {
-            if (statePrev) return statePrev
-            else return !statePrev
-          })
-          setHidden('hidden');
-        };
+
+
+        setOpenGameResult(statePrev => {
+          if (statePrev) {
+            setHidden('hidden');
+            return statePrev
+          }
+          else return !statePrev
+        })
+          
         break;
     }
 
@@ -347,18 +378,24 @@ export default function Home() {
 
   const handleCardSelection = (card: ZodiacCardModel) => {
     log('function select card');
-    if (statusGame === "COUNTDOWN") {
+    if (statusGame === "COUNTDOWN" && countNumberRef.current > 0) {
         const betCard: BetZodiacCard = {
         ...card,
         transactionId: transactionId.current ?? 0,
       };
 
       selectedCardRef.current = {...betCard};
+
+      
       setOpenBetting(statePrev => {
-        if (statePrev) return statePrev
-        else return !statePrev
+        if (statePrev) {
+          setHidden('hidden');
+          return statePrev}
+        else {
+          setHidden("scroll");
+          return !statePrev}
       });
-      setHidden('hidden');
+ 
     } else {
       toast.remove();
       toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
@@ -421,8 +458,9 @@ const handleModal = useCallback((stateModal : ModalSet) => {
         break;
       case "BETTING":
         setOpenBetting(statePrev => {
-          if (statePrev) return statePrev
-          else return !statePrev
+          if (statePrev) {
+            return statePrev}
+          else {return !statePrev}
         });
         break;
       case "WINLOST":
@@ -552,6 +590,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
     setSelectedCard: handleCardSelection,
     betting: handleBetting,
     iCoinWinTheGame: totalIcoinWinRef.current ?? 0,
+    setCountNumber: handleCountNumber,
   }
 
   if (isLoadingRef.current) {
