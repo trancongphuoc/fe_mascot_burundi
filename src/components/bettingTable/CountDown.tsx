@@ -9,7 +9,7 @@ const TOTAL_COUNTDOWN : number = 35;
 export default function Countdown() {
   log('<Countdown />');
   const [count, setCount] = useState(0);
-  const { stateGame, transactionId, setCountNumber } = useContext(GameInfoContext)
+  const { stateGame, transactionId, setCountNumber: finishCountNumber } = useContext(GameInfoContext)
 
   const differentTime = (startTime: number): number => {
     const currentTime = Date.now();
@@ -28,7 +28,9 @@ export default function Countdown() {
         
       const interval = setInterval(() => {
         initialRemainingTime -= 1;
-        setCountNumber(Math.max(initialRemainingTime, 0))
+        if (initialRemainingTime <= 0) {
+          finishCountNumber()
+        }
         setCount(Math.max(initialRemainingTime, 0));
       }, 1000);
 

@@ -110,8 +110,8 @@ export default function Home() {
     }
   };
 
-  const handleCountNumber = (countNumber: number) => {
-    countNumberRef.current = countNumber
+  const handleCountNumber = () => {
+    handleModal({state: "CLOSE", type: "BETTING"})
   } 
 
   useEffect(() => {
@@ -264,7 +264,6 @@ export default function Home() {
 
         setHidden('scroll')
         break;
-
       case 'RESULTWAITING':
         setOpenDepositIcoin(statePrev => {
           if (statePrev) return !statePrev
@@ -325,7 +324,7 @@ export default function Home() {
 
   const handleCardSelection = (card: ZodiacCardModel) => {    
     try {
-        if (statusGame === "COUNTDOWN" && countNumberRef.current > 0) {
+        if (statusGame === "COUNTDOWN") {
           const betCard: BetZodiacCard = {
           ...card,
           transactionId: transactionId.current ?? 0,

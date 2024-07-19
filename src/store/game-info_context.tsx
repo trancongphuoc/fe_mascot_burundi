@@ -12,7 +12,7 @@ type GameInfoContextType = {
     setSelectedCard: (_card: ZodiacCardModel) => void;
     betting: (_card: BetZodiacCard) => void;
     iCoinWinTheGame: number;
-    setCountNumber: (_: number) => void;
+    setCountNumber: () => void;
 };
 
 
@@ -27,7 +27,7 @@ export const GameInfoContext = createContext<GameInfoContextType>({
     setSelectedCard: (_card: ZodiacCardModel) => {},
     betting: (_card: BetZodiacCard) => {},
     iCoinWinTheGame: 0,
-    setCountNumber: (_: number) => {}
+    setCountNumber: () => {}
 });
 
 // interface GameInfoProviderProps {
