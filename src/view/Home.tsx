@@ -264,8 +264,7 @@ export default function Home() {
           if (statePrev) {
             setHidden('scroll');
             return !statePrev
-          }
-          else return statePrev
+          } else return statePrev
         });
 
         setOpenRule(statePrev => {
@@ -620,6 +619,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
           )}
         </Toaster>
         <h1>{document.body.style.overflow ?? "unknow"}</h1>
+        <h2>{fbIdRef.current}</h2>
         <Header/>
         <ShortInfoGame/>
         <BettingTable />

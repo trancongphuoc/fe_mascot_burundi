@@ -35,7 +35,7 @@ const PopupMineResult = () => {
 
   const [myHistory, setMyHistory] = useState<MyHistory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const { setModal } = useContext(GameInfoContext);
+  const { setModal, stateGame } = useContext(GameInfoContext);
 
   useEffect(() => {
       new Image().src = bgMyHistory;
@@ -55,7 +55,9 @@ const PopupMineResult = () => {
             zodiacCards: history.zodiacCards,
             // netIcoin: (history.totalIcoinWin ?? 0) - (history.totalIcoinBetting ?? 0),
           }));
-          setMyHistory(myHistories);
+          if (stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") {
+            setMyHistory(myHistories);
+          }
         }
       } catch (error) {
         console.error('Error fetching history:', error);
