@@ -19,7 +19,7 @@ import PopupGameHistory from '../components/popup/PopupGameHistory';
 import PopupMyHistory from '../components/popup/PopupMyHistory';
 
 import { db } from '../firebase/config';
-import { ref, onValue, off, set } from "firebase/database";
+import { ref, onValue, off } from "firebase/database";
 import { AnimatePresence } from 'framer-motion';
 
 import PopupOpenCard from '../components/openCard/PopupOpenCard';
@@ -304,16 +304,14 @@ export default function Home() {
         setHidden("hidden")
         break;
       case 'END':
-
         setopenGameCircle(statePrev => {
           if (statePrev) return !statePrev
-          else return statePrev
-        })
+          else return statePrev })
 
         setOpenGameResult(statePrev => {
           if (statePrev) return statePrev
-          else return !statePrev
-        })
+          else return !statePrev})
+
         setHidden("hidden")
         break;
     }
@@ -325,27 +323,23 @@ export default function Home() {
 
 
 
-  const handleCardSelection = (card: ZodiacCardModel) => {
-    log('function select card');
-    if (statusGame === "COUNTDOWN" && countNumberRef.current > 0) {
-        const betCard: BetZodiacCard = {
-        ...card,
-        transactionId: transactionId.current ?? 0,
-      };
+  const handleCardSelection = (card: ZodiacCardModel) => {    
+    try {
+        if (statusGame === "COUNTDOWN" && countNumberRef.current > 0) {
+          const betCard: BetZodiacCard = {
+          ...card,
+          transactionId: transactionId.current ?? 0,
+        };
 
-      selectedCardRef.current = {...betCard};
-
+        selectedCardRef.current = {...betCard};
+        handleModal({state: "OPEN", type: "BETTING"})
+  
+      } else {
+        toast.remove();
+        toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
+      }
       
-      setOpenBetting(statePrev => {
-        if (statePrev) {
-          setHidden('hidden');
-          return statePrev}
-        else {
-          setHidden("scroll");
-          return !statePrev}
-      });
- 
-    } else {
+    } catch (error) {
       toast.remove();
       toast('Chưa đến thời gian đặt cược', { duration: 2000, position: 'bottom-center'});
     }
@@ -407,10 +401,8 @@ const handleModal = useCallback((stateModal : ModalSet) => {
         break;
       case "BETTING":
         setOpenBetting(statePrev => {
-          if (statePrev) {
-            return statePrev}
-          else {return !statePrev}
-        });
+          if (statePrev) return statePrev
+          else return !statePrev});
         break;
       case "WINLOST":
         setOpenLostWin(statePrev => {
