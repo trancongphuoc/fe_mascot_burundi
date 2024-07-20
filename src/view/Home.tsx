@@ -394,8 +394,7 @@ const handleModal = useCallback((stateModal : ModalSet) => {
       case "RULE":
         setOpenRule(statePrev => {
           if (statePrev) return statePrev
-          else return !statePrev
-        })
+          else return !statePrev})
         break;
       case "BETTING":
         setOpenBetting(statePrev => {
@@ -405,48 +404,40 @@ const handleModal = useCallback((stateModal : ModalSet) => {
       case "WINLOST":
         setOpenLostWin(statePrev => {
           if (statePrev) return statePrev
-          else return !statePrev
-        })
+          else return !statePrev})
         break;
       case "GAMEHISTORY":
         setOpenGameHistory(statePrev => {
           if (statePrev) return statePrev
-          else return !statePrev
-        })
+          else return !statePrev})
         break;
       case "MYHISTORY":
         setOpenMyHistory(statePrev => {
           if (statePrev) return statePrev
-          else return !statePrev
-        })
+          else return !statePrev})
         break;
       case "DEPOSIT":
         setOpenDepositIcoin(statePrev => {
           if (statePrev) return statePrev
-          else return !statePrev
-        });
+          else return !statePrev});
         break;
       case "DISCONNECT":
         setOpenDisconnect(statePrev => {
           if (statePrev) return statePrev
-          else return !statePrev
-        });
+          else return !statePrev});
         break;
       case "GAMECIRCLE":
         setopenGameCircle(statePrev => {
           if (statePrev) return statePrev
-          else return !statePrev
-        });
+          else return !statePrev});
         break;
       case "GAMERESULT":
         setOpenGameResult(statePrev => {
           if (statePrev) return statePrev
-          else return !statePrev
-        });
+          else return !statePrev});
         setOpenLostWin(statePrev => {
           if (statePrev) return statePrev
-          else return !statePrev
-        });
+          else return !statePrev});
         break;
       default:
         break;
@@ -457,60 +448,50 @@ const handleModal = useCallback((stateModal : ModalSet) => {
       case "RULE":
         setOpenRule(statePrev => {
           if (statePrev) return !statePrev
-          else return statePrev
-        })
+          else return statePrev})
         break;
       case "BETTING":
         setOpenBetting(statePrev => {
           if (statePrev) return !statePrev
-          else return statePrev
-        });
+          else return statePrev});
         break;
       case "WINLOST":
         setOpenLostWin(statePrev => {
           if (statePrev) return !statePrev
-          else return statePrev
-        })
+          else return statePrev})
         break;
       case "GAMEHISTORY":
         setOpenGameHistory(statePrev => {
           if (statePrev) return !statePrev
-          else return statePrev
-        })
+          else return statePrev})
         break;
       case "MYHISTORY":
         setOpenMyHistory(statePrev => {
           if (statePrev) return !statePrev
-          else return statePrev
-        })
+          else return statePrev})
         break;
       case "DEPOSIT":
         setOpenDepositIcoin(statePrev => {
           if (statePrev) return !statePrev
-          else return statePrev
-        });
+          else return statePrev});
         break;
       case "DISCONNECT":
         setOpenDisconnect(statePrev => {
           if (statePrev) return !statePrev
-          else return statePrev
-        });
+          else return statePrev});
         break;
       case "GAMECIRCLE":
         setopenGameCircle(statePrev => {
           if (statePrev) return !statePrev
-          else return statePrev
-        });
+          else return statePrev});
         break;
       case "GAMERESULT":
         setOpenGameResult(statePrev => {
           if (statePrev) return !statePrev
-          else return statePrev
-        });
+          else return statePrev});
         setOpenLostWin(statePrev => {
           if (statePrev) return statePrev
-          else return !statePrev
-        });
+          else return !statePrev});
         break;
       default:
         break;

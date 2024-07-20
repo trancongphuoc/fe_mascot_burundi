@@ -13,7 +13,7 @@ const ButtonStake = ({children, handleClick, className} : ButtonStakeProps) => {
     log('<ButtonStake />')
     return (
         <button
-            onTouchStart={(e) => {
+            onTouchEnd={(e) => {
                 e.stopPropagation();
                 e.preventDefault()
                 handleClick()
