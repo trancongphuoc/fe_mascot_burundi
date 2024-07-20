@@ -19,7 +19,7 @@ export default function ZodiacCard({betCard, index}: ZodiacCardPro) {
     const isActive = selectedCard?.id === betCard.id;
 
     return <div 
-        onClick={() => setSelectedCard(betCard)}
+        onTouchStart={() => setSelectedCard(betCard)}
         className="betting-table__card">
 
         <p className='betting-table__card--no'>{index + 1}</p>
