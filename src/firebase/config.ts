@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database";
 
-
 const firebaseConfigDEV = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY_DEV,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN_DEV,
@@ -25,10 +24,10 @@ const firebaseConfigPRO = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID_PRO,
 };
 
-const finalFirebaseConfig =  window.location.hostname.includes("ikara4m") ?
-                            firebaseConfigPRO : firebaseConfigDEV;
-
+const finalFirebaseConfig = window.location.hostname.includes("ikara4m")
+  ? firebaseConfigPRO
+  : firebaseConfigDEV;
 
 const app = initializeApp(finalFirebaseConfig);
-export const analytics = getAnalytics(app);    
-export const db = getDatabase();  
+export const analytics = getAnalytics(app);
+export const db = getDatabase();
