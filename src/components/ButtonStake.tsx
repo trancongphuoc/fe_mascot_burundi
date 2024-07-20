@@ -15,6 +15,7 @@ const ButtonStake = ({children, handleClick, className} : ButtonStakeProps) => {
         <button
             onTouchStart={(e) => {
                 e.stopPropagation();
+                e.preventDefault()
                 handleClick()
             }}
             className={className}

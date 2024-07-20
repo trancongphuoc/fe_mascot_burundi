@@ -41,6 +41,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  -webkit-touch-callout: none;
   touch-action: manipulation;
   margin: 0 auto;
   background-image: url(../assets/buffalo_logo.svg), url(../assets/goat_logo.svg), linear-gradient(to bottom, #094348 0%, #062F33 30%, #062F33 100%);

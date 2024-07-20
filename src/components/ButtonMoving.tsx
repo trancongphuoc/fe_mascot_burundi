@@ -17,19 +17,27 @@ const ButtonMoving = ({content, setClick, cssClass} : ButtonMovingProps) => {
 
   const handleClick = (e: any) => {
     e.stopPropagation();
+    e.preventDefault();
     setTexts([...texts, { id: Date.now() }]);
     setClick();
   };
 
   const handleAnimationComplete = (id: number) => {
-    setTexts(texts.filter(text => text.id !== id));
+    try {
+      setTexts(texts.filter(text => text.id !== id));
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (
-    <button className={`${cssClass} button-moving`} onClick={(e) => handleClick(e)}>
+    <button className={`${cssClass} button-moving`} onTouchStart={(e) => handleClick(e)}>
       {texts.map((text) => (
           <motion.p 
-              onTouchStart={(e) => e.stopPropagation()}
+              onTouchStart={(e) =>{
+                e.preventDefault();
+                e.stopPropagation()
+              }}
               key={text.id}
               initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 0, y: -100 }}
