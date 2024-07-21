@@ -34,6 +34,7 @@ const ButtonMoving = ({ content, setClick, cssClass }: ButtonMovingProps) => {
     <button
       className={`${cssClass} button-moving`}
       onTouchStart={(e) => handleClick(e)}
+      onClick={(e) => handleClick(e)}
     >
       {texts.map((text) => (
         <motion.p

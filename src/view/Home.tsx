@@ -122,9 +122,10 @@ export default function Home() {
     }
   };
 
-  const handleCountNumber = () => {
-    handleModal({ state: "CLOSE", type: "BETTING" });
-  };
+  const handleCountNumber = useCallback(() => {
+    console.log("call o")
+    // handleModal({ state: "CLOSE", type: "BETTING" });
+  }, []);
 
   useEffect(() => {
     const fetchAndSetFbId = async () => {
@@ -260,7 +261,7 @@ export default function Home() {
           else return statePrev;
         });
 
-        setHidden("hidden");
+        setHidden("scroll");
 
         break;
       case "COUNTDOWN":
@@ -298,7 +299,7 @@ export default function Home() {
           if (statePrev) return !statePrev;
           else return statePrev;
         });
-
+        setHidden("scroll");
         break;
       case "RESULT":
         setOpenRule((statePrev) => {
@@ -431,7 +432,6 @@ export default function Home() {
 
   const handleModal = useCallback((stateModal: ModalSet) => {
     if (stateModal.state === "OPEN") {
-      setHidden("hidden");
       switch (stateModal.type) {
         case "RULE":
           setOpenRule((statePrev) => {
@@ -494,38 +494,43 @@ export default function Home() {
         default:
           break;
       }
+      setHidden("hidden");
     } else {
-      setHidden("scroll");
       switch (stateModal.type) {
         case "RULE":
           setOpenRule((statePrev) => {
             if (statePrev) return !statePrev;
             else return statePrev;
           });
+          setHidden("scroll");
           break;
         case "BETTING":
           setOpenBetting((statePrev) => {
             if (statePrev) return !statePrev;
             else return statePrev;
           });
+          setHidden("scroll");
           break;
         case "WINLOST":
           setOpenLostWin((statePrev) => {
             if (statePrev) return !statePrev;
             else return statePrev;
           });
+          setHidden("scroll");
           break;
         case "GAMEHISTORY":
           setOpenGameHistory((statePrev) => {
             if (statePrev) return !statePrev;
             else return statePrev;
           });
+          setHidden("scroll");
           break;
         case "MYHISTORY":
           setOpenMyHistory((statePrev) => {
             if (statePrev) return !statePrev;
             else return statePrev;
           });
+          setHidden("scroll");
           break;
         case "DEPOSIT":
           setOpenDepositIcoin((statePrev) => {
@@ -534,6 +539,7 @@ export default function Home() {
           });
           break;
         case "DISCONNECT":
+          setHidden("scroll");
           setOpenDisconnect((statePrev) => {
             if (statePrev) return !statePrev;
             else return statePrev;
@@ -634,7 +640,7 @@ export default function Home() {
 
           {openMyHistory && <PopupMyHistory />}
 
-          {openDepositIcoin && <PopupDeposit key={Math.random()} />}
+          {openDepositIcoin && <PopupDeposit key={'deposit'}/>}
 
           {openDisconnect && <PopupDisconnect />}
 

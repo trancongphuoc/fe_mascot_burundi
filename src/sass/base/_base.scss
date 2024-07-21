@@ -16,8 +16,10 @@ $font-primary: 'Roboto', sans-serif;
 
 html {
     box-sizing: border-box;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
     border: none;
     background-color: transparent;
     overscroll-behavior: none;
@@ -43,13 +45,14 @@ body {
     -webkit-touch-callout: none;
     touch-action: manipulation;
 
+    // overflow: scroll !important;
+
     margin: 0 auto;
 
-    background-image: url(../assets/buffalo_logo.svg), url(../assets/goat_logo.svg), linear-gradient(
-        to bottom,
-        $color-warm-black 0%,
-        $color-sacramento-state-green 30%,
-        $color-sacramento-state-green 100%);
+    background-image: url(../assets/buffalo_logo.svg), url(../assets/goat_logo.svg), linear-gradient(to bottom,
+            $color-warm-black 0%,
+            $color-sacramento-state-green 30%,
+            $color-sacramento-state-green 100%);
     background-position: top left, top right, center;
     background-repeat: no-repeat;
 }
