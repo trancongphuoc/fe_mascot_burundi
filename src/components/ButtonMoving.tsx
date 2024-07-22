@@ -16,8 +16,8 @@ const ButtonMoving = ({ content, setClick, cssClass }: ButtonMovingProps) => {
   const [texts, setTexts] = useState<TextItem[]>([]);
 
   const handleClick = (e: any) => {
-    e.stopPropagation();
-    e.preventDefault();
+    e.event.stopImmediatePropagation();
+    e.event.preventDefault();
     setTexts([...texts, { id: Date.now() }]);
     setClick();
   };
@@ -38,10 +38,10 @@ const ButtonMoving = ({ content, setClick, cssClass }: ButtonMovingProps) => {
     >
       {texts.map((text) => (
         <motion.p
-          onTouchStart={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          }}
+          // onTouchStart={(e) => {
+          //   e.preventDefault();
+          //   e.stopPropagation();
+          // }}
           key={text.id}
           initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 0, y: -100 }}
