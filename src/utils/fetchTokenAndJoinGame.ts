@@ -6,7 +6,7 @@ export const fetchTokenAndJoinGame = async (parameters: string | null | undefine
     let fbId = '';
 
     if (!parameters) {
-      console.log('no para', parameters);
+      toast.dismiss();
       toast('Lỗi không đăng nhập', { duration: 2000, position: 'bottom-center' });
       return fbId;
     }

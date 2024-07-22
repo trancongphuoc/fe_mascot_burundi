@@ -24,11 +24,11 @@ export default function ZodiacCard({ betCard, index }: ZodiacCardPro) {
         e.stopPropagation();
         setSelectedCard(betCard);
       }}
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setSelectedCard(betCard);
-      }}
+      // onClick={(e) => {
+      //   e.preventDefault();
+      //   e.stopPropagation();
+      //   setSelectedCard(betCard);
+      // }}
       className="betting-table__card"
     >
       <p className="betting-table__card--no">{index + 1}</p>

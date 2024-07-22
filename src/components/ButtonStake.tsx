@@ -22,11 +22,11 @@ const ButtonStake = ({
         e.preventDefault();
         handleClick();
       }}
-      onClick={(e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        handleClick();
-      }}
+      // onClick={(e) => {
+      //   e.stopPropagation();
+      //   e.preventDefault();
+      //   handleClick();
+      // }}
       className={className}
     >
       {children}

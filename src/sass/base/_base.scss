@@ -42,7 +42,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
     // TODO: add fast
-    touch-action: none;
+    touch-action: manipulation;
 
 
     // overflow: scroll !important;
