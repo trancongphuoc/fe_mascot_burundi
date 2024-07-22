@@ -1,3 +1,4 @@
+
 // MovingText.tsx
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -16,12 +17,10 @@ const ButtonMoving = ({ content, setClick, cssClass }: ButtonMovingProps) => {
   const [texts, setTexts] = useState<TextItem[]>([]);
 
   const handleClick = (e: any) => {
-    
-    e.stopImmediatePropagation();
+    e.stopPropagation();
     e.preventDefault();
     setTexts([...texts, { id: Date.now() }]);
     setClick();
-    e.stopPropagation();
   };
 
   const handleAnimationComplete = (id: number) => {
@@ -35,8 +34,9 @@ const ButtonMoving = ({ content, setClick, cssClass }: ButtonMovingProps) => {
   return (
     <button
       className={`${cssClass} button-moving`}
-      onTouchStart={(e) => handleClick(e)}
-      // onClick={(e) => handleClick(e)}
+      //off touch
+      // onTouchStart={(e) => handleClick(e)}
+      onClick={(e) => handleClick(e)}
     >
       {texts.map((text) => (
         <motion.p
