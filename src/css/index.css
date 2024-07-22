@@ -1428,7 +1428,6 @@ h4 {
   width: 86px;
   height: 32px;
   justify-self: end;
-  touch-action: manipulation;
 }
 .betting--button-2 {
   grid-area: 4/2/4/3;
@@ -1436,7 +1435,6 @@ h4 {
   z-index: 5;
   width: 86px;
   height: 32px;
-  touch-action: manipulation;
 }
 .betting--button-3 {
   grid-area: 4/3/4/4;
@@ -1445,7 +1443,6 @@ h4 {
   z-index: 5;
   width: 86px;
   height: 32px;
-  touch-action: manipulation;
 }
 .betting__confirm {
   touch-action: manipulation;

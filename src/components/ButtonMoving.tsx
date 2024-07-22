@@ -16,10 +16,12 @@ const ButtonMoving = ({ content, setClick, cssClass }: ButtonMovingProps) => {
   const [texts, setTexts] = useState<TextItem[]>([]);
 
   const handleClick = (e: any) => {
-    e.event.stopImmediatePropagation();
-    e.event.preventDefault();
+    
+    e.stopImmediatePropagation();
+    e.preventDefault();
     setTexts([...texts, { id: Date.now() }]);
     setClick();
+    e.stopPropagation();
   };
 
   const handleAnimationComplete = (id: number) => {
