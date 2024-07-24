@@ -15,7 +15,7 @@ import { log } from "../../utils/log";
 import ButtonStake from "../ButtonStake";
 
 import useAudio from "../UseAudio";
-import audioConfirm from "../../../public/sounds/confirm_button.wav";
+// import audioConfirm from "../../../public/sounds/confirm_button.wav";
 // import audioBet from '../../../public/sounds/stake_audio.wav';
 // import AudioPlayer from './Audiobutton';
 import AnimatedCounter from "../animation/AnimatedCounter";
@@ -30,7 +30,7 @@ const DialogBetting = () => {
     useContext(GameInfoContext);
 
   // const clickAudioRef =  useAudio(audioBet);
-  const confirmRef = useAudio(audioConfirm);
+  // const confirmRef = useAudio(audioConfirm);
 
   // function playAudio () {
   //   const audio = useAudio(audioBet);
@@ -39,7 +39,6 @@ const DialogBetting = () => {
   // }
 
   const sendDataOut = () => {
-    confirmRef();
     if (!transactionId) {
       toast.dismiss();
       toast("Thiếu thông tin game", {

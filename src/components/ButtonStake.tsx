@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { log } from "../utils/log";
 
-// import audioBet from '../../public/sounds/stake_audio.wav';
+import audioBet from '../../public/sounds/stake_audio.wav';
 
 interface ButtonStakeProps {
   children: ReactNode;
@@ -9,22 +9,27 @@ interface ButtonStakeProps {
   className: string;
 }
 
+const confirmRef = new Audio(audioBet);
+
 const ButtonStake = ({
   children,
   handleClick,
   className,
 }: ButtonStakeProps) => {
-  log("<ButtonStake />");
+  log("<ButtonStake />"); 
+
   return (
     <button
       onTouchEnd={(e) => {
         e.stopPropagation();
         e.preventDefault();
+        confirmRef.play();
         handleClick();
       }}
       // onClick={(e) => {
       //   e.stopPropagation();
       //   e.preventDefault();
+      //   confirmRef.play();
       //   handleClick();
       // }}
       className={className}

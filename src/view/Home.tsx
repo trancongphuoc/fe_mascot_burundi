@@ -572,7 +572,11 @@ export default function Home() {
           break;
         case "GAMERESULT":
           setOpenGameResult((statePrev) => {
-            playWinAudio();
+            if (dialogTypeRef.current === "WIN") {
+              playWinAudio();
+            } else {
+              playLostAudio();
+            }
             if (statePrev) return !statePrev;
             else return statePrev;
           });

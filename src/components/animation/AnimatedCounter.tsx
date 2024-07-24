@@ -30,7 +30,6 @@ const AnimatedCounter = ({from, to, animationOptions}: AnimatedCounterProps) => 
             ease: "easeOut",
             ...animationOptions,
             onUpdate(value) {
-                console.log(value)
                 element.textContent = value.toFixed(0);
             }
         })
