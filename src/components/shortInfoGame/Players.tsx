@@ -21,7 +21,7 @@ export default function Players() {
                         const playerData = data[playerId];
                         const player: User = {
                             facebookUserId: playerData.facebookUserId,
-                            profileImageLink: playerData.profileImageLink ?? '',
+                            profileImageLink: playerData.profileImageLink || '',
                             name: playerData.name,
                             uid: playerData.uid,
                             totalIcoin: playerData.totalIcoin,
@@ -50,7 +50,7 @@ export default function Players() {
             {players.slice(0, 5).map((player) => (
                 <AvatarCircle 
                     key={player.profileImageLink}
-                    avatarUrl={player.profileImageLink ?? ''}
+                    avatarUrl={player.profileImageLink || ''}
                     className="avatar mr-5px"/>
             ))}
             {(players.length > 5) && <h2 className='result__right--number'>{number}</h2>}

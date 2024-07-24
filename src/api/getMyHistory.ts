@@ -1,10 +1,11 @@
+import { log } from '../utils/log';
 import { isSameDay } from '../utils/utils';
 import api from './axios';
 
 export const fetchMyHistory = async () => {
   const token = window.sessionStorage.getItem('token');
   if (!token) {
-    console.error('Token is not available');
+   log('Token is not available');
     return "FAILED";
   } 
   

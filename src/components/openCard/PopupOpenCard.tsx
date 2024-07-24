@@ -39,7 +39,7 @@ const PopupOpenCard = () => {
         onComplete={ () => setModal({state: "CLOSE", type: "GAMERESULT"})}
         className='open-card--lottie-animation'
       />
-       {isAnimationComplete && <SVG src={cardResult?.imgUrl ?? ""} className='open-card--img'/>}
+       {isAnimationComplete && <SVG src={cardResult?.imgUrl || ""} className='open-card--img'/>}
     </PopupCenter>
   );
 };

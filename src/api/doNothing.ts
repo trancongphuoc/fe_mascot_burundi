@@ -1,3 +1,4 @@
+import { log } from '../utils/log';
 import api from './axios';
 
 export const doNothing = async (): Promise<void> => {
@@ -5,7 +6,7 @@ export const doNothing = async (): Promise<void> => {
     const token = window.sessionStorage.getItem('token');
 
     if (!token) {
-      console.error('No token found in session storage.');
+      log('No token found in session storage.');
       return;
     }
 
@@ -13,7 +14,7 @@ export const doNothing = async (): Promise<void> => {
       headers: { 'Authorization': `Bearer ${token}` },
     });
 
-    console.log('do nothing', response.data);
+    log('do nothing', response.data);
 
     if (response.data.status === "OK") {
       // Handle success case if needed

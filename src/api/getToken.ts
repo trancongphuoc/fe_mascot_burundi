@@ -1,3 +1,4 @@
+import { log } from "../utils/log";
 import api from "./axios";
 
 
@@ -12,10 +13,10 @@ export const getToken = async ({ userId, platform, language, packageName }: Toke
     //   headers: { 'Authorization': `Bearer ${token}` },
     });
 
-    console.log('Response data:', response.data);
+    log(`Response data: ${response.data}`);
 
     if (response.data) {
-      console.log('token', response.data);
+      log(`token ${response.data}`);
       window.sessionStorage.setItem('token', response.data);
       return "OK";
     } else {

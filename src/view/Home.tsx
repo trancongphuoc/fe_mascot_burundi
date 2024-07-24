@@ -173,11 +173,11 @@ export default function Home() {
               if (Object.hasOwnProperty.call(data.topUsers, topUserId)) {
                 const user = data.topUsers[topUserId];
                 const topUser: User = {
-                  facebookUserId: user.facebookUserId ?? "",
-                  name: user.name ?? "",
-                  profileImageLink: user.profileImageLink ?? "",
-                  totalIcoin: user.totalIcoin ?? 0,
-                  uid: user.uid ?? 0,
+                  facebookUserId: user.facebookUserId || "",
+                  name: user.name || "",
+                  profileImageLink: user.profileImageLink || "",
+                  totalIcoin: user.totalIcoin || 0,
+                  uid: user.uid || 0,
                 };
                 topUsers.push(topUser);
               }
@@ -185,10 +185,10 @@ export default function Home() {
           }
           cardResultRef.current = { ...zodiacCard };
           topUserRef.current = [...topUsers].sort(
-            (a, b) => (b.totalIcoin ?? 0) - (a.totalIcoin ?? 0)
+            (a, b) => (b.totalIcoin || 0) - (a.totalIcoin || 0)
           );
-          noGameRef.current = data.noGameToday ?? 0;
-          transactionId.current = data.transactionId ?? 0;
+          noGameRef.current = data.noGameToday || 0;
+          transactionId.current = data.transactionId || 0;
           setStatusGame(data.status);
 
           if (data.isPause) {
@@ -199,8 +199,8 @@ export default function Home() {
 
           setGameInfo((prevState) => ({
             ...prevState,
-            stateGame: data.status ?? "NONE",
-            transactionId: data.transactionId ?? 0,
+            stateGame: data.status || "NONE",
+            transactionId: data.transactionId || 0,
           }));
 
           if (isLoadingRef.current) {
@@ -374,7 +374,7 @@ export default function Home() {
       if (statusGame === "COUNTDOWN") {
         const betCard: BetZodiacCard = {
           ...card,
-          transactionId: transactionId.current ?? 0,
+          transactionId: transactionId.current || 0,
         };
 
         selectedCardRef.current = { ...betCard };
@@ -419,8 +419,8 @@ export default function Home() {
         toast.dismiss();
         betCardRef.current = updatedBetCards;
         const data = await bettingCard(
-          transactionId.current ?? 0,
-          zodiacCard.totalIcoinBetting ?? 0,
+          transactionId.current || 0,
+          zodiacCard.totalIcoinBetting || 0,
           zodiacCard.id
         );
         if (data !== "OK") {
@@ -608,7 +608,7 @@ export default function Home() {
     setModal: handleModal,
     setSelectedCard: handleCardSelection,
     betting: handleBetting,
-    iCoinWinTheGame: totalIcoinWinRef.current ?? 0,
+    iCoinWinTheGame: totalIcoinWinRef.current || 0,
     setCountNumber: handleCountNumber,
   };
 
@@ -663,7 +663,7 @@ export default function Home() {
             <DialogWinLost
               dialogType={dialogTypeRef.current}
               totalIcoin={totalIcoinWinRef.current}
-              zodiac={cardResultRef.current?.imgUrl ?? ""}
+              zodiac={cardResultRef.current?.imgUrl || ""}
             />
           )}
 

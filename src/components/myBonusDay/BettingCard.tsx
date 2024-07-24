@@ -14,7 +14,7 @@ const BettingCard =  ({ betCard }: BettingCardProps) => {
             <SVG src={Background} className="card__main--background"/>
             <SVG src={betCard.imageUrl} className="card__main--zodiac"/>
             <p className='card__main--bonus'>x{betCard.multiply}</p>
-            <ToltalIcoinBetting bettingIcoin={betCard.totalIcoinBetting ?? 0} />
+            <ToltalIcoinBetting bettingIcoin={betCard.totalIcoinBetting || 0} />
         </div>
     )
 }

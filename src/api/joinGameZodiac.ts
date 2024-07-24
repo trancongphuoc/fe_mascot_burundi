@@ -1,5 +1,6 @@
 import axios from 'axios';
 import api from './axios';
+import { log } from '../utils/log';
 
 interface JoinGameResponse {
   status: string;
@@ -13,7 +14,7 @@ export const joinGameZodiac = async (): Promise<string> => {
   try {
     const token = window.sessionStorage.getItem('token');
     if (!token) {
-      console.error('Token is not available');
+      log('Token is not available');
       return "FAILED";
     } 
 
@@ -23,7 +24,7 @@ export const joinGameZodiac = async (): Promise<string> => {
 
     const { status, data } = response.data;
 
-    console.log('User from join game:', data?.user?.facebookUserId);
+    log(`User from join game: ${data?.user?.facebookUserId}`);
 
     if (status === "OK" && data && data.user && data.user.facebookUserId) {
       return data.user.facebookUserId;

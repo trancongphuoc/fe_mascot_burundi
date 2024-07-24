@@ -90,9 +90,9 @@ const BestPlayers = function BestPlayers() {
                         <BestUser
                             key={user.facebookUserId}
                             index={index}
-                            profileImageLink={user.profileImageLink ?? ''}
-                            name={user.name ?? 'unknow'}
-                            totalIcoin={user.totalIcoin ?? 0}/>
+                            profileImageLink={user.profileImageLink || ''}
+                            name={user.name || 'unknow'}
+                            totalIcoin={user.totalIcoin || 0}/>
                     ))
                 }
             </ol>

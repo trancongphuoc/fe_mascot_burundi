@@ -18,9 +18,9 @@ const getTopUsers = (): Promise<User[]> => {
                 const topUsers: User[] = Object.keys(data).map(userId => {
                     const userData = data[userId];
                     return {
-                        facebookUserId: userData.facebookUserId ?? '',
-                        name: userData.name ?? '',
-                        profileImageLink: userData.profileImageLink ?? '',
+                        facebookUserId: userData.facebookUserId || '',
+                        name: userData.name || '',
+                        profileImageLink: userData.profileImageLink || '',
                         totalIcoin: userData.totalIcoin,
                         uid: userData.uid,
                     };

@@ -32,9 +32,9 @@ const ShortGameHistory = function ShortGameHistory() {
             const gameHistoryData = data[gameHistoryId];
             // const idCard = Math.random() * 1000;
             const player: ZodiacCardHistory = {
-              lastUpdate: gameHistoryData.lastUpdate ?? 0,
-              id: gameHistoryData.id ?? "",
-              imageUrl: gameHistoryData.imageUrl ?? "",
+              lastUpdate: gameHistoryData.lastUpdate || 0,
+              id: gameHistoryData.id || "",
+              imageUrl: gameHistoryData.imageUrl || "",
               name: gameHistoryData.name,
               multiply: gameHistoryData.multiply,
             };

@@ -18,7 +18,7 @@ export default function BestUser({index, profileImageLink, name, totalIcoin} : B
             <p className={`content${index}--name`}>{name}</p>
             <p className={`content${index}--text`}>Thưởng ván trước:</p>
             <div className={`content${index}__icoin`}>
-                <p className={`content${index}__icoin--data`}>{formatNumber(totalIcoin ?? 0)}</p>
+                <p className={`content${index}__icoin--data`}>{formatNumber(totalIcoin || 0)}</p>
                 <img src={Icoin} alt="icoin" className="content1__icoin--img"></img>
             </div>
         </li>

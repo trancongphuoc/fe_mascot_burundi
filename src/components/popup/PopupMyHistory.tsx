@@ -49,8 +49,8 @@ const PopupMineResult = () => {
           const myHistories: MyHistory[] = data.map((history: any) => ({
             time: new Date(history.addTime),
             noGame: history.noGame,
-            totalIcoinWin: history.totalIcoinWin ?? 0,
-            totalIcoinBetting: history.totalIcoinBetting ?? 0,
+            totalIcoinWin: history.totalIcoinWin || 0,
+            totalIcoinBetting: history.totalIcoinBetting || 0,
             zodiacCardId: history.zodiacCardId,
             zodiacCards: history.zodiacCards,
             // netIcoin: (history.totalIcoinWin ?? 0) - (history.totalIcoinBetting ?? 0),

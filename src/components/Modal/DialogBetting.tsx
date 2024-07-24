@@ -56,7 +56,7 @@ const DialogBetting = () => {
 
     const betCard: BetZodiacCard = {
       ...selectedCard,
-      totalIcoinBetting: bettingIcoin.to ?? 0,
+      totalIcoinBetting: bettingIcoin.to || 0,
     };
 
     setModal({ state: "CLOSE", type: "BETTING" });
@@ -129,7 +129,7 @@ const DialogBetting = () => {
         />
         {selectedCard?.imageUrl && (
           <SVG
-            src={selectedCard?.imageUrl ?? ""}
+            src={selectedCard?.imageUrl || ""}
             onClick={(e) => e.stopPropagation()}
             className="betting--zodiac-card"
           />

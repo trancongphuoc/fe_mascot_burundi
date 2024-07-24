@@ -249,7 +249,7 @@ const DialogLostWin = ({
             <SVG className={`lost__no${index + 1}--img`} src={crown[index]} />
             <div className={`lost__no${index + 1}--url`}>
               <AvatarCircle
-                avatarUrl={user.profileImageLink ?? ""}
+                avatarUrl={user.profileImageLink || ""}
                 className={""}
               />
             </div>
@@ -257,7 +257,7 @@ const DialogLostWin = ({
             <div className="lost__totalIcoin">
               <SVG className="lost__totalIcoin--img" src={Icoin} />
               <p className="lost__totalIcoin--icoin">
-                {formatNumber(user.totalIcoin ?? 0)}
+                {formatNumber(user.totalIcoin || 0)}
               </p>
             </div>
           </div>

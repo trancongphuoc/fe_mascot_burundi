@@ -110,15 +110,20 @@ function MyBonusToday({
   }, [stateGame, transactionId, fbId]);
 
   useEffect(() => {
-    if (betCards.length <= 4) {
-      setBettingCards([...betCards.map((card) => ({ ...card }))]);
-    } else {
-      toast.dismiss();
-      toast("Đặt cược tối đa 4 lá linh vật", {
-        duration: 2000,
-        position: "bottom-center",
-      });
+    try {
+      if (betCards.length <= 4) {
+        setBettingCards([...betCards.map((card) => ({ ...card }))]);
+      } else {
+        toast.dismiss();
+        toast("Đặt cược tối đa 4 lá linh vật", {
+          duration: 2000,
+          position: "bottom-center",
+        });
+      }
+    } catch (error: any) {
+      log(error)
     }
+
   }, [betCards, transactionId]);
 
   return (
@@ -135,7 +140,7 @@ function MyBonusToday({
 
         <NoGameToday
           arrowImg={ArrowWhite}
-          noGameToday={betUser?.noBettingToday ?? 0}
+          noGameToday={betUser?.noBettingToday || 0}
         />
 
         <div className="section-myInfo__cards">

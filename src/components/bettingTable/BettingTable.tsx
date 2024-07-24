@@ -23,18 +23,17 @@ export default function BettingTable() {
 
     const handleData = (snapshot: any) => {
       const data = snapshot.val();
-      console.log("zodiacCards", data);
       if (data) {
         const betCards: ZodiacCardModel[] = [];
         for (const gameHistoryId in data) {
           if (Object.hasOwnProperty.call(data, gameHistoryId)) {
             const gameHistoryData = data[gameHistoryId];
             const card: ZodiacCardModel = {
-              id: gameHistoryData.id ?? "",
-              imageUrl: gameHistoryData.imageUrl ?? "",
-              name: gameHistoryData.name,
-              multiply: gameHistoryData.multiply,
-              counter: gameHistoryData.counter,
+              id: gameHistoryData.id || "",
+              imageUrl: gameHistoryData.imageUrl || "",
+              name: gameHistoryData.name || "",
+              multiply: gameHistoryData.multiply || 0,
+              counter: gameHistoryData.counter || 0,   
             };
             betCards.push(card);
           }

@@ -62,7 +62,7 @@ export default function ZodiacCard({ betCard, index }: ZodiacCardPro) {
 
       <SVG src={betCard.imageUrl} className="betting-table__card--zodiac" />
       <p className="betting-table__card--bonus">x{betCard.multiply}</p>
-      <BettingPLayers numberOfPlayer={betCard.counter ?? 0} />
+      <BettingPLayers numberOfPlayer={betCard.counter || 0} />
     </div>
   );
 }
