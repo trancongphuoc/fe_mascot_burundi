@@ -50,6 +50,10 @@ import PopupOpenCircle from "../components/openCard/PopupOpenCircle.tsx";
 // import PopupCenter from '../components/popup/PopupCenter.tsx';
 import MaintainModal from '../components/Modal/MaintainModal.tsx';
 
+import useAudio from '../components/UseAudio.tsx';
+import winAudio from '../../public/sounds/audio_win.wav';
+import lostAudio from '../../public/sounds/audio_lost.wav';
+
 const img: string[] = [
   buffalo,
   tiger,
@@ -135,6 +139,9 @@ export default function Home() {
 
     fetchAndSetFbId();
   }, [parameters]);
+
+  const playLostAudio = useAudio(lostAudio);
+  const playWinAudio = useAudio(winAudio);
 
   // const handleLoading = () => {
   //   setIsLoading(false);
@@ -346,7 +353,6 @@ export default function Home() {
           if (statePrev) return !statePrev;
           else return statePrev;
         });
-
         setOpenGameResult((statePrev) => {
           if (statePrev) return statePrev;
           else return !statePrev;
@@ -566,6 +572,7 @@ export default function Home() {
           break;
         case "GAMERESULT":
           setOpenGameResult((statePrev) => {
+            playWinAudio();
             if (statePrev) return !statePrev;
             else return statePrev;
           });
@@ -640,7 +647,6 @@ export default function Home() {
           setFirebaseData={setFirebaseData}
         />
         <BestPlayers />
-        <button onClick={() => handleModal({state: "OPEN", type: "MAINTAIN"})}>open maintain</button>
 
         {/* Dialog when click */}
 
