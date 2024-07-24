@@ -68,7 +68,9 @@ const DialogBetting = () => {
     betting(betCard);
   };
 
-  const handleStake = (stake: number) => {
+  const handleStake = (stake: number, e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (stake) {
       const totalIcoinString = window.sessionStorage.getItem("totalIcoin");
       const totalIcoin =
@@ -162,19 +164,19 @@ const DialogBetting = () => {
         </div>
         <ButtonMoving
           content={"+10"}
-          setClick={() => handleStake(10)}
+          setClick={(e) => handleStake(10, e)}
           cssClass="betting--button-1"
         />
 
         <ButtonMoving
           content={"+100"}
-          setClick={() => handleStake(100)}
+          setClick={(e) => handleStake(100, e)}
           cssClass="betting--button-2"
         />
 
         <ButtonMoving
           content={"+1000"}
-          setClick={() => handleStake(1000)}
+          setClick={(e) => handleStake(1000, e)}
           cssClass="betting--button-3"
         />
 

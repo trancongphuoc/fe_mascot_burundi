@@ -9,7 +9,7 @@ interface TextItem {
 
 interface ButtonMovingProps {
   content: string;
-  setClick: () => void;
+  setClick: (e: any) => void;
   cssClass: string;
 }
 
@@ -17,10 +17,8 @@ const ButtonMoving = ({ content, setClick, cssClass }: ButtonMovingProps) => {
   const [texts, setTexts] = useState<TextItem[]>([]);
 
   const handleClick = (e: any) => {
-    e.stopPropagation();
-    e.preventDefault();
     setTexts([...texts, { id: Date.now() }]);
-    setClick();
+    setClick(e);
   };
 
   const handleAnimationComplete = (id: number) => {

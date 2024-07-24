@@ -24,9 +24,11 @@ const firebaseConfigPRO = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID_PRO,
 };
 
-const finalFirebaseConfig = window.location.hostname.includes("ikara4m")
-  ? firebaseConfigPRO
-  : firebaseConfigDEV;
+const finalFirebaseConfig =
+  window.location.hostname.includes("ikara-development") ||
+  window.location.hostname.includes("localhost")
+    ? firebaseConfigDEV
+    : firebaseConfigPRO;
 
 const app = initializeApp(finalFirebaseConfig);
 export const analytics = getAnalytics(app);

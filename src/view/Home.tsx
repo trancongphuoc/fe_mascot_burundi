@@ -183,7 +183,12 @@ export default function Home() {
           noGameRef.current = data.noGameToday ?? 0;
           transactionId.current = data.transactionId ?? 0;
           setStatusGame(data.status);
-          setMaintain(data.isPause);
+
+          if (data.isPause) {
+            handleModal({state: "OPEN", type: "MAINTAIN"})
+          } else {
+            handleModal({state: "CLOSE", type: "MAINTAIN"})
+          }
 
           setGameInfo((prevState) => ({
             ...prevState,
@@ -203,6 +208,8 @@ export default function Home() {
     };
 
     fetchGameInfo();
+
+    console.log("xxxx", window.location.hostname)
 
     switch (statusGame) {
       case "NONE":
@@ -567,6 +574,13 @@ export default function Home() {
             else return !statePrev;
           });
           break;
+        case "MAINTAIN":
+          setHidden("scroll");
+          setMaintain((statePrev) => {
+            if (statePrev) return !statePrev;
+            else return statePrev;
+          });
+            break;
         default:
           break;
       }
@@ -614,8 +628,8 @@ export default function Home() {
             </div>
           )}
         </Toaster>
-        <h1>{document.body.style.overflow ?? "unknow"}</h1>
-        <h2>{fbIdRef.current}</h2>
+        {/* <h1>{document.body.style.overflow ?? "unknow"}</h1>
+        <h2>{fbIdRef.current}</h2> */}
         <Header />
         <ShortInfoGame />
         <BettingTable />

@@ -76,8 +76,8 @@ const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ zodiacs }) => {
           <Loading className="history-game-popup__loading"/>
         ) : (
           <div className="history-game-popup__content">
-            {gameHistories.map((game, index) => (
-              <div key={index} className="history-game-popup__item">
+            {gameHistories.map((game) => (
+              <div key={game.noGame} className="history-game-popup__item">
                 <p className='history-game-popup__item--index'>{game.noGame}</p>
                 {[...Array(8)].map((_, i) => (
                   <div key={i} className="history-game-popup__item--buffalo">
