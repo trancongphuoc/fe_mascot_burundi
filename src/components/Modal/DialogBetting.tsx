@@ -14,10 +14,6 @@ import LazyImage from "../LazyImage";
 import { log } from "../../utils/log";
 import ButtonStake from "../ButtonStake";
 
-import useAudio from "../UseAudio";
-// import audioConfirm from "../../../public/sounds/confirm_button.wav";
-// import audioBet from '../../../public/sounds/stake_audio.wav';
-// import AudioPlayer from './Audiobutton';
 import AnimatedCounter from "../animation/AnimatedCounter";
 import ButtonMoving from "../ButtonMoving";
 import { GameInfoContext } from "../../store/game-info_context";

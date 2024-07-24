@@ -4,7 +4,7 @@ import { db } from "../../firebase/config";
 import { log } from "../../utils/log";
 import { GameInfoContext } from "../../store/game-info_context";
 
-const TOTAL_COUNTDOWN: number = 40;
+const TOTAL_COUNTDOWN: number = 38;
 
 export default function Countdown() {
   log("<Countdown />");
@@ -18,7 +18,7 @@ export default function Countdown() {
   };
 
   useEffect(() => {
-    let initialRemainingTime = 40;
+    let initialRemainingTime = 38;
     const stateRef = ref(db, "/zodiacGame/state/startTime");
 
     get(stateRef).then((snapshot: DataSnapshot) => {
