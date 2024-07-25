@@ -24,7 +24,7 @@ const Header = function Header() {
   return (
     <header className="section-header u-margin-top-huge1">
       <SVG src={PrimaryText} className="u-margin-minus-bottom-big" />
-      <p className="heading-secondary">Hôm nay {noGame ?? 0} Ván</p>
+      <p className="heading-secondary">Hôm nay {noGame || 0} Ván</p>
       <SVG
         src={Rule}
         className="section-header__rule"

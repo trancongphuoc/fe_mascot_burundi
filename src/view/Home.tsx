@@ -99,6 +99,8 @@ export default function Home() {
   const topUserRef = useRef<User[]>([]);
   const noGameRef = useRef<number>(0);
   const transactionId = useRef<number>(0);
+  const bettingTimeEnd = useRef<boolean>(false);
+
 
   // const zodiacImgs = useRef<ZodiacCardModel[]>([])
 
@@ -111,7 +113,7 @@ export default function Home() {
     if (data.totalIcoinWin) {
       totalIcoinWinRef.current = data.totalIcoinWin;
     }
-    console.log("check icoin win: ", data.totalIcoinWin);
+    log("check icoin win: ", data.totalIcoinWin);
 
     if (typeof data.isWin === "boolean") {
       if (data.isWin) {
@@ -127,7 +129,7 @@ export default function Home() {
   };
 
   const handleCountNumber = useCallback(() => {
-    console.log("call o")
+    log("call o")
     // handleModal({ state: "CLOSE", type: "BETTING" });
   }, []);
 
@@ -216,7 +218,7 @@ export default function Home() {
 
     fetchGameInfo();
 
-    console.log("xxxx", window.location.hostname)
+    log(`host name: ${window.location.hostname}`)
 
     switch (statusGame) {
       case "NONE":
@@ -280,6 +282,7 @@ export default function Home() {
         break;
       case "COUNTDOWN":
         doNothing();
+        bettingTimeEnd.current = false;
 
         setOpenGameResult((statePrev) => {
           if (statePrev) return !statePrev;
@@ -371,7 +374,7 @@ export default function Home() {
 
   const handleCardSelection = (card: ZodiacCardModel) => {
     try {
-      if (statusGame === "COUNTDOWN") {
+      if (statusGame === "COUNTDOWN" && !bettingTimeEnd.current) {
         const betCard: BetZodiacCard = {
           ...card,
           transactionId: transactionId.current || 0,
@@ -598,6 +601,10 @@ export default function Home() {
     }
   }, []);
 
+  const handleBettingTimeEnd = () => {
+    bettingTimeEnd.current = true;
+  }
+
   const ctxValue = {
     stateGame: gameInfo.stateGame,
     transactionId: gameInfo.transactionId,
@@ -609,7 +616,7 @@ export default function Home() {
     setSelectedCard: handleCardSelection,
     betting: handleBetting,
     iCoinWinTheGame: totalIcoinWinRef.current || 0,
-    setCountNumber: handleCountNumber,
+    setBettingTimeEnd: handleBettingTimeEnd,
   };
 
   if (isLoadingRef.current) {

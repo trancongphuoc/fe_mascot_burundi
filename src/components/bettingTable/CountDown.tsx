@@ -9,7 +9,7 @@ const TOTAL_COUNTDOWN: number = 38;
 export default function Countdown() {
   log("<Countdown />");
   const [count, setCount] = useState(0);
-  const { stateGame, transactionId, setModal } = useContext(GameInfoContext);
+  const { stateGame, transactionId, setModal, setBettingTimeEnd } = useContext(GameInfoContext);
 
   const differentTime = (startTime: number): number => {
     const currentTime = Date.now();
@@ -30,6 +30,7 @@ export default function Countdown() {
       initialRemainingTime -= 1;
 
       if (initialRemainingTime == 0) {
+        setBettingTimeEnd();
         setModal({ state: "CLOSE", type: "BETTING" });
         setModal({ state: "CLOSE", type: "DEPOSIT" });
       }
