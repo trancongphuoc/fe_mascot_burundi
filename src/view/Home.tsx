@@ -447,6 +447,7 @@ export default function Home() {
 
   const handleModal = useCallback((stateModal: ModalSet) => {
     if (stateModal.state === "OPEN") {
+      setHidden("hidden");
       switch (stateModal.type) {
         case "RULE":
           setOpenRule((statePrev) => {
@@ -515,7 +516,6 @@ export default function Home() {
         default:
           break;
       }
-      setHidden("hidden");
     } else {
       switch (stateModal.type) {
         case "RULE":

@@ -2,26 +2,26 @@ import { useEffect, useState, useContext } from 'react';
 import PopupCenter from '../popup/PopupCenter';
 import LottieAnimation from './AnimationOpenCard';
 // import animationData from '../../assets/json/game_ketqua3s.json';
-import animationData from '../../assets/json/p2_gamelinhvat.json';
+import animationData from '../../assets/json/xoayxoay.json';
 import SVG from 'react-inlinesvg';
 import { GameInfoContext } from '../../store/game-info_context';
 
 
 const PopupOpenCard = () => {
-  const [isAnimationComplete, setIsAnimationComplete] = useState(false);
+  // const [isAnimationComplete, setIsAnimationComplete] = useState(false);
   const { setModal, cardResult } = useContext(GameInfoContext);
 
-  useEffect(() => {
-    setIsAnimationComplete(true);
+  // useEffect(() => {
+  //   setIsAnimationComplete(true);
 
-    const hideSvgTimer = setTimeout(() => {
-      setIsAnimationComplete(false);
-    }, 2000); // 2.7 seconds delay
+  //   const hideSvgTimer = setTimeout(() => {
+  //     setIsAnimationComplete(false);
+  //   }, 2000); // 2.7 seconds delay
 
-    return () => {
-      clearTimeout(hideSvgTimer);
-    }; // Cleanup timers on component unmount
-  }, []);
+  //   return () => {
+  //     clearTimeout(hideSvgTimer);
+  //   }; // Cleanup timers on component unmount
+  // }, []);
 
   return (
     <PopupCenter
@@ -36,7 +36,7 @@ const PopupOpenCard = () => {
         onComplete={ () => setModal({state: "CLOSE", type: "GAMERESULT"})}
         className='open-card--lottie-animation'
       />
-       {isAnimationComplete && <SVG src={cardResult?.imgUrl || ""} className='open-card--img'/>}
+       <SVG src={cardResult?.imgUrl || ""} className='open-card--img'/>
     </PopupCenter>
   );
 };
