@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import PopupCenter from '../popup/PopupCenter';
 import LottieAnimation from './AnimationOpenCard';
 // import animationData from '../../assets/json/game_ketqua3s.json';
