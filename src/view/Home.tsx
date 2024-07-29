@@ -100,6 +100,7 @@ export default function Home() {
   const noGameRef = useRef<number>(0);
   const transactionId = useRef<number>(0);
   const bettingTimeEnd = useRef<boolean>(false);
+  const pauseGameRef = useRef<boolean>(false);
 
 
   // const zodiacImgs = useRef<ZodiacCardModel[]>([])
@@ -188,11 +189,17 @@ export default function Home() {
           transactionId.current = data.transactionId || 0;
           setStatusGame(data.status);
 
-          if (data.isPause) {
-            handleModal({state: "OPEN", type: "MAINTAIN"})
-          } else {
-            handleModal({state: "CLOSE", type: "MAINTAIN"})
+          if (data.isPause !== pauseGameRef.current) {
+            if (data.isPause) {
+              handleModal({ state: "OPEN", type: "MAINTAIN" });
+              pauseGameRef.current = true;
+            } else {
+              handleModal({ state: "CLOSE", type: "MAINTAIN" });
+              pauseGameRef.current = false;
+            }
           }
+          
+
 
           // setGameInfo((prevState) => ({
           //   ...prevState,
