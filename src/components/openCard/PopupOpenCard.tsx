@@ -12,16 +12,13 @@ const PopupOpenCard = () => {
   const { setModal, cardResult } = useContext(GameInfoContext);
 
   useEffect(() => {
-    const showSvgTimer = setTimeout(() => {
-      setIsAnimationComplete(true);
-    }, 0); // 1.5 seconds delay
+    setIsAnimationComplete(true);
 
     const hideSvgTimer = setTimeout(() => {
       setIsAnimationComplete(false);
     }, 2000); // 2.7 seconds delay
 
     return () => {
-      clearTimeout(showSvgTimer);
       clearTimeout(hideSvgTimer);
     }; // Cleanup timers on component unmount
   }, []);
@@ -35,7 +32,7 @@ const PopupOpenCard = () => {
         animationData={animationData}
         style={{ width: 300, height: 300 }}
         speed={1}
-        direction={1}
+        direction={1}           
         onComplete={ () => setModal({state: "CLOSE", type: "GAMERESULT"})}
         className='open-card--lottie-animation'
       />

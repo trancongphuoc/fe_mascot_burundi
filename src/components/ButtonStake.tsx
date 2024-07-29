@@ -20,18 +20,18 @@ const ButtonStake = ({
 
   return (
     <button
-      onTouchEnd={(e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        confirmRef.play();
-        handleClick();
-      }}
-      // onClick={(e) => {
+      // onTouchEnd={(e) => {
       //   e.stopPropagation();
       //   e.preventDefault();
       //   confirmRef.play();
       //   handleClick();
       // }}
+      onClick={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        confirmRef.play();
+        handleClick();
+      }}
       className={className}
     >
       {children}

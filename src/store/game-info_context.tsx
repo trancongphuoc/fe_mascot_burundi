@@ -27,7 +27,7 @@ export const GameInfoContext = createContext<GameInfoContextType>({
     setSelectedCard: (_card: ZodiacCardModel) => {},
     betting: (_card: BetZodiacCard) => {},
     iCoinWinTheGame: 0,
-    setBettingTimeEnd: () => {}
+    setBettingTimeEnd: () => {},
 });
 
 // interface GameInfoProviderProps {

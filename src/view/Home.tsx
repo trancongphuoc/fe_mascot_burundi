@@ -72,10 +72,10 @@ export default function Home() {
 
   const [statusGame, setStatusGame] = useState<StatusGame>("NONE");
 
-  const [gameInfo, setGameInfo] = useState<GameInfo>({
-    stateGame: "NONE",
-    transactionId: 0,
-  });
+  // const [gameInfo, setGameInfo] = useState<GameInfo>({
+  //   stateGame: "NONE",
+  //   transactionId: 0,
+  // });
 
   const [openGameResult, setOpenGameResult] = useState(false);
   const [openGameCircle, setopenGameCircle] = useState(false);
@@ -106,7 +106,7 @@ export default function Home() {
 
   // const gameInfoCtx = useContext(GameInfoContext);
 
-  const handleIsWin = (data: {
+  const handleIsWin = useCallback((data: {
     isWin?: boolean | undefined;
     totalIcoinWin?: number | undefined;
   }) => {
@@ -126,12 +126,7 @@ export default function Home() {
     } else {
       dialogTypeRef.current = "LOST";
     }
-  };
-
-  const handleCountNumber = useCallback(() => {
-    log("call o")
-    // handleModal({ state: "CLOSE", type: "BETTING" });
-  }, []);
+  },[]);
 
   useEffect(() => {
     const fetchAndSetFbId = async () => {
@@ -199,11 +194,11 @@ export default function Home() {
             handleModal({state: "CLOSE", type: "MAINTAIN"})
           }
 
-          setGameInfo((prevState) => ({
-            ...prevState,
-            stateGame: data.status || "NONE",
-            transactionId: data.transactionId || 0,
-          }));
+          // setGameInfo((prevState) => ({
+          //   ...prevState,
+          //   stateGame: data.status || "NONE",
+          //   transactionId: data.transactionId || 0,
+          // }));
 
           if (isLoadingRef.current) {
             callbackFlutter("callbackDisableLoading");
@@ -242,15 +237,15 @@ export default function Home() {
           else return statePrev;
         });
 
-        setopenGameCircle((statePrev) => {
-          if (statePrev) return !statePrev;
-          else return statePrev;
-        });
+        // setopenGameCircle((statePrev) => {
+        //   if (statePrev) return !statePrev;
+        //   else return statePrev;
+        // });
 
-        setOpenGameResult((statePrev) => {
-          if (statePrev) return !statePrev;
-          else return statePrev;
-        });
+        // setOpenGameResult((statePrev) => {
+        //   if (statePrev) return !statePrev;
+        //   else return statePrev;
+        // });
 
         setHidden("hidden");
         break;
@@ -267,15 +262,15 @@ export default function Home() {
           else return statePrev;
         });
 
-        setOpenGameResult((statePrev) => {
-          if (statePrev) return !statePrev;
-          else return statePrev;
-        });
+        // setOpenGameResult((statePrev) => {
+        //   if (statePrev) return !statePrev;
+        //   else return statePrev;
+        // });
 
-        setOpenLostWin((statePrev) => {
-          if (statePrev) return !statePrev;
-          else return statePrev;
-        });
+        // setOpenLostWin((statePrev) => {
+        //   if (statePrev) return !statePrev;
+        //   else return statePrev;
+        // });
 
         setHidden("scroll");
 
@@ -283,6 +278,11 @@ export default function Home() {
       case "COUNTDOWN":
         doNothing();
         bettingTimeEnd.current = false;
+
+        setOpenLostWin((statePrev) => {
+          if (statePrev) return !statePrev;
+          else return statePrev;
+        });
 
         setOpenGameResult((statePrev) => {
           if (statePrev) return !statePrev;
@@ -401,13 +401,12 @@ export default function Home() {
   const betCardRef = useRef<BetZodiacCard[]>([]);
   // const betSuccessRef = useRef<boolean>(false);
 
-  const setFirebaseData = (zodiacCards: BetZodiacCard[]) => {
+  const setFirebaseData = useCallback((zodiacCards: BetZodiacCard[]) => {
     betCardRef.current = zodiacCards;
-  };
+  },[]);
 
   // send icoin betting
   const handleBetting = async (zodiacCard: BetZodiacCard) => {
-    log("function betting");
     const oldBetCards = [...betCardRef.current.map((card) => ({ ...card }))];
     try {
       const updatedBetCards = updateNewBetCards(zodiacCard, betCardRef.current);
@@ -606,8 +605,8 @@ export default function Home() {
   }
 
   const ctxValue = {
-    stateGame: gameInfo.stateGame,
-    transactionId: gameInfo.transactionId,
+    stateGame: statusGame,
+    transactionId: transactionId.current,
     noGame: noGameRef.current,
     cardResult: cardResultRef.current,
     selectedCard: selectedCardRef.current,

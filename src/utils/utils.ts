@@ -39,3 +39,27 @@ export const updateNewBetCards = (zodiacCard: BetZodiacCard, oldBetCards: BetZod
     return [...oldBetCards, zodiacCard]
   }
 }
+
+
+export const sortBettingCard = (betCards: BetZodiacCard[], firebaseCards: BetZodiacCard[]) : BetZodiacCard[] => {
+  const newOrderList: string[] = betCards.map(card => card.id);
+  const cardMap: { [key: string]: BetZodiacCard } = {};
+
+  firebaseCards.forEach(card => {
+    cardMap[card.id] = card;
+  });
+
+  const sortedFirebaseCards: BetZodiacCard[] = newOrderList
+    .map(id => cardMap[id])
+    .filter((card): card is BetZodiacCard => card !== undefined);
+
+  const newOrderSet: Set<string> = new Set(newOrderList);
+
+  firebaseCards.forEach(card => {
+    if (!newOrderSet.has(card.id)) {
+      sortedFirebaseCards.push(card);
+    }
+  });
+
+  return sortedFirebaseCards;
+}
