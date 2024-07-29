@@ -296,20 +296,21 @@ export default function Home() {
           else return statePrev;
         });
 
-        setOpenRule((statePrev) => {
-          if (statePrev) return !statePrev;
-          else return statePrev;
-        });
+        // disable close dialog
+        // setOpenRule((statePrev) => {
+        //   if (statePrev) return !statePrev;
+        //   else return statePrev;
+        // });
 
-        setOpenGameHistory((statePrev) => {
-          if (statePrev) return !statePrev;
-          else return statePrev;
-        });
+        // setOpenGameHistory((statePrev) => {
+        //   if (statePrev) return !statePrev;
+        //   else return statePrev;
+        // });
 
-        setOpenMyHistory((statePrev) => {
-          if (statePrev) return !statePrev;
-          else return statePrev;
-        });
+        // setOpenMyHistory((statePrev) => {
+        //   if (statePrev) return !statePrev;
+        //   else return statePrev;
+        // });
 
         setHidden("scroll");
         break;
