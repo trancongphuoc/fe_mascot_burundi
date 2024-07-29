@@ -47,12 +47,12 @@ const PopupMineResult = () => {
         const data = await fetchMyHistory();
         if (data != null) {
           const myHistories: MyHistory[] = data.map((history: any) => ({
-            time: new Date(history.addTime),
-            noGame: history.noGame,
+            time: new Date(history.addTime || 0),
+            noGame: history.noGame || 0,
             totalIcoinWin: history.totalIcoinWin || 0,
             totalIcoinBetting: history.totalIcoinBetting || 0,
-            zodiacCardId: history.zodiacCardId,
-            zodiacCards: history.zodiacCards,
+            zodiacCardId: history.zodiacCardId || 0,
+            zodiacCards: history.zodiacCards || [],
             // netIcoin: (history.totalIcoinWin ?? 0) - (history.totalIcoinBetting ?? 0),
           }));
           if (stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") {
