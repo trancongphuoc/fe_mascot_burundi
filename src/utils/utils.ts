@@ -9,13 +9,15 @@ export const useQueryParams = () => {
 };
 
 export const formatNumber = (num: number) => {
-    if (num >= 1000000) {
-        const formattedNum = (num / 1000).toFixed(0).replace('.', ',');
-        return parseFloat(formattedNum).toLocaleString('vi-VN') + 'k';
-    } else {
-        return num.toLocaleString('vi-VN');
-    }
+  if (num >= 1000000) {
+    const wholePart = Math.floor(num / 1000);
+    const decimalPart = ((num % 1000) / 1000).toString().slice(1, 3).replace('.',',');
+    return `${wholePart.toLocaleString('vi-VN')}${decimalPart}k`;
+  } else {
+      return num.toLocaleString('vi-VN');
+  }
 };
+
 
 export function isSameDay(timestamp1: number, timestamp2: number): boolean {
     const date1 = new Date(timestamp1);

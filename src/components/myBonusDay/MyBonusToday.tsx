@@ -28,125 +28,129 @@ interface MyInfoBetResultModel {
   setFirebaseData: (_: BetZodiacCard[]) => void;
 }
 
-const MyBonusToday = memo(({ betCards, onUserDataChange, fbId, setFirebaseData,}: MyInfoBetResultModel) => {
+const MyBonusToday = memo(
+  ({
+    betCards,
+    onUserDataChange,
+    fbId,
+    setFirebaseData,
+  }: MyInfoBetResultModel) => {
+    log("<firebase MyBonusToday />");
+    const [betUser, setBetUser] = useState<BetUser>();
+    const [icoinWinToday, setIcoinWinToday] = useState<number>(0);
+    const [bettingCards, setBettingCards] = useState<BetZodiacCard[]>([]);
 
-  log("<firebase MyBonusToday />");
-  const [betUser, setBetUser] = useState<BetUser>();
-  const [icoinWinToday, setIcoinWinToday] = useState<number>(0);
-  const [bettingCards, setBettingCards] = useState<BetZodiacCard[]>([]);
+    const { stateGame, transactionId } = useContext(GameInfoContext);
 
-  const { stateGame, transactionId } = useContext(GameInfoContext);
+    useEffect(() => {
+      const stateRef = ref(db, `/zodiacGame/players/${fbId}`);
+      const handleData = (snapshot: DataSnapshot) => {
+        const data = snapshot.val();
+        if (!data) return;
 
-  useEffect(() => {
-    const stateRef = ref(db, `/zodiacGame/players/${fbId}`);
-    const handleData = (snapshot: DataSnapshot) => {
-      const data = snapshot.val();
-      if (!data) return;
+        const firebaseCards: BetZodiacCard[] = data.bettingCards
+          ? Object.keys(data.bettingCards).map((cardId) => ({
+              id: data.bettingCards[cardId]?.id || "",
+              imageUrl: data.bettingCards[cardId]?.imageUrl || "",
+              name: data.bettingCards[cardId]?.name || "",
+              multiply: data.bettingCards[cardId]?.multiply || 0,
+              totalIcoinBetting:
+                data.bettingCards[cardId]?.totalIcoinBetting || 0,
+            }))
+          : [];
 
-      const firebaseCards: BetZodiacCard[] = data.bettingCards
-        ? Object.keys(data.bettingCards).map((cardId) => ({
-            id: data.bettingCards[cardId]?.id || "",
-            imageUrl: data.bettingCards[cardId]?.imageUrl || "",
-            name: data.bettingCards[cardId]?.name || "",
-            multiply: data.bettingCards[cardId]?.multiply || 0,
-            totalIcoinBetting:
-              data.bettingCards[cardId]?.totalIcoinBetting || 0,
-          }))
-        : [];
+        let newFirebaseCards: BetZodiacCard[] = [];
+        setBettingCards((cardsPrev) => {
+          newFirebaseCards = sortBettingCard(cardsPrev, firebaseCards);
+          setFirebaseData([...newFirebaseCards.map((card) => ({ ...card }))]);
+          return newFirebaseCards;
+        });
 
-      console.log("firebase: ", firebaseCards);
+        const user: BetUser = {
+          facebookUserId: data.facebookUserId,
+          profileImageLink: data.profileImageLink,
+          name: data.name,
+          uid: data.uid,
+          totalIcoin: data.totalIcoin,
+          noBettingToday: data.noBettingToday,
+          bettingCards: firebaseCards,
+          isWin: data.isWin,
+          totalIcoinWin: data.totalIcoinWin || 0,
+          totalIcoinWinToday: data.totalIcoinWinToday || 0,
+        };
+        setBetUser({ ...user });
 
-      let newFirebaseCards: BetZodiacCard[] = [];
-      setBettingCards((cardsPrev) => {
-        newFirebaseCards = sortBettingCard(cardsPrev, firebaseCards);
-        setFirebaseData([...newFirebaseCards.map((card) => ({ ...card }))]);
-        return newFirebaseCards;
-      });
+        if (
+          stateGame !== "PREPARESTART" &&
+          stateGame !== "END" &&
+          stateGame !== "NONE"
+        ) {
+          onUserDataChange({
+            isWin: user.isWin,
+            totalIcoinWin: user.totalIcoinWin,
+          });
+        }
 
-      const user: BetUser = {
-        facebookUserId: data.facebookUserId,
-        profileImageLink: data.profileImageLink,
-        name: data.name,
-        uid: data.uid,
-        totalIcoin: data.totalIcoin,
-        noBettingToday: data.noBettingToday,
-        bettingCards: firebaseCards,
-        isWin: data.isWin,
-        totalIcoinWin: data.totalIcoinWin || 0,
-        totalIcoinWinToday: data.totalIcoinWinToday || 0,
+        if (
+          (stateGame !== "RESULTWAITING" &&
+            stateGame !== "RESULT" &&
+            stateGame !== "END") ||
+          betCards.length === 0
+        ) {
+          setIcoinWinToday(user.totalIcoinWinToday || 0);
+        }
       };
-      setBetUser({ ...user });
 
-      if (
-        stateGame !== "PREPARESTART" &&
-        stateGame !== "END" &&
-        stateGame !== "NONE"
-      ) {
-        onUserDataChange({
-          isWin: user.isWin,
-          totalIcoinWin: user.totalIcoinWin,
-        });
+      onValue(stateRef, handleData);
+
+      return () => off(stateRef, "value", handleData);
+    }, [stateGame, transactionId, fbId]);
+
+    useEffect(() => {
+      try {
+        if (betCards.length <= 4) {
+          setBettingCards([...betCards.map((card) => ({ ...card }))]);
+        } else {
+          toast.dismiss();
+          toast("Đặt cược tối đa 4 lá linh vật", {
+            duration: 2000,
+            position: "bottom-center",
+          });
+        }
+      } catch (error: any) {
+        log(error);
       }
+    }, [betCards, transactionId]);
 
-      if (
-        (stateGame !== "RESULTWAITING" &&
-          stateGame !== "RESULT" &&
-          stateGame !== "END") ||
-        betCards.length === 0
-      ) {
-        setIcoinWinToday(user.totalIcoinWinToday || 0);
-      }
-    };
+    return (
+      <>
+        <div className="section-myInfo mt-22px">
+          <img src={bgHeader} className="section-myInfo__bg" />
 
-    onValue(stateRef, handleData);
+          <div className="header-left">
+            <p className="header-left--text">Thưởng hôm nay:</p>
+            <IcoinWinToday icoinImg={Icoin} icoinWinToday={icoinWinToday} />
+          </div>
 
-    return () => off(stateRef, "value", handleData);
-  }, [stateGame, transactionId, fbId]);
+          <NoGameToday
+            arrowImg={ArrowWhite}
+            noGameToday={betUser?.noBettingToday || 0}
+          />
 
-  useEffect(() => {
-    try {
-      if (betCards.length <= 4) {
-        setBettingCards([...betCards.map((card) => ({ ...card }))]);
-      } else {
-        toast.dismiss();
-        toast("Đặt cược tối đa 4 lá linh vật", {
-          duration: 2000,
-          position: "bottom-center",
-        });
-      }
-    } catch (error: any) {
-      log(error);
-    }
-  }, [betCards, transactionId]);
+          <div className="section-myInfo__cards">
+            {bettingCards.map((betCard) => (
+              <BettingCard key={betCard.id} betCard={betCard} />
+            ))}
+          </div>
 
-  return (
-    <>
-      <div className="section-myInfo mt-22px">
-        <img src={bgHeader} className="section-myInfo__bg" />
-
-        <div className="header-left">
-          <p className="header-left--text">Thưởng hôm nay:</p>
-          <IcoinWinToday icoinImg={Icoin} icoinWinToday={icoinWinToday} />
+          <div className="end">
+            <MyTotalIcoin fbId={fbId} betCards={betCards} />
+            <DepositIcoin />
+          </div>
         </div>
-
-        <NoGameToday
-          arrowImg={ArrowWhite}
-          noGameToday={betUser?.noBettingToday || 0}
-        />
-
-        <div className="section-myInfo__cards">
-          {bettingCards.map((betCard) => (
-            <BettingCard key={betCard.id} betCard={betCard} />
-          ))}
-        </div>
-
-        <div className="end">
-          <MyTotalIcoin fbId={fbId} betCards={betCards} />
-          <DepositIcoin />
-        </div>
-      </div>
-    </>
-  );
-});
+      </>
+    );
+  }
+);
 
 export default MyBonusToday;

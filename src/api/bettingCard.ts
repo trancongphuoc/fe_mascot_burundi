@@ -1,6 +1,7 @@
 import axios from 'axios'; // Ensure you have axios imported correctly
 import api from './axios';
 import toast from 'react-hot-toast';
+import { log } from '../utils/log';
 
 interface ApiResponse {
   status: string;
@@ -28,7 +29,7 @@ export const bettingCard = async (
       headers: { 'Authorization': `Bearer ${token}` },
     });
 
-    console.log('Response betting:', response.data);
+    log(`Response betting: ${response.data}`);
     
     if (response.data.status === "OK") {
       return "OK";

@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { log } from "../utils/log";
+import Loading from "./Loading";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -31,7 +32,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI
-      return <h1>Something went wrong.</h1>;
+      return <Loading/>
     }
 
     return this.props.children; 

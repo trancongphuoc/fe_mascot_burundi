@@ -373,11 +373,11 @@ export default function Home() {
         break;
     }
 
-    toast.dismiss();
-    toast(`giai doan ${statusGame}`, {
-      duration: 2000,
-      position: "bottom-center",
-    });
+    // toast.dismiss();
+    // toast(`giai doan ${statusGame}`, {
+    //   duration: 2000,
+    //   position: "bottom-center",
+    // });
   }, [statusGame]);
 
   const handleCardSelection = (card: ZodiacCardModel) => {
