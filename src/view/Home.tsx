@@ -491,17 +491,10 @@ export default function Home() {
           });
           break;
         case "DEPOSIT":
-          if (openBetting) {
             setOpenDepositIcoin((statePrev) => {
               if (statePrev) return statePrev;
               else return !statePrev;
             });
-          } else {
-            setOpenDepositIcoin((statePrev) => {
-              if (statePrev) return !statePrev;
-              else return statePrev;
-            });
-          }
           break;
         case "DISCONNECT":
           setOpenDisconnect((statePrev) => {

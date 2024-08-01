@@ -65,6 +65,7 @@ const DialogBetting = () => {
   const handleStake = (stake: number, e: any) => {
     e.preventDefault();
     e.stopPropagation();
+    
     if (stake) {
       // const totalIcoinString = window.sessionStorage.getItem("totalIcoin");
       // const totalIcoin =
