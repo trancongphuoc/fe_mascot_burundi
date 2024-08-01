@@ -546,6 +546,12 @@ export default function Home() {
             if (statePrev) return !statePrev;
             else return statePrev;
           });
+          if (openDepositIcoin) {
+            setOpenDepositIcoin((statePrev) => {
+              if (statePrev) return !statePrev;
+              else return statePrev;
+            });
+          }
           setHidden("scroll");
           break;
         case "WINLOST":
