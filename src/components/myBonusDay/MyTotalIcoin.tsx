@@ -17,30 +17,30 @@ interface MyTotalIcoinProps {
 const MyTotalIcoin = function MyTotalIcoin({ fbId, betCards }: MyTotalIcoinProps) {
     log('<MyTotalIcoin />');
 
-    const [totalIcoin, setTotalIcoin] = useState<number>(0);
-    const  { stateGame } = useContext(GameInfoContext);
+    const [icoin, setIcoin] = useState<number>(0);
+    const  { stateGame, setTotalIcoin } = useContext(GameInfoContext);
 
     useEffect(()=> {
         const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
-            if ((data != undefined && data != null && data != totalIcoin)) {
+            if ((data != undefined && data != null && data != icoin)) {
                 if ( (stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") || betCards.length === 0) {
-                    setTotalIcoin(data);  
-                    window.sessionStorage.setItem('totalIcoin', data);   
+                    setIcoin(data);  
+                    setTotalIcoin(data || 0);
                 }  
             }
         };
         onValue(stateRef, handleData);
         return () => off(stateRef, 'value', handleData);
-    },[totalIcoin, fbId, stateGame])
+    },[icoin, fbId, stateGame])
 
 
     return  (
         <div className="end-left">
                 <p className='end-left--text'>Tổng của tôi:</p>
                 <SVG src={Icoin} className="end-left--img"/>
-                <p className='end-left--icoin'>{formatNumber(totalIcoin)}</p>
+                <p className='end-left--icoin'>{formatNumber(icoin)}</p>
         </div>
     );
 };

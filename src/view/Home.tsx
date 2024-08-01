@@ -101,6 +101,7 @@ export default function Home() {
   const transactionId = useRef<number>(0);
   const bettingTimeEnd = useRef<boolean>(false);
   const pauseGameRef = useRef<boolean>(false);
+  const totalIcoinRef = useRef<number>(0);
 
 
   // const zodiacImgs = useRef<ZodiacCardModel[]>([])
@@ -612,6 +613,10 @@ export default function Home() {
     bettingTimeEnd.current = true;
   }
 
+  const handleTotalIcoin = (icoin: number) => {
+    totalIcoinRef.current = icoin;
+  }
+
   const ctxValue = {
     stateGame: statusGame,
     transactionId: transactionId.current,
@@ -624,6 +629,8 @@ export default function Home() {
     betting: handleBetting,
     iCoinWinTheGame: totalIcoinWinRef.current || 0,
     setBettingTimeEnd: handleBettingTimeEnd,
+    totalIcoin: totalIcoinRef.current,
+    setTotalIcoin: handleTotalIcoin,
   };
 
   if (isLoadingRef.current) {

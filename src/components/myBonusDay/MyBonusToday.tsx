@@ -59,7 +59,9 @@ const MyBonusToday = memo(
             }))
           : [];
 
+        console.log('firebase: ', firebaseCards);
         let newFirebaseCards: BetZodiacCard[] = [];
+
         setBettingCards((cardsPrev) => {
           newFirebaseCards = sortBettingCard(cardsPrev, firebaseCards);
           setFirebaseData([...newFirebaseCards.map((card) => ({ ...card }))]);

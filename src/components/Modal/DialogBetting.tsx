@@ -22,8 +22,7 @@ const DialogBetting = () => {
   log("<DialogBetting />");
 
   const [bettingIcoin, setBettingIcoin] = useState({ from: 0, to: 0 });
-  const { setModal, selectedCard, transactionId, betting } =
-    useContext(GameInfoContext);
+  const { setModal, selectedCard, transactionId, betting, totalIcoin } =useContext(GameInfoContext);
 
   // const clickAudioRef =  useAudio(audioBet);
   // const confirmRef = useAudio(audioConfirm);
@@ -67,9 +66,9 @@ const DialogBetting = () => {
     e.preventDefault();
     e.stopPropagation();
     if (stake) {
-      const totalIcoinString = window.sessionStorage.getItem("totalIcoin");
-      const totalIcoin =
-        totalIcoinString !== null ? parseInt(totalIcoinString, 10) : 0;
+      // const totalIcoinString = window.sessionStorage.getItem("totalIcoin");
+      // const totalIcoin =
+      //   totalIcoinString !== null ? parseInt(totalIcoinString, 10) : 0;
 
       const newStake = bettingIcoin.to + stake;
       if (newStake <= totalIcoin) {
