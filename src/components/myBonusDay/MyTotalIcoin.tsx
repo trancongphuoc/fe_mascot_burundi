@@ -24,7 +24,7 @@ const MyTotalIcoin = function MyTotalIcoin({ fbId, betCards }: MyTotalIcoinProps
         const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
-            if ((data && data != totalIcoin)) {
+            if ((data != undefined && data != null && data != totalIcoin)) {
                 if ( (stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") || betCards.length === 0) {
                     setTotalIcoin(data);  
                     window.sessionStorage.setItem('totalIcoin', data);   
