@@ -48,11 +48,11 @@ import PopupDeposit from "../components/popup/PopupDeposit.tsx";
 import PopupOpenCircle from "../components/openCard/PopupOpenCircle.tsx";
 // import MaintainModal from '../components/Modal/MaintainModal.tsx';
 // import PopupCenter from '../components/popup/PopupCenter.tsx';
-import MaintainModal from '../components/Modal/MaintainModal.tsx';
+import MaintainModal from "../components/Modal/MaintainModal.tsx";
 
-import useAudio from '../components/UseAudio.tsx';
-import winAudio from '../../public/sounds/audio_win.wav';
-import lostAudio from '../../public/sounds/audio_lost.wav';
+import useAudio from "../components/UseAudio.tsx";
+import winAudio from "../../public/sounds/audio_win.wav";
+import lostAudio from "../../public/sounds/audio_lost.wav";
 
 const img: string[] = [
   buffalo,
@@ -103,32 +103,34 @@ export default function Home() {
   const pauseGameRef = useRef<boolean>(false);
   const totalIcoinRef = useRef<number>(0);
 
-
   // const zodiacImgs = useRef<ZodiacCardModel[]>([])
 
   // const gameInfoCtx = useContext(GameInfoContext);
 
-  const handleIsWin = useCallback((data: {
-    isWin?: boolean | undefined;
-    totalIcoinWin?: number | undefined;
-  }) => {
-    if (data.totalIcoinWin) {
-      totalIcoinWinRef.current = data.totalIcoinWin;
-    }
-    log("check icoin win: ", data.totalIcoinWin);
+  const handleIsWin = useCallback(
+    (data: {
+      isWin?: boolean | undefined;
+      totalIcoinWin?: number | undefined;
+    }) => {
+      if (data.totalIcoinWin) {
+        totalIcoinWinRef.current = data.totalIcoinWin;
+      }
+      log("check icoin win: ", data.totalIcoinWin);
 
-    if (typeof data.isWin === "boolean") {
-      if (data.isWin) {
+      if (typeof data.isWin === "boolean") {
+        if (data.isWin) {
+          dialogTypeRef.current = "WIN";
+        } else {
+          dialogTypeRef.current = "LOST";
+        }
+      } else if ((data.totalIcoinWin || 0) > 0) {
         dialogTypeRef.current = "WIN";
       } else {
         dialogTypeRef.current = "LOST";
       }
-    } else if ((data.totalIcoinWin || 0) > 0) {
-      dialogTypeRef.current = "WIN";
-    } else {
-      dialogTypeRef.current = "LOST";
-    }
-  },[]);
+    },
+    []
+  );
 
   useEffect(() => {
     const fetchAndSetFbId = async () => {
@@ -199,8 +201,6 @@ export default function Home() {
               pauseGameRef.current = false;
             }
           }
-          
-
 
           // setGameInfo((prevState) => ({
           //   ...prevState,
@@ -221,7 +221,7 @@ export default function Home() {
 
     fetchGameInfo();
 
-    log(`host name: ${window.location.hostname}`)
+    log(`host name: ${window.location.hostname}`);
 
     switch (statusGame) {
       case "NONE":
@@ -412,7 +412,7 @@ export default function Home() {
 
   const setFirebaseData = useCallback((zodiacCards: BetZodiacCard[]) => {
     betCardRef.current = zodiacCards;
-  },[]);
+  }, []);
 
   // send icoin betting
   const handleBetting = async (zodiacCard: BetZodiacCard) => {
@@ -489,10 +489,17 @@ export default function Home() {
           });
           break;
         case "DEPOSIT":
-          setOpenDepositIcoin((statePrev) => {
-            if (statePrev) return statePrev;
-            else return !statePrev;
-          });
+          if (openBetting) {
+            setOpenDepositIcoin((statePrev) => {
+              if (statePrev) return statePrev;
+              else return !statePrev;
+            });
+          } else {
+            setOpenDepositIcoin((statePrev) => {
+              if (statePrev) return !statePrev;
+              else return statePrev;
+            });
+          }
           break;
         case "DISCONNECT":
           setOpenDisconnect((statePrev) => {
@@ -517,10 +524,10 @@ export default function Home() {
           });
           break;
         case "MAINTAIN":
-        setMaintain((statePrev) => {
-          if (statePrev) return statePrev;
-          else return !statePrev;
-        });
+          setMaintain((statePrev) => {
+            if (statePrev) return statePrev;
+            else return !statePrev;
+          });
           break;
         default:
           break;
@@ -602,7 +609,7 @@ export default function Home() {
             if (statePrev) return !statePrev;
             else return statePrev;
           });
-            break;
+          break;
         default:
           break;
       }
@@ -611,11 +618,11 @@ export default function Home() {
 
   const handleBettingTimeEnd = () => {
     bettingTimeEnd.current = true;
-  }
+  };
 
   const handleTotalIcoin = (icoin: number) => {
     totalIcoinRef.current = icoin;
-  }
+  };
 
   const ctxValue = {
     stateGame: statusGame,
@@ -692,11 +699,11 @@ export default function Home() {
 
           {openMyHistory && <PopupMyHistory />}
 
-          {openDepositIcoin && <PopupDeposit key={'deposit'}/>}
+          {openDepositIcoin && <PopupDeposit key={"deposit"} />}
 
           {openDisconnect && <PopupDisconnect />}
 
-          {maintain && <MaintainModal/>}
+          {maintain && <MaintainModal />}
         </AnimatePresence>
 
         {openGameResult && <PopupOpenCard />}

@@ -62,11 +62,14 @@ const MyBonusToday = memo(
         console.log('firebase: ', firebaseCards);
         let newFirebaseCards: BetZodiacCard[] = [];
 
-        setBettingCards((cardsPrev) => {
-          newFirebaseCards = sortBettingCard(cardsPrev, firebaseCards);
-          setFirebaseData([...newFirebaseCards.map((card) => ({ ...card }))]);
-          return newFirebaseCards;
-        });
+        if (!(firebaseCards.length == 0 && stateGame == "NONE")) {
+          setBettingCards((cardsPrev) => {
+            newFirebaseCards = sortBettingCard(cardsPrev, firebaseCards);
+            setFirebaseData([...newFirebaseCards.map((card) => ({ ...card }))]);
+            return newFirebaseCards;
+          });
+        }
+
 
         const user: BetUser = {
           facebookUserId: data.facebookUserId,
