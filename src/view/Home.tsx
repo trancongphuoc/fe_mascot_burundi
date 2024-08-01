@@ -280,7 +280,8 @@ export default function Home() {
         //   else return statePrev;
         // });
 
-        setHidden("scroll");
+        //TODO: disable scroll
+        // setHidden("scroll");
 
         break;
       case "COUNTDOWN":
@@ -325,8 +326,9 @@ export default function Home() {
           if (statePrev) return !statePrev;
           else return statePrev;
         });
-        setHidden("scroll");
-        break;
+        //TODO: disable scroll
+        // setHidden("scroll");
+        break;  
       case "RESULT":
         setOpenRule((statePrev) => {
           if (statePrev) return !statePrev;
