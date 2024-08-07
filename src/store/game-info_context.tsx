@@ -15,6 +15,7 @@ type GameInfoContextType = {
     setBettingTimeEnd: () => void;
     totalIcoin: number;
     setTotalIcoin: (_: number) => void
+    fbId: string,
 };
 
 
@@ -32,6 +33,7 @@ export const GameInfoContext = createContext<GameInfoContextType>({
     setBettingTimeEnd: () => {},
     totalIcoin: 0,
     setTotalIcoin: (_: number) => {},
+    fbId: "",
 });
 
 // interface GameInfoProviderProps {

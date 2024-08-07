@@ -24,7 +24,7 @@ interface BetUser extends User {
 interface MyInfoBetResultModel {
   onUserDataChange: (data: { isWin?: boolean; totalIcoinWin?: number }) => void;
   betCards: BetZodiacCard[];
-  fbId: string;
+  // fbId: string;
   setFirebaseData: (_: BetZodiacCard[]) => void;
 }
 
@@ -32,7 +32,7 @@ const MyBonusToday = memo(
   ({
     betCards,
     onUserDataChange,
-    fbId,
+    // fbId,
     setFirebaseData,
   }: MyInfoBetResultModel) => {
     log("<firebase MyBonusToday />");
@@ -40,7 +40,7 @@ const MyBonusToday = memo(
     const [icoinWinToday, setIcoinWinToday] = useState<number>(0);
     const [bettingCards, setBettingCards] = useState<BetZodiacCard[]>([]);
 
-    const { stateGame, transactionId } = useContext(GameInfoContext);
+    const { stateGame, transactionId, fbId } = useContext(GameInfoContext);
 
     useEffect(() => {
       const stateRef = ref(db, `/zodiacGame/players/${fbId}`);

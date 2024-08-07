@@ -1,7 +1,7 @@
 import axios from 'axios'; // Ensure you have axios imported correctly
 import api from './axios';
 import toast from 'react-hot-toast';
-import { log } from '../utils/log';
+import { setLogCat } from './sendLogcat';
 
 interface ApiResponse {
   status: string;
@@ -19,7 +19,16 @@ export const bettingCard = async (
       toast.dismiss();
       toast('Thiếu thông tin', { duration: 2000, position: 'bottom-center'});
       return "FAILED";
-    } 
+    }
+
+    const label = "BETTING CARD";
+
+    setLogCat(JSON.stringify({
+        label,
+        zodiacGameId,
+        totalIcoin,
+        zodiacCardId
+    }));
     
     const response = await api.post<ApiResponse>('/rest/zodiac-game/betting', {
       zodiacGameId,
@@ -29,7 +38,7 @@ export const bettingCard = async (
       headers: { 'Authorization': `Bearer ${token}` },
     });
 
-    log(`Response betting: ${response.data}`);
+    await setLogCat(JSON.stringify({label, responseData: response.data, status: response.status}));
     
     if (response.data.status === "OK") {
       return "OK";

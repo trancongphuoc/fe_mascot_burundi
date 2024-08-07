@@ -15,7 +15,7 @@ interface User {
     facebookUserId?: string,
     profileImageLink?: string,
     name: string,
-    uid?: string,
+    uid?: number,
     totalIcoin?: number,
     noBettingToday?: number,
 }

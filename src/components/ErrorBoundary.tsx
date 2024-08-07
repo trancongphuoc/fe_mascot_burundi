@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { log } from "../utils/log";
 import Loading from "./Loading";
+import { setLogCat } from "../api/sendLogcat";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -18,7 +19,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     // Update state so the next render will show the fallback UI.
-    console.log(error)
+    setLogCat(JSON.stringify({ERROR:error}))
     return { hasError: true };
   }
 
@@ -26,6 +27,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     // You can also log the error to an error reporting service
     // logErrorToMyService(error, errorInfo);
     log(`ERROR React WSOD: ${error} ### ${errorInfo}`)
+    setLogCat(JSON.stringify({ERROR:error,errorInfo: errorInfo}))
     window.location.reload();
   }
 

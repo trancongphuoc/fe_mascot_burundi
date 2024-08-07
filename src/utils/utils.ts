@@ -20,14 +20,21 @@ export const formatNumber = (num: number) => {
 
 
 export function isSameDay(timestamp1: number, timestamp2: number): boolean {
-    const date1 = new Date(timestamp1);
-    const date2 = new Date(timestamp2);
-    return (
-      date1.getDate() === date2.getDate() &&
-      date1.getMonth() === date2.getMonth() &&
-      date1.getFullYear() === date2.getFullYear()
-    );
+  if (isNaN(timestamp1) || isNaN(timestamp2)) {
+    console.error('Invalid timestamp:', timestamp1, timestamp2);
+    return false;
+  }
+  
+  const date1 = new Date(timestamp1);
+  const date2 = new Date(timestamp2);
+
+  return (
+    date1.getUTCDate() === date2.getUTCDate() &&
+    date1.getUTCMonth() === date2.getUTCMonth() &&
+    date1.getUTCFullYear() === date2.getUTCFullYear()
+  );
 }
+
 
 export const updateNewBetCards = (zodiacCard: BetZodiacCard, oldBetCards: BetZodiacCard[]): BetZodiacCard[] => {
   const newOldBetCard = oldBetCards.map(card => ({...card}));

@@ -17,20 +17,6 @@ import { formatNumber } from '../../utils/utils';
 import { GameInfoContext } from '../../store/game-info_context';  
 
 
-interface MyHistory {
-  time: Date,
-  noGame: number,
-  totalIcoinWin: number,
-  totalIcoinBetting: number,
-  zodiacCardId: string,
-  zodiacCards: BetZodiacCard[],
-  netIcoin: number,
-}
-
-interface BetZodiacCard extends ZodiacCardModel {
-  totalIcoinBetting: number,
-}
-
 const PopupMineResult = () => {
 
   const [myHistory, setMyHistory] = useState<MyHistory[]>([]);
@@ -45,18 +31,10 @@ const PopupMineResult = () => {
     const fetchData = async () => {
       try {
         const data = await fetchMyHistory();
-        if (data != null) {
-          const myHistories: MyHistory[] = data.map((history: any) => ({
-            time: new Date(history.addTime || 0),
-            noGame: history.noGame || 0,
-            totalIcoinWin: history.totalIcoinWin || 0,
-            totalIcoinBetting: history.totalIcoinBetting || 0,
-            zodiacCardId: history.zodiacCardId || 0,
-            zodiacCards: history.zodiacCards || [],
-            // netIcoin: (history.totalIcoinWin ?? 0) - (history.totalIcoinBetting ?? 0),
-          }));
+        if (data != null && data != "FAILED") {
+          const myHistories = [...data.map((item) => ({...item}))];
           if (stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") {
-            setMyHistory(myHistories);
+            setMyHistory([...myHistories]);
           }
         }
       } catch (error) {
@@ -104,15 +82,15 @@ const PopupMineResult = () => {
                     </div>
                     <div className="bets">
                       {
-                        mine.zodiacCards.map((card, index) => (
-                          <div key={index} className="bet">
+                        mine.zodiacCards.map((card) => (
+                          <div key={card.id} className="bet">
                             <p className="bet--index">{index + 1}</p>
                             <SVG src={card.id === mine.zodiacCardId ? BgCardWin : BgCardLost} className="bet__card--bg"/>
                             <SVG src={card.imageUrl} className="bet__card--zodiac"/>
                             <p className="bet--bonus">x{card.multiply}</p>
                             <div className="bet__icoin">
                               <SVG className="bet__icoin--img" src={card.id === mine.zodiacCardId ? IcoinWin : IcoinLost}/>
-                              <p className="bet__icoin--data">{formatNumber(card.totalIcoinBetting)}</p>
+                              <p className="bet__icoin--data">{formatNumber(card.totalIcoinBetting ?? 0)}</p>
                             </div>
                           </div>
                         ))

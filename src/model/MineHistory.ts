@@ -9,3 +9,13 @@ interface BetInfo {
     bonus: string;
     icoin: number;
   }
+
+  interface MyHistory {
+    time: Date,
+    noGame: number,
+    totalIcoinWin: number,
+    totalIcoinBetting: number,
+    zodiacCardId: string,
+    zodiacCards: BetZodiacCard[],
+    netIcoin: number,
+  }

@@ -53,6 +53,7 @@ import MaintainModal from "../components/Modal/MaintainModal.tsx";
 import useAudio from "../components/UseAudio.tsx";
 import winAudio from "../../public/sounds/audio_win.wav";
 import lostAudio from "../../public/sounds/audio_lost.wav";
+import { setLogCat } from "../api/sendLogcat.ts";
 
 const img: string[] = [
   buffalo,
@@ -64,6 +65,8 @@ const img: string[] = [
   chicken,
   pig,
 ];
+
+const label = "RESUT"
 
 export default function Home() {
   const parameters = useQueryParams();
@@ -220,6 +223,15 @@ export default function Home() {
     };
 
     fetchGameInfo();
+
+    if (statusGame == "RESULT") {
+      setLogCat(JSON.stringify({
+        label,
+        topUser: topUserRef.current || "", 
+        card: cardResultRef.current || '',
+        game: noGameRef.current || "-1"
+     }));
+    }
 
     log(`host name: ${window.location.hostname}`);
 
@@ -639,6 +651,7 @@ export default function Home() {
     setBettingTimeEnd: handleBettingTimeEnd,
     totalIcoin: totalIcoinRef.current,
     setTotalIcoin: handleTotalIcoin,
+    fbId: fbIdRef.current,
   };
 
   if (isLoadingRef.current) {

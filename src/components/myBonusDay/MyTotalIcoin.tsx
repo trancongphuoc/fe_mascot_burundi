@@ -14,11 +14,11 @@ interface MyTotalIcoinProps {
 }
 
 //TODO: fix have no pass fbId
-const MyTotalIcoin = function MyTotalIcoin({ fbId, betCards }: MyTotalIcoinProps) {
+const MyTotalIcoin = function MyTotalIcoin({ betCards }: MyTotalIcoinProps) {
     log('<MyTotalIcoin />');
 
     const [icoin, setIcoin] = useState<number>(0);
-    const  { stateGame, setTotalIcoin } = useContext(GameInfoContext);
+    const  { stateGame, setTotalIcoin, fbId } = useContext(GameInfoContext);
 
     useEffect(()=> {
         const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
