@@ -16,7 +16,6 @@ const OpenCard: React.FC<OpenCardProps> = ({ onClose, zodiac}) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log('Closing...');
       onClose();
     }, 3000);
 

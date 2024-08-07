@@ -84,7 +84,7 @@ const DialogBetting = () => {
         setModal({ state: "OPEN", type: "DEPOSIT" });
       }
     } else {
-      console.log("no stake");
+      log("no stake");
     }
   };
 

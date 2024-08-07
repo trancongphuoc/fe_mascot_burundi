@@ -1,12 +1,14 @@
-import axios from 'axios'; // Ensure you have axios imported correctly
-import api from './axios';
-import toast from 'react-hot-toast';
-import { setLogCat } from './sendLogcat';
+import axios from "axios"; // Ensure you have axios imported correctly
+import api from "./axios";
+import toast from "react-hot-toast";
+import { setLogCat } from "./sendLogcat";
 
 interface ApiResponse {
   status: string;
   [key: string]: any; // Allow additional properties if necessary
 }
+
+const label = "BETTING CARD";
 
 export const bettingCard = async (
   zodiacGameId: number,
@@ -14,47 +16,61 @@ export const bettingCard = async (
   zodiacCardId: string
 ): Promise<string> => {
   try {
-    const token = window.sessionStorage.getItem('token');
+    const token = window.sessionStorage.getItem("token");
     if (!token) {
       toast.dismiss();
-      toast('Thiếu thông tin', { duration: 2000, position: 'bottom-center'});
+      toast("Thiếu thông tin", { duration: 2000, position: "bottom-center" });
       return "FAILED";
     }
 
-    const label = "BETTING CARD";
-
-    setLogCat(JSON.stringify({
+    setLogCat(
+      JSON.stringify({
         label,
         zodiacGameId,
         totalIcoin,
-        zodiacCardId
-    }));
-    
-    const response = await api.post<ApiResponse>('/rest/zodiac-game/betting', {
-      zodiacGameId,
-      totalIcoin,
-      zodiacCardId
-    }, {
-      headers: { 'Authorization': `Bearer ${token}` },
-    });
+        zodiacCardId,
+      })
+    );
 
-    await setLogCat(JSON.stringify({label, responseData: response.data, status: response.status}));
-    
+    const response = await api.post<ApiResponse>(
+      "/rest/zodiac-game/betting",
+      {
+        zodiacGameId,
+        totalIcoin,
+        zodiacCardId,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    await setLogCat(
+      JSON.stringify({
+        label,
+        responseData: response ?? "unknown",
+      })
+    );
+
     if (response.data.status === "OK") {
       return "OK";
     } else {
       toast.dismiss();
-      // toast('Đặt cược thất bại', { duration: 2000, position: 'bottom-center'});
-      toast(response.data.message, { duration: 2000, position: 'bottom-center'});
+      toast(response.data.message, {
+        duration: 2000,
+        position: "bottom-center",
+      });
       return "FAILED";
     }
   } catch (error) {
     toast.dismiss();
-    toast('Lỗi đặt cược', { duration: 2000, position: 'bottom-center'});
+    toast("Lỗi đặt cược", { duration: 2000, position: "bottom-center" });
     if (axios.isAxiosError(error)) {
-      console.error('Axios error fetching game history:', error.response?.data || error.message);
+      console.error(
+        "Axios error fetching game history:",
+        error.response?.data || error.message
+      );
     } else {
-      console.error('Unexpected error fetching game history:', error);
+      console.error("Unexpected error fetching game history:", error);
     }
     return "FAILED";
   }

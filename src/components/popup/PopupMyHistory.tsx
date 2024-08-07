@@ -84,7 +84,7 @@ const PopupMineResult = () => {
                       {
                         mine.zodiacCards.map((card) => (
                           <div key={card.id} className="bet">
-                            <p className="bet--index">{index + 1}</p>
+                            <p className="bet--index">{card.id.slice(-1)}</p>
                             <SVG src={card.id === mine.zodiacCardId ? BgCardWin : BgCardLost} className="bet__card--bg"/>
                             <SVG src={card.imageUrl} className="bet__card--zodiac"/>
                             <p className="bet--bonus">x{card.multiply}</p>

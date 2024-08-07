@@ -96,7 +96,8 @@ export default function Home() {
   const dialogTypeRef = useRef<DialogType>("LOST");
   const selectedCardRef = useRef<BetZodiacCard | null>(null);
   const totalIcoinWinRef = useRef<number>(0);
-  const fbIdRef = useRef<string>("");
+  // const fbIdRef = useRef<string>("");
+  const [fbId, setFbId] = useState<string>('')
 
   const cardResultRef = useRef<ZodiacCard | null>(null);
   const topUserRef = useRef<User[]>([]);
@@ -138,7 +139,8 @@ export default function Home() {
   useEffect(() => {
     const fetchAndSetFbId = async () => {
       const fbId = await fetchTokenAndJoinGame(parameters);
-      fbIdRef.current = fbId;
+      // fbIdRef.current = fbId;
+      setFbId(fbId)
     };
 
     fetchAndSetFbId();
@@ -651,7 +653,7 @@ export default function Home() {
     setBettingTimeEnd: handleBettingTimeEnd,
     totalIcoin: totalIcoinRef.current,
     setTotalIcoin: handleTotalIcoin,
-    fbId: fbIdRef.current,
+    fbId: fbId,
   };
 
   if (isLoadingRef.current) {
@@ -689,7 +691,7 @@ export default function Home() {
         <MyBonusToday
           onUserDataChange={handleIsWin}
           betCards={betCardRef.current}
-          fbId={fbIdRef.current}
+          // fbId={fbIdRef.current}
           setFirebaseData={setFirebaseData}
         />
         <BestPlayers />

@@ -2,6 +2,7 @@
 // MovingText.tsx
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { log } from "../utils/log";
 
 interface TextItem {
   id: number;
@@ -24,8 +25,8 @@ const ButtonMoving = ({ content, setClick, cssClass }: ButtonMovingProps) => {
   const handleAnimationComplete = (id: number) => {
     try {
       setTexts(texts.filter((text) => text.id !== id));
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      log(error);
     }
   };
 

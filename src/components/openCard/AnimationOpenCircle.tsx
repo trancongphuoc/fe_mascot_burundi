@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import lottie, { AnimationConfigWithData, AnimationDirection, AnimationItem } from 'lottie-web';
+import { log } from '../../utils/log';
 
 interface LottieAnimationProps {
   animationData: any; // You can define a more specific type if available
@@ -32,7 +33,7 @@ const LottieAnimation: React.FC<LottieAnimationProps> = ({
   const handleComplete = useCallback(() => {
     if (onComplete) {
       onComplete();
-      console.log('complete ...');
+      log('complete ...');
     }
   }, [onComplete]);
 

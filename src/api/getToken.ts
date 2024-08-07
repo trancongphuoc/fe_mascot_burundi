@@ -23,8 +23,8 @@ export const getToken = async ({ userId, platform, language, packageName }: Toke
       console.error('Unexpected response structure:', response.data);
       return "FAILED";
     }
-  } catch (error) {
-    console.log(error)
+  } catch (error: any) {
+    log(`${error.toString() || 'unknow'}`)
     return "FAILED";
   }
 };

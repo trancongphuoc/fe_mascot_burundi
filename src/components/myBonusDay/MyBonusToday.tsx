@@ -59,7 +59,6 @@ const MyBonusToday = memo(
             }))
           : [];
 
-        console.log('firebase: ', firebaseCards);
         let newFirebaseCards: BetZodiacCard[] = [];
 
         if (!(firebaseCards.length == 0 && stateGame == "NONE")) {

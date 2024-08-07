@@ -1,6 +1,7 @@
 import api from './axios';
 import { GameHistory } from '../model/GameHistory';
 import { setLogCat } from './sendLogcat';
+import { log } from '../utils/log';
 
 export const fetchGameHistory = async (): Promise<GameHistory[] | null> => {
   const label = "GAME HISTORY"
@@ -12,7 +13,7 @@ export const fetchGameHistory = async (): Promise<GameHistory[] | null> => {
     const response = await api.get(`/rest/zodiac-game/history`)
     const endTime = new Date().getTime();
     const duration = endTime - startTime;
-    console.log("xxxxxx", duration);
+    log("xxxxxx", duration);
     if (response.data.status === "OK" && Array.isArray(response.data.data.zodiacGameList)) {
 
       await setLogCat("Game History Api Success");

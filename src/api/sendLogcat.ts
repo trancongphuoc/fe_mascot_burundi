@@ -27,7 +27,6 @@ export const setLogCat = async (
 
     const result = await setLogCatFunction(data);
 
-    console.log("User: ---", result);
     return result.data as CloudFunctionResponse;
   } catch (error) {
     console.error("Error calling SetLogCat function: ", error);

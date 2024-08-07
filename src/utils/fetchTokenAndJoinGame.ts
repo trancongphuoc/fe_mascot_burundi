@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { getToken } from "../api/getToken";
 import { joinGameZodiac } from "../api/joinGameZodiac";
 import { callSetLastRunLogCat } from "../api/setLastRunLogCat";
+import { log } from "./log";
 
 export const fetchTokenAndJoinGame = async (parameters: string | null | undefined) => {
   let fbId = '';
@@ -20,7 +21,6 @@ export const fetchTokenAndJoinGame = async (parameters: string | null | undefine
     const data = JSON.parse(decodedParams);
     await getToken(data);
   } catch (error) {
-    console.log('valid token');
     window.sessionStorage.setItem('token', parameters);
   }
 
@@ -32,14 +32,13 @@ export const fetchTokenAndJoinGame = async (parameters: string | null | undefine
         uid = response.data?.user.uid || 0;
         window.sessionStorage.setItem('fbId', fbId);
         window.sessionStorage.setItem('uid', uid.toString());
-        console.log('join game success', response);
         await callSetLastRunLogCat(uid);
         break;
       } else {
-        console.log('join game failed');
+        log('join game failed');
       }
-    } catch (error) {
-      console.log(`error join game, attempt ${attempt + 1}:`, error);
+    } catch (error: any) {
+      log(`error join game, attempt ${attempt + 1}: ${error.toString() || 'unknown'}`);
     }
     attempt++;
   }

@@ -14,9 +14,6 @@ interface FlipCardProps {
 export default function FlipCard({ zodiac }: FlipCardProps) {
   const [flip, setFlip] = useState(true);
 
-  console.log('zodiac', zodiac);
-
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setFlip(false);

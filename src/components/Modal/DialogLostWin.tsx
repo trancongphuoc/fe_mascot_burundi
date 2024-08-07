@@ -83,8 +83,6 @@ const DialogLostWin = ({
 }: DialogLostWinProps) => {
   const { setModal, topUsers } = useContext(GameInfoContext);
 
-  console.log("check dialogType", dialogType);
-
   const contentLost = (
     <>
       <SVG
