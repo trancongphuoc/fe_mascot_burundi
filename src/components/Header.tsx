@@ -1,7 +1,7 @@
 import PrimaryText from "../assets/primary-text.svg";
 import SVG from "react-inlinesvg";
 import Rule from "../assets/rule.svg";
-import { log } from "../utils/log";
+// import { log } from "../utils/log";
 import { useContext } from "react";
 import { GameInfoContext } from "../store/game-info_context";
 
@@ -11,7 +11,7 @@ import { GameInfoContext } from "../store/game-info_context";
 // }
 
 const Header = function Header() {
-  log("<Header />");
+  // log("<Header />");
 
   const { noGame, setModal, stateGame } = useContext(GameInfoContext);
 

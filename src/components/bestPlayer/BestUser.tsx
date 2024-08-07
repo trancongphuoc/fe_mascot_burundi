@@ -1,7 +1,7 @@
 import { formatNumber } from "../../utils/utils"
 import Icoin from '../../assets/icoin.svg';
 import AvatarCircle from "../AvatarCircle";
-import { log } from "../../utils/log";
+// import { log } from "../../utils/log";
 
 interface BestUserProps {
     index: number,
@@ -11,7 +11,7 @@ interface BestUserProps {
 }
 
 export default function BestUser({index, profileImageLink, name, totalIcoin} : BestUserProps) {
-    log('<BestUser />')
+    // log('<BestUser />')
     return (
         <li className={`content${index}`}>
             <AvatarCircle avatarUrl={profileImageLink} className={`content${index}--img`}/>

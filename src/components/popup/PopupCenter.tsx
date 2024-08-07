@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { MouseEventHandler, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { log } from '../../utils/log';
+// import { log } from '../../utils/log';
 
 interface PopupCenterProps {
   children: ReactNode;
@@ -16,7 +16,7 @@ export default function PopupCenter({
   classNameChild,
   className = 'popup-overlay-center',
 }: PopupCenterProps) {
-  log('<PopCenterProps />')
+  // log('<PopCenterProps />')
 
   const modalRoot = document.getElementById('modal-root');
   

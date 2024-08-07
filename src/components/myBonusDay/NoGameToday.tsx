@@ -1,7 +1,7 @@
 import { memo, useContext } from "react";
 import SVG from "react-inlinesvg";
 import { GameInfoContext } from "../../store/game-info_context";
-import { log } from "../../utils/log";
+// import { log } from "../../utils/log";
 
 interface NoGameTodayProps {
   arrowImg: string;
@@ -12,7 +12,7 @@ const NoGameToday = memo(function NoGameToday({
   arrowImg,
   noGameToday,
 }: NoGameTodayProps) {
-  log("<NoGameToday />");
+  // log("<NoGameToday />");
 
   const { setModal, stateGame } = useContext(GameInfoContext);
 

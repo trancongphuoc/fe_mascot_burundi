@@ -1,10 +1,10 @@
-import { log } from '../../utils/log';
+// import { log } from '../../utils/log';
 import PopupCenter from './PopupCenter';
 import { GameInfoContext } from '../../store/game-info_context';
 import { useContext } from 'react';
 
 const PopupDisconnect = () => {
-  log('<PopRule />');
+  // log('<PopRule />');
   const { setModal } = useContext(GameInfoContext);
 
   return (

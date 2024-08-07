@@ -1,8 +1,8 @@
-import { log } from "./log";
+// import { log } from "./log";
 type FlutterMessage = 'callbackMyWallet' | 'callbackDisableLoading'
 
 export const callbackFlutter = (flutterMessage: FlutterMessage) => {
-    log('function my wallet')
+    // log('function my wallet')
     if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
       window.flutter_inappwebview.callHandler(flutterMessage);
     } else {

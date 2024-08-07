@@ -39,7 +39,7 @@ import setHidden from "../utils/setBodyScroll";
 import { updateNewBetCards, useQueryParams } from "../utils/utils";
 import { fetchTokenAndJoinGame } from "../utils/fetchTokenAndJoinGame";
 import { callbackFlutter } from "../utils/functions";
-import { log } from "../utils/log";
+// import { log } from "../utils/log";
 import { GameInfoContext } from "../store/game-info_context.tsx";
 // import { useContext } from 'react';
 import ShortInfoGame from "../components/shortInfoGame/ShortInfoGame.tsx";
@@ -53,7 +53,7 @@ import MaintainModal from "../components/Modal/MaintainModal.tsx";
 import useAudio from "../components/UseAudio.tsx";
 import winAudio from "../../public/sounds/audio_win.wav";
 import lostAudio from "../../public/sounds/audio_lost.wav";
-import { setLogCat } from "../api/sendLogcat.ts";
+// import { setLogCat } from "../api/sendLogcat.ts";
 
 const img: string[] = [
   buffalo,
@@ -119,7 +119,7 @@ export default function Home() {
       if (data.totalIcoinWin) {
         totalIcoinWinRef.current = data.totalIcoinWin;
       }
-      log("check icoin win: ", data.totalIcoinWin);
+      // log("check icoin win: ", data.totalIcoinWin);
 
       if (typeof data.isWin === "boolean") {
         if (data.isWin) {
@@ -226,16 +226,16 @@ export default function Home() {
 
     fetchGameInfo();
 
-    if (statusGame == "RESULT") {
-      setLogCat(JSON.stringify({
-        label,
-        topUser: topUserRef.current || "", 
-        card: cardResultRef.current || '',
-        game: noGameRef.current || "-1"
-     }));
-    }
+    // if (statusGame == "RESULT") {
+    //   setLogCat(JSON.stringify({
+    //     label,
+    //     topUser: topUserRef.current || "", 
+    //     card: cardResultRef.current || '',
+    //     game: noGameRef.current || "-1"
+    //  }));
+    // }
 
-    log(`host name: ${window.location.hostname}`);
+    // log(`host name: ${window.location.hostname}`);
 
     switch (statusGame) {
       case "NONE":
@@ -463,7 +463,7 @@ export default function Home() {
   };
 
   const updateOnlineStatus = useCallback(() => {
-    log("function update online status");
+    // log("function update online status");
     const onlineStatus = navigator.onLine;
     setOpenDisconnect(!onlineStatus);
   }, []);

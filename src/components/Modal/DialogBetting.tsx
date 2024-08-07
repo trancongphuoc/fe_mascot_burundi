@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import SVG from "react-inlinesvg";
 import toast from "react-hot-toast";
 import LazyImage from "../LazyImage";
-import { log } from "../../utils/log";
+// import { log } from "../../utils/log";
 import ButtonStake from "../ButtonStake";
 
 import AnimatedCounter from "../animation/AnimatedCounter";
@@ -19,7 +19,7 @@ import ButtonMoving from "../ButtonMoving";
 import { GameInfoContext } from "../../store/game-info_context";
 
 const DialogBetting = () => {
-  log("<DialogBetting />");
+  // log("<DialogBetting />");
 
   const [bettingIcoin, setBettingIcoin] = useState({ from: 0, to: 0 });
   const { setModal, selectedCard, transactionId, betting, totalIcoin } =useContext(GameInfoContext);
@@ -84,7 +84,7 @@ const DialogBetting = () => {
         setModal({ state: "OPEN", type: "DEPOSIT" });
       }
     } else {
-      log("no stake");
+      // log("no stake");
     }
   };
 

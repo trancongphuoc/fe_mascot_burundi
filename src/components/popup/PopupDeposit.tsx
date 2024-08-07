@@ -1,11 +1,11 @@
-import { log } from '../../utils/log';
+// import { log } from '../../utils/log';
 import PopupCenter from './PopupCenter';
 import { GameInfoContext } from '../../store/game-info_context';
 import { useContext } from 'react';
 import { callbackFlutter } from '../../utils/functions';
 
 const PopupDeposit = () => {
-  log('<PopRule />');
+  // log('<PopRule />');
   const { setModal } = useContext(GameInfoContext);
 
   return (

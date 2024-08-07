@@ -6,7 +6,7 @@ import { db } from "../../firebase/config";
 import bgHeader from "../../assets/bg_my_bonus_today.png";
 import MyTotalIcoin from "./MyTotalIcoin";
 import BettingCard from "./BettingCard";
-import { log } from "../../utils/log";
+// import { log } from "../../utils/log";
 import DepositIcoin from "./DepositIcoin";
 import { GameInfoContext } from "../../store/game-info_context";
 import IcoinWinToday from "./IcoinWinTody";
@@ -35,7 +35,7 @@ const MyBonusToday = memo(
     // fbId,
     setFirebaseData,
   }: MyInfoBetResultModel) => {
-    log("<firebase MyBonusToday />");
+    // log("<firebase MyBonusToday />");
     const [betUser, setBetUser] = useState<BetUser>();
     const [icoinWinToday, setIcoinWinToday] = useState<number>(0);
     const [bettingCards, setBettingCards] = useState<BetZodiacCard[]>([]);
@@ -122,7 +122,7 @@ const MyBonusToday = memo(
           });
         }
       } catch (error: any) {
-        log(error);
+        // log(error);
       }
     }, [betCards, transactionId]);
 

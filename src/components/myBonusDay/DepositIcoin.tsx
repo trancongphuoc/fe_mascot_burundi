@@ -1,10 +1,10 @@
 import ArrowWhite from "../../assets/arrow-white.svg";
 import SVG from "react-inlinesvg";
 import { callbackFlutter } from "../../utils/functions";
-import { log } from "../../utils/log";
+// import { log } from "../../utils/log";
 
 export default function DepositIcoin() {
-  log("<DepositIcoin />");
+  // log("<DepositIcoin />");
   return (
     <button
       className="end-right"

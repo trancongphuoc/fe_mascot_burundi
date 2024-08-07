@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { log } from "../utils/log";
+// import { log } from "../utils/log";
 
 import audioBet from '../../public/sounds/stake_audio.wav';
 
@@ -16,7 +16,7 @@ const ButtonStake = ({
   handleClick,
   className,
 }: ButtonStakeProps) => {
-  log("<ButtonStake />"); 
+  // log("<ButtonStake />"); 
 
   return (
     <button

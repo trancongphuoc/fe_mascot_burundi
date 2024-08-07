@@ -12,7 +12,7 @@ export const callSetLastRunLogCat = async (uid: number) => {
     const result = await setLastRunLogCat(data);
     return result.data;
   } catch (error) {
-    console.error("Error calling SetLastRunLogCat:", error);
+    // console.error("Error calling SetLastRunLogCat:", error);
     throw error;
   }
 };

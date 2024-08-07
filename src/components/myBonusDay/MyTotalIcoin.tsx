@@ -4,7 +4,7 @@ import SVG from 'react-inlinesvg';
 import Icoin from '../../assets/icoin.svg';
 import { formatNumber } from "../../utils/utils";
 import { off, onValue, ref } from "firebase/database";
-import { log } from "../../utils/log";
+// import { log } from "../../utils/log";
 import { useContext } from "react";
 import { GameInfoContext } from "../../store/game-info_context";
 
@@ -15,7 +15,7 @@ interface MyTotalIcoinProps {
 
 //TODO: fix have no pass fbId
 const MyTotalIcoin = function MyTotalIcoin({ betCards }: MyTotalIcoinProps) {
-    log('<MyTotalIcoin />');
+    // log('<MyTotalIcoin />');
 
     const [icoin, setIcoin] = useState<number>(0);
     const  { stateGame, setTotalIcoin, fbId } = useContext(GameInfoContext);

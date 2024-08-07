@@ -1,14 +1,14 @@
 import axios from "axios"; // Ensure you have axios imported correctly
 import api from "./axios";
 import toast from "react-hot-toast";
-import { setLogCat } from "./sendLogcat";
+// import { setLogCat } from "./sendLogcat";
 
 interface ApiResponse {
   status: string;
   [key: string]: any; // Allow additional properties if necessary
 }
 
-const label = "BETTING CARD";
+// const label = "BETTING CARD";
 
 export const bettingCard = async (
   zodiacGameId: number,
@@ -23,14 +23,14 @@ export const bettingCard = async (
       return "FAILED";
     }
 
-    setLogCat(
-      JSON.stringify({
-        label,
-        zodiacGameId,
-        totalIcoin,
-        zodiacCardId,
-      })
-    );
+    // setLogCat(
+    //   JSON.stringify({
+    //     label,
+    //     zodiacGameId,
+    //     totalIcoin,
+    //     zodiacCardId,
+    //   })
+    // );
 
     const response = await api.post<ApiResponse>(
       "/rest/zodiac-game/betting",
@@ -44,12 +44,12 @@ export const bettingCard = async (
       }
     );
 
-    await setLogCat(
-      JSON.stringify({
-        label,
-        responseData: response ?? "unknown",
-      })
-    );
+    // await setLogCat(
+    //   JSON.stringify({
+    //     label,
+    //     responseData: response ?? "unknown",
+    //   })
+    // );
 
     if (response.data.status === "OK") {
       return "OK";
@@ -65,12 +65,12 @@ export const bettingCard = async (
     toast.dismiss();
     toast("Lỗi đặt cược", { duration: 2000, position: "bottom-center" });
     if (axios.isAxiosError(error)) {
-      console.error(
-        "Axios error fetching game history:",
-        error.response?.data || error.message
-      );
+      // console.error(
+      //   "Axios error fetching game history:",
+      //   error.response?.data || error.message
+      // );
     } else {
-      console.error("Unexpected error fetching game history:", error);
+      // console.error("Unexpected error fetching game history:", error);
     }
     return "FAILED";
   }

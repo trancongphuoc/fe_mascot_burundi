@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { onValue, ref, off } from "firebase/database";
 import { db } from "../../firebase/config";
-import { log } from "../../utils/log";
+// import { log } from "../../utils/log";
 import AvatarCircle from "../AvatarCircle";
 
 export default function Players() {
-    log('<Players />');
+    // log('<Players />');
     const [players, setPlayers] = useState<User[]>([]);
     const [number, setNumber] = useState(0);
 

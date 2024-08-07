@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { log } from "../utils/log"
+// import { log } from "../utils/log"
 
 interface ButtonProps {
     children: ReactNode,
@@ -8,7 +8,7 @@ interface ButtonProps {
 }
 
 const Button = function Button ({children, cssClass, onSet} : ButtonProps) {
-    log('<Button />');
+    // log('<Button />');
 
     return <button className={cssClass} onClick={onSet}>
         {children}

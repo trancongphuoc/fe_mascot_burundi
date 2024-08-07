@@ -1,4 +1,4 @@
-import { log } from '../utils/log';
+// import { log } from '../utils/log';
 import api from './axios';
 
 export const doNothing = async (): Promise<void> => {
@@ -6,7 +6,7 @@ export const doNothing = async (): Promise<void> => {
     const token = window.sessionStorage.getItem('token');
 
     if (!token) {
-      log('No token found in session storage.');
+      // log('No token found in session storage.');
       return;
     }
 
@@ -14,14 +14,14 @@ export const doNothing = async (): Promise<void> => {
       headers: { 'Authorization': `Bearer ${token}` },
     });
 
-    log('do nothing', response.data);
+    // log('do nothing', response.data);
 
     if (response.data.status === "OK") {
       // Handle success case if needed
     } else {
-      console.error('Unexpected response structure:', response.data);
+      // console.error('Unexpected response structure:', response.data);
     }
   } catch (error) {
-    console.error('Error doing nothing:', error);
+    // console.error('Error doing nothing:', error);
   }
 };

@@ -1,29 +1,29 @@
-import { log } from "../utils/log";
+// import { log } from "../utils/log";
 import { isSameDay } from "../utils/utils";
 import api from "./axios";
-import { setLogCat } from "./sendLogcat";
+// import { setLogCat } from "./sendLogcat";
 
 
 export const fetchMyHistory = async () => {
-  const label = "MY HISTORY";
+  // const label = "MY HISTORY";
   const token = window.sessionStorage.getItem("token");
   if (!token) {
-    setLogCat("My History: Token is not available");
-    log("Token is not available");
+    // setLogCat("My History: Token is not available");
+    // log("Token is not available");
     return "FAILED";
   }
 
   try {
-    setLogCat(
-      JSON.stringify({
-        label,
-        message: "Starting API request",
-        url: "/rest/zodiac-game/user-history",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-    );
+    // setLogCat(
+    //   JSON.stringify({
+    //     label,
+    //     message: "Starting API request",
+    //     url: "/rest/zodiac-game/user-history",
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   })
+    // );
 
     const response = await api.get(`/rest/zodiac-game/user-history`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -34,16 +34,16 @@ export const fetchMyHistory = async () => {
       Array.isArray(response.data?.data?.zodiacGameUserList)
     ) {
       const result = getZodiacGameUser(response.data?.data?.zodiacGameUserList);
-      await setLogCat(JSON.stringify(result));
+      // await setLogCat(JSON.stringify(result));
 
       return result;
     } else {
-      await setLogCat(JSON.stringify({ label, response: response.data }));
+      // await setLogCat(JSON.stringify({ label, response: response.data }));
       console.error("Unexpected response structure:", response.data);
       return null;
     }
   } catch (error) {
-    await setLogCat(JSON.stringify({ label, error: error }));
+    // await setLogCat(JSON.stringify({ label, error: error }));
     console.error("Error fetching game history:", error);
     return null;
   }

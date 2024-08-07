@@ -1,8 +1,8 @@
 import toast from "react-hot-toast";
 import { getToken } from "../api/getToken";
 import { joinGameZodiac } from "../api/joinGameZodiac";
-import { callSetLastRunLogCat } from "../api/setLastRunLogCat";
-import { log } from "./log";
+// import { callSetLastRunLogCat } from "../api/setLastRunLogCat";
+// import { log } from "./log";
 
 export const fetchTokenAndJoinGame = async (parameters: string | null | undefined) => {
   let fbId = '';
@@ -32,19 +32,19 @@ export const fetchTokenAndJoinGame = async (parameters: string | null | undefine
         uid = response.data?.user.uid || 0;
         window.sessionStorage.setItem('fbId', fbId);
         window.sessionStorage.setItem('uid', uid.toString());
-        await callSetLastRunLogCat(uid);
+        // await callSetLastRunLogCat(uid);
         break;
       } else {
-        log('join game failed');
+        // log('join game failed');
       }
     } catch (error: any) {
-      log(`error join game, attempt ${attempt + 1}: ${error.toString() || 'unknown'}`);
+      // log(`error join game, attempt ${attempt + 1}: ${error.toString() || 'unknown'}`);
     }
     attempt++;
   }
 
   if (attempt === maxRetries) {
-    console.log('Max retries reached. Failed to join game.');
+    // console.log('Max retries reached. Failed to join game.');
     toast.dismiss();
     toast('Lỗi kết nối, vui lòng thử lại sau', { duration: 2000, position: 'bottom-center' });
   }

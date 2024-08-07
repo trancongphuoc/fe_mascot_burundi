@@ -1,6 +1,6 @@
 import axios from 'axios';
 import api from './axios';
-import { log } from '../utils/log';
+// import { log } from '../utils/log';
 
 
 
@@ -22,7 +22,7 @@ export const joinGameZodiac = async (): Promise<JoinGameResponse> => {
 
     const { status, data, message } = response.data;
 
-    log(`User from join game: ${data?.user?.facebookUserId}`);
+    // log(`User from join game: ${data?.user?.facebookUserId}`);
 
     if (status === "OK" && data && data.user && data.user.facebookUserId) {
       joinGameResponse = {
@@ -32,7 +32,7 @@ export const joinGameZodiac = async (): Promise<JoinGameResponse> => {
       }
       return joinGameResponse;
     } else {
-      console.error('Unexpected response structure:', response.data);
+      // console.error('Unexpected response structure:', response.data);
       return joinGameResponse;
     }
   } catch (error) {
@@ -43,8 +43,8 @@ export const joinGameZodiac = async (): Promise<JoinGameResponse> => {
 
 const handleAxiosError = (error: any) => {
   if (axios.isAxiosError(error)) {
-    console.error('Axios error joining game:', error.response?.data || error.message);
+    // console.error('Axios error joining game:', error.response?.data || error.message);
   } else {
-    console.error('Unexpected error joining game:', error);
+    // console.error('Unexpected error joining game:', error);
   }
 };

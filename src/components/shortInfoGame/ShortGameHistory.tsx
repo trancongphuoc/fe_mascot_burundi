@@ -3,7 +3,7 @@ import Card from "../Card";
 import Arrow from "../../assets/arrow.svg";
 import { db } from "../../firebase/config";
 import { off, onValue, ref } from "firebase/database";
-import { log } from "../../utils/log";
+// import { log } from "../../utils/log";
 import { GameInfoContext } from "../../store/game-info_context";
 
 // interface ShortGameHistoryProps {
@@ -15,7 +15,7 @@ interface ZodiacCardHistory extends ZodiacCardModel {
 }
 
 const ShortGameHistory = function ShortGameHistory() {
-  log("<ShortGameHistory />");
+  // log("<ShortGameHistory />");
   const [gameHistories, setGameHistories] = useState<ZodiacCardHistory[]>([]);
 
   const { stateGame, transactionId, setModal } = useContext(GameInfoContext);

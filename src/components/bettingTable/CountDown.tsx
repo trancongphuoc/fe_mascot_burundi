@@ -1,13 +1,13 @@
 import { DataSnapshot, get, ref } from "firebase/database";
 import { useState, useEffect, useContext } from "react";
 import { db } from "../../firebase/config";
-import { log } from "../../utils/log";
+// import { log } from "../../utils/log";
 import { GameInfoContext } from "../../store/game-info_context";
 
 const TOTAL_COUNTDOWN: number = 39;
 
 export default function Countdown() {
-  log("<Countdown />");
+  // log("<Countdown />");
   const [count, setCount] = useState(0);
   const { stateGame, transactionId, setModal, setBettingTimeEnd } = useContext(GameInfoContext);
 
