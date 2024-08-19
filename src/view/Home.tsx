@@ -66,7 +66,7 @@ const img: string[] = [
   pig,
 ];
 
-const label = "RESUT"
+// const label = "RESUT"
 
 export default function Home() {
   const parameters = useQueryParams();
@@ -228,7 +228,7 @@ export default function Home() {
 
     // if (statusGame == "RESULT") {
     //   setLogCat(JSON.stringify({
-    //     label,
+    //     // label,
     //     topUser: topUserRef.current || "", 
     //     card: cardResultRef.current || '',
     //     game: noGameRef.current || "-1"

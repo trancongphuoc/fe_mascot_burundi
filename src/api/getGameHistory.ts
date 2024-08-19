@@ -1,6 +1,6 @@
 import api from './axios';
 import { GameHistory } from '../model/GameHistory';
-// import { setLogCat } from './sendLogcat';
+import { setLogCat } from './sendLogcat';
 // import { log } from '../utils/log';
 
 export const fetchGameHistory = async (): Promise<GameHistory[] | null> => {
@@ -16,7 +16,7 @@ export const fetchGameHistory = async (): Promise<GameHistory[] | null> => {
     // log("xxxxxx", duration);
     if (response.data.status === "OK" && Array.isArray(response.data.data.zodiacGameList)) {
 
-      // await setLogCat("Game History Api Success");
+      await setLogCat("Game History Api Success");
 
       return response.data.data.zodiacGameList.map((item: any) => ({
         status: item.status,

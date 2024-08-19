@@ -20,12 +20,14 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     // Update state so the next render will show the fallback UI.
     // setLogCat(JSON.stringify({ERROR:error}))
+    console.log(error)
     return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // log(`ERROR React WSOD: ${error} ### ${errorInfo}`)
     // setLogCat(JSON.stringify({ERROR:error,errorInfo: errorInfo}))
+    console.log(`${error} + ${errorInfo}`)
     window.location.reload();
   }
 
