@@ -1,12 +1,25 @@
-// import { log } from "./log";
-type FlutterMessage = 'callbackMyWallet' | 'callbackDisableLoading'
+type FlutterMessage = 'callbackMyWallet' | 'callbackDisableLoading';
 
-export const callbackFlutter = (flutterMessage: FlutterMessage) => {
-    // log('function my wallet')
-    if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
-      window.flutter_inappwebview.callHandler(flutterMessage);
-    } else {
-      // console.log('window.flutter_inappwebview or callHandler is not available');
-    }
-    return false;
-}
+export const callbackFlutter = (flutterMessage: FlutterMessage): boolean => {
+  // Check for Flutter InAppWebView (usually for Flutter apps)
+  if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
+    window.flutter_inappwebview.callHandler(flutterMessage);
+    return true; // Message was handled
+  }
+
+  // Check for WKWebView (usually for iOS apps)
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers[flutterMessage]) {
+    window.webkit.messageHandlers[flutterMessage].postMessage(flutterMessage);
+    return true; // Message was handled
+  }
+
+  // Check for Android WebView
+  if (window.AndroidWebView && typeof window.AndroidWebView.postMessage === 'function') {
+    window.AndroidWebView.postMessage(flutterMessage);
+    return true; // Message was handled
+  }
+
+  // Log if none of the WebView types are available
+  console.log('No WebView handler available (Flutter, WKWebView, or Android WebView)');
+  return false; // Message was not handled
+};
