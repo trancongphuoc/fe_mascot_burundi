@@ -7,7 +7,7 @@ function App() {
     <ErrorBoundary>
       <BrowserRouter>
         <Routes>
-          <Route path="/zodiac-game" element={<Home />} />
+          <Route path="/" element={<Home />} />
         </Routes>
      </BrowserRouter>
     </ErrorBoundary>

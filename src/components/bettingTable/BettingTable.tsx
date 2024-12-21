@@ -39,7 +39,7 @@ export default function BettingTable() {
           }
         }
         setBetCard(betCards);
-        window.sessionStorage.setItem("card", JSON.stringify(betCards));
+        localStorage.setItem("card", JSON.stringify(betCards));
       }
     };
     onValue(stateRef, handleData);

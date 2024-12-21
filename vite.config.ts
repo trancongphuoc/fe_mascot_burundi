@@ -6,9 +6,9 @@
   export default defineConfig(({ mode }) => {
     return {
       plugins: [react(), MillionLint.vite()],
-      base: '/zodiac-game',
+      base: '/',
       build: {
-        outDir: 'dist', // Ensure this is set to your desired output directory
+        outDir: 'build', // Ensure this is set to your desired output directory
       },
       server: {
         port: 3000, // Default port for development

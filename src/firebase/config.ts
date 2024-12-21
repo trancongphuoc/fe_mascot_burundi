@@ -14,22 +14,7 @@ const firebaseConfigDEV = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID_DEV,
 };
 
-const firebaseConfigPRO = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY_PRO,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN_PRO,
-  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL_PRO,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID_PRO,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET_PRO,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID_PRO,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID_PRO,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID_PRO,
-};
-
-const finalFirebaseConfig =
-  window.location.hostname.includes("ikara-development") ||
-  window.location.hostname.includes("localhost")
-    ? firebaseConfigDEV
-    : firebaseConfigPRO;
+const finalFirebaseConfig = firebaseConfigDEV;
 
 const app = initializeApp(finalFirebaseConfig);
 export const analytics = getAnalytics(app);

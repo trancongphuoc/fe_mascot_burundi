@@ -9,7 +9,8 @@ type ModalType = "RULE" |
                 "DISCONNECT" |
                 "GAMECIRCLE" |
                 "GAMERESULT" |
-                "MAINTAIN";
+                "MAINTAIN" |
+                "MPS_INPUTPHONE";
 
 interface ModalSet {
     state: ModalState,

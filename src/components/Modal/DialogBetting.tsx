@@ -67,7 +67,7 @@ const DialogBetting = () => {
     e.stopPropagation();
     
     if (stake) {
-      // const totalIcoinString = window.sessionStorage.getItem("totalIcoin");
+      // const totalIcoinString = localStorage.getItem("totalIcoin");
       // const totalIcoin =
       //   totalIcoinString !== null ? parseInt(totalIcoinString, 10) : 0;
 

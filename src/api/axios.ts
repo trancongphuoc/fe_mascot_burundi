@@ -7,4 +7,4 @@ const api = axios.create({
    
 export default api;
 
-export const token = window.sessionStorage.getItem('token');
+export const token = localStorage.getItem('token');

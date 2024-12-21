@@ -17,7 +17,7 @@ export const setLogCat = async (
 ): Promise<CloudFunctionResponse> => {
   try {
     const setLogCatFunction = httpsCallable(functions, "v5-SetLogCat");
-    const uid = window.sessionStorage.getItem("uid") || "0";
+    const uid = localStorage.getItem("uid") || "0";
 
     const data = {
       parameters: btoa(

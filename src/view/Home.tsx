@@ -1,4 +1,5 @@
 import "../css/index.css";
+import "../css/mps.css";
 
 import tiger from "../assets/tiger.svg";
 import buffalo from "../assets/buffalo.svg";
@@ -15,6 +16,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import DialogBetting from "../components/Modal/DialogBetting.tsx";
 import DialogWinLost from "../components/Modal/DialogLostWin.tsx";
 import PopupRule from "../components/popup/PopupRule";
+
 import PopupGameHistory from "../components/popup/PopupGameHistory";
 import PopupMyHistory from "../components/popup/PopupMyHistory";
 
@@ -53,7 +55,13 @@ import MaintainModal from "../components/Modal/MaintainModal.tsx";
 import useAudio from "../components/UseAudio.tsx";
 import winAudio from "../../public/sounds/audio_win.wav";
 import lostAudio from "../../public/sounds/audio_lost.wav";
+import PopupInputPhone from "../components/popup/mps/PopupInputPhone.tsx";
+import PopupInputOTP from "../components/popup/mps/PopupInputOTP.tsx";
+import PopupNotify from "../components/popup/mps/PopupNotify.tsx";
+import PopupPrepareRegister from "../components/popup/mps/PopupPrepageRegister.tsx";
 // import { setLogCat } from "../api/sendLogcat.ts";
+
+import * as mps from '../api/mps.ts';
 
 const img: string[] = [
   buffalo,
@@ -71,14 +79,7 @@ const img: string[] = [
 export default function Home() {
   const parameters = useQueryParams();
 
-  // const [game, setGame] = useState<ZodiacGameData | null>(null);
-
   const [statusGame, setStatusGame] = useState<StatusGame>("NONE");
-
-  // const [gameInfo, setGameInfo] = useState<GameInfo>({
-  //   stateGame: "NONE",
-  //   transactionId: 0,
-  // });
 
   const [openGameResult, setOpenGameResult] = useState(false);
   const [openGameCircle, setopenGameCircle] = useState(false);
@@ -107,10 +108,6 @@ export default function Home() {
   const pauseGameRef = useRef<boolean>(false);
   const totalIcoinRef = useRef<number>(0);
 
-  // const zodiacImgs = useRef<ZodiacCardModel[]>([])
-
-  // const gameInfoCtx = useContext(GameInfoContext);
-
   const handleIsWin = useCallback(
     (data: {
       isWin?: boolean | undefined;
@@ -119,7 +116,6 @@ export default function Home() {
       if (data.totalIcoinWin) {
         totalIcoinWinRef.current = data.totalIcoinWin;
       }
-      // log("check icoin win: ", data.totalIcoinWin);
 
       if (typeof data.isWin === "boolean") {
         if (data.isWin) {
@@ -138,8 +134,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchAndSetFbId = async () => {
-      const fbId = await fetchTokenAndJoinGame(parameters);
-      // fbIdRef.current = fbId;
+      const fbId = await fetchTokenAndJoinGame();
       setFbId(fbId)
     };
 
@@ -149,16 +144,12 @@ export default function Home() {
   const playLostAudio = useAudio(lostAudio);
   const playWinAudio = useAudio(winAudio);
 
-  // const handleLoading = () => {
-  //   setIsLoading(false);
-  // }
-
-  // useEffect(()=>{
-  //   window.addEventListener("load",handleLoading);
-  //   return () => window.removeEventListener("load",handleLoading);
-  // },[])
-
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setOpenInputPhone(true);
+    }
+
     const fetchGameInfo = async () => {
       const stateRef = ref(db, "zodiacGame/state");
 
@@ -207,12 +198,6 @@ export default function Home() {
             }
           }
 
-          // setGameInfo((prevState) => ({
-          //   ...prevState,
-          //   stateGame: data.status || "NONE",
-          //   transactionId: data.transactionId || 0,
-          // }));
-
           if (isLoadingRef.current) {
             callbackFlutter("callbackDisableLoading");
             isLoadingRef.current = false;
@@ -225,18 +210,6 @@ export default function Home() {
     };
 
     fetchGameInfo();
-
-    // if (statusGame == "RESULT") {
-    //   setLogCat(JSON.stringify({
-    //     // label,
-    //     topUser: topUserRef.current || "", 
-    //     card: cardResultRef.current || '',
-    //     game: noGameRef.current || "-1"
-    //  }));
-    // }
-
-    // log(`host name: ${window.location.hostname}`);
-
     switch (statusGame) {
       case "NONE":
         setOpenRule((statePrev) => {
@@ -259,16 +232,6 @@ export default function Home() {
           else return statePrev;
         });
 
-        // setopenGameCircle((statePrev) => {
-        //   if (statePrev) return !statePrev;
-        //   else return statePrev;
-        // });
-
-        // setOpenGameResult((statePrev) => {
-        //   if (statePrev) return !statePrev;
-        //   else return statePrev;
-        // });
-
         setHidden("hidden");
         break;
       case "PREPARESTART":
@@ -283,19 +246,6 @@ export default function Home() {
           if (statePrev) return !statePrev;
           else return statePrev;
         });
-
-        // setOpenGameResult((statePrev) => {
-        //   if (statePrev) return !statePrev;
-        //   else return statePrev;
-        // });
-
-        // setOpenLostWin((statePrev) => {
-        //   if (statePrev) return !statePrev;
-        //   else return statePrev;
-        // });
-
-        //TODO: disable scroll
-        // setHidden("scroll");
 
         break;
       case "COUNTDOWN":
@@ -312,22 +262,6 @@ export default function Home() {
           else return statePrev;
         });
 
-        // disable close dialog
-        // setOpenRule((statePrev) => {
-        //   if (statePrev) return !statePrev;
-        //   else return statePrev;
-        // });
-
-        // setOpenGameHistory((statePrev) => {
-        //   if (statePrev) return !statePrev;
-        //   else return statePrev;
-        // });
-
-        // setOpenMyHistory((statePrev) => {
-        //   if (statePrev) return !statePrev;
-        //   else return statePrev;
-        // });
-
         setHidden("scroll");
         break;
       case "RESULTWAITING":
@@ -340,8 +274,7 @@ export default function Home() {
           if (statePrev) return !statePrev;
           else return statePrev;
         });
-        //TODO: disable scroll
-        // setHidden("scroll");
+
         break;  
       case "RESULT":
         setOpenRule((statePrev) => {
@@ -390,11 +323,6 @@ export default function Home() {
         break;
     }
 
-    // toast.dismiss();
-    // toast(`giai doan ${statusGame}`, {
-    //   duration: 2000,
-    //   position: "bottom-center",
-    // });
   }, [statusGame]);
 
   const handleCardSelection = (card: ZodiacCardModel) => {
@@ -424,7 +352,6 @@ export default function Home() {
   };
 
   const betCardRef = useRef<BetZodiacCard[]>([]);
-  // const betSuccessRef = useRef<boolean>(false);
 
   const setFirebaseData = useCallback((zodiacCards: BetZodiacCard[]) => {
     betCardRef.current = zodiacCards;
@@ -459,7 +386,6 @@ export default function Home() {
       betCardRef.current = oldBetCards;
     }
 
-    // selectedCardRef.current = null;
   };
 
   const updateOnlineStatus = useCallback(() => {
@@ -631,6 +557,79 @@ export default function Home() {
     }
   }, []);
 
+
+  // MPS
+  
+  const [openInputPhone, setOpenInputPhone] = useState(false);
+  const [openInputOTP, setOpenInputOTP] = useState(false);
+  const [openInputNotify, setOpenInputNotify] = useState(false);
+  const [openPrepageRegister, setOpenPrepageRegister] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [titleOTP, setTitleOTP] = useState("");
+  const [title, setTitle] = useState("");
+  const [message, setMessage] = useState("");
+  const [buttonName, setButtonName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const [popupCallback, setPopupCallback] = useState(() => () => {
+    console.log("Default callback executed");
+  });
+
+  const mpsSendOTP = async (_phoneNumber?: string) => {
+    if(_phoneNumber != null) {
+      setPhoneNumber(_phoneNumber)
+    }
+
+    if(openInputPhone) {
+      setOpenInputPhone(false);
+    }
+
+    if(!openInputOTP) {
+      setOpenInputOTP(true);
+    }
+
+    const res = await mps.sendOTP(_phoneNumber || phoneNumber)
+    console.log(res)
+
+    if(res.data.status == "OK") {
+      //
+    } else {
+      setErrorMessage(res.data.message);
+
+    }
+
+    alert(`OTP sent to ${phoneNumber}`);
+  }
+
+
+
+  const mpsVerifyOTP = async (otp: string) => {
+    const res = await mps.verifyOTP(phoneNumber, otp)
+    console.log(res)
+
+    if(res.data.status == "OK") {
+      setOpenInputOTP(false);
+      
+      localStorage.setItem('token', res.data.accessToken);
+    } else {
+      setErrorMessage(res.data.message);
+    }
+  }
+
+  
+  // const mpsRegister = (OTP: string) => {
+  //   alert(`OTP sent to ${OTP}`);
+  // }
+
+
+  // const temp = () => {
+  //   setPopupCallback(() => () => {
+  //     setOpenInputOTP(false);
+  //   });
+  // }
+  // END MPS
+
   const handleBettingTimeEnd = () => {
     bettingTimeEnd.current = true;
   };
@@ -683,15 +682,13 @@ export default function Home() {
             </div>
           )}
         </Toaster>
-        {/* <h1>{document.body.style.overflow ?? "unknow"}</h1>
-        <h2>{fbIdRef.current}</h2> */}
+
         <Header />
         <ShortInfoGame />
         <BettingTable />
         <MyBonusToday
           onUserDataChange={handleIsWin}
           betCards={betCardRef.current}
-          // fbId={fbIdRef.current}
           setFirebaseData={setFirebaseData}
         />
         <BestPlayers />
@@ -720,10 +717,44 @@ export default function Home() {
           {openDisconnect && <PopupDisconnect />}
 
           {maintain && <MaintainModal />}
+
+          {/* MPS */}
+          {openInputPhone && 
+            <PopupInputPhone 
+              mpsSendOTP={mpsSendOTP} 
+              errorMessage={errorMessage}
+            />  
+          }
+
+          {openInputOTP && 
+            <PopupInputOTP 
+              resendOTP={mpsSendOTP}
+              _title={titleOTP} 
+              mpsVerifyOTP={mpsVerifyOTP} 
+              errorMessage={errorMessage}
+            />
+          }
+
+          {openInputNotify && 
+            <PopupNotify 
+              _buttonName={buttonName}
+              _title={title}
+              _message={message}
+              callback={popupCallback} 
+            />}
+
+          {openPrepageRegister && 
+            <PopupPrepareRegister 
+              phoneNumber="123213" 
+              callback={null} 
+            />
+          }
+
+          {/* END MPS */}
         </AnimatePresence>
 
-        {openGameResult && <PopupOpenCard />}
-        {openGameCircle && <PopupOpenCircle />}
+        {/* {openGameResult && <PopupOpenCard />} */}
+        {/* {openGameCircle && <PopupOpenCircle />} */}
       </div>
     </GameInfoContext.Provider>
   );

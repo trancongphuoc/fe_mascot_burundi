@@ -11,7 +11,7 @@ export const joinGameZodiac = async (): Promise<JoinGameResponse> => {
   } 
 
   try {
-    const token = window.sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (!token) {
       return joinGameResponse;
     } 

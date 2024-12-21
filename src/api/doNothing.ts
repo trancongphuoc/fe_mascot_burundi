@@ -3,7 +3,7 @@ import api from './axios';
 
 export const doNothing = async (): Promise<void> => {
   try {
-    const token = window.sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
     if (!token) {
       // log('No token found in session storage.');

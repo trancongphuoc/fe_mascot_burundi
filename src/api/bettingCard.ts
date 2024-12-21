@@ -16,7 +16,7 @@ export const bettingCard = async (
   zodiacCardId: string
 ): Promise<string> => {
   try {
-    const token = window.sessionStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (!token) {
       toast.dismiss();
       toast("Thiếu thông tin", { duration: 2000, position: "bottom-center" });

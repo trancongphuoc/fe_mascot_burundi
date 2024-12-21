@@ -6,7 +6,7 @@ import api from "./axios";
 
 export const fetchMyHistory = async () => {
   // const label = "MY HISTORY";
-  const token = window.sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
   if (!token) {
     // setLogCat("My History: Token is not available");
     // log("Token is not available");

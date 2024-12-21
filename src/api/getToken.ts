@@ -2,29 +2,22 @@
 import api from "./axios";
 
 
-export const getToken = async ({ userId, platform, language, packageName }: TokenRequestParams): Promise<string> => {
+export const getUserInfo = async (): Promise<any> => {
+  let token = localStorage.getItem("token")
   try {
-    const response = await api.post<string>('/rest/auth', {
-        userId,
-        platform,
-        language,
-        packageName,
-    }, {
-    //   headers: { 'Authorization': `Bearer ${token}` },
+    const response = await api.post<string>('api/user/info', {}, {
+      headers: { 'Authorization': `Bearer ${token}` },
     });
 
-    // log(`Response data: ${response.data}`);
-
     if (response.data) {
-      // log(`token ${response.data}`);
-      window.sessionStorage.setItem('token', response.data);
-      return "OK";
+      return response.data;
     } else {
-      // console.error('Unexpected response structure:', response.data);
+      localStorage.removeItem("token")
       return "FAILED";
     }
   } catch (error: any) {
-    // log(`${error.toString() || 'unknow'}`)
+    localStorage.removeItem("token")
+    console.log(error)
     return "FAILED";
   }
 };
