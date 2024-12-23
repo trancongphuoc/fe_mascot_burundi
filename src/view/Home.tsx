@@ -867,8 +867,6 @@ export default function Home() {
           handleCharge={handleCharge}
         />
 
-
-
         <BestPlayers />
 
         {/* Dialog when click */}
@@ -933,8 +931,8 @@ export default function Home() {
           {/* END MPS */}
         </AnimatePresence>
 
-        {/* {openGameResult && <PopupOpenCard />} */}
-        {/* {openGameCircle && <PopupOpenCircle />} */}
+        {openGameResult && <PopupOpenCard />}
+        {openGameCircle && <PopupOpenCircle />}
       </div>
     </GameInfoContext.Provider>
   );
