@@ -18,14 +18,14 @@ export const fetchMyHistory = async () => {
     //   JSON.stringify({
     //     label,
     //     message: "Starting API request",
-    //     url: "/rest/zodiac-game/user-history",
+    //     url: "/api/mascot/user-history",
     //     headers: {
     //       Authorization: `Bearer ${token}`,
     //     },
     //   })
     // );
 
-    const response = await api.get(`/rest/zodiac-game/user-history`, {
+    const response = await api.get(`/api/mascot/user-history`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 

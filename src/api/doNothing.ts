@@ -10,7 +10,7 @@ export const doNothing = async (): Promise<void> => {
       return;
     }
 
-    const response = await api.post(`/rest/zodiac-game/do-nothing`, {}, {
+    const response = await api.post(`/api/mascot/do-nothing`, {}, {
       headers: { 'Authorization': `Bearer ${token}` },
     });
 

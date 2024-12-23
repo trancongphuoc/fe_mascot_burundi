@@ -10,13 +10,13 @@ export const fetchGameHistory = async (): Promise<GameHistory[] | null> => {
 
     // setLogCat("Game History Api");
 
-    const response = await api.get(`/rest/zodiac-game/history`)
+    const response = await api.get(`/api/mascot/history`)
     // const endTime = new Date().getTime();
     // const duration = endTime - startTime;
     // log("xxxxxx", duration);
     if (response.data.status === "OK" && Array.isArray(response.data.data.zodiacGameList)) {
 
-      await setLogCat("Game History Api Success");
+      // await setLogCat("Game History Api Success");
 
       return response.data.data.zodiacGameList.map((item: any) => ({
         status: item.status,

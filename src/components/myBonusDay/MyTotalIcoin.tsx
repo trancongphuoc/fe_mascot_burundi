@@ -17,15 +17,15 @@ interface MyTotalIcoinProps {
 const MyTotalIcoin = function MyTotalIcoin({ betCards }: MyTotalIcoinProps) {
     // log('<MyTotalIcoin />');
 
-    const [icoin, setIcoin] = useState<number>(0);
-    const  { stateGame, setTotalIcoin, fbId } = useContext(GameInfoContext);
+    const  { stateGame, setTotalIcoin, fbId, totalIcoin } = useContext(GameInfoContext);
+    const [icoin, setIcoin] = useState<number>(totalIcoin || 0);
 
     useEffect(()=> {
-        const stateRef = ref(db, `/ikara/users/${fbId}/totalIcoin`);
+        const stateRef = ref(db, `/zodiacGame/players/${fbId}/totalIcoin`);
         const handleData = (snapshot: any) => {
             const data = snapshot.val();
             if ((data != undefined && data != null && data != icoin)) {
-                if ( (stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") || betCards.length === 0) {
+                if ((stateGame !== "RESULTWAITING" && stateGame !== "RESULT" && stateGame !== "END") || betCards.length === 0) {
                     setIcoin(data);  
                     setTotalIcoin(data || 0);
                 }  

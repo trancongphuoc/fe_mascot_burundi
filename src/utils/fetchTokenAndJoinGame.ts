@@ -8,23 +8,30 @@ export const fetchTokenAndJoinGame = async () => {
   const maxRetries = 3; // Số lần thử lại tối đa
   let attempt = 0; // Đếm số lần thử lại
 
-  try {
-    await getUserInfo();
-  } catch (error) {
-    console.log(error)
-  }
+  // try {
+  //   await getUserInfo();
+  // } catch (error) {
+  //   console.log(error)
+  // }
 
   while (attempt < maxRetries) {
     try {
+      console.log("start fetch")
       const response : JoinGameResponse = await joinGameZodiac();
-      if (response && response.message !== "FAILED") {
+      if (response && response.status === "OK") {
         fbId = response.data?.user.facebookUserId || "";
         uid = response.data?.user.uid || 0;
         localStorage.setItem('fbId', fbId);
         localStorage.setItem('uid', uid.toString());
-        break;
+        return response;
+      } else if(response.status !== "NOTOKEN") {
+        console.log("remove token")
+        localStorage.removeItem("token")
+        window.location.reload();
       }
     } catch (error: any) {
+      console.log("remove token")
+      localStorage.removeItem("token")
       console.log(error)
     }
     attempt++;
@@ -36,5 +43,5 @@ export const fetchTokenAndJoinGame = async () => {
     toast('Lỗi kết nối, vui lòng thử lại sau', { duration: 2000, position: 'bottom-center' });
   }
 
-  return fbId;
+  return null;
 };

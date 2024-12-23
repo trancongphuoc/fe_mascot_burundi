@@ -5,9 +5,10 @@ import { GameInfoContext } from '../../../store/game-info_context';
 interface PopupPrepareRegisterProps {
     phoneNumber: string;
     callback: any;
+    type: string
 }
 
-const PopupPrepareRegister: React.FC<PopupPrepareRegisterProps> = ({ phoneNumber, callback }) => {
+const PopupPrepareRegister: React.FC<PopupPrepareRegisterProps> = ({ phoneNumber, callback, type }) => {
     const { setModal } = useContext(GameInfoContext);
 
     return (
@@ -23,7 +24,10 @@ const PopupPrepareRegister: React.FC<PopupPrepareRegisterProps> = ({ phoneNumber
                 <div style={{ marginBottom: 30, textAlign: 'center' }}>
                     <p style={{ wordWrap: 'break-word' }}>
                         <strong>
-                            Fee 120Fbu/1000 ibiceri/umunsi Join to MASCOT now for a chance to win 500.000 Fbu every month
+                            {type === "REGISTER" ?
+                            "Fee 120Fbu/1000 ibiceri/umunsi Join to MASCOT now for a chance to win 500.000 Fbu every month" :
+                            "Are you sure ?"}
+                            
                         </strong>
                     </p>
                 </div>
@@ -33,7 +37,7 @@ const PopupPrepareRegister: React.FC<PopupPrepareRegisterProps> = ({ phoneNumber
                     padding: "10px",
 
                 }}>
-                    <button className='mps-button' onClick={callback}>REGISTER</button>
+                    <button className='mps-button' onClick={callback}>{type === "REGISTER" ? "REGISTER" : "CANCEL"}</button>
                 </div>
 
             </div>

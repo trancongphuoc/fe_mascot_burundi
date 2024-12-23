@@ -23,7 +23,9 @@
     border-radius: 29px;
     min-width: 189px;
     min-height: 40px;
-    background-color: #1D8E7C;
+    /* background-color: #1D8E7C; */
+    background: linear-gradient(180deg, #32DCB3 0%, #073C43 100%);
+
     border: none;
     color: white;
     cursor: pointer;
@@ -31,8 +33,25 @@
 }
   
 .mps-button:hover {
-    background-color: #146357; /* Màu nền khi hover */
+    background: linear-gradient(180deg, #42E4C1 0%, #0A5159 100%);
 }
+
+.mps-button-register-and-cancel {
+    border-radius: 10px;
+    min-width: 200px;
+    min-height: 40px;
+    background: linear-gradient(180deg, #32DCB3 0%, #073C43 100%);
+    font-size: 23px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Hiệu ứng mượt khi đổi màu */
+}
+
+.mps-button-register-and-cancel:hover {
+    background: linear-gradient(180deg, #42E4C1 0%, #0A5159 100%);
+}
+
 
 .mps-input {
     border-radius: 16px;

@@ -9,7 +9,7 @@ export const doNothing = async (): Promise<void> => {
       return;
     }
 
-    const response = await api.post(`/rest/zodiac-game/do-nothing`, {}, {
+    const response = await api.post(`/api/mascot/do-nothing`, {}, {
       headers: { 'Authorization': `Bearer ${token}` },
     });
 
@@ -39,6 +39,63 @@ export const verifyOTP = async (phoneNumner: string, otp: string): Promise<any> 
     try {
       const response = await api.post(`/api/auth/verify_otp`, {phone: phoneNumner, otp: otp});
       return response;
+    } catch (error) {
+      console.error(error);
+    }
+};
+
+
+export const register = async (): Promise<any> => {
+  try {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      // log('No token found in session storage.');
+      return;
+    }
+
+    const response = await api.post(`/api/mps/register`, {}, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+    return response;
+    } catch (error) {
+      console.error(error);
+    }
+};
+
+
+export const cancel = async (): Promise<any> => {
+  try {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      // log('No token found in session storage.');
+      return;
+    }
+
+    const response = await api.post(`/api/mps/cancel`, {}, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+    return response;
+    } catch (error) {
+      console.error(error);
+    }
+};
+
+
+export const charge = async (): Promise<any> => {
+  try {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      // log('No token found in session storage.');
+      return;
+    }
+
+    const response = await api.post(`/api/mps/charge`, {}, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+    return response;
     } catch (error) {
       console.error(error);
     }

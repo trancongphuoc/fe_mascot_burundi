@@ -13,9 +13,12 @@
 interface User {
     language?: string,
     facebookUserId?: string,
+    id?: string,
     profileImageLink?: string,
     name: string,
     uid?: number,
     totalIcoin?: number,
     noBettingToday?: number,
+    premium?: boolean,
+    phoneNumber?: string
 }

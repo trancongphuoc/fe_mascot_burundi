@@ -33,7 +33,7 @@ export const bettingCard = async (
     // );
 
     const response = await api.post<ApiResponse>(
-      "/rest/zodiac-game/betting",
+      "/api/mascot/betting",
       {
         zodiacGameId,
         totalIcoin,

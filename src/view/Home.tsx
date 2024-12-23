@@ -134,8 +134,11 @@ export default function Home() {
 
   useEffect(() => {
     const fetchAndSetFbId = async () => {
-      const fbId = await fetchTokenAndJoinGame();
-      setFbId(fbId)
+      const response = await fetchTokenAndJoinGame();
+      setFbId(response?.data?.user.facebookUserId || "");
+      handleTotalIcoin(response?.data?.user.totalIcoin || 0);
+      setPremium(response?.data?.user.premium || false)
+      setPhoneNumber(response?.data?.user.phoneNumber || "")
     };
 
     fetchAndSetFbId();
@@ -563,7 +566,7 @@ export default function Home() {
   const [openInputPhone, setOpenInputPhone] = useState(false);
   const [openInputOTP, setOpenInputOTP] = useState(false);
   const [openInputNotify, setOpenInputNotify] = useState(false);
-  const [openPrepageRegister, setOpenPrepageRegister] = useState(false);
+  const [openPrepageRegisterAndCancel, setOpenPrepageRegisterAndCancel] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [titleOTP, setTitleOTP] = useState("");
@@ -571,9 +574,14 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [buttonName, setButtonName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
+  const [premium, setPremium] = useState(false);
+  const [typeRegisterAndCancel, setTypeRegisterAndCancel] = useState("REGISTER")
   const [popupCallback, setPopupCallback] = useState(() => () => {
     console.log("Default callback executed");
+  });
+
+  const [registerAndCancelCallBack, setRegisterAndCancelCallBack] = useState(() => () => {
+    console.log("Register and Cancel");
   });
 
   const mpsSendOTP = async (_phoneNumber?: string) => {
@@ -617,6 +625,48 @@ export default function Home() {
     }
   }
 
+  const mpsRegister = async () => {
+    const res = await mps.register()
+    console.log(res)
+
+    if(res.data.status == "OK") {
+      setOpenPrepageRegisterAndCancel(false);
+
+      setOpenInputNotify(true)
+    } else {
+      setErrorMessage(res.data.message);
+    }
+  }
+
+
+  const mpsCancel = async () => {
+    const res = await mps.cancel()
+    console.log(res)
+
+    if(res.data.status == "OK") {
+      setOpenPrepageRegisterAndCancel(false);
+
+      setOpenInputNotify(true)
+    } else {
+      setErrorMessage(res.data.message);
+    }
+  }
+
+  const handleRegisterAndCancel = (type: string) => {
+    setOpenPrepageRegisterAndCancel(true)
+    setTypeRegisterAndCancel(type);
+
+    if(type === "REGISTER") {
+      setRegisterAndCancelCallBack(() => () => {
+        mpsRegister();
+      });
+    } else {
+      setRegisterAndCancelCallBack(() => () => {
+        mpsCancel();
+      });
+    }
+
+  }
   
   // const mpsRegister = (OTP: string) => {
   //   alert(`OTP sent to ${OTP}`);
@@ -691,6 +741,21 @@ export default function Home() {
           betCards={betCardRef.current}
           setFirebaseData={setFirebaseData}
         />
+
+        {premium ? (
+        <div style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "10px",
+          }}>
+          <button className="mps-button-register-and-cancel" onClick={() => {handleRegisterAndCancel("CANCEL")}} style={{marginTop: 10, width: 100}}><strong>Cancel</strong></button>
+        </div>
+        ) : (
+        <div>
+          <button className="mps-button-register-and-cancel" onClick={() => {handleRegisterAndCancel("REGISTER")}} style={{marginTop: 10, width: 100}}><strong>Register</strong></button>
+        </div>
+        )}
+
         <BestPlayers />
 
         {/* Dialog when click */}
@@ -743,10 +808,12 @@ export default function Home() {
               callback={popupCallback} 
             />}
 
-          {openPrepageRegister && 
+          {openPrepageRegisterAndCancel && 
             <PopupPrepareRegister 
-              phoneNumber="123213" 
-              callback={null} 
+              type = {typeRegisterAndCancel}
+              phoneNumber={phoneNumber}
+              // callback={registerAndCancelCallBack} 
+              callback={registerAndCancelCallBack} 
             />
           }
 
