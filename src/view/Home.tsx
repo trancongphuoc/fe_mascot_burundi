@@ -665,6 +665,7 @@ export default function Home() {
     console.log(res)
 
     if (res.data.status == "OK") {
+      setPremium(true);
       setOpenPrepageRegisterAndCancel(false);
 
       setTitleNotify(t("SUCCESS"));
@@ -693,11 +694,12 @@ export default function Home() {
 
 
   const mpsCancel = async () => {
-    setLoading(false)
+    setLoading(true)
     const res = await mps.cancel()
     console.log(res)
 
     if (res.data.status == "OK") {
+      setPremium(false);
       setOpenPrepageRegisterAndCancel(false);
 
       setTitleNotify(t("SUCCESS"));
@@ -712,7 +714,7 @@ export default function Home() {
       setErrorMessage(res.data.message);
     }
 
-    setLoading(true)
+    setLoading(false)
   }
 
   const mpsCharge = async () => {
