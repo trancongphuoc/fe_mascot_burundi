@@ -3,8 +3,11 @@ import { motion } from 'framer-motion';
 import { RULE_CONTENTS } from '../../model/RuleContent';
 import PopupCenter from './PopupCenter';
 import { GameInfoContext } from '../../store/game-info_context';
+import { useTranslation } from 'react-i18next';
+import '../../utils/i18n'; // Import file cấu hình i18n
 
 const PopupRule = () => {
+  const { t } = useTranslation();
   const [currentRuleIndex, setCurrentRuleIndex] = useState(0);
   const { setModal } = useContext(GameInfoContext);
 
@@ -25,7 +28,7 @@ const PopupRule = () => {
       onClick={() => setModal({ state: "CLOSE", type: "RULE"})}
       classNameChild='rule'
     >
-        <p className='rule--primary mt-20px'>Thể lệ Đoán Linh Vật</p>
+        <p className='rule--primary mt-20px'>{t("Rules of Mascot")}</p>
         <img 
           className='rule--img mb-20px mt-18-5px'
           src={RULE_CONTENTS[currentRuleIndex].image}
@@ -44,7 +47,7 @@ const PopupRule = () => {
           whileTap={{y: 1}}
           className="rule__button mb-21px mt-13px"
           onClick={handleNext}>
-          <p className="rule__button--next">Tiếp tục</p>
+          <p className="rule__button--next">{t("Continue")}</p>
         </motion.div>
      </PopupCenter>
   );

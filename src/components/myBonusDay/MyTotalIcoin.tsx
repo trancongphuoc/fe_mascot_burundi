@@ -7,7 +7,8 @@ import { off, onValue, ref } from "firebase/database";
 // import { log } from "../../utils/log";
 import { useContext } from "react";
 import { GameInfoContext } from "../../store/game-info_context";
-
+import { useTranslation } from 'react-i18next';
+import '../../utils/i18n'; // Import file cấu hình i18n
 interface MyTotalIcoinProps {
     fbId: string,
     betCards: BetZodiacCard[]
@@ -16,7 +17,7 @@ interface MyTotalIcoinProps {
 //TODO: fix have no pass fbId
 const MyTotalIcoin = function MyTotalIcoin({ betCards }: MyTotalIcoinProps) {
     // log('<MyTotalIcoin />');
-
+    const { t } = useTranslation();
     const  { stateGame, setTotalIcoin, fbId, totalIcoin } = useContext(GameInfoContext);
     const [icoin, setIcoin] = useState<number>(totalIcoin || 0);
 
@@ -38,7 +39,7 @@ const MyTotalIcoin = function MyTotalIcoin({ betCards }: MyTotalIcoinProps) {
 
     return  (
         <div className="end-left">
-                <p className='end-left--text'>Tổng của tôi:</p>
+                <p className='end-left--text'>{t("My sum")}:</p>
                 <SVG src={Icoin} className="end-left--img"/>
                 <p className='end-left--icoin'>{formatNumber(icoin)}</p>
         </div>

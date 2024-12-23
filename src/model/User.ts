@@ -20,5 +20,5 @@ interface User {
     totalIcoin?: number,
     noBettingToday?: number,
     premium?: boolean,
-    phoneNumber?: string
+    phone?: string
 }

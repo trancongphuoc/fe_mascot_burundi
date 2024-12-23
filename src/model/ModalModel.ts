@@ -10,7 +10,11 @@ type ModalType = "RULE" |
                 "GAMECIRCLE" |
                 "GAMERESULT" |
                 "MAINTAIN" |
-                "MPS_INPUTPHONE";
+                "MPS_INPUTPHONE" |
+                "SENDOTP" |
+                "VERIFYOTP" |
+                "REGISTERANDCANCEL" |
+                "NOTIFY";
 
 interface ModalSet {
     state: ModalState,

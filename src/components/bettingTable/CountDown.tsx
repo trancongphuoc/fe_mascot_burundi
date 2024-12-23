@@ -3,10 +3,13 @@ import { useState, useEffect, useContext } from "react";
 import { db } from "../../firebase/config";
 // import { log } from "../../utils/log";
 import { GameInfoContext } from "../../store/game-info_context";
+import { useTranslation } from 'react-i18next';
+import '../../utils/i18n'; // Import file cấu hình i18n
 
 const TOTAL_COUNTDOWN: number = 39;
 
 export default function Countdown() {
+  const { t } = useTranslation();
   // log("<Countdown />");
   const [count, setCount] = useState(0);
   const { stateGame, transactionId, setModal, setBettingTimeEnd } = useContext(GameInfoContext);
@@ -43,7 +46,7 @@ export default function Countdown() {
 
   return (
     <div className="betting-table--counter">
-      <p>Đếm ngược {count}</p>
+      <p>{t('Countdown')} {count}</p>
     </div>
   );
 }

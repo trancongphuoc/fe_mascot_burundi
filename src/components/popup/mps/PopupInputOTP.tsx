@@ -1,16 +1,20 @@
 import { useEffect, useState, useContext } from 'react';
 import PopupCenter from '../PopupCenter';
 import { GameInfoContext } from '../../../store/game-info_context';
-
+import { useTranslation } from 'react-i18next';
+import '../../../utils/i18n'; // Import file cấu hình i18n
 
 interface PopupInputOTPProps {
     errorMessage?: string;
     mpsVerifyOTP: any;
     _title?: string;
-    resendOTP: any
+    resendOTP: any;
+    loading?: boolean
 }
 
-const PopupInputOTP: React.FC<PopupInputOTPProps> = ({errorMessage, mpsVerifyOTP, _title, resendOTP}) => {
+const PopupInputOTP: React.FC<PopupInputOTPProps> = ({errorMessage, mpsVerifyOTP, _title, resendOTP, loading}) => {
+    const { t } = useTranslation();
+
     const { setModal } = useContext(GameInfoContext);
 
     const [OTP, setOTP] = useState("");
@@ -49,11 +53,13 @@ const PopupInputOTP: React.FC<PopupInputOTPProps> = ({errorMessage, mpsVerifyOTP
         },
         timer: {
             fontWeight: "bold",
+            fontSize: "13px"
         },
         resend: {
             color: "#007BFF",
             cursor: "pointer",
             textDecoration: "underline",
+            fontSize: "13px"
         },
         disabledResend: {
             color: "#CCC",
@@ -66,7 +72,7 @@ const PopupInputOTP: React.FC<PopupInputOTPProps> = ({errorMessage, mpsVerifyOTP
     return (
         <PopupCenter
             className='popup-overlay-history'
-            onClick={() => setModal({ state: "CLOSE", type: "MPS_INPUTPHONE" })}
+            onClick={() => setModal({ state: "CLOSE", type: "VERIFYOTP" })}
             classNameChild='mps'
         >
             <div className='mps-chill'>
@@ -79,7 +85,7 @@ const PopupInputOTP: React.FC<PopupInputOTPProps> = ({errorMessage, mpsVerifyOTP
                         maxLength={6}
                         type="text"
                         className="mps-input"
-                        placeholder="Enter OTP"
+                        placeholder={t("Enter OTP")}
                         value={OTP}
                         onChange={(event) => {
                             const value = event.target.value;
@@ -89,16 +95,16 @@ const PopupInputOTP: React.FC<PopupInputOTPProps> = ({errorMessage, mpsVerifyOTP
                         }}
                     />
                     <div style={styles.container_2}>
-                        <span style={styles.timer}>Remain {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, "0")}</span>
+                        <span style={styles.timer}>{t('Remain')} {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, "0")}</span>
                         {timeLeft === 0 ? (
                             <span style={styles.resend} onClick={() => {
                                 resendOTP()
                                 setTimeLeft(60);
                             }}>
-                                Resend OTP?
+                                {t('Resend OTP?')}
                             </span>
                         ) : (
-                            <span style={styles.disabledResend}>Resend OTP?</span>
+                            <span style={styles.disabledResend}>{t('Resend OTP?')}</span>
                         )}
                     </div>
                 </div>
@@ -108,15 +114,17 @@ const PopupInputOTP: React.FC<PopupInputOTPProps> = ({errorMessage, mpsVerifyOTP
                     padding: "10px",
 
                 }}>
-                    <button className='mps-button' onClick={() => {
+                    {loading ? 
+                    <button className={'mps-button loading'}><span className="spinner"></span>GO</button> : 
+                    <button className={'mps-button'} onClick={() => {
                         if (/^\d*$/.test(OTP) && OTP.length == 6) {
                             setTimeLeft(60); 
                             mpsVerifyOTP(OTP);
                         } else {
-                            setError("Please input OTP")
+                            setError(t("Please input OTP"))
                         }
 
-                    }}>GO</button>
+                    }}>GO</button>}
                 </div>
 
             </div>

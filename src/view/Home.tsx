@@ -63,6 +63,9 @@ import PopupPrepareRegister from "../components/popup/mps/PopupPrepageRegister.t
 
 import * as mps from '../api/mps.ts';
 
+import { useTranslation } from 'react-i18next';
+import '../utils/i18n.ts'; // Import file cấu hình i18n
+
 const img: string[] = [
   buffalo,
   tiger,
@@ -78,6 +81,7 @@ const img: string[] = [
 
 export default function Home() {
   const parameters = useQueryParams();
+  const { t, i18n } = useTranslation();
 
   const [statusGame, setStatusGame] = useState<StatusGame>("NONE");
 
@@ -133,12 +137,13 @@ export default function Home() {
   );
 
   useEffect(() => {
+    console.log(t('Wel come'))
     const fetchAndSetFbId = async () => {
       const response = await fetchTokenAndJoinGame();
       setFbId(response?.data?.user.facebookUserId || "");
       handleTotalIcoin(response?.data?.user.totalIcoin || 0);
       setPremium(response?.data?.user.premium || false)
-      setPhoneNumber(response?.data?.user.phoneNumber || "")
+      setPhoneNumber(response?.data?.user.phone || "")
     };
 
     fetchAndSetFbId();
@@ -235,7 +240,7 @@ export default function Home() {
           else return statePrev;
         });
 
-        setHidden("hidden");
+        // setHidden("hidden"); //EDIT
         break;
       case "PREPARESTART":
         betCardRef.current = [];
@@ -278,7 +283,7 @@ export default function Home() {
           else return statePrev;
         });
 
-        break;  
+        break;
       case "RESULT":
         setOpenRule((statePrev) => {
           if (statePrev) return !statePrev;
@@ -400,6 +405,7 @@ export default function Home() {
   useOnlineStatus(updateOnlineStatus);
 
   const handleModal = useCallback((stateModal: ModalSet) => {
+    console.log(stateModal.type);
     if (stateModal.state === "OPEN") {
       setHidden("hidden");
       switch (stateModal.type) {
@@ -434,10 +440,10 @@ export default function Home() {
           });
           break;
         case "DEPOSIT":
-            setOpenDepositIcoin((statePrev) => {
-              if (statePrev) return statePrev;
-              else return !statePrev;
-            });
+          setOpenDepositIcoin((statePrev) => {
+            if (statePrev) return statePrev;
+            else return !statePrev;
+          });
           break;
         case "DISCONNECT":
           setOpenDisconnect((statePrev) => {
@@ -463,6 +469,12 @@ export default function Home() {
           break;
         case "MAINTAIN":
           setMaintain((statePrev) => {
+            if (statePrev) return statePrev;
+            else return !statePrev;
+          });
+          break;
+        case "REGISTERANDCANCEL":
+          setOpenPrepageRegisterAndCancel((statePrev) => {
             if (statePrev) return statePrev;
             else return !statePrev;
           });
@@ -554,6 +566,18 @@ export default function Home() {
             else return statePrev;
           });
           break;
+        case "REGISTERANDCANCEL":
+          setOpenPrepageRegisterAndCancel((statePrev) => {
+            if (statePrev) return !statePrev;
+            else return statePrev;
+          });
+          break;
+        case "NOTIFY":
+          setOpenNotify((statePrev) => {
+            if (statePrev) return !statePrev;
+            else return statePrev;
+          });
+          break;
         default:
           break;
       }
@@ -562,21 +586,23 @@ export default function Home() {
 
 
   // MPS
-  
+
   const [openInputPhone, setOpenInputPhone] = useState(false);
   const [openInputOTP, setOpenInputOTP] = useState(false);
-  const [openInputNotify, setOpenInputNotify] = useState(false);
+  const [openNotify, setOpenNotify] = useState(false);
   const [openPrepageRegisterAndCancel, setOpenPrepageRegisterAndCancel] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [titleOTP, setTitleOTP] = useState("");
-  const [title, setTitle] = useState("");
-  const [message, setMessage] = useState("");
-  const [buttonName, setButtonName] = useState("");
+  const [titleNotify, setTitleNotify] = useState("");
+  const [messageNotify, setMessageNotify] = useState("");
+  const [buttonNameNotify, setButtonNameNotify] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [premium, setPremium] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [typeRegisterAndCancel, setTypeRegisterAndCancel] = useState("REGISTER")
-  const [popupCallback, setPopupCallback] = useState(() => () => {
+  const [callbackNotify, setCallbackNotify] = useState(() => () => {
     console.log("Default callback executed");
   });
 
@@ -585,78 +611,155 @@ export default function Home() {
   });
 
   const mpsSendOTP = async (_phoneNumber?: string) => {
-    if(_phoneNumber != null) {
+    if (_phoneNumber != null) {
       setPhoneNumber(_phoneNumber)
     }
 
-    if(openInputPhone) {
-      setOpenInputPhone(false);
-    }
+    // if (openInputPhone) {
+    //   setOpenInputPhone(false);
+    // }
 
-    if(!openInputOTP) {
-      setOpenInputOTP(true);
-    }
+    // if (!openInputOTP) {
+    //   setOpenInputOTP(true);
+    // }
 
+    setLoading(true)
     const res = await mps.sendOTP(_phoneNumber || phoneNumber)
     console.log(res)
 
-    if(res.data.status == "OK") {
-      //
+    if (res.data.status == "OK") {
+      setOpenInputPhone(false);
+      setOpenInputOTP(true);
     } else {
       setErrorMessage(res.data.message);
 
     }
 
-    alert(`OTP sent to ${phoneNumber}`);
+    setLoading(false)
+
+    // alert(`OTP sent to ${phoneNumber}`);
   }
 
 
 
   const mpsVerifyOTP = async (otp: string) => {
+    setLoading(true);
     const res = await mps.verifyOTP(phoneNumber, otp)
     console.log(res)
 
-    if(res.data.status == "OK") {
+    if (res.data.status == "OK") {
       setOpenInputOTP(false);
-      
+
       localStorage.setItem('token', res.data.accessToken);
+      window.location.reload();
     } else {
       setErrorMessage(res.data.message);
     }
+
+    setLoading(false);
   }
 
   const mpsRegister = async () => {
+    setLoading(true);
     const res = await mps.register()
     console.log(res)
 
-    if(res.data.status == "OK") {
+    if (res.data.status == "OK") {
       setOpenPrepageRegisterAndCancel(false);
 
-      setOpenInputNotify(true)
+      setTitleNotify(t("SUCCESS"));
+      setMessageNotify(t("You registed MASCOT successfully.<br>Service fee 120Fbu/1000 coins/day"));
+      setButtonNameNotify(t("GO"));
+      setCallbackNotify(() => () => {
+        setOpenNotify(false);
+      });
+  
+      setOpenNotify(true)
     } else {
-      setErrorMessage(res.data.message);
+      // setErrorMessage(res.data.message);
+
+      setTitleNotify(t("OOP!"));
+      setMessageNotify(res.data.message);
+      setButtonNameNotify(t("CLOSE"));
+      setCallbackNotify(() => () => {
+        setOpenNotify(false);
+      });
+  
+      setOpenNotify(true)
     }
+
+    setLoading(false)
   }
 
 
   const mpsCancel = async () => {
+    setLoading(false)
     const res = await mps.cancel()
     console.log(res)
 
-    if(res.data.status == "OK") {
+    if (res.data.status == "OK") {
       setOpenPrepageRegisterAndCancel(false);
 
-      setOpenInputNotify(true)
+      setTitleNotify(t("SUCCESS"));
+      setMessageNotify(t("You canceled MASCOT successfully."));
+      setButtonNameNotify(t("CLOSE"));
+      setCallbackNotify(() => () => {
+        setOpenNotify(false);
+      });
+  
+      setOpenNotify(true)
     } else {
       setErrorMessage(res.data.message);
     }
+
+    setLoading(true)
+  }
+
+  const mpsCharge = async () => {
+    setLoading(true)
+    const res = await mps.charge()
+    console.log(res)
+
+    if (res.data.status == "OK") {
+      setTitleNotify(t("Buy more"));
+      setMessageNotify(t("You have 1000 coins to join MASCOT, fee 100Fbu. Good luck to you!"));
+      setButtonNameNotify(t("CLOSE"));
+      setCallbackNotify(() => () => {
+        setOpenNotify(false);
+      });
+  
+      setOpenNotify(true)
+    } else {
+      setTitleNotify(t("OPPS!"));
+      setMessageNotify(res.data.message);
+      setButtonNameNotify(t("CLOSE"));
+      setCallbackNotify(() => () => {
+        setOpenNotify(false);
+      });
+    }
+    setLoading(false)
+  }
+
+  const logout = () => {
+    mps.logout();
+  }
+
+  const handleCharge = () => {
+    setTitleNotify(t("Buy more"));
+    setMessageNotify(t("Fee 100Fbu/1000 coins Join to MASCOT now for a chance to win 500.000 Fbu every month"));
+    setButtonNameNotify(t("BUY"));
+    setCallbackNotify(() => () => {
+      mpsCharge();
+    });
+
+    setOpenNotify(true)
   }
 
   const handleRegisterAndCancel = (type: string) => {
     setOpenPrepageRegisterAndCancel(true)
     setTypeRegisterAndCancel(type);
 
-    if(type === "REGISTER") {
+    if (type === "REGISTER") {
       setRegisterAndCancelCallBack(() => () => {
         mpsRegister();
       });
@@ -667,7 +770,7 @@ export default function Home() {
     }
 
   }
-  
+
   // const mpsRegister = (OTP: string) => {
   //   alert(`OTP sent to ${OTP}`);
   // }
@@ -733,28 +836,36 @@ export default function Home() {
           )}
         </Toaster>
 
-        <Header />
+        <Header logout={logout} />
         <ShortInfoGame />
         <BettingTable />
+
+        {premium ? (
+          <div style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "10px",
+          }}>
+            <button className="mps-button-register-and-cancel" onClick={() => { handleRegisterAndCancel("CANCEL") }} style={{ marginTop: 10, width: 100 }}><strong>{t('Cancel')}</strong></button>
+          </div>
+        ) : (
+          <div style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "10px",
+          }}>
+            <button className="mps-button-register-and-cancel" onClick={() => { handleRegisterAndCancel("REGISTER") }} style={{ marginTop: 10, width: 100 }}><strong>{t("Register")}</strong></button>
+          </div>
+        )}
+
         <MyBonusToday
           onUserDataChange={handleIsWin}
           betCards={betCardRef.current}
           setFirebaseData={setFirebaseData}
+          handleCharge={handleCharge}
         />
 
-        {premium ? (
-        <div style={{
-              display: "flex",
-              justifyContent: "center",
-              padding: "10px",
-          }}>
-          <button className="mps-button-register-and-cancel" onClick={() => {handleRegisterAndCancel("CANCEL")}} style={{marginTop: 10, width: 100}}><strong>Cancel</strong></button>
-        </div>
-        ) : (
-        <div>
-          <button className="mps-button-register-and-cancel" onClick={() => {handleRegisterAndCancel("REGISTER")}} style={{marginTop: 10, width: 100}}><strong>Register</strong></button>
-        </div>
-        )}
+
 
         <BestPlayers />
 
@@ -784,36 +895,36 @@ export default function Home() {
           {maintain && <MaintainModal />}
 
           {/* MPS */}
-          {openInputPhone && 
-            <PopupInputPhone 
-              mpsSendOTP={mpsSendOTP} 
-              errorMessage={errorMessage}
-            />  
-          }
-
-          {openInputOTP && 
-            <PopupInputOTP 
-              resendOTP={mpsSendOTP}
-              _title={titleOTP} 
-              mpsVerifyOTP={mpsVerifyOTP} 
+          {openInputPhone &&
+            <PopupInputPhone
+              mpsSendOTP={mpsSendOTP}
               errorMessage={errorMessage}
             />
           }
 
-          {openInputNotify && 
-            <PopupNotify 
-              _buttonName={buttonName}
-              _title={title}
-              _message={message}
-              callback={popupCallback} 
+          {openInputOTP &&
+            <PopupInputOTP
+              resendOTP={mpsSendOTP}
+              _title={titleOTP}
+              mpsVerifyOTP={mpsVerifyOTP}
+              errorMessage={errorMessage}
+            />
+          }
+
+          {openNotify &&
+            <PopupNotify
+              _buttonName={buttonNameNotify}
+              _title={titleNotify}
+              _message={messageNotify}
+              callback={callbackNotify}
             />}
 
-          {openPrepageRegisterAndCancel && 
-            <PopupPrepareRegister 
-              type = {typeRegisterAndCancel}
+          {openPrepageRegisterAndCancel &&
+            <PopupPrepareRegister
+              type={typeRegisterAndCancel}
               phoneNumber={phoneNumber}
               // callback={registerAndCancelCallBack} 
-              callback={registerAndCancelCallBack} 
+              callback={registerAndCancelCallBack}
             />
           }
 

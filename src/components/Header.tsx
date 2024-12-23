@@ -4,15 +4,17 @@ import Rule from "../assets/rule.svg";
 // import { log } from "../utils/log";
 import { useContext } from "react";
 import { GameInfoContext } from "../store/game-info_context";
+import { useTranslation } from 'react-i18next';
+import '../utils/i18n'; // Import file cấu hình i18n
 
 // interface HeaderProps {
 //     gameNo?: number,
 //     onClickRule: () => void
 // }
 
-const Header = function Header() {
+const Header = function Header({ logout }: { logout: () => void }) {
   // log("<Header />");
-
+  const { t } = useTranslation();
   const { noGame, setModal, stateGame } = useContext(GameInfoContext);
 
   const handleOpenRule = () => {
@@ -23,13 +25,27 @@ const Header = function Header() {
 
   return (
     <header className="section-header u-margin-top-huge1">
+      {/* <SVG
+        src={Rule}
+        className="section-header__logout"
+        onClick={handleOpenRule}
+      /> */}
       <SVG src={PrimaryText} className="u-margin-minus-bottom-big" />
-      <p className="heading-secondary">Hôm nay {noGame || 0} Ván</p>
+      <p className="heading-secondary">{t("Today {{count}} games", { count: noGame || 0 })}</p>
+      <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
+      <SVG
+        src={Rule}
+        className="section-header__logout"
+        onClick={logout}
+      />
       <SVG
         src={Rule}
         className="section-header__rule"
         onClick={handleOpenRule}
       />
+
+      </div>
+
     </header>
   );
 };

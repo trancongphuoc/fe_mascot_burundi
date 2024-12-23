@@ -14,6 +14,9 @@ import NoGameToday from "./NoGameToday";
 import toast from "react-hot-toast";
 import { sortBettingCard } from "../../utils/utils";
 
+import { useTranslation } from 'react-i18next';
+import '../../utils/i18n'; // Import file cấu hình i18n
+
 interface BetUser extends User {
   bettingCards?: BetZodiacCard[];
   isWin?: boolean;
@@ -26,6 +29,7 @@ interface MyInfoBetResultModel {
   betCards: BetZodiacCard[];
   // fbId: string;
   setFirebaseData: (_: BetZodiacCard[]) => void;
+  handleCharge: () => void
 }
 
 const MyBonusToday = memo(
@@ -34,8 +38,10 @@ const MyBonusToday = memo(
     onUserDataChange,
     // fbId,
     setFirebaseData,
+    handleCharge
   }: MyInfoBetResultModel) => {
-    // log("<firebase MyBonusToday />");
+    const { t } = useTranslation();
+
     const [betUser, setBetUser] = useState<BetUser>();
     const [icoinWinToday, setIcoinWinToday] = useState<number>(0);
     const [bettingCards, setBettingCards] = useState<BetZodiacCard[]>([]);
@@ -132,7 +138,7 @@ const MyBonusToday = memo(
           <img src={bgHeader} className="section-myInfo__bg" />
 
           <div className="header-left">
-            <p className="header-left--text">Thưởng hôm nay:</p>
+            <p className="header-left--text">{t("Today's bonus")}:</p>
             <IcoinWinToday icoinImg={Icoin} icoinWinToday={icoinWinToday} />
           </div>
 
@@ -149,7 +155,7 @@ const MyBonusToday = memo(
 
           <div className="end">
             <MyTotalIcoin fbId={fbId} betCards={betCards} />
-            <DepositIcoin />
+            <DepositIcoin handleCharge={handleCharge} />
           </div>
         </div>
       </>

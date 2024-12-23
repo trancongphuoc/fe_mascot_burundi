@@ -100,3 +100,16 @@ export const charge = async (): Promise<any> => {
       console.error(error);
     }
 };
+
+export const logout = async (): Promise<any> => {
+  try {
+    const token = localStorage.getItem('token');
+    localStorage.clear();
+    const response = await api.get(`/api/logout`, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+    window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+};

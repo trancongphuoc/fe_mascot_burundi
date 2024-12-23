@@ -7,18 +7,18 @@ import Rule4 from '../assets/rule_4.png';
 export const RULE_CONTENTS = [
     {
       image: Rule1,
-      text: 'Trong lúc thời gian đếm ngược bạn nhấn chọn lá bài muốn đoán'
+      text: "Mugihe umwanya uriko uraharurwa, mufyonde kw'ikarata mushaka guha amahirwe"
     },
     {
       image: Rule2,
-      text: 'Bạn nhấn chọn lá bài sẽ hiện các mức cược, mỗi ván lật tối đa 4 lá bài'
+      text: "Mufyonde kw'ikarata kugira werekane intambwe z'ugutigira.Intambwe yose uhindukiza nimiburiburi ikarata 4"
     },
     {
       image: Rule3,
-      text: 'Kết thúc đếm ngược sẽ tự động lật bài. Nếu trúng bạn nhận thưởng tương ứng với số tiền cược'
+      text: "Umwanya urarangiye kandi ikarata zica zihindura.Utsinze,uzoronka agashimwe gahuye nayo wakoresheje mugutigira"
     },
     {
       image: Rule4,
-      text: 'Chúng tôi sẽ hiện thị người thắng 1 ngày trước'
+      text: "Turerekana uwatsinze umunsi imbere"
     }
   ];

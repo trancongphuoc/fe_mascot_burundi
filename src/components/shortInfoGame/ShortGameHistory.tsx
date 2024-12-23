@@ -5,6 +5,8 @@ import { db } from "../../firebase/config";
 import { off, onValue, ref } from "firebase/database";
 // import { log } from "../../utils/log";
 import { GameInfoContext } from "../../store/game-info_context";
+import { useTranslation } from 'react-i18next';
+import '../../utils/i18n'; // Import file cấu hình i18n
 
 // interface ShortGameHistoryProps {
 //   openDialog: () => void;
@@ -19,7 +21,7 @@ const ShortGameHistory = function ShortGameHistory() {
   const [gameHistories, setGameHistories] = useState<ZodiacCardHistory[]>([]);
 
   const { stateGame, transactionId, setModal } = useContext(GameInfoContext);
-
+  const { t } = useTranslation();
   useEffect(() => {
     const stateRef = ref(db, "/zodiacGame/state/zodiacCardsRecent");
 
@@ -58,7 +60,7 @@ const ShortGameHistory = function ShortGameHistory() {
 
   return (
     <div className="result__left" onClick={handleOpenGameHistory}>
-      <p className="result__left--text">Kết quả</p>
+      <p className="result__left--text">{t("Result")}</p>
       {gameHistories.map((result) => (
         <Card
           key={result.lastUpdate}
