@@ -122,7 +122,7 @@ const MyBonusToday = memo(
           setBettingCards([...betCards.map((card) => ({ ...card }))]);
         } else {
           toast.dismiss();
-          toast("Đặt cược tối đa 4 lá linh vật", {
+          toast(t("Bet up to 4 mascot cards"), {
             duration: 2000,
             position: "bottom-center",
           });

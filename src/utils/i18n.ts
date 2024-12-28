@@ -68,6 +68,7 @@ const resources = {
       "BUY": "BUY",
       "You have 1000 coins to join MASCOT, fee 100Fbu. Good luck to you!": "You have 1000 coins to join MASCOT, fee 100Fbu. Good luck to you!",
       "CLOSE": "CLOSE",
+      "Close": "Close",
       "Register": "Register",
       "Account": "Account",
       "Point earn today": "Point earn today",
@@ -82,7 +83,13 @@ const resources = {
       "NO": "NO",
       "You have canceled successfully. Thank you!": "You have canceled successfully. Thank you!",
       "Notify": "Notify",
-      "Enter OTP code here": "Enter OTP code here"
+      "Enter OTP code here": "Enter OTP code here",
+      "Missing game information": "Missing game information",
+      "Missing card selection": "Missing card selection",
+      "Missing bet amount": "Missing bet amount",
+      "Bet up to 4 mascot cards": "Bet up to 4 mascot cards",
+      "Round": "Round",
+      "Betting level": "Betting level"
     }
   },
   "bi": {
@@ -149,6 +156,7 @@ const resources = {
       "BUY": "Kugura",
       "You have 1000 coins to join MASCOT, fee 100Fbu. Good luck to you!": "Mufise amanota 1000 kugira mukoreshe Mascot.Igiciro ni 100F.Tubifurije amahirwe",
       "CLOSE": "Mwugare",
+      "Close": "Mwugare",
       "Register": "Kwiyandikisha",
       "Account": "Ikonte",
       "Point earn today": "Amanota mwaronse ku munsi",
@@ -163,7 +171,13 @@ const resources = {
       "NO": "Oya",
       "You have canceled successfully. Thank you!": "Mwakuyemwo neza igisata Mascot. Murakoze!",
       "Notify": "Menyesha",
-      "Enter OTP code here": "Injiza ikode kabanga ngaha"
+      "Enter OTP code here": "Injiza ikode kabanga ngaha",
+      "Missing game information": "Ibibura murukino",
+      "Missing card selection": "Ibibura mwikarata yahiswemwo",
+      "Missing bet amount": "Amafaranga abura yo gutigira",
+      "Bet up to 4 mascot cards": "Tigira gushika kukarata 4 za Mascot",
+      "Round": "Ikiringo",
+      "Betting level": "Intambwe yo gutigira"
     }
   }
 };

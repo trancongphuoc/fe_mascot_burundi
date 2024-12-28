@@ -3,28 +3,30 @@ import PopupCenter from './PopupCenter';
 import { GameInfoContext } from '../../store/game-info_context';
 import { useContext } from 'react';
 import { callbackFlutter } from '../../utils/functions';
+import { useTranslation } from 'react-i18next';
+import '../../utils/i18n'; // Import file cấu hình i18n
 
 const PopupDeposit = () => {
   // log('<PopRule />');
   const { setModal } = useContext(GameInfoContext);
-
+  const { t } = useTranslation();
   return (
     <PopupCenter
       className='popup-overlay-center'
       onClick={() => setModal({state: "CLOSE", type: "DEPOSIT"})}
       classNameChild='noti'
     >
-      <p className="content">Bạn không đủ iCoin để chơi vui lòng nạp thêm!</p>
+      <p className="content">{t("You do not have enough iCoin to play, please top up!")}</p>
       <button
         className="button_left"
         onClick={() => setModal({state: "CLOSE", type: "DEPOSIT"})}
-      >Huỷ</button>
+      >{t("Cancel")}</button>
       <button
         className="button_right"
         onClick={() => {
           setModal({state: "CLOSE", type: "DEPOSIT"})
           callbackFlutter('callbackMyWallet')}}
-      >Nạp thêm</button>
+      >{t("Buy more")}</button>
     </PopupCenter>
   );
 };

@@ -1,6 +1,8 @@
-import PrimaryText from "../assets/primary-text.svg";
+import PrimaryText from "../assets/primary-text-3.svg";
+
 import SVG from "react-inlinesvg";
-import Rule from "../assets/rule.svg";
+import Rules from "../assets/rules.svg";
+import Logout from "../assets/logout.svg";
 // import { log } from "../utils/log";
 import { useContext } from "react";
 import { GameInfoContext } from "../store/game-info_context";
@@ -34,12 +36,12 @@ const Header = function Header({ logout }: { logout: () => void }) {
       <p className="heading-secondary">{t("Today {{count}} games", { count: noGame || 0 })}</p>
       <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
       <SVG
-        src={Rule}
+        src={Logout}
         className="section-header__logout"
         onClick={logout}
       />
       <SVG
-        src={Rule}
+        src={Rules}
         className="section-header__rule"
         onClick={handleOpenRule}
       />

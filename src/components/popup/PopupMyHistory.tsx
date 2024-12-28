@@ -15,14 +15,15 @@ import PopupCenter from './PopupCenter';
 import LazyImage from '../LazyImage';
 import { formatNumber } from '../../utils/utils';
 import { GameInfoContext } from '../../store/game-info_context';  
-
+import { useTranslation } from 'react-i18next';
+import '../../utils/i18n'; // Import file cấu hình i18n
 
 const PopupMineResult = () => {
 
   const [myHistory, setMyHistory] = useState<MyHistory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { setModal, stateGame } = useContext(GameInfoContext);
-
+  const { t } = useTranslation();
   useEffect(() => {
       new Image().src = bgMyHistory;
   }, []);
@@ -65,8 +66,8 @@ const PopupMineResult = () => {
         <SVG src={ loading ? TextHistory : ''} className="mine-popup--header mt-7px mb-12-5px"/>
         
         <div className="mine-popup__title mb-7px">
-            <p className="mine-popup__title--head1">Ván</p>
-            <p className="mine-popup__title--head2">Mức cược</p>
+            <p className="mine-popup__title--head1">{t("Round")}</p>
+            <p className="mine-popup__title--head2">{t("Betting level")}</p>
         </div>
 
         {

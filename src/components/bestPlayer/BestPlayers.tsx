@@ -1,6 +1,6 @@
 
 import { useContext } from 'react';
-import SecondaryText from '../../assets/best-players-logo.svg';
+import SecondaryText from '../../assets/best-players-logo-2.svg';
 import SVG from 'react-inlinesvg';
 import bgBestPlayers from '../../assets/bg_best_players.png';
 // import { getTopUsers } from '../../firebase/bestPlayers';

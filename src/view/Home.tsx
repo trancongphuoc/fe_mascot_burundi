@@ -373,7 +373,7 @@ export default function Home() {
 
       if (updatedBetCards.length > 4) {
         toast.dismiss();
-        toast("Đặt cược tối đa 4 lá linh vật", {
+        toast(t("Bet up to 4 mascot cards"), {
           duration: 2000,
           position: "bottom-center",
         });
@@ -899,6 +899,7 @@ export default function Home() {
             <PopupInputPhone
               mpsSendOTP={mpsSendOTP}
               errorMessage={errorMessage}
+              loading={loading}
             />
           }
 
@@ -908,6 +909,7 @@ export default function Home() {
               _title={titleOTP}
               mpsVerifyOTP={mpsVerifyOTP}
               errorMessage={errorMessage}
+              loading={loading}
             />
           }
 
@@ -917,6 +919,7 @@ export default function Home() {
               _title={titleNotify}
               _message={messageNotify}
               callback={callbackNotify}
+              loading={loading}
             />}
 
           {openPrepageRegisterAndCancel &&
@@ -925,6 +928,7 @@ export default function Home() {
               phoneNumber={phoneNumber}
               // callback={registerAndCancelCallBack} 
               callback={registerAndCancelCallBack}
+              loading={loading}
             />
           }
 

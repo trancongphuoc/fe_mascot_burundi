@@ -34,6 +34,8 @@ import { formatNumber } from "../../utils/utils";
 import { GameInfoContext } from "../../store/game-info_context";
 import { useContext } from "react";
 import AvatarCircle from "../AvatarCircle";
+import { useTranslation } from 'react-i18next';
+import '../../utils/i18n'; // Import file cấu hình i18n
 
 interface DialogLostWinProps {
   dialogType: DialogType;
@@ -81,6 +83,7 @@ const DialogLostWin = ({
   totalIcoin,
   dialogType,
 }: DialogLostWinProps) => {
+  const { t } = useTranslation();
   const { setModal, topUsers } = useContext(GameInfoContext);
 
   const contentLost = (
@@ -99,10 +102,10 @@ const DialogLostWin = ({
         }}
       >
         <p className="lost__secondary--text1">
-          Bạn bỏ lỡ phần thưởng lần đoán này
+          {t("You missed the prize this time")}
         </p>
         <p className="lost__secondary--text2">
-          Đừng nản lòng, hãy cố gắng lên, tin tưởng bản thân!
+          {t("Don't be discouraged, keep trying, believe in yourself!")}
         </p>
       </div>
     </>
@@ -123,7 +126,7 @@ const DialogLostWin = ({
         }}
       >
         <p className="win__secondary--text">
-          Thật xuất sắc, bạn đã đoán trúng ván này
+          {t("Excellent, you guessed this time right.")}
         </p>
         <div className="win__totalIcoin">
           <SVG className="win__totalIcoin--img" src={Icoin} />
@@ -229,7 +232,7 @@ const DialogLostWin = ({
             e.stopPropagation();
           }}
         >
-          TOP chiến thắng
+          {t("Top winner")}
         </p>
         <SVG
           src={dialogType == "WIN" ? win.lineRight : lost.lineRight}

@@ -17,10 +17,12 @@ import ButtonStake from "../ButtonStake";
 import AnimatedCounter from "../animation/AnimatedCounter";
 import ButtonMoving from "../ButtonMoving";
 import { GameInfoContext } from "../../store/game-info_context";
+import { useTranslation } from 'react-i18next';
+import '../../utils/i18n'; // Import file cấu hình i18n
 
 const DialogBetting = () => {
   // log("<DialogBetting />");
-
+  const { t } = useTranslation();
   const [bettingIcoin, setBettingIcoin] = useState({ from: 0, to: 0 });
   const { setModal, selectedCard, transactionId, betting, totalIcoin } =useContext(GameInfoContext);
 
@@ -36,7 +38,7 @@ const DialogBetting = () => {
   const sendDataOut = () => {
     if (!transactionId) {
       toast.dismiss();
-      toast("Thiếu thông tin game", {
+      toast(t("Missing game information"), {
         duration: 2000,
         position: "bottom-center",
       });
@@ -44,12 +46,12 @@ const DialogBetting = () => {
     }
     if (!selectedCard) {
       toast.dismiss();
-      toast("Thiếu card select", { duration: 2000, position: "bottom-center" });
+      toast(t("Missing card selection"), { duration: 2000, position: "bottom-center" });
       return;
     }
     if (bettingIcoin.to == 0) {
       toast.remove();
-      toast("Thiếu tiền cược", { duration: 2000, position: "bottom-center" });
+      toast("Missing bet amount", { duration: 2000, position: "bottom-center" });
       return;
     }
 
@@ -146,7 +148,7 @@ const DialogBetting = () => {
         />
 
         <p className="betting--text" onClick={(e) => e.stopPropagation()}>
-          Chúc bạn nhận thưởng lớn
+          {t("Good luck and get big prize")}
         </p>
 
         <div
@@ -179,7 +181,7 @@ const DialogBetting = () => {
           handleClick={sendDataOut}
           className="betting__confirm mb-34px mt-14-5px"
         >
-          xác nhận
+          {t("Confirm")}
         </ButtonStake>
       </motion.div>
     </motion.div>

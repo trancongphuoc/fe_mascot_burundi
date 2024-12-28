@@ -17,7 +17,8 @@ import Loading from '../Loading';
 import PopupCenter from './PopupCenter';
 import LazyImage from '../LazyImage';
 import { GameInfoContext } from '../../store/game-info_context';
-
+import { useTranslation } from 'react-i18next';
+import '../../utils/i18n'; // Import file cấu hình i18n
 
 interface PopupGameHistoryProps {
   zodiacs: string[];
@@ -28,7 +29,7 @@ const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ zodiacs }) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const { setModal } = useContext(GameInfoContext)
-
+  const { t } = useTranslation();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,7 +64,7 @@ const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ zodiacs }) => {
         <SVG src={TextResult} className="history-game-popup--header" />
 
         <div className="history-game-popup__title mt-7px">
-          <p className="history-game-popup__title--no">Ván</p>
+          <p className="history-game-popup__title--no">{t("Round")}</p>
           {zodiacs.map((zodiac, index) => {
             return <div key={index} className="history-game-popup__card">
               <SVG src={BgCard} className="history-game-popup__card--Bg" />
