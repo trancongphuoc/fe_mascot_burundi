@@ -12,11 +12,76 @@
     padding: 20px 39px 25px 39px;
     position: relative;
     top: 0vh;
-    z-index: 5000;
+    z-index: -1;
+
+    background-image: url('../assets/mps_bg.svg');
+    background-size: cover;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.mps-top {
+    background: #ffffff;
+    max-width: 382px;
+    min-height: 400px;
+    max-height: 576px;
+    grid-template-rows: min-content min-content;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 10px 39px 25px 39px;
+    position: relative;
+    top: -5vh;
+    z-index: -1;
+    background-image: url('../assets/bg_mps_big_2.svg');
+    background-size: cover;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.mps-top > .mps-no-pd {
+    padding: 0 !important; /* Sử dụng !important nếu cần thiết để override */
 }
 
 .mps-chill {
     width: 100%;
+}
+
+.mps-color {
+    color: linear-gradient(180deg, #32DCB3 0%, #073C43 100%);;
+}
+
+
+.mps-top-daily-button {
+    justify-self: start;
+    border: none;
+    /* background-color: transparent; */
+  }
+  
+.mps-top-monthly-button {
+    justify-self: end;  /* Căn phải giống như rule */
+    border: none;
+    /* background-color: transparent; */
+}
+
+.mps-top-button {
+    position: relative; /* Để định vị spinner */
+    /* border-radius: 2px; */
+    border-radius: 0 0 30px 30px;
+    min-width: 189px;
+    min-height: 40px;
+    background: linear-gradient(180deg, #32DCB3 0%, #073C43 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 /* .mps-button {

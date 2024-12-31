@@ -1,7 +1,7 @@
-import Rule1 from '../assets/rule_1.png';
+import Rule1 from '../assets/rule_1-2.png';
 import Rule2 from '../assets/rule_2.png';
-import Rule3 from '../assets/rule_3.png';
-import Rule4 from '../assets/rule_4.png';
+import Rule3 from '../assets/rule_3-2.png';
+import Rule4 from '../assets/rule_4-2.png';
 
 
 export const RULE_CONTENTS = [

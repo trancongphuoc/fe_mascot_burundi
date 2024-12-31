@@ -4,7 +4,7 @@ interface ToltalIcoinBettingProps {
 
 const ToltalIcoinBetting = ({bettingIcoin}: ToltalIcoinBettingProps) => {
     return (
-        <p className='card__main--icoin'>{bettingIcoin} iCoin</p>
+        <p className='card__main--icoin'>{bettingIcoin} manota</p>
     )
 }
 

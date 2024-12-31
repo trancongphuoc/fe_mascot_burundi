@@ -1,7 +1,7 @@
 import BgCardLost from '../../assets/bg_card_nomarl.svg';
 import BgCardWin from '../../assets/bg_card_selected.svg';
 
-import TextHistory from '../../assets/text-mine-history.svg';
+import TextHistory from '../../assets/text-mine-history-2.svg';
 import IcoinLost from '../../assets/icoin-lost.svg';
 import IcoinWin from '../../assets/icoin_small.svg';
 import SVG from 'react-inlinesvg';
@@ -63,7 +63,7 @@ const PopupMineResult = () => {
           className="mine-popup__bg"
         />
 
-        <SVG src={ loading ? TextHistory : ''} className="mine-popup--header mt-7px mb-12-5px"/>
+        <SVG style={{width: "60%"}} src={ loading ? TextHistory : ''} className="mine-popup--header mt-7px mb-12-5px"/>
         
         <div className="mine-popup__title mb-7px">
             <p className="mine-popup__title--head1">{t("Round")}</p>

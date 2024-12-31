@@ -16,6 +16,10 @@ type GameInfoContextType = {
     totalIcoin: number;
     setTotalIcoin: (_: number) => void
     fbId: string,
+    totalStar: number,
+    totalStarMonth: number,
+    premium: boolean,
+    phone: string
 };
 
 
@@ -34,6 +38,10 @@ export const GameInfoContext = createContext<GameInfoContextType>({
     totalIcoin: 0,
     setTotalIcoin: (_: number) => {},
     fbId: "",
+    totalStar: 0,
+    totalStarMonth: 0,
+    premium: false,
+    phone: ""
 });
 
 // interface GameInfoProviderProps {

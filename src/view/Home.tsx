@@ -40,6 +40,7 @@ import Loading from "../components/Loading";
 import setHidden from "../utils/setBodyScroll";
 import { updateNewBetCards, useQueryParams } from "../utils/utils";
 import { fetchTokenAndJoinGame } from "../utils/fetchTokenAndJoinGame";
+import { exitGameZodiac } from "../api/exitGameZodiac.ts";
 import { callbackFlutter } from "../utils/functions";
 // import { log } from "../utils/log";
 import { GameInfoContext } from "../store/game-info_context.tsx";
@@ -65,6 +66,8 @@ import * as mps from '../api/mps.ts';
 
 import { useTranslation } from 'react-i18next';
 import '../utils/i18n.ts'; // Import file cấu hình i18n
+import PopupTopdaily from "../components/popup/mps/PopupTopDaily.tsx";
+import PopupTopMonthly from "../components/popup/mps/PopupTopMonthly.tsx";
 
 const img: string[] = [
   buffalo,
@@ -80,7 +83,7 @@ const img: string[] = [
 // const label = "RESUT"
 
 export default function Home() {
-  const parameters = useQueryParams();
+  // const parameters = useQueryParams();
   const { t, i18n } = useTranslation();
 
   const [statusGame, setStatusGame] = useState<StatusGame>("NONE");
@@ -136,18 +139,30 @@ export default function Home() {
     []
   );
 
+  const fetchAndSetFbId = async () => {
+    const response = await fetchTokenAndJoinGame();
+    setFbId(response?.data?.user.facebookUserId || "");
+    handleTotalIcoin(response?.data?.user.totalIcoin || 0);
+    setPremium(response?.data?.user.premium || false)
+    setPhoneNumber(response?.data?.user.phone || "")
+    setTotalStar(response?.data?.user.totalStar || 0)
+    setTotalStarMonth(response?.data?.user.totalStarMonth || 0)
+
+  };
+
   useEffect(() => {
     console.log(t('Wel come'))
-    const fetchAndSetFbId = async () => {
-      const response = await fetchTokenAndJoinGame();
-      setFbId(response?.data?.user.facebookUserId || "");
-      handleTotalIcoin(response?.data?.user.totalIcoin || 0);
-      setPremium(response?.data?.user.premium || false)
-      setPhoneNumber(response?.data?.user.phone || "")
+    fetchAndSetFbId();
+
+    const onBeforeUnload = () => {
+      exitGameZodiac();
     };
 
-    fetchAndSetFbId();
-  }, [parameters]);
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", onBeforeUnload);
+    };
+  }, []);
 
   const playLostAudio = useAudio(lostAudio);
   const playWinAudio = useAudio(winAudio);
@@ -218,6 +233,7 @@ export default function Home() {
     };
 
     fetchGameInfo();
+    if (!fbId) return;
     switch (statusGame) {
       case "NONE":
         setOpenRule((statePrev) => {
@@ -345,14 +361,14 @@ export default function Home() {
         handleModal({ state: "OPEN", type: "BETTING" });
       } else {
         toast.remove();
-        toast("Chưa đến thời gian đặt cược", {
+        toast(t("Time to bet not yet"), {
           duration: 2000,
           position: "bottom-center",
         });
       }
     } catch (error) {
       toast.remove();
-      toast("Chưa đến thời gian đặt cược", {
+      toast(t("Time to bet not yet"), {
         duration: 2000,
         position: "bottom-center",
       });
@@ -405,7 +421,9 @@ export default function Home() {
   useOnlineStatus(updateOnlineStatus);
 
   const handleModal = useCallback((stateModal: ModalSet) => {
-    console.log(stateModal.type);
+    // console.log(stateModal.type);
+    // console.log(stateModal.state);
+
     if (stateModal.state === "OPEN") {
       setHidden("hidden");
       switch (stateModal.type) {
@@ -578,6 +596,18 @@ export default function Home() {
             else return statePrev;
           });
           break;
+        case "TOPDAILY":
+          setOpenTopDaily((statePrev) => {
+            if (statePrev) return !statePrev;
+            else return statePrev;
+          });
+          break;
+        case "TOPMONTHLY":
+          setOpenTopMonthly((statePrev) => {
+            if (statePrev) return !statePrev;
+            else return statePrev;
+          });
+          break;
         default:
           break;
       }
@@ -592,6 +622,10 @@ export default function Home() {
   const [openNotify, setOpenNotify] = useState(false);
   const [openPrepageRegisterAndCancel, setOpenPrepageRegisterAndCancel] = useState(false);
 
+  const [openTopDaily, setOpenTopDaily] = useState(false);
+  const [openTopMonthly, setOpenTopMonthly] = useState(false);
+
+
   const [errorMessage, setErrorMessage] = useState("");
   const [titleOTP, setTitleOTP] = useState("");
   const [titleNotify, setTitleNotify] = useState("");
@@ -599,15 +633,18 @@ export default function Home() {
   const [buttonNameNotify, setButtonNameNotify] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [premium, setPremium] = useState(false);
+  const [totalStar, setTotalStar] = useState(0);
+  const [totalStarMonth, setTotalStarMonth] = useState(0);
+
   const [loading, setLoading] = useState(false);
 
   const [typeRegisterAndCancel, setTypeRegisterAndCancel] = useState("REGISTER")
   const [callbackNotify, setCallbackNotify] = useState(() => () => {
-    console.log("Default callback executed");
+    // console.log("Default callback executed");
   });
 
   const [registerAndCancelCallBack, setRegisterAndCancelCallBack] = useState(() => () => {
-    console.log("Register and Cancel");
+    // console.log("Register and Cancel");
   });
 
   const mpsSendOTP = async (_phoneNumber?: string) => {
@@ -625,7 +662,6 @@ export default function Home() {
 
     setLoading(true)
     const res = await mps.sendOTP(_phoneNumber || phoneNumber)
-    console.log(res)
 
     if (res.data.status == "OK") {
       setOpenInputPhone(false);
@@ -645,13 +681,13 @@ export default function Home() {
   const mpsVerifyOTP = async (otp: string) => {
     setLoading(true);
     const res = await mps.verifyOTP(phoneNumber, otp)
-    console.log(res)
 
     if (res.data.status == "OK") {
       setOpenInputOTP(false);
 
       localStorage.setItem('token', res.data.accessToken);
-      window.location.reload();
+      // window.location.reload();
+      await fetchAndSetFbId();
     } else {
       setErrorMessage(res.data.message);
     }
@@ -662,19 +698,19 @@ export default function Home() {
   const mpsRegister = async () => {
     setLoading(true);
     const res = await mps.register()
-    console.log(res)
 
     if (res.data.status == "OK") {
       setPremium(true);
       setOpenPrepageRegisterAndCancel(false);
 
-      setTitleNotify(t("SUCCESS"));
-      setMessageNotify(t("You registed MASCOT successfully.<br>Service fee 120Fbu/1000 coins/day"));
-      setButtonNameNotify(t("GO"));
+      setTitleNotify(t("Success"));
+      setMessageNotify(t("You registed MASCOT successfully. Service fee 120Fbu/1000 coins/day"));
+      setButtonNameNotify(t("Go"));
       setCallbackNotify(() => () => {
         setOpenNotify(false);
+        // location.reload();
       });
-  
+
       setOpenNotify(true)
     } else {
       // setErrorMessage(res.data.message);
@@ -684,8 +720,9 @@ export default function Home() {
       setButtonNameNotify(t("CLOSE"));
       setCallbackNotify(() => () => {
         setOpenNotify(false);
+        // location.reload();
       });
-  
+
       setOpenNotify(true)
     }
 
@@ -696,19 +733,18 @@ export default function Home() {
   const mpsCancel = async () => {
     setLoading(true)
     const res = await mps.cancel()
-    console.log(res)
 
     if (res.data.status == "OK") {
       setPremium(false);
       setOpenPrepageRegisterAndCancel(false);
 
-      setTitleNotify(t("SUCCESS"));
+      setTitleNotify(t("Success"));
       setMessageNotify(t("You canceled MASCOT successfully."));
       setButtonNameNotify(t("CLOSE"));
       setCallbackNotify(() => () => {
         setOpenNotify(false);
       });
-  
+
       setOpenNotify(true)
     } else {
       setErrorMessage(res.data.message);
@@ -720,7 +756,6 @@ export default function Home() {
   const mpsCharge = async () => {
     setLoading(true)
     const res = await mps.charge()
-    console.log(res)
 
     if (res.data.status == "OK") {
       setTitleNotify(t("Buy more"));
@@ -729,7 +764,7 @@ export default function Home() {
       setCallbackNotify(() => () => {
         setOpenNotify(false);
       });
-  
+
       setOpenNotify(true)
     } else {
       setTitleNotify(t("OPPS!"));
@@ -742,7 +777,8 @@ export default function Home() {
     setLoading(false)
   }
 
-  const logout = () => {
+  const logout = async () => {
+    exitGameZodiac()
     mps.logout();
   }
 
@@ -808,6 +844,10 @@ export default function Home() {
     totalIcoin: totalIcoinRef.current,
     setTotalIcoin: handleTotalIcoin,
     fbId: fbId,
+    premium: premium,
+    totalStar: totalStar,
+    totalStarMonth: totalStarMonth,
+    phone: phoneNumber
   };
 
   if (isLoadingRef.current) {
@@ -838,11 +878,11 @@ export default function Home() {
           )}
         </Toaster>
 
-        <Header logout={logout} />
+        <Header logout={logout} openRanking={() => setOpenTopDaily(true)} cancel={() => handleRegisterAndCancel("CANCEL")} />
         <ShortInfoGame />
         <BettingTable />
 
-        {premium ? (
+        {/* {premium ? (
           <div style={{
             display: "flex",
             justifyContent: "center",
@@ -858,7 +898,16 @@ export default function Home() {
           }}>
             <button className="mps-button-register-and-cancel" onClick={() => { handleRegisterAndCancel("REGISTER") }} style={{ marginTop: 10, width: 100 }}><strong>{t("Register")}</strong></button>
           </div>
-        )}
+        )} */}
+
+        {!premium &&
+          <div style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "10px",
+          }}>
+            <button className="mps-button-register-and-cancel" onClick={() => { handleRegisterAndCancel("REGISTER") }} style={{ marginTop: 10, width: 100 }}><strong>{t("Register")}</strong></button>
+          </div>}
 
         <MyBonusToday
           onUserDataChange={handleIsWin}
@@ -931,6 +980,10 @@ export default function Home() {
               loading={loading}
             />
           }
+
+
+          {openTopDaily && <PopupTopdaily />}
+          {openTopMonthly && <PopupTopMonthly />}
 
           {/* END MPS */}
         </AnimatePresence>

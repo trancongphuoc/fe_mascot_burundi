@@ -14,7 +14,9 @@ type ModalType = "RULE" |
                 "SENDOTP" |
                 "VERIFYOTP" |
                 "REGISTERANDCANCEL" |
-                "NOTIFY";
+                "NOTIFY" |
+                "TOPDAILY" |
+                "TOPMONTHLY";
 
 interface ModalSet {
     state: ModalState,

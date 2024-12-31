@@ -14,17 +14,6 @@ export const fetchMyHistory = async () => {
   }
 
   try {
-    // setLogCat(
-    //   JSON.stringify({
-    //     label,
-    //     message: "Starting API request",
-    //     url: "/api/mascot/user-history",
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   })
-    // );
-
     const response = await api.get(`/api/mascot/user-history`, {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -35,7 +24,6 @@ export const fetchMyHistory = async () => {
     ) {
       const result = getZodiacGameUser(response.data?.data?.zodiacGameUserList);
       // await setLogCat(JSON.stringify(result));
-
       return result;
     } else {
       // await setLogCat(JSON.stringify({ label, response: response.data }));
@@ -53,11 +41,17 @@ const getZodiacGameUser = (zodiacGameUser: any): MyHistory[] => {
   const now = Date.now();
   const filteredDay = zodiacGameUser.filter((item: any) => {
     const addTime = item.addTime;
-    if (typeof addTime !== "number") {
+    const timestamp = typeof addTime === 'string' 
+    ? new Date(addTime).getTime() 
+    : addTime;
+
+    if (typeof timestamp !== "number") {
       return false;
     }
-    return isSameDay(addTime, now);
+    return isSameDay(timestamp, now);
   });
+
+  console.log(filteredDay)
 
   const myHistories: MyHistory[] = filteredDay.map((item: any) => ({
     time: new Date(item?.addTime ?? 0),

@@ -148,7 +148,7 @@ const DialogBetting = () => {
         />
 
         <p className="betting--text" onClick={(e) => e.stopPropagation()}>
-          {t("Good luck and get big prize")}
+          {t("Good luck and get big prize")}
         </p>
 
         <div

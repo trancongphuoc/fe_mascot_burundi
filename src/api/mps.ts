@@ -113,3 +113,24 @@ export const logout = async (): Promise<any> => {
       console.error(error);
     }
 };
+
+
+export const topDaily = async (): Promise<any> => {
+  try {
+
+    const response = await api.get(`/api/mascot/top-daily`);
+    return response;
+    } catch (error) {
+      console.error(error);
+    }
+};
+
+export const topMonthly = async (): Promise<any> => {
+  try {
+
+    const response = await api.get(`/api/mascot/top-monthly`);
+    return response;
+    } catch (error) {
+      console.error(error);
+    }
+};

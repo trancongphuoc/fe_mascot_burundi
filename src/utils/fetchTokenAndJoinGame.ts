@@ -3,20 +3,16 @@ import { getUserInfo } from "../api/getToken";
 import { joinGameZodiac } from "../api/joinGameZodiac";
 
 export const fetchTokenAndJoinGame = async () => {
+  console.log("fetchTokenAndJoinGame")
   let fbId = '';
   let uid = 0;
   const maxRetries = 3; // Số lần thử lại tối đa
   let attempt = 0; // Đếm số lần thử lại
 
-  // try {
-  //   await getUserInfo();
-  // } catch (error) {
-  //   console.log(error)
-  // }
 
   while (attempt < maxRetries) {
     try {
-      console.log("start fetch")
+      console.log("attempt :" + attempt)
       const response : JoinGameResponse = await joinGameZodiac();
       if (response && response.status === "OK") {
         fbId = response.data?.user.facebookUserId || "";
@@ -38,9 +34,9 @@ export const fetchTokenAndJoinGame = async () => {
   }
 
   if (attempt === maxRetries) {
-    // console.log('Max retries reached. Failed to join game.');
-    toast.dismiss();
-    toast('Lỗi kết nối, vui lòng thử lại sau', { duration: 2000, position: 'bottom-center' });
+    console.log('Max retries reached. Failed to join game.');
+    // toast.dismiss();
+    // toast('Lỗi kết nối, vui lòng thử lại sau', { duration: 2000, position: 'bottom-center' });
   }
 
   return null;

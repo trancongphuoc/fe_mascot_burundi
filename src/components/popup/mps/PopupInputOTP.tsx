@@ -19,7 +19,7 @@ const PopupInputOTP: React.FC<PopupInputOTPProps> = ({errorMessage, mpsVerifyOTP
 
     const [OTP, setOTP] = useState("");
     const [error, setError] = useState(errorMessage);
-    const [title, setTitle] = useState(_title || "Welcome To Mascot");
+    const [title, setTitle] = useState(_title || t("Welcome To Mascot"));
     
     const [timeLeft, setTimeLeft] = useState(60);
 
@@ -115,16 +115,16 @@ const PopupInputOTP: React.FC<PopupInputOTPProps> = ({errorMessage, mpsVerifyOTP
 
                 }}>
                     {loading ? 
-                    <button className={'mps-button loading'}><span className="spinner"></span>GO</button> : 
+                    <button className={'mps-button loading'}><span className="spinner"></span>{t("Go")}</button> : 
                     <button className={'mps-button'} onClick={() => {
                         if (/^\d*$/.test(OTP) && OTP.length == 6) {
                             setTimeLeft(60); 
                             mpsVerifyOTP(OTP);
                         } else {
-                            setError(t("Please input OTP"))
+                            setError(t("OTP is wrong. Please try again."))
                         }
 
-                    }}>GO</button>}
+                    }}>{t("Go")}</button>}
                 </div>
 
             </div>

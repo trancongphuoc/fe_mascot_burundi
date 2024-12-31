@@ -12,7 +12,7 @@ import bgGameHistory2x from '../../assets/bg_game_history_2x.png';
 
 import BgCard from '../../assets/bg_card_normal_light.svg';
 import StickIcon from  '../../assets/icon_stick.svg';
-import TextResult from '../../assets/text-result.svg';
+import TextResult from '../../assets/text-result-2.svg';
 import Loading from '../Loading';
 import PopupCenter from './PopupCenter';
 import LazyImage from '../LazyImage';
@@ -61,7 +61,7 @@ const PopupGameHistory: React.FC<PopupGameHistoryProps> = ({ zodiacs }) => {
           className='history-game-popup__bg'
         />
 
-        <SVG src={TextResult} className="history-game-popup--header" />
+        <SVG style={{width: "60%"}} src={TextResult} className="history-game-popup--header" />
 
         <div className="history-game-popup__title mt-7px">
           <p className="history-game-popup__title--no">{t("Round")}</p>

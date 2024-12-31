@@ -27,7 +27,7 @@ const PopupInputPhone: React.FC<PopupInputPhoneProps> = ({mpsSendOTP, errorMessa
         >
             <div className='mps-chill'>
                 <div style={{marginBottom: 20, textAlign: 'center'}}>
-                    <h3>{t('Welcome to Mascot')}</h3>
+                    <h3>{t("Welcome To Mascot")}</h3>
                     {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
                 </div>
                 <div style={{marginBottom: 20}}>

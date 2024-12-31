@@ -3,7 +3,8 @@ import PopupCenter from '../PopupCenter';
 import { GameInfoContext } from '../../../store/game-info_context';
 import { useTranslation } from 'react-i18next';
 import '../../../utils/i18n'; // Import file cấu hình i18n
-
+import LazyImage from '../../LazyImage';
+import bgSmall from '../../../assets/bg_small.svg';
 interface PopupPrepareRegisterProps {
     phoneNumber: string;
     callback: any;
@@ -22,7 +23,13 @@ const PopupPrepareRegister: React.FC<PopupPrepareRegisterProps> = ({ phoneNumber
             onClick={() => setModal({ state: "CLOSE", type: "REGISTERANDCANCEL" })}
             classNameChild='mps'
         >
-            <div className='mps-chill'>
+            {/* <LazyImage
+            lowResSrc={bgSmall}
+            highResSrc={bgSmall}
+            alt='my history'
+            className="mine-popup__bg"
+            /> */}
+            <div className='mps-chill' >
                 <div style={{ marginBottom: 30, textAlign: 'center' }}>
                     <h2>{'Hello ' + (phoneNumber != null && phoneNumber.startsWith("257") ? phoneNumber.substring(3) : phoneNumber) }</h2>
                 </div>
@@ -30,8 +37,8 @@ const PopupPrepareRegister: React.FC<PopupPrepareRegisterProps> = ({ phoneNumber
                     <p style={{ wordWrap: 'break-word' }}>
                         <strong>
                             {type === "REGISTER" ?
-                            "Fee 120Fbu/1000 ibiceri/umunsi Join to MASCOT now for a chance to win 500.000 Fbu every month" :
-                            "Are you sure ?"}
+                            (<div><div>{t("Fee 120Fbu/1000 coins/day")}</div> <div> {t("Join to MASCOT now for a chance to win 500.000 Fbu every month")}</div></div>) :
+                            t("Are you sure?")}
                             
                         </strong>
                     </p>
