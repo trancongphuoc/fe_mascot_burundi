@@ -38,7 +38,7 @@ import { doNothing } from "../api/doNothing";
 import Loading from "../components/Loading";
 // import useNetworkStatus from '../api/useNetworkStatus';
 import setHidden from "../utils/setBodyScroll";
-import { updateNewBetCards, useQueryParams } from "../utils/utils";
+import { updateNewBetCards, useQueryParams, isWebView } from "../utils/utils";
 import { fetchTokenAndJoinGame } from "../utils/fetchTokenAndJoinGame";
 import { exitGameZodiac } from "../api/exitGameZodiac.ts";
 import { callbackFlutter } from "../utils/functions";
@@ -68,6 +68,8 @@ import { useTranslation } from 'react-i18next';
 import '../utils/i18n.ts'; // Import file cấu hình i18n
 import PopupTopdaily from "../components/popup/mps/PopupTopDaily.tsx";
 import PopupTopMonthly from "../components/popup/mps/PopupTopMonthly.tsx";
+import ringme from "ringme-library";
+import PopupShowIframe from "../components/popup/mps/PopupShowIframe.tsx";
 
 const img: string[] = [
   buffalo,
@@ -107,6 +109,8 @@ export default function Home() {
   // const fbIdRef = useRef<string>("");
   const [fbId, setFbId] = useState<string>('')
 
+  const [iframeUrl, setIframeUrl] = useState<string>("");
+
   const cardResultRef = useRef<ZodiacCard | null>(null);
   const topUserRef = useRef<User[]>([]);
   const noGameRef = useRef<number>(0);
@@ -143,7 +147,13 @@ export default function Home() {
     const response = await fetchTokenAndJoinGame();
     setFbId(response?.data?.user.facebookUserId || "");
     handleTotalIcoin(response?.data?.user.totalIcoin || 0);
-    setPremium(response?.data?.user.premium || false)
+
+    if (isWebView()) {
+      setPremium(response?.data?.user.premiumSupperApp || false)
+    } else {
+      setPremium(response?.data?.user.premium || false)
+    }
+
     setPhoneNumber(response?.data?.user.phone || "")
     setTotalStar(response?.data?.user.totalStar || 0)
     setTotalStarMonth(response?.data?.user.totalStarMonth || 0)
@@ -152,7 +162,33 @@ export default function Home() {
 
   useEffect(() => {
     console.log(t('Wel come'))
-    fetchAndSetFbId();
+
+    if (isWebView() && !localStorage.getItem('token')) {
+      ringme.getUserInfo().then((data: any) => {
+        let dataJson = typeof data === "string" ? JSON.parse(data) : data;
+
+        if (!dataJson) return;
+
+        let body = {
+          msisdn: dataJson.userId,
+          token: dataJson.token
+        }
+
+        mps.verifySupperApp(body).then((res: any) => {
+          localStorage.setItem('token', res.data.accessToken);
+          fetchAndSetFbId();
+        }).catch((error: any) => {
+          console.log(error);
+          // setOpenInputPhone(true);
+        });
+
+      }).catch((error: any) => {
+        console.log(error);
+        // setOpenInputPhone(true);
+      });
+    } else {
+      fetchAndSetFbId();
+    }
 
     const onBeforeUnload = () => {
       exitGameZodiac();
@@ -168,8 +204,9 @@ export default function Home() {
   const playWinAudio = useAudio(winAudio);
 
   useEffect(() => {
+    console.log("Welcome 2")
     const token = localStorage.getItem('token');
-    if (!token) {
+    if (!token && !isWebView()) {
       setOpenInputPhone(true);
     }
 
@@ -608,6 +645,11 @@ export default function Home() {
             else return statePrev;
           });
           break;
+        case "SHOWIFRAME":
+          if(iframeUrl !== "") {
+            closeIframe();
+          }
+          break;
         default:
           break;
       }
@@ -697,57 +739,89 @@ export default function Home() {
 
   const mpsRegister = async () => {
     setLoading(true);
-    const res = await mps.register()
 
-    if (res.data.status == "OK") {
-      setPremium(true);
-      setOpenPrepageRegisterAndCancel(false);
+    if (isWebView()) {
+      let data = await ringme.getUserInfo();
+      const res = await mps.getPaymentRegisterUrl(data?.saToken || "");
+      if (res.data?.code == "200") {
+        setOpenPrepageRegisterAndCancel(false);
+        setIframeUrl(res.data?.data);
+      } else {
+        setTitleNotify(t("OOP!"));
+        setMessageNotify(res.data.message);
+        setButtonNameNotify(t("CLOSE"));
+        setCallbackNotify(() => () => {
+          setOpenNotify(false);
+          // location.reload();
+        });
 
-      setTitleNotify(t("Success"));
-      setMessageNotify(t("You registed MASCOT successfully. Service fee 120Fbu/1000 coins/day"));
-      setButtonNameNotify(t("Go"));
-      setCallbackNotify(() => () => {
-        setOpenNotify(false);
-        // location.reload();
-      });
-
-      setOpenNotify(true)
+        setOpenNotify(true)
+      }
     } else {
-      // setErrorMessage(res.data.message);
 
-      setTitleNotify(t("OOP!"));
-      setMessageNotify(res.data.message);
-      setButtonNameNotify(t("CLOSE"));
-      setCallbackNotify(() => () => {
-        setOpenNotify(false);
-        // location.reload();
-      });
+      const res = await mps.register()
 
-      setOpenNotify(true)
+      if (res.data.status == "OK") {
+        setPremium(true);
+        setOpenPrepageRegisterAndCancel(false);
+
+        setTitleNotify(t("Success"));
+        setMessageNotify(t("You registed MASCOT successfully. Service fee 120Fbu/1000 coins/day"));
+        setButtonNameNotify(t("Go"));
+        setCallbackNotify(() => () => {
+          setOpenNotify(false);
+          // location.reload();
+        });
+
+        setOpenNotify(true)
+      } else {
+        // setErrorMessage(res.data.message);
+
+        setTitleNotify(t("OOP!"));
+        setMessageNotify(res.data.message);
+        setButtonNameNotify(t("CLOSE"));
+        setCallbackNotify(() => () => {
+          setOpenNotify(false);
+          // location.reload();
+        });
+
+        setOpenNotify(true)
+      }
     }
-
     setLoading(false)
   }
 
 
   const mpsCancel = async () => {
     setLoading(true)
-    const res = await mps.cancel()
 
-    if (res.data.status == "OK") {
-      setPremium(false);
-      setOpenPrepageRegisterAndCancel(false);
-
-      setTitleNotify(t("Success"));
-      setMessageNotify(t("You canceled MASCOT successfully."));
-      setButtonNameNotify(t("CLOSE"));
-      setCallbackNotify(() => () => {
-        setOpenNotify(false);
-      });
-
-      setOpenNotify(true)
+    if (isWebView()) {
+      let data = await ringme.getUserInfo();
+      const res = await mps.getPaymentRegisterUrl(data?.saToken || "");
+      if (res.data?.code == "200") {
+        setOpenPrepageRegisterAndCancel(false);
+        setIframeUrl(res.data?.data);
+      } else {
+        setErrorMessage(res.data?.message);
+      }
     } else {
-      setErrorMessage(res.data.message);
+      const res = await mps.cancel()
+
+      if (res.data.status == "OK") {
+        setPremium(false);
+        setOpenPrepageRegisterAndCancel(false);
+
+        setTitleNotify(t("Success"));
+        setMessageNotify(t("You canceled MASCOT successfully."));
+        setButtonNameNotify(t("CLOSE"));
+        setCallbackNotify(() => () => {
+          setOpenNotify(false);
+        });
+
+        setOpenNotify(true)
+      } else {
+        setErrorMessage(res.data.message);
+      }
     }
 
     setLoading(false)
@@ -755,31 +829,53 @@ export default function Home() {
 
   const mpsCharge = async () => {
     setLoading(true)
-    const res = await mps.charge()
 
-    if (res.data.status == "OK") {
-      setTitleNotify(t("Buy more"));
-      setMessageNotify(t("You have 1000 coins to join MASCOT, fee 100Fbu. Good luck to you!"));
-      setButtonNameNotify(t("CLOSE"));
-      setCallbackNotify(() => () => {
-        setOpenNotify(false);
-      });
-
-      setOpenNotify(true)
+    if (isWebView()) {
+      let data = await ringme.getUserInfo();
+      const res = await mps.getPaymentRegisterUrl(data?.saToken || "");
+      if (res.data?.code == "200") {
+        setOpenPrepageRegisterAndCancel(false);
+        setIframeUrl(res.data?.data);
+      } else {
+        setTitleNotify(t("OPPS!"));
+        setMessageNotify(res.data.message);
+        setButtonNameNotify(t("CLOSE"));
+        setCallbackNotify(() => () => {
+          setOpenNotify(false);
+        });
+      }
     } else {
-      setTitleNotify(t("OPPS!"));
-      setMessageNotify(res.data.message);
-      setButtonNameNotify(t("CLOSE"));
-      setCallbackNotify(() => () => {
-        setOpenNotify(false);
-      });
+      const res = await mps.charge()
+
+      if (res.data.status == "OK") {
+        setTitleNotify(t("Buy more"));
+        setMessageNotify(t("You have 1000 coins to join MASCOT, fee 100Fbu. Good luck to you!"));
+        setButtonNameNotify(t("CLOSE"));
+        setCallbackNotify(() => () => {
+          setOpenNotify(false);
+        });
+
+        setOpenNotify(true)
+      } else {
+        setTitleNotify(t("OPPS!"));
+        setMessageNotify(res.data.message);
+        setButtonNameNotify(t("CLOSE"));
+        setCallbackNotify(() => () => {
+          setOpenNotify(false);
+        });
+      }
     }
+
+
     setLoading(false)
   }
 
   const logout = async () => {
     exitGameZodiac()
     mps.logout();
+    if (isWebView()) {
+      ringme.backMiniApp();
+    }
   }
 
   const handleCharge = () => {
@@ -806,7 +902,11 @@ export default function Home() {
         mpsCancel();
       });
     }
+  }
 
+  const closeIframe = () => {
+    fetchAndSetFbId();
+    setIframeUrl('')
   }
 
   // const mpsRegister = (OTP: string) => {
@@ -990,6 +1090,8 @@ export default function Home() {
 
         {openGameResult && <PopupOpenCard />}
         {openGameCircle && <PopupOpenCircle />}
+
+        {(iframeUrl != null && iframeUrl != "") && <PopupShowIframe src={iframeUrl} onClose={closeIframe} />}
       </div>
     </GameInfoContext.Provider>
   );

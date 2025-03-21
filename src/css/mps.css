@@ -20,6 +20,25 @@
     color: #ffffff;
 }
 
+.mps-iframe {
+    background: #ffffff;
+    max-width: 327px;
+    height: auto;
+    grid-template-rows: min-content min-content;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    border-radius: 10px;
+    margin: 0 auto;
+    position: relative;
+    top: 0vh;
+    z-index: -1;
+    background-size: cover;
+    background-color: transparent;
+    color: #ffffff;
+}
+
 .mps-top {
     background: #ffffff;
     max-width: 382px;

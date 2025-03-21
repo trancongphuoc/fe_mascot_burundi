@@ -72,3 +72,20 @@ export const sortBettingCard = (betCards: BetZodiacCard[], firebaseCards: BetZod
 
   return sortedFirebaseCards;
 }
+
+export const isWebView = () => {
+  const navigator = window.navigator;
+  const userAgent = navigator.userAgent;
+  const normalizedUserAgent = userAgent.toLowerCase();
+  const standalone = (navigator as any).standalone;
+
+  const isIos = /ip(ad|hone|od)/.test(normalizedUserAgent) || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+  const isAndroid = /android/.test(normalizedUserAgent);
+  const isSafari = /safari/.test(normalizedUserAgent);
+  const isWV = (isAndroid && /; wv\)/.test(normalizedUserAgent)) || (isIos && !standalone && !isSafari);
+
+  const osText = isIos ? 'iOS' : isAndroid ? 'Android' : 'Other';
+  const webviewText = isWV ? 'Yes' : 'No';
+  console.log(`OS: ${osText}, Is WebView: ${webviewText}`);
+  return isWV;
+}

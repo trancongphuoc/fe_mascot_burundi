@@ -44,6 +44,15 @@ export const verifyOTP = async (phoneNumner: string, otp: string): Promise<any> 
     }
 };
 
+export const verifySupperApp = async (data: any): Promise<any> => {
+  try {
+    const response = await api.post(`/api/auth/verify_supper_app`, data);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 
 export const register = async (): Promise<any> => {
   try {
@@ -55,6 +64,24 @@ export const register = async (): Promise<any> => {
     }
 
     const response = await api.post(`/api/mps/register`, {}, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+    return response;
+    } catch (error) {
+      console.error(error);
+    }
+};
+
+export const getPaymentRegisterUrl = async (saToken: string): Promise<any> => {
+  try {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      // log('No token found in session storage.');
+      return;
+    }
+
+    const response = await api.post(`/api/sp_app/get_payment_register_url?saToken=` + saToken, {}, {
       headers: { 'Authorization': `Bearer ${token}` },
     });
     return response;
@@ -82,6 +109,24 @@ export const cancel = async (): Promise<any> => {
     }
 };
 
+export const cancelSupperApp = async (saToken: string): Promise<any> => {
+  try {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      // log('No token found in session storage.');
+      return;
+    }
+
+    const response = await api.post(`/api/sp_app/cancel?saToken=` + saToken, {}, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+    return response;
+    } catch (error) {
+      console.error(error);
+    }
+};
+
 
 export const charge = async (): Promise<any> => {
   try {
@@ -93,6 +138,24 @@ export const charge = async (): Promise<any> => {
     }
 
     const response = await api.post(`/api/mps/charge`, {}, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+    return response;
+    } catch (error) {
+      console.error(error);
+    }
+};
+
+export const getPaymentChargeUrl = async (saToken: string): Promise<any> => {
+  try {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      // log('No token found in session storage.');
+      return;
+    }
+
+    const response = await api.post(`/api/sp_app/get_payment_charge_url?saToken=` + saToken, {}, {
       headers: { 'Authorization': `Bearer ${token}` },
     });
     return response;

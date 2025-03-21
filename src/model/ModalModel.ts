@@ -16,7 +16,8 @@ type ModalType = "RULE" |
                 "REGISTERANDCANCEL" |
                 "NOTIFY" |
                 "TOPDAILY" |
-                "TOPMONTHLY";
+                "TOPMONTHLY" |
+                "SHOWIFRAME";
 
 interface ModalSet {
     state: ModalState,
