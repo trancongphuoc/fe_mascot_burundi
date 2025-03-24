@@ -742,7 +742,8 @@ export default function Home() {
 
     if (isWebView()) {
       let data = await ringme.getUserInfo();
-      const res = await mps.getPaymentRegisterUrl(data?.saToken || "");
+      let dataJson = typeof data === "string" ? JSON.parse(data) : data;
+      const res = await mps.getPaymentRegisterUrl(dataJson?.token || "");
       if (res.data?.code == "200") {
         setOpenPrepageRegisterAndCancel(false);
         setIframeUrl(res.data?.data);
@@ -797,7 +798,8 @@ export default function Home() {
 
     if (isWebView()) {
       let data = await ringme.getUserInfo();
-      const res = await mps.getPaymentRegisterUrl(data?.saToken || "");
+      let dataJson = typeof data === "string" ? JSON.parse(data) : data;
+      const res = await mps.getPaymentRegisterUrl(dataJson?.token || "");
       if (res.data?.code == "200") {
         setOpenPrepageRegisterAndCancel(false);
         setIframeUrl(res.data?.data);
@@ -832,7 +834,8 @@ export default function Home() {
 
     if (isWebView()) {
       let data = await ringme.getUserInfo();
-      const res = await mps.getPaymentRegisterUrl(data?.saToken || "");
+      let dataJson = typeof data === "string" ? JSON.parse(data) : data;
+      const res = await mps.getPaymentRegisterUrl(dataJson?.token || "");
       if (res.data?.code == "200") {
         setOpenPrepageRegisterAndCancel(false);
         setIframeUrl(res.data?.data);
