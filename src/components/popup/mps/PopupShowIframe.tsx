@@ -5,46 +5,64 @@ import { useTranslation } from 'react-i18next';
 import '../../../utils/i18n'; // Import file cấu hình i18n
 
 interface PopupShowIframeProps {
-    src: string;
-    onClose?: () => void; // Hàm đóng iframe
+  src: string;
+  onClose?: () => void; // Hàm đóng iframe
 }
 
-const PopupShowIframe: React.FC<PopupShowIframeProps> = ({src, onClose}) => {
-    const { setModal } = useContext(GameInfoContext);
-    const iframeRef = useRef<HTMLIFrameElement>(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    console.log("Iframe URL:", src);
-    useEffect(() => {
-      const checkIframe = setInterval(() => {
-        if (iframeRef.current && !document.body.contains(iframeRef.current)) {
-          console.log("Iframe đã bị xóa khỏi DOM");
-          onClose?.(); // Gọi hàm đóng nếu iframe bị xóa
-        }
-      }, 1000);
-  
-      return () => clearInterval(checkIframe);
-    }, []);
+const PopupShowIframe: React.FC<PopupShowIframeProps> = ({ src, onClose }) => {
+  const { setModal } = useContext(GameInfoContext);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  console.log("Iframe URL:", src);
+  useEffect(() => {
+    const checkIframe = setInterval(() => {
+      if (iframeRef.current && !document.body.contains(iframeRef.current)) {
+        console.log("Iframe đã bị xóa khỏi DOM");
+        onClose?.(); // Gọi hàm đóng nếu iframe bị xóa
+      }
+    }, 1000);
 
-    return (
-        <PopupCenter
-            className='popup-overlay-history'
-            onClick={() => setModal({ state: "CLOSE", type: "SHOWIFRAME" })}
-            classNameChild='mps-iframe'
-        >
-            <div className='mps-chill'>
-                <iframe
-                ref={iframeRef}
-                src={src}
-                width={"100%"}
-                height={"600px"}
-                style={{ border: "none", borderRadius: "8px" }}
-                title="Verification OTP"
-                onLoad={() => setIsLoaded(true)}
-            />
+    return () => clearInterval(checkIframe);
+  }, []);
 
-            </div>
-        </PopupCenter>
-    );
+  return (
+    <PopupCenter
+      className='popup-overlay-history'
+      onClick={() => setModal({ state: "CLOSE", type: "SHOWIFRAME" })}
+      classNameChild='mps-iframe'
+    >
+      <button
+        onClick={onClose}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          background: 'transparent',
+          border: 'none',
+          fontSize: '24px',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+          color: '#fff',
+          zIndex: 1000
+        }}
+        aria-label="Close"
+      >
+        ✕
+      </button>
+      <div className='mps-chill' style={{ position: 'relative' }}>
+        <iframe
+          ref={iframeRef}
+          src={src}
+          width={"100%"}
+          height={"600px"}
+          style={{ border: "none", borderRadius: "8px" }}
+          title="Verification OTP"
+          onLoad={() => setIsLoaded(true)}
+        />
+
+      </div>
+    </PopupCenter>
+  );
 };
 
 export default PopupShowIframe;

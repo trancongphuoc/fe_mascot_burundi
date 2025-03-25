@@ -799,7 +799,7 @@ export default function Home() {
     if (isWebView()) {
       let data = await ringme.getUserInfo();
       let dataJson = typeof data === "string" ? JSON.parse(data) : data;
-      const res = await mps.getPaymentRegisterUrl(dataJson?.token || "");
+      const res = await mps.cancelSupperApp(dataJson?.token || "");
       if (res.data?.code == "200") {
         setOpenPrepageRegisterAndCancel(false);
         setIframeUrl(res.data?.data);
@@ -835,9 +835,9 @@ export default function Home() {
     if (isWebView()) {
       let data = await ringme.getUserInfo();
       let dataJson = typeof data === "string" ? JSON.parse(data) : data;
-      const res = await mps.getPaymentRegisterUrl(dataJson?.token || "");
+      const res = await mps.getPaymentChargeUrl(dataJson?.token || "");
       if (res.data?.code == "200") {
-        setOpenPrepageRegisterAndCancel(false);
+        setOpenNotify(false)
         setIframeUrl(res.data?.data);
       } else {
         setTitleNotify(t("OPPS!"));
